@@ -6,13 +6,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -23,12 +17,12 @@ public class Main extends Application {
     }
 
     private void homePage(Stage primaryStage) {
-        Button play = new Button("Begin New Journey");
+        Button play = new Button("Play");
         Button tutorial = new Button("Tutorial");
         Button unlocks = new Button("Unlocks");
         Button stats = new Button("Stats");
         Button credits = new Button("Credits");
-        Button quit = new Button("Exit Game");
+        Button quit = new Button("Quit");
 
         play.setOnAction(e -> playOptions(primaryStage));
         tutorial.setOnAction(e -> textTutorial(primaryStage));
@@ -37,39 +31,26 @@ public class Main extends Application {
         credits.setOnAction(e -> credits(primaryStage));
         quit.setOnAction(e -> Platform.exit());
 
-        VBox buttonBox = new VBox(10);
-        buttonBox.getChildren().addAll(play, tutorial, unlocks, stats, credits, quit);
-        buttonBox.setSpacing(10);
-        buttonBox.setPadding(new Insets(20));
+        VBox root = new VBox(10);
+        root.getChildren().addAll(play, tutorial, unlocks, stats, credits, quit);
+        root.setSpacing(10);
+        root.setPadding(new Insets(20));
 
-        // Align the VBox to the bottom center
-        buttonBox.setLayoutX(860); // Adjust this based on your screen width
-        buttonBox.setLayoutY(700); // Adjust this based on your screen height
+        root.setStyle("-fx-background-color: black;");
 
-        // Load the background image
-        Image image = new Image("/application/images/EndlessMountain16x9.png");
-
-        // Define the background size and position
-        BackgroundSize size = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false);
-        BackgroundImage backgroundImage = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, size);
-
-        // Use a Pane to allow free positioning
-        Pane root = new Pane();
-        root.getChildren().add(buttonBox);
-        root.setBackground(new Background(backgroundImage));
-
-        // Set button styles and sizes
-        buttonBox.getChildren().forEach(button -> {
-            ((Button) button).prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.1)); // Adjust the size as needed
-            ((Button) button).prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.04));
+        root.getChildren().forEach(button -> {
+            ((Button) button).prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.25)); // width of the menu buttons
+            ((Button) button).prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.1)); // height of the menu buttons
         });
 
-        Scene scene = new Scene(root, 1920, 1080); // screen size
-        primaryStage.setTitle("Endless Mountain of Monsters");
+        VBox.setVgrow(play, Priority.ALWAYS);
+
+        Scene scene = new Scene(root, 500, 500);
+        primaryStage.setTitle("Dungeon Crawler");
         primaryStage.setScene(scene);
+//        primaryStage.setFullScreen(true);
         primaryStage.show();
     }
-
 
     private void playOptions(Stage primaryStage) {
         Button back = new Button("Back");
@@ -83,12 +64,12 @@ public class Main extends Application {
 
         // Bind button width to 40% of the scene's width and height
         root.getChildren().forEach(button -> {
-            ((Button) button).prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.1));
-            ((Button) button).prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.04));
+            ((Button) button).prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.25));
+            ((Button) button).prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.1));
         });
         
         root.setStyle("-fx-background-color: black;");
-        Scene scene = new Scene(root, 1920, 1080);
+        Scene scene = new Scene(root, 500, 500);
         
 //        primaryStage.setFullScreen(true);
         primaryStage.setScene(scene);
@@ -111,13 +92,13 @@ public class Main extends Application {
         // Bind button size properties to scale with the window
         root.getChildren().forEach(node -> {
             if (node instanceof Button) {
-                ((Button) node).prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.1));
-                ((Button) node).prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.04));
+                ((Button) node).prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.25));
+                ((Button) node).prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.1));
             }
         });
 
         root.setStyle("-fx-background-color: black;"); // Set background color to black
-        Scene scene = new Scene(root, 1920, 1080);
+        Scene scene = new Scene(root, 500, 500);
 
         primaryStage.setScene(scene);
     }
@@ -138,13 +119,13 @@ public class Main extends Application {
         // Bind button size properties to scale with the window
         root.getChildren().forEach(node -> {
             if (node instanceof Button) {
-                ((Button) node).prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.1));
-                ((Button) node).prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.04));
+                ((Button) node).prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.25));
+                ((Button) node).prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.1));
             }
         });
 
         root.setStyle("-fx-background-color: black;"); // Set background color to black
-        Scene scene = new Scene(root, 1920, 1080);
+        Scene scene = new Scene(root, 500, 500);
 
         primaryStage.setScene(scene);
     }
@@ -165,13 +146,13 @@ public class Main extends Application {
         // Bind button size properties to scale with the window
         root.getChildren().forEach(node -> {
             if (node instanceof Button) {
-                ((Button) node).prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.1));
-                ((Button) node).prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.04));
+                ((Button) node).prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.25));
+                ((Button) node).prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.1));
             }
         });
 
         root.setStyle("-fx-background-color: black;"); // Set background color to black
-        Scene scene = new Scene(root, 1920, 1080);
+        Scene scene = new Scene(root, 500, 500);
 
         primaryStage.setScene(scene);
     }
@@ -192,13 +173,13 @@ public class Main extends Application {
         // Bind button size properties to scale with the window
         root.getChildren().forEach(node -> {
             if (node instanceof Button) {
-                ((Button) node).prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.1));
-                ((Button) node).prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.04));
+                ((Button) node).prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.25));
+                ((Button) node).prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.1));
             }
         });
 
         root.setStyle("-fx-background-color: black;"); // Set background color to black
-        Scene scene = new Scene(root, 1920, 1080);
+        Scene scene = new Scene(root, 500, 500);
 
         primaryStage.setScene(scene);
     }
