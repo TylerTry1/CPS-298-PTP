@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
@@ -57,7 +58,7 @@ public class Main extends Application {
         buttonBox2.setLayoutY(750); // Adjust Y for second VBox
 
         // Load the background image
-        Image image = new Image("/application/images/EndlessMountain16x9.png");
+        Image image = new Image("applicationImagesBackgrounds/EndlessMountain16x9.png");
         // Define the background size and position
         BackgroundSize size = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false);
         BackgroundImage backgroundImage = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, size);
@@ -107,18 +108,49 @@ public class Main extends Application {
         HBox enemyPositions = new HBox(10);
         enemyPositions.getChildren().addAll(enemyPosition1, enemyPosition2, enemyPosition3, enemyPosition4);
 
+        // Create ImageViews for enemy positions
+        ImageView enemyInPosition1 = new ImageView(new Image("applicationImagesEnemySprites/Goblin Axeman/Goblin_axeman_1_Idle.png"));
+        ImageView enemyInPosition2 = new ImageView(new Image("applicationImagesEnemySprites/Goblin Axeman/Goblin_axeman_1_Idle.png"));
+        ImageView enemyInPosition3 = new ImageView(new Image("applicationImagesEnemySprites/Goblin Archer/Goblin_Archer_1_Idle.png"));
+        ImageView enemyInPosition4 = new ImageView(new Image("applicationImagesEnemySprites/Goblin Shaman/Goblin_Shaman_1_Idle.png"));
+        
+        // Set the size of the images to match the button size
+        enemyInPosition1.setFitWidth(0.08 * 1920);  // Width relative to the screen size (1920x1080)
+        enemyInPosition1.setFitHeight(0.3 * 1080);  // Height relative to the screen size
+
+        enemyInPosition2.setFitWidth(0.08 * 1920);
+        enemyInPosition2.setFitHeight(0.3 * 1080);
+
+        enemyInPosition3.setFitWidth(0.08 * 1920);
+        enemyInPosition3.setFitHeight(0.3 * 1080);
+
+        enemyInPosition4.setFitWidth(0.08 * 1920);
+        enemyInPosition4.setFitHeight(0.3 * 1080);
+        
+        // HBox for enemy images
+        HBox enemyImages = new HBox(10);
+        enemyImages.getChildren().addAll(enemyInPosition1, enemyInPosition2, enemyInPosition3, enemyInPosition4);
+        
         // Create a Pane for free positioning
         Pane root = new Pane();
+        Pane images = new Pane();
 
-        // Add the HBoxes and back button to the Pane
+        // Add the HBoxes, enemy images, and back button to the Pane
         root.getChildren().addAll(heroPositions, enemyPositions, back);
-
-        // Manually position the HBoxes and the back button
+        root.getChildren().addAll(images);  // Add the images Pane to the root Pane
+        
+        images.getChildren().addAll(enemyImages);  // Add the enemy images to the images Pane
+        
+        // Manually position the HBoxes, enemy images, and the back button
         heroPositions.setLayoutX(100);  // Position X for hero positions
         heroPositions.setLayoutY(250);  // Position Y for hero positions
 
         enemyPositions.setLayoutX(1200);  // Position X for enemy positions
         enemyPositions.setLayoutY(250);   // Position Y for enemy positions
+
+        // Align enemyImages to perfectly overlap enemyPositions
+        enemyImages.setLayoutX(1200);  // Same X position as enemy positions
+        enemyImages.setLayoutY(250);   // Same Y position as enemy positions
 
         back.setLayoutX(50);  // Position X for back button
         back.setLayoutY(50);  // Position Y for back button
@@ -133,16 +165,15 @@ public class Main extends Application {
             ((Button) button).prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.08));
             ((Button) button).prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.3));
         });
-//        root.getChildren().forEach(button -> {
-//        	
-//        }
+
         root.setStyle("-fx-background-color: black;");  // Set the background color
 
         Scene scene = new Scene(root, 1920, 1080);  // Create a scene with the Pane
-
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+
+
 
 
     // putting this on the sideline, in case we decide we need a play options tab.
