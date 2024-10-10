@@ -12,6 +12,7 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -23,6 +24,7 @@ public class Main extends Application {
     }
 
     private void homePage(Stage primaryStage) {
+        // First set of buttons
         Button play = new Button("Begin New Journey");
         Button tutorial = new Button("Tutorial");
         Button unlocks = new Button("Unlocks");
@@ -30,20 +32,30 @@ public class Main extends Application {
         Button credits = new Button("Credits");
         Button quit = new Button("Exit Game");
 
-        play.setOnAction(e -> playOptions(primaryStage));
+        play.setOnAction(e -> battleScene(primaryStage));
         tutorial.setOnAction(e -> textTutorial(primaryStage));
         unlocks.setOnAction(e -> unlocks(primaryStage));
         stats.setOnAction(e -> stats(primaryStage));
         credits.setOnAction(e -> credits(primaryStage));
         quit.setOnAction(e -> Platform.exit());
 
-        VBox buttonBox = new VBox(10);
-        buttonBox.getChildren().addAll(play, tutorial, unlocks, stats, credits, quit);
-        buttonBox.setSpacing(10);
-        buttonBox.setPadding(new Insets(20));
-        // Align the VBox to the bottom center
-        buttonBox.setLayoutX(860); // Adjust this based on your screen width
-        buttonBox.setLayoutY(700); // Adjust this based on your screen height
+
+        // VBox 1 for first set of buttons
+        VBox playbutton = new VBox(10);
+        playbutton.getChildren().addAll(play);
+        playbutton.setSpacing(10);
+        playbutton.setPadding(new Insets(20));
+        playbutton.setLayoutX(768); // Adjust X for play button
+        playbutton.setLayoutY(930); // Adjust Y for play button
+
+        // VBox 2 for second set of buttons
+        VBox buttonBox2 = new VBox(10);
+        buttonBox2.getChildren().addAll(tutorial, unlocks, stats, credits, quit);
+        buttonBox2.setSpacing(10);
+        buttonBox2.setPadding(new Insets(20));
+        buttonBox2.setLayoutX(7); // Adjust X for second VBox
+        buttonBox2.setLayoutY(750); // Adjust Y for second VBox
+
         // Load the background image
         Image image = new Image("/application/images/EndlessMountain16x9.png");
         // Define the background size and position
@@ -52,11 +64,16 @@ public class Main extends Application {
 
         // Use a Pane to allow free positioning
         Pane root = new Pane();
-        root.getChildren().add(buttonBox);
+        root.getChildren().addAll(playbutton, buttonBox2); // Add both button lists
         root.setBackground(new Background(backgroundImage));
 
-        // Set button styles and sizes
-        buttonBox.getChildren().forEach(button -> {
+        // Set button styles and sizes for both sets of buttons
+        playbutton.getChildren().forEach(button -> {
+            ((Button) button).prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.2)); // Adjust the size as needed
+            ((Button) button).prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.08));
+        });
+
+        buttonBox2.getChildren().forEach(button -> {
             ((Button) button).prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.1)); // Adjust the size as needed
             ((Button) button).prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.04));
         });
@@ -67,6 +84,68 @@ public class Main extends Application {
         primaryStage.show();
     }
 
+
+    private void battleScene(Stage primaryStage) {
+        Button back = new Button("Back");
+
+        Button heroPosition4 = new Button("heroPosition4");
+        Button heroPosition3 = new Button("heroPosition3");
+        Button heroPosition2 = new Button("heroPosition2");
+        Button heroPosition1 = new Button("heroPosition1");
+
+        Button enemyPosition1 = new Button("enemyPosition1");
+        Button enemyPosition2 = new Button("enemyPosition2");
+        Button enemyPosition3 = new Button("enemyPosition3");
+        Button enemyPosition4 = new Button("enemyPosition4");
+
+        back.setOnAction(e -> homePage(primaryStage));
+
+        // Create the HBoxes for hero and enemy positions
+        HBox heroPositions = new HBox(10);
+        heroPositions.getChildren().addAll(heroPosition4, heroPosition3, heroPosition2, heroPosition1);
+
+        HBox enemyPositions = new HBox(10);
+        enemyPositions.getChildren().addAll(enemyPosition1, enemyPosition2, enemyPosition3, enemyPosition4);
+
+        // Create a Pane for free positioning
+        Pane root = new Pane();
+
+        // Add the HBoxes and back button to the Pane
+        root.getChildren().addAll(heroPositions, enemyPositions, back);
+
+        // Manually position the HBoxes and the back button
+        heroPositions.setLayoutX(100);  // Position X for hero positions
+        heroPositions.setLayoutY(250);  // Position Y for hero positions
+
+        enemyPositions.setLayoutX(1200);  // Position X for enemy positions
+        enemyPositions.setLayoutY(250);   // Position Y for enemy positions
+
+        back.setLayoutX(50);  // Position X for back button
+        back.setLayoutY(50);  // Position Y for back button
+
+        // Set the button sizes for all buttons in HBoxes
+        heroPositions.getChildren().forEach(button -> {
+            ((Button) button).prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.08));
+            ((Button) button).prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.3));
+        });
+
+        enemyPositions.getChildren().forEach(button -> {
+            ((Button) button).prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.08));
+            ((Button) button).prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.3));
+        });
+//        root.getChildren().forEach(button -> {
+//        	
+//        }
+        root.setStyle("-fx-background-color: black;");  // Set the background color
+
+        Scene scene = new Scene(root, 1920, 1080);  // Create a scene with the Pane
+
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+
+    // putting this on the sideline, in case we decide we need a play options tab.
     private void playOptions(Stage primaryStage) {
         Button back = new Button("Back");
 
@@ -89,6 +168,9 @@ public class Main extends Application {
 //        primaryStage.setFullScreen(true);
         primaryStage.setScene(scene);
 //        primaryStage.requestFocus();
+        
+        
+        
     }
 
     private void textTutorial(Stage primaryStage) {
