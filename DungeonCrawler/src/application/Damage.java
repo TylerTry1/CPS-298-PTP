@@ -9,7 +9,7 @@ public class Damage {
         this.random = new Random();
     }
 
-    public int calculateDamage(characterStats attacker, characterStats defender) {
+    public int calculateDamage(Characters attacker, Characters defender) {
         int baseDamage = attacker.damage;
 
         if (isCriticalHit(attacker)) {
@@ -19,11 +19,11 @@ public class Damage {
         return baseDamage;
     }
 
-    private boolean isCriticalHit(characterStats attacker) {
+    private boolean isCriticalHit(Characters attacker) {
         return random.nextInt(100) < attacker.crit_chance;
     }
 
-    public void applyDamage(characterStats defender, int damage) {
+    public void applyDamage(Characters defender, int damage) {
         defender.health -= damage;
         if (defender.health < 0) {
             defender.health = 0;
