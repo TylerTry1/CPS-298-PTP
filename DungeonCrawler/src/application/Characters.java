@@ -1,10 +1,10 @@
 package application;
 
-import java.util.ArrayList;
-import java.util.Scanner;
+//import java.util.ArrayList;
+//import java.util.Scanner;
 public class Characters {
 
-    public class characterStats {
+    //public class characterStats {
         String name;
         int health;
         int damage;
@@ -13,9 +13,9 @@ public class Characters {
         int crit_chance;
         int dodge_chance; // leave this stat at 0 for all characters, need a 0 value in case we want to change it later.
         int position;
-    }
+    //}
 
-    public class characterDismas extends characterStats {
+    /*public class characterDismas extends characterStats {
         public characterDismas() {
             name = "Dismas";
             health = 33;
@@ -119,7 +119,7 @@ public class Characters {
 //        }
     }
 
-    
+    */
    
     }
 
