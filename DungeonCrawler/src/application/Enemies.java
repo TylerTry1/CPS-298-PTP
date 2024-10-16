@@ -9,7 +9,7 @@ public class Enemies {
         int health;
         int damage;
         int defense; // leave this stat at 0 for all characters, need a 0 value in case we want to change it later.
-        int accuracy;
+        int accuracy; // leave this stat at 0 for all characters, need a 0 value in case we want to change it later.
         int crit_chance;
         int dodge_chance; // leave this stat at 0 for all characters, need a 0 value in case we want to change it later.
         int position;
@@ -22,7 +22,7 @@ public class Enemies {
 			health = 24;
 			damage = 7;
 			defense = 0;
-			accuracy = 70;
+			accuracy = 0; 
 			crit_chance = 10;
 			dodge_chance = 0;
 			position = pos.orElse(2);
@@ -37,7 +37,7 @@ public class Enemies {
 			health = 32;
 			damage = 15;
 			defense = 0;
-			accuracy = 75;
+			accuracy = 0;
 			crit_chance = 20;
 			dodge_chance = 0;
 			position = pos.orElse(1);
@@ -52,7 +52,7 @@ public class Enemies {
 			health = 28;
 			damage = 10;
 			defense = 0;
-			accuracy = 85;
+			accuracy = 0;
 			crit_chance = 15;
 			dodge_chance = 0;
 			position = pos.orElse(3);
@@ -67,7 +67,7 @@ public class Enemies {
 			health = 20;
 			damage = 4;
 			defense = 0;
-			accuracy = 65;
+			accuracy = 0;
 			crit_chance = 10;
 			dodge_chance = 0;
 			position = pos.orElse(4);
@@ -82,7 +82,7 @@ public class Enemies {
 			health = 28;
 			damage = 12;
 			defense = 0;
-			accuracy = 75;
+			accuracy = 0;
 			crit_chance = 12;
 			dodge_chance = 0;
 			position = pos.orElse(1);
@@ -98,7 +98,7 @@ public class Enemies {
 			health = 25;
 			damage = 10;
 			defense = 0;
-			accuracy = 90;
+			accuracy = 0;
 			crit_chance = 20;
 			dodge_chance = 0;
 			position = pos.orElse(2);
@@ -113,7 +113,7 @@ public class Enemies {
 			health = 35;
 			damage = 15;
 			defense = 0;
-			accuracy = 85;
+			accuracy = 0;
 			crit_chance = 15;
 			dodge_chance = 0;
 			position = pos.orElse(1);
@@ -128,7 +128,7 @@ public class Enemies {
 			health = 25;
 			damage = 12; 
 			defense = 0;
-			accuracy = 70;
+			accuracy = 0;
 			crit_chance = 0;
 			position = pos.orElse(4);
 			size = 1;
@@ -154,7 +154,7 @@ public class Enemies {
 			health = 50;
 			damage = 25;
 			defense = 0;
-			accuracy = 65;
+			accuracy = 0;
 			crit_chance = 5;
 			position = pos.orElse(1);
 			size = 2;
@@ -167,7 +167,7 @@ public class Enemies {
 			health = 60;
 			damage = 30;
 			defense = 0;
-			accuracy = 70;
+			accuracy = 0;
 			crit_chance = 8;
 			position = pos.orElse(1);
 			size = 2;
@@ -180,7 +180,7 @@ public class Enemies {
 			health = 18;
 			damage = 10;
 			defense = 0;
-			accuracy = 50;
+			accuracy = 0;
 			crit_chance = 5;
 			position = pos.orElse(1);
 			size = 1;
@@ -194,7 +194,7 @@ public class Enemies {
 			health = 35;
 			damage = 25;
 			defense = 0;
-			accuracy = 60;
+			accuracy = 0;
 			crit_chance =15;
 			position = pos.orElse(1);
 			size = 1;
@@ -208,7 +208,7 @@ public class Enemies {
 			health = 65;
 			damage = 30;
 			defense = 0;
-			accuracy = 80;
+			accuracy = 0;
 			crit_chance = 25;
 			position = pos.orElse(1);
 			size = 2;
@@ -221,7 +221,7 @@ public class Enemies {
 			health = 40;
 			damage = 18;
 			defense = 0;
-			accuracy = 50;
+			accuracy = 0;
 			crit_chance = 20;
 			position = pos.orElse(1);
 			size = 1;
