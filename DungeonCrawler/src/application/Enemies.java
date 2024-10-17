@@ -7,11 +7,11 @@ public class Enemies {
 	public class enemyStats {
         String name;
         int health;
-        int damage;
-        int defense; // leave this stat at 0 for all characters, need a 0 value in case we want to change it later.
-        int accuracy; // leave this stat at 0 for all characters, need a 0 value in case we want to change it later.
+        static int damage;
+        static int defense; // leave this stat at 0 for all characters, need a 0 value in case we want to change it later.
+        static int accuracy; // leave this stat at 0 for all characters, need a 0 value in case we want to change it later.
         int crit_chance;
-        int dodge_chance; // leave this stat at 0 for all characters, need a 0 value in case we want to change it later.
+        static int dodge_chance; // leave this stat at 0 for all characters, need a 0 value in case we want to change it later.
         int position;
         int size;
 	}
@@ -33,7 +33,7 @@ public class Enemies {
 	
 	public class goblinAxeman extends enemyStats {
 		public goblinAxeman(Optional <Integer> pos) {
-			name = "Goblin Axemant";
+			name = "Goblin Axeman";
 			health = 32;
 			damage = 15;
 			defense = 0;
@@ -48,7 +48,7 @@ public class Enemies {
 	
 	public class goblinArcher extends enemyStats {
 		public goblinArcher(Optional <Integer> pos) {
-			name = "Goblin Scout";
+			name = "Goblin Archer";
 			health = 28;
 			damage = 10;
 			defense = 0;
@@ -92,8 +92,8 @@ public class Enemies {
 	}
 	
 	
-	public class skeletonCrossbowmen extends enemyStats {
-		public skeletonCrossbowmen(Optional <Integer> pos) {
+	public class skeletonCrossbowman extends enemyStats {
+		public skeletonCrossbowman(Optional <Integer> pos) {
 			name = "Skeleton Crossbowmen";
 			health = 25;
 			damage = 10;
@@ -130,6 +130,7 @@ public class Enemies {
 			defense = 0;
 			accuracy = 0;
 			crit_chance = 0;
+			dodge_chance = 0;
 			position = pos.orElse(4);
 			size = 1;
 		}
@@ -143,6 +144,7 @@ public class Enemies {
 			defense = 0;
 			accuracy = 0;
 			crit_chance = 0;
+			dodge_chance = 0;
 			position = pos.orElse(1);
 			size = 1;
 		}
@@ -156,6 +158,7 @@ public class Enemies {
 			defense = 0;
 			accuracy = 0;
 			crit_chance = 5;
+			dodge_chance = 0;
 			position = pos.orElse(1);
 			size = 2;
 		}
@@ -169,6 +172,7 @@ public class Enemies {
 			defense = 0;
 			accuracy = 0;
 			crit_chance = 8;
+			dodge_chance = 0;
 			position = pos.orElse(1);
 			size = 2;
 		}
@@ -182,6 +186,7 @@ public class Enemies {
 			defense = 0;
 			accuracy = 0;
 			crit_chance = 5;
+			dodge_chance = 0;
 			position = pos.orElse(1);
 			size = 1;
 			
@@ -196,6 +201,7 @@ public class Enemies {
 			defense = 0;
 			accuracy = 0;
 			crit_chance =15;
+			dodge_chance = 0;
 			position = pos.orElse(1);
 			size = 1;
 			
@@ -210,6 +216,7 @@ public class Enemies {
 			defense = 0;
 			accuracy = 0;
 			crit_chance = 25;
+			dodge_chance = 0;
 			position = pos.orElse(1);
 			size = 2;
 		}
@@ -223,6 +230,7 @@ public class Enemies {
 			defense = 0;
 			accuracy = 0;
 			crit_chance = 20;
+			dodge_chance = 0;
 			position = pos.orElse(1);
 			size = 1;
 		}
