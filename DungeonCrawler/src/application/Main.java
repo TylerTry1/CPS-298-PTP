@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Side;
+import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -18,17 +19,35 @@ import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class Main extends Application {
+	// music tracks
+	String path1 = getClass().getResource("/Music/DD1RuinsTheme.mp3").toExternalForm();
+	Media mediaPath = new Media(path1);
+	String path2 = getClass().getResource("/Music/MainMenu.mp3").toExternalForm();
+	Media mediaPath2 = new Media(path2);
+
 	@Override
 	public void start(Stage primaryStage) {
 		homePage(primaryStage);
+
 	}
 
 	private void homePage(Stage primaryStage) {
+		Image cursorImage = new Image("GUIAssets/cursor.png");
+		Cursor customCursor = Cursor.cursor(cursorImage.getUrl());
+
+		Media media = new Media(path2);
+		MediaPlayer mediaPlayer = new MediaPlayer(media);
+		mediaPlayer.setVolume(0.05); // Volume level (0.0 to 1.0)
+		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE); // Loop the music
+		mediaPlayer.play(); // music player
+
 		// First set of buttons
 		Button play = new Button("Begin New Journey");
 		Button tutorial = new Button("Tutorial");
@@ -36,13 +55,32 @@ public class Main extends Application {
 		Button stats = new Button("Stats");
 		Button credits = new Button("Credits");
 		Button quit = new Button("Exit Game");
+		play.setOnAction(e -> {
+			battleScene(primaryStage);
+			mediaPlayer.stop();
+		});
 
-		play.setOnAction(e -> battleScene(primaryStage));
-		tutorial.setOnAction(e -> textTutorial(primaryStage));
-		unlocks.setOnAction(e -> unlocks(primaryStage));
-		stats.setOnAction(e -> stats(primaryStage));
-		credits.setOnAction(e -> credits(primaryStage));
-		quit.setOnAction(e -> Platform.exit());
+		tutorial.setOnAction(e -> {
+			textTutorial(primaryStage);
+			mediaPlayer.stop();
+		});
+		unlocks.setOnAction(e -> {
+			unlocks(primaryStage);
+			mediaPlayer.stop();
+		});
+		stats.setOnAction(e -> {
+			stats(primaryStage);
+			mediaPlayer.stop();
+		});
+		credits.setOnAction(e -> {
+			credits(primaryStage);
+			mediaPlayer.stop();
+
+		});
+		quit.setOnAction(e -> {
+			Platform.exit();
+			mediaPlayer.stop();
+		});
 
 		// VBox 1 for first set of buttons
 		VBox playbutton = new VBox(10);
@@ -86,12 +124,26 @@ public class Main extends Application {
 		});
 
 		Scene scene = new Scene(root, 1920, 1080); // screen size
+		scene.setCursor(customCursor);
 		primaryStage.setTitle("Endless Mountain of Monsters");
 		primaryStage.setScene(scene);
 		primaryStage.show();
+		primaryStage.setOnCloseRequest(event -> {
+			mediaPlayer.stop(); // Stop the music when the stage is closed
+		});
 	}
 
 	private void battleScene(Stage primaryStage) {
+		Image cursorImage = new Image("GUIAssets/cursor.png");
+		Cursor customCursor = Cursor.cursor(cursorImage.getUrl());
+
+		// music player
+		Media media = new Media(path1);
+		MediaPlayer mediaPlayer = new MediaPlayer(media);
+		mediaPlayer.setVolume(0.05); // Volume level (0.0 to 1.0)
+		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE); // Loop the music
+		mediaPlayer.play(); // music player
+
 		// Create buttons for everything
 		Button back = new Button("Back");
 		Button heroPosition4 = new Button("heroPosition4");
@@ -123,8 +175,8 @@ public class Main extends Application {
 
 		Text heroName = new Text("Hero Name");
 		Text enemyName = new Text("Enemy Name");
+
 		// -------------------------------------------------------------
-		back.setOnAction(e -> homePage(primaryStage));
 
 		// Create the HBoxes for hero and enemy positions
 		HBox heroPositions = new HBox(50);
@@ -144,32 +196,37 @@ public class Main extends Application {
 				passTurnbutton);
 		// -------------------------------------------------------------
 		// Images for everything
-		ImageView enemyInPosition1 = new ImageView(new Image("applicationImagesEnemySprites/Goblin Axeman/Goblin_axeman_1_Idle.png"));
-		ImageView enemyInPosition2 = new ImageView(new Image("applicationImagesEnemySprites/Goblin Axeman/Goblin_axeman_1_Idle.png"));
-		ImageView enemyInPosition3 = new ImageView(new Image("applicationImagesEnemySprites/Goblin Archer/Goblin_Archer_1_Idle.png"));
-		ImageView enemyInPosition4 = new ImageView(new Image("applicationImagesEnemySprites/Goblin Shaman/Goblin_Shaman_1_Idle.png"));
+		ImageView enemyInPosition1 = new ImageView(
+				new Image("applicationImagesEnemySprites/Goblin Axeman/Goblin_axeman_1_Idle.png"));
+		ImageView enemyInPosition2 = new ImageView(
+				new Image("applicationImagesEnemySprites/Goblin Axeman/Goblin_axeman_1_Idle.png"));
+		ImageView enemyInPosition3 = new ImageView(
+				new Image("applicationImagesEnemySprites/Goblin Archer/Goblin_Archer_1_Idle.png"));
+		ImageView enemyInPosition4 = new ImageView(
+				new Image("applicationImagesEnemySprites/Goblin Shaman/Goblin_Shaman_1_Idle.png"));
 		ImageView skillbuttonimage1 = new ImageView(new Image("abilityIconsPaladin/holy_rampart.png"));
 		ImageView skillbuttonimage2 = new ImageView(new Image("abilityIconsPaladin/holy_rampart.png"));
 		ImageView skillbuttonimage3 = new ImageView(new Image("abilityIconsPaladin/holy_rampart.png"));
 		ImageView skillbuttonimage4 = new ImageView(new Image("abilityIconsPaladin/holy_rampart.png"));
 		ImageView heroNamePlate = new ImageView(new Image("GUIAssets/nameplate.png"));
 		ImageView enemyNamePlate = new ImageView(new Image("GUIAssets/nameplate.png"));
-		ImageView characterSelectionIndicator1 = new ImageView(new Image("GUIAssets/characterSelectionIndicator.png"));
-		ImageView characterSelectionIndicator2 = new ImageView(new Image("GUIAssets/characterSelectionIndicator.png"));
-		ImageView characterSelectionIndicator3 = new ImageView(new Image("GUIAssets/characterSelectionIndicator.png"));
-		ImageView characterSelectionIndicator4 = new ImageView(new Image("GUIAssets/characterSelectionIndicator.png"));
+		ImageView heroSelectionIndicator4 = new ImageView(new Image("GUIAssets/characterSelectionIndicator.png"));
+		ImageView heroSelectionIndicator3 = new ImageView(new Image("GUIAssets/characterSelectionIndicator.png"));
+		ImageView heroSelectionIndicator2 = new ImageView(new Image("GUIAssets/characterSelectionIndicator.png"));
+		ImageView heroSelectionIndicator1 = new ImageView(new Image("GUIAssets/characterSelectionIndicator.png"));
 		ImageView enemySelectionIndicator1 = new ImageView(new Image("GUIAssets/enemySelectionIndicator.png"));
 		ImageView enemySelectionIndicator2 = new ImageView(new Image("GUIAssets/enemySelectionIndicator.png"));
 		ImageView enemySelectionIndicator3 = new ImageView(new Image("GUIAssets/enemySelectionIndicator.png"));
 		ImageView enemySelectionIndicator4 = new ImageView(new Image("GUIAssets/enemySelectionIndicator.png"));
-		
+
 		Image backgroundImagesetup = new Image("combatBackgrounds/cryptsRoomWallDrain.png");
-		BackgroundSize size = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false); // background image
-		BackgroundPosition customPosition = new BackgroundPosition(Side.LEFT, 0, true, Side.TOP, 0, true); // fit to top left
+		BackgroundSize size = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false); // background
+																														// image
+		BackgroundPosition customPosition = new BackgroundPosition(Side.LEFT, 0, true, Side.TOP, 0, true); // fit to top
+																											// left
 		BackgroundImage backgroundImagePayoff = new BackgroundImage(backgroundImagesetup, BackgroundRepeat.NO_REPEAT,
 				BackgroundRepeat.NO_REPEAT, customPosition, size);
 
-		
 		// -------------------------------------------------------------
 		// Set the size of the images to match the button size
 		enemyInPosition1.setFitWidth(0.08 * 1920); // Width relative to the screen size (1920x1080)
@@ -193,20 +250,84 @@ public class Main extends Application {
 		skillbuttonimage2.setMouseTransparent(true);
 		skillbuttonimage3.setMouseTransparent(true);
 		skillbuttonimage4.setMouseTransparent(true);
-		characterSelectionIndicator1.setMouseTransparent(true);
-		characterSelectionIndicator2.setMouseTransparent(true);
-		characterSelectionIndicator3.setMouseTransparent(true);
-		characterSelectionIndicator4.setMouseTransparent(true);
+		heroSelectionIndicator4.setMouseTransparent(true);
+		heroSelectionIndicator3.setMouseTransparent(true);
+		heroSelectionIndicator2.setMouseTransparent(true);
+		heroSelectionIndicator1.setMouseTransparent(true);
 		enemySelectionIndicator1.setMouseTransparent(true);
 		enemySelectionIndicator2.setMouseTransparent(true);
 		enemySelectionIndicator3.setMouseTransparent(true);
 		enemySelectionIndicator4.setMouseTransparent(true);
+		// -------------------------------------------------------------
+		heroPosition1.setOnMouseEntered(e -> {
+			heroSelectionIndicator1.setVisible(true); // Make the image appear on hover
+		});
+		heroPosition1.setOnMouseExited(e -> {
+			heroSelectionIndicator1.setVisible(false); // Make the image appear on hover
+		});
+		heroSelectionIndicator1.setVisible(false);
+
+		heroPosition2.setOnMouseEntered(e -> {
+			heroSelectionIndicator2.setVisible(true); // Make the image appear on hover
+		});
+		heroPosition2.setOnMouseExited(e -> {
+			heroSelectionIndicator2.setVisible(false); // Make the image appear on hover
+		});
+		heroSelectionIndicator2.setVisible(false);
+
+		heroPosition3.setOnMouseEntered(e -> {
+			heroSelectionIndicator3.setVisible(true); // Make the image appear on hover
+		});
+		heroPosition3.setOnMouseExited(e -> {
+			heroSelectionIndicator3.setVisible(false); // Make the image appear on hover
+		});
+		heroSelectionIndicator3.setVisible(false);
+
+		heroPosition4.setOnMouseEntered(e -> {
+			heroSelectionIndicator4.setVisible(true); // Make the image appear on hover
+		});
+		heroPosition4.setOnMouseExited(e -> {
+			heroSelectionIndicator4.setVisible(false); // Make the image appear on hover
+		});
+		heroSelectionIndicator4.setVisible(false);
+
+		enemyPosition1.setOnMouseEntered(e -> {
+			enemySelectionIndicator1.setVisible(true); // Make the image appear on hover
+		});
+		enemyPosition1.setOnMouseExited(e -> {
+			enemySelectionIndicator1.setVisible(false); // Make the image appear on hover
+		});
+		enemySelectionIndicator1.setVisible(false);
+
+		enemyPosition2.setOnMouseEntered(e -> {
+			enemySelectionIndicator2.setVisible(true); // Make the image appear on hover
+		});
+		enemyPosition2.setOnMouseExited(e -> {
+			enemySelectionIndicator2.setVisible(false); // Make the image appear on hover
+		});
+		enemySelectionIndicator2.setVisible(false);
+
+		enemyPosition3.setOnMouseEntered(e -> {
+			enemySelectionIndicator3.setVisible(true); // Make the image appear on hover
+		});
+		enemyPosition3.setOnMouseExited(e -> {
+			enemySelectionIndicator3.setVisible(false); // Make the image appear on hover
+		});
+		enemySelectionIndicator3.setVisible(false);
+
+		enemyPosition4.setOnMouseEntered(e -> {
+			enemySelectionIndicator4.setVisible(true); // Make the image appear on hover
+		});
+		enemyPosition4.setOnMouseExited(e -> {
+			enemySelectionIndicator4.setVisible(false); // Make the image appear on hover
+		});
+		enemySelectionIndicator4.setVisible(false);
 		heroName.setFill(Color.WHITE);
 		enemyName.setFill(Color.WHITE);
 		// -------------------------------------------------------------
 
 		skillbuttonimage1.setFitWidth(0.06 * 1920); // placeholder 16:9 aspect ratio
-		skillbuttonimage1.setFitHeight(0.09 * 1080); 
+		skillbuttonimage1.setFitHeight(0.09 * 1080);
 		skillbuttonimage2.setFitWidth(0.06 * 1920); // placeholder
 		skillbuttonimage2.setFitHeight(0.09 * 1080);
 		skillbuttonimage3.setFitWidth(0.06 * 1920); // placeholder
@@ -222,14 +343,22 @@ public class Main extends Application {
 		root.getChildren().add(heroHealthBars); // Add hero health bars to the root Pane
 		root.getChildren().add(enemyHealthBars); // Add enemy health bars to the root Pane
 		root.getChildren().add(skillButtons); // skill buttons
-		root.getChildren().addAll(skillbuttonimage1, skillbuttonimage2, skillbuttonimage3, skillbuttonimage4); // these are the images for the skill buttons
+		root.getChildren().addAll(skillbuttonimage1, skillbuttonimage2, skillbuttonimage3, skillbuttonimage4); // these
+																												// are
+																												// the
+																												// images
+																												// for
+																												// the
+																												// skill
+																												// buttons
 		root.getChildren().addAll(heroNamePlate, enemyNamePlate);
-		root.getChildren().addAll(heroName, enemyName);//keep name after name plate to avoid layering issues
-		root.getChildren().addAll(characterSelectionIndicator1, characterSelectionIndicator2, characterSelectionIndicator3, characterSelectionIndicator4); // might need 4 of these.
-		root.getChildren().addAll(enemySelectionIndicator1, enemySelectionIndicator2, enemySelectionIndicator3, enemySelectionIndicator4); // might need 4 of these.
+		root.getChildren().addAll(heroName, enemyName);// keep name after name plate to avoid layering issues
+		root.getChildren().addAll(heroSelectionIndicator1, heroSelectionIndicator2, heroSelectionIndicator3,
+				heroSelectionIndicator4); // might need 4 of these.
+		root.getChildren().addAll(enemySelectionIndicator1, enemySelectionIndicator2, enemySelectionIndicator3,
+				enemySelectionIndicator4); // might need 4 of these.
 
 		root.setBackground(new Background(backgroundImagePayoff));
-										
 
 		// -------------------------------------------------------------
 		// Manually position the HBoxes and back button
@@ -250,26 +379,26 @@ public class Main extends Application {
 
 		heroName.setLayoutX(200); // hero's name
 		heroName.setLayoutY(740);
-		
+
 		enemyName.setLayoutX(1660);
 		enemyName.setLayoutY(740);
-		
-		heroNamePlate.setLayoutX(-5); 
+
+		heroNamePlate.setLayoutX(-5);
 		heroNamePlate.setLayoutY(710);
-		
+
 		enemyNamePlate.setLayoutX(1415);
 		enemyNamePlate.setLayoutY(710);
 		enemyNamePlate.setScaleX(-1);
 		// -------------------------------------------------------------
 
-		characterSelectionIndicator1.setLayoutX(135);
-		characterSelectionIndicator1.setLayoutY(560);
-		characterSelectionIndicator2.setLayoutX(340);
-		characterSelectionIndicator2.setLayoutY(560);
-		characterSelectionIndicator3.setLayoutX(545);
-		characterSelectionIndicator3.setLayoutY(560);
-		characterSelectionIndicator4.setLayoutX(750);
-		characterSelectionIndicator4.setLayoutY(560);
+		heroSelectionIndicator1.setLayoutX(750);
+		heroSelectionIndicator1.setLayoutY(560);
+		heroSelectionIndicator2.setLayoutX(545);
+		heroSelectionIndicator2.setLayoutY(560);
+		heroSelectionIndicator3.setLayoutX(340);
+		heroSelectionIndicator3.setLayoutY(560);
+		heroSelectionIndicator4.setLayoutX(135);
+		heroSelectionIndicator4.setLayoutY(560);
 		// -------------------------------------------------------------
 
 		enemySelectionIndicator1.setLayoutX(1047); // spacing of 205 between each
@@ -280,8 +409,7 @@ public class Main extends Application {
 		enemySelectionIndicator3.setLayoutY(513);
 		enemySelectionIndicator4.setLayoutX(1662);
 		enemySelectionIndicator4.setLayoutY(513);
-		
-		
+
 		back.setLayoutX(50); // Position X for back button
 		back.setLayoutY(50); // Position Y for back button
 		// -------------------------------------------------------------
@@ -296,7 +424,7 @@ public class Main extends Application {
 		enemyInPosition4.setLayoutY(250);
 		// -------------------------------------------------------------
 		skillbuttonimage1.setLayoutX(586);
-		skillbuttonimage1.setLayoutY(778);// 778 SWEET SPOT							// 127 x multiple
+		skillbuttonimage1.setLayoutY(778);// 778 SWEET SPOT // 127 x multiple
 		skillbuttonimage2.setLayoutX(713);
 		skillbuttonimage2.setLayoutY(778);
 		skillbuttonimage3.setLayoutX(840);
@@ -319,15 +447,26 @@ public class Main extends Application {
 			((Button) button).prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.09));
 		});
 
-//		root.setStyle("-fx-background-color: black;"); // Set the background color
+		back.setOnAction(e -> {
+			mediaPlayer.stop(); // Stop the music when the back button is pressed
+			homePage(primaryStage);
+		});
 
 		Scene scene = new Scene(root, 1920, 1080); // Create a scene with the Pane
+		scene.setCursor(customCursor);
 		primaryStage.setScene(scene);
 		primaryStage.show();
+
+		primaryStage.setOnCloseRequest(event -> {
+			mediaPlayer.stop(); // Stop the music when the stage is closed
+		});
+
 	}
 
 	// putting this on the sideline, in case we decide we need a play options tab.
 	private void playOptions(Stage primaryStage) {
+		Image cursorImage = new Image("GUIAssets/cursor.png");
+		Cursor customCursor = Cursor.cursor(cursorImage.getUrl());
 		Button back = new Button("Back");
 
 		back.setOnAction(e -> homePage(primaryStage));
@@ -353,6 +492,8 @@ public class Main extends Application {
 	}
 
 	private void textTutorial(Stage primaryStage) {
+		Image cursorImage = new Image("GUIAssets/cursor.png");
+		Cursor customCursor = Cursor.cursor(cursorImage.getUrl());
 		Button back = new Button("Back");
 		back.setOnAction(e -> homePage(primaryStage));
 
@@ -375,11 +516,14 @@ public class Main extends Application {
 
 		root.setStyle("-fx-background-color: black;"); // Set background color to black
 		Scene scene = new Scene(root, 1920, 1080);
+		scene.setCursor(customCursor);
 
 		primaryStage.setScene(scene);
 	}
 
 	private void unlocks(Stage primaryStage) {
+		Image cursorImage = new Image("GUIAssets/cursor.png");
+		Cursor customCursor = Cursor.cursor(cursorImage.getUrl());
 		Button back = new Button("Back");
 		back.setOnAction(e -> homePage(primaryStage));
 
@@ -402,11 +546,14 @@ public class Main extends Application {
 
 		root.setStyle("-fx-background-color: black;"); // Set background color to black
 		Scene scene = new Scene(root, 1920, 1080);
+		scene.setCursor(customCursor);
 
 		primaryStage.setScene(scene);
 	}
 
 	private void stats(Stage primaryStage) {
+		Image cursorImage = new Image("GUIAssets/cursor.png");
+		Cursor customCursor = Cursor.cursor(cursorImage.getUrl());
 		Button back = new Button("Back");
 		back.setOnAction(e -> homePage(primaryStage));
 
@@ -429,11 +576,14 @@ public class Main extends Application {
 
 		root.setStyle("-fx-background-color: black;"); // Set background color to black
 		Scene scene = new Scene(root, 1920, 1080);
+		scene.setCursor(customCursor);
 
 		primaryStage.setScene(scene);
 	}
 
 	private void credits(Stage primaryStage) {
+		Image cursorImage = new Image("GUIAssets/cursor.png");
+		Cursor customCursor = Cursor.cursor(cursorImage.getUrl());
 		Button back = new Button("Back");
 		back.setOnAction(e -> homePage(primaryStage));
 
@@ -456,6 +606,7 @@ public class Main extends Application {
 
 		root.setStyle("-fx-background-color: black;"); // Set background color to black
 		Scene scene = new Scene(root, 1920, 1080);
+		scene.setCursor(customCursor);
 
 		primaryStage.setScene(scene);
 	}
