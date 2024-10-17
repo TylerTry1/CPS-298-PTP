@@ -22,6 +22,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.LinearGradient;
+import javafx.scene.paint.Paint;
+import javafx.scene.paint.Stop;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -150,22 +155,11 @@ public class Main extends Application {
 		Button heroPosition3 = new Button("heroPosition3");
 		Button heroPosition2 = new Button("heroPosition2");
 		Button heroPosition1 = new Button("heroPosition1");
-		ProgressBar heroHealthBar1 = new ProgressBar(1.0); // Initial progress value 0-1.0
-		ProgressBar heroHealthBar2 = new ProgressBar(1.0);
-		ProgressBar heroHealthBar3 = new ProgressBar(1.0);
-		ProgressBar heroHealthBar4 = new ProgressBar(1.0);
-		heroHealthBar1.setStyle("-fx-accent: red;");
-		heroHealthBar2.setStyle("-fx-accent: red;");
-		heroHealthBar3.setStyle("-fx-accent: red;");
-		heroHealthBar4.setStyle("-fx-accent: red;");
 		Button enemyPosition1 = new Button("enemyPosition1");
 		Button enemyPosition2 = new Button("enemyPosition2");
 		Button enemyPosition3 = new Button("enemyPosition3");
 		Button enemyPosition4 = new Button("enemyPosition4");
-		ProgressBar enemyHealthBar1 = new ProgressBar(1.0); // Initial progress value 0-1.0
-		ProgressBar enemyHealthBar2 = new ProgressBar(1.0);
-		ProgressBar enemyHealthBar3 = new ProgressBar(1.0);
-		ProgressBar enemyHealthBar4 = new ProgressBar(1.0);
+
 		Button skillbutton1 = new Button("skill 1");
 		Button skillbutton2 = new Button("skill 2");
 		Button skillbutton3 = new Button("skill 3");
@@ -175,25 +169,112 @@ public class Main extends Application {
 
 		Text heroName = new Text("Hero Name");
 		Text enemyName = new Text("Enemy Name");
+		// -------------------------------------------------------------
 
+		Paint redToBlackGradient = new LinearGradient(
+                0, 0, // Start at the top
+                0, 1, // End at the bottom
+                true, // proportional
+                CycleMethod.NO_CYCLE, // Cycle method
+                new Stop(0, Color.RED), // Start color (top)
+                new Stop(1, Color.BLACK) // End color (bottom)
+        );
+		Paint whiteToBlackGradient = new LinearGradient(
+				 0, 0, // Start at the top
+	                0, 1, // End at the bottom
+	                true, // proportional
+	                CycleMethod.NO_CYCLE, // Cycle method
+	                new Stop(0, Color.BLACK), // Start color (top)
+	                new Stop(1, Color.rgb(50, 50, 50)) // End color (bottom, darker gray)
+	        );
+		Rectangle heroHealthBarRedRectangle4 = new Rectangle(100, 15); // Width, Height, Fill Color
+		Rectangle heroHealthBarRedRectangle3 = new Rectangle(100, 15);
+		Rectangle heroHealthBarRedRectangle2 = new Rectangle(100, 15);
+		Rectangle heroHealthBarRedRectangle1 = new Rectangle(100, 15);
+		Rectangle heroHealthBarBlackRectangle4 = new Rectangle(100, 15); // Width, Height, Fill Color
+		Rectangle heroHealthBarBlackRectangle3 = new Rectangle(100, 15);
+		Rectangle heroHealthBarBlackRectangle2 = new Rectangle(100, 15);
+		Rectangle heroHealthBarBlackRectangle1 = new Rectangle(100, 15);
+		Rectangle enemyHealthBarRedRectangle1 = new Rectangle(100, 15);
+		Rectangle enemyHealthBarRedRectangle2 = new Rectangle(100, 15);
+		Rectangle enemyHealthBarRedRectangle3 = new Rectangle(100, 15);
+		Rectangle enemyHealthBarRedRectangle4 = new Rectangle(100, 15);
+		Rectangle enemyHealthBarBlackRectangle1 = new Rectangle(100, 15);
+		Rectangle enemyHealthBarBlackRectangle2 = new Rectangle(100, 15);
+		Rectangle enemyHealthBarBlackRectangle3 = new Rectangle(100, 15);
+		Rectangle enemyHealthBarBlackRectangle4 = new Rectangle(100, 15);
+		heroHealthBarRedRectangle4.setFill(redToBlackGradient);
+	    heroHealthBarRedRectangle4.setArcWidth(5);
+	    heroHealthBarRedRectangle4.setArcHeight(5);
+		heroHealthBarRedRectangle3.setFill(redToBlackGradient);
+	    heroHealthBarRedRectangle3.setArcWidth(5);
+	    heroHealthBarRedRectangle3.setArcHeight(5);
+		heroHealthBarRedRectangle2.setFill(redToBlackGradient);
+	    heroHealthBarRedRectangle2.setArcWidth(5);
+	    heroHealthBarRedRectangle2.setArcHeight(5);
+		heroHealthBarRedRectangle1.setFill(redToBlackGradient);
+	    heroHealthBarRedRectangle1.setArcWidth(5);
+	    heroHealthBarRedRectangle1.setArcHeight(5);
+	    heroHealthBarBlackRectangle4.setFill(whiteToBlackGradient);
+	    heroHealthBarBlackRectangle4.setArcWidth(5);
+	    heroHealthBarBlackRectangle4.setArcHeight(5);
+	    heroHealthBarBlackRectangle3.setFill(whiteToBlackGradient);
+	    heroHealthBarBlackRectangle3.setArcWidth(5);
+	    heroHealthBarBlackRectangle3.setArcHeight(5);
+	    heroHealthBarBlackRectangle2.setFill(whiteToBlackGradient);
+	    heroHealthBarBlackRectangle2.setArcWidth(5);
+	    heroHealthBarBlackRectangle2.setArcHeight(5);
+	    heroHealthBarBlackRectangle1.setFill(whiteToBlackGradient);
+	    heroHealthBarBlackRectangle1.setArcWidth(5);
+	    heroHealthBarBlackRectangle1.setArcHeight(5);
+	    enemyHealthBarRedRectangle1.setFill(redToBlackGradient);
+	    enemyHealthBarRedRectangle1.setArcWidth(5);
+	    enemyHealthBarRedRectangle1.setArcHeight(5);
+	    enemyHealthBarRedRectangle2.setFill(redToBlackGradient);
+	    enemyHealthBarRedRectangle2.setArcWidth(5);
+	    enemyHealthBarRedRectangle2.setArcHeight(5);
+	    enemyHealthBarRedRectangle3.setFill(redToBlackGradient);
+	    enemyHealthBarRedRectangle3.setArcWidth(5);
+	    enemyHealthBarRedRectangle3.setArcHeight(5);
+	    enemyHealthBarRedRectangle4.setFill(redToBlackGradient);
+	    enemyHealthBarRedRectangle4.setArcWidth(5);
+	    enemyHealthBarRedRectangle4.setArcHeight(5);
+	    enemyHealthBarBlackRectangle1.setFill(whiteToBlackGradient);
+	    enemyHealthBarBlackRectangle1.setArcWidth(5);
+	    enemyHealthBarBlackRectangle1.setArcHeight(5);
+	    enemyHealthBarBlackRectangle2.setFill(whiteToBlackGradient);
+	    enemyHealthBarBlackRectangle2.setArcWidth(5);
+	    enemyHealthBarBlackRectangle2.setArcHeight(5);
+	    enemyHealthBarBlackRectangle3.setFill(whiteToBlackGradient);
+	    enemyHealthBarBlackRectangle3.setArcWidth(5);
+	    enemyHealthBarBlackRectangle3.setArcHeight(5);
+	    enemyHealthBarBlackRectangle4.setFill(whiteToBlackGradient);
+	    enemyHealthBarBlackRectangle4.setArcWidth(5);
+	    enemyHealthBarBlackRectangle4.setArcHeight(5);
 		// -------------------------------------------------------------
 
 		// Create the HBoxes for hero and enemy positions
 		HBox heroPositions = new HBox(50);
 		heroPositions.getChildren().addAll(heroPosition4, heroPosition3, heroPosition2, heroPosition1);
 
-		HBox heroHealthBars = new HBox(105);
-		heroHealthBars.getChildren().addAll(heroHealthBar1, heroHealthBar2, heroHealthBar3, heroHealthBar4);
 
 		HBox enemyPositions = new HBox(50);
 		enemyPositions.getChildren().addAll(enemyPosition1, enemyPosition2, enemyPosition3, enemyPosition4);
 
-		HBox enemyHealthBars = new HBox(105); // 105 is the sweet spot
-		enemyHealthBars.getChildren().addAll(enemyHealthBar1, enemyHealthBar2, enemyHealthBar3, enemyHealthBar4);
-
 		HBox skillButtons = new HBox(10);
 		skillButtons.getChildren().addAll(skillbutton1, skillbutton2, skillbutton3, skillbutton4, movebutton,
 				passTurnbutton);
+		HBox heroHealthBarRedRectangles = new HBox(105);
+		heroHealthBarRedRectangles.getChildren().addAll(heroHealthBarRedRectangle4,heroHealthBarRedRectangle3,heroHealthBarRedRectangle2,heroHealthBarRedRectangle1);
+		
+		HBox heroHealthBarBlackRectangles = new HBox(105);
+		heroHealthBarBlackRectangles.getChildren().addAll(heroHealthBarBlackRectangle4,heroHealthBarBlackRectangle3,heroHealthBarBlackRectangle2,heroHealthBarBlackRectangle1);
+		
+		HBox enemyHealthBarRedRectangles = new HBox(105);
+		enemyHealthBarRedRectangles.getChildren().addAll(enemyHealthBarRedRectangle1,enemyHealthBarRedRectangle2,enemyHealthBarRedRectangle3,enemyHealthBarRedRectangle4);
+		
+		HBox enemyHealthBarBlackRectangles = new HBox(105);
+		enemyHealthBarBlackRectangles.getChildren().addAll(enemyHealthBarBlackRectangle1,enemyHealthBarBlackRectangle2,enemyHealthBarBlackRectangle3,enemyHealthBarBlackRectangle4);
 		// -------------------------------------------------------------
 		// Images for everything
 		ImageView enemyInPosition1 = new ImageView(
@@ -238,10 +319,6 @@ public class Main extends Application {
 		enemyInPosition4.setFitWidth(0.08 * 1920);
 		enemyInPosition4.setFitHeight(0.3 * 1080);
 
-		enemyHealthBar1.setStyle("-fx-accent: red;");
-		enemyHealthBar2.setStyle("-fx-accent: red;");
-		enemyHealthBar3.setStyle("-fx-accent: red;");
-		enemyHealthBar4.setStyle("-fx-accent: red;");
 		enemyInPosition1.setMouseTransparent(true);
 		enemyInPosition2.setMouseTransparent(true);
 		enemyInPosition3.setMouseTransparent(true);
@@ -340,25 +417,18 @@ public class Main extends Application {
 		// Add buttons, images, and back button to the root Pane
 		root.getChildren().addAll(heroPositions, enemyPositions, back);
 		root.getChildren().addAll(enemyInPosition1, enemyInPosition2, enemyInPosition3, enemyInPosition4);
-		root.getChildren().add(heroHealthBars); // Add hero health bars to the root Pane
-		root.getChildren().add(enemyHealthBars); // Add enemy health bars to the root Pane
 		root.getChildren().add(skillButtons); // skill buttons
-		root.getChildren().addAll(skillbuttonimage1, skillbuttonimage2, skillbuttonimage3, skillbuttonimage4); // these
-																												// are
-																												// the
-																												// images
-																												// for
-																												// the
-																												// skill
-																												// buttons
+		root.getChildren().addAll(skillbuttonimage1, skillbuttonimage2, skillbuttonimage3, skillbuttonimage4); 																						
 		root.getChildren().addAll(heroNamePlate, enemyNamePlate);
 		root.getChildren().addAll(heroName, enemyName);// keep name after name plate to avoid layering issues
-		root.getChildren().addAll(heroSelectionIndicator1, heroSelectionIndicator2, heroSelectionIndicator3,
-				heroSelectionIndicator4); // might need 4 of these.
-		root.getChildren().addAll(enemySelectionIndicator1, enemySelectionIndicator2, enemySelectionIndicator3,
-				enemySelectionIndicator4); // might need 4 of these.
+		root.getChildren().addAll(heroSelectionIndicator1, heroSelectionIndicator2, heroSelectionIndicator3,heroSelectionIndicator4); 
+		root.getChildren().addAll(enemySelectionIndicator1, enemySelectionIndicator2, enemySelectionIndicator3, enemySelectionIndicator4); // might need 4 of these.
+		root.getChildren().add(heroHealthBarBlackRectangles);
+		root.getChildren().add(heroHealthBarRedRectangles);
+		root.getChildren().add(enemyHealthBarBlackRectangles);
+		root.getChildren().add(enemyHealthBarRedRectangles);
 
-		root.setBackground(new Background(backgroundImagePayoff));
+		root.setBackground(new Background(backgroundImagePayoff)); // set background image
 
 		// -------------------------------------------------------------
 		// Manually position the HBoxes and back button
@@ -367,12 +437,6 @@ public class Main extends Application {
 
 		enemyPositions.setLayoutX(1025); // Position X for enemy positions
 		enemyPositions.setLayoutY(250); // Position Y for enemy positions
-
-		enemyHealthBars.setLayoutX(1055); // Position health bar relative to enemies
-		enemyHealthBars.setLayoutY(600); // Position health bar slightly below enemies
-
-		heroHealthBars.setLayoutX(155); // Position health bar relative to heroes
-		heroHealthBars.setLayoutY(600); // Position health bar slightly below heroes
 
 		skillButtons.setLayoutX(585); // 585 sweet spot
 		skillButtons.setLayoutY(775);
@@ -389,6 +453,19 @@ public class Main extends Application {
 		enemyNamePlate.setLayoutX(1415);
 		enemyNamePlate.setLayoutY(710);
 		enemyNamePlate.setScaleX(-1);
+		// -------------------------------------------------------------
+		//health bars
+		heroHealthBarRedRectangles.setLayoutX(155);
+		heroHealthBarRedRectangles.setLayoutY(600);
+		
+		heroHealthBarBlackRectangles.setLayoutX(155);
+		heroHealthBarBlackRectangles.setLayoutY(600);
+
+		enemyHealthBarRedRectangles.setLayoutX(1055);
+		enemyHealthBarRedRectangles.setLayoutY(600);
+	
+		enemyHealthBarBlackRectangles.setLayoutX(1055);
+		enemyHealthBarBlackRectangles.setLayoutY(600);
 		// -------------------------------------------------------------
 
 		heroSelectionIndicator1.setLayoutX(750);
@@ -453,6 +530,7 @@ public class Main extends Application {
 		});
 
 		Scene scene = new Scene(root, 1920, 1080); // Create a scene with the Pane
+		
 		scene.setCursor(customCursor);
 		primaryStage.setScene(scene);
 		primaryStage.show();
