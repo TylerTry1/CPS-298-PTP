@@ -10,5 +10,6 @@ public class Assassin extends Characters {
 		crit_chance = 10;
 		dodge_chance = 0;
 		position = 3;
+		speed = 7;
 	}
 }

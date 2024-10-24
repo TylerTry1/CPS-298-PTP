@@ -10,5 +10,6 @@ public class Alchemist extends Characters {
         crit_chance = 14;
         dodge_chance = 0;
         position = 1;
+        speed = 5;
     }
 }

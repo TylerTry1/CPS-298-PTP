@@ -13,6 +13,19 @@ public class Characters {
         int crit_chance;
         int dodge_chance; // leave this stat at 0 for all characters, need a 0 value in case we want to change it later.
         int position;
+        int speed;
+        
+        int getHealth() {
+        	return health;
+        }
+        
+        int getSpeed() {
+        	return speed;
+        }
+        
+        void adjustSpeed(int adjust) {
+        	speed += adjust;
+        }
     //}
 
     /*public class characterDismas extends characterStats {

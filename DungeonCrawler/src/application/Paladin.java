@@ -11,5 +11,6 @@ public class Paladin extends Characters{
         crit_chance = 32;
         dodge_chance = 0;
         position = 2;
+        speed = 3;
 	}
 }

@@ -1,24 +1,11 @@
+/*
 package application;
 
-import application.Enemies.goblinScout;
-import application.Enemies.goblinAxeman;
-import application.Enemies.goblinArcher;
-import application.Enemies.goblinShaman;
-import application.Enemies.skeletonSwordsman;
-import application.Enemies.skeletonCrossbowman;
-import application.Enemies.skeletonDefender;
-import application.Enemies.necromancer;
-import application.Enemies.giantPummeler;
-import application.Enemies.giantSlammer;
-import application.Enemies.zombiePeasant;
-import application.Enemies.zombieKnight;
-import application.Enemies.minotaur;
-import application.Enemies.boar;
 
 // When Abilities hit multiple targets, the farthest back is listed first.
 // Will use this later for logic checking to see which positions to actually damage.
 
-public class EnemyAbilities {
+public class EnemyAbilities extends Enemies{
 	
 	// Default to create variables.
 	public class enemyAbilitiesDefault {
@@ -218,6 +205,13 @@ public class EnemyAbilities {
 		}
 	}
 	
+	public class bodyPileAbilities extends enemyAbilitiesDefault {
+		
+		public void squelch() {
+			// Placeholder ability for logic flow
+		}
+	}
+	
 	public class giantPummelerAbilities extends enemyAbilitiesDefault {
 		
 		// Shockwave
@@ -393,3 +387,5 @@ public class EnemyAbilities {
 		}
 	}
 }
+
+*/
