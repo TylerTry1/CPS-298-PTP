@@ -32,11 +32,12 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 	// music tracks
-	String path1 = getClass().getResource("/Music/DD1RuinsTheme.mp3").toExternalForm();
-	Media mediaPath = new Media(path1);
-	String path2 = getClass().getResource("/Music/MainMenu.mp3").toExternalForm();
-	Media mediaPath2 = new Media(path2);
-
+	String combatMusic = getClass().getResource("/Music/DD1RuinsTheme.mp3").toExternalForm();
+	Media mediaPath = new Media(combatMusic);
+	String menuMusic = getClass().getResource("/Music/MainMenu.mp3").toExternalForm();
+	Media mediaPath2 = new Media(menuMusic);
+	String shopMusic = getClass().getResource("/Music/ShopTheme.mp3").toExternalForm();
+	Media mediaPath3 = new Media(shopMusic);
 	@Override
 	public void start(Stage primaryStage) {
 		homePage(primaryStage);
@@ -47,19 +48,22 @@ public class Main extends Application {
 		Image cursorImage = new Image("GUIAssets/cursor.png");
 		Cursor customCursor = Cursor.cursor(cursorImage.getUrl());
 
-		Media media = new Media(path2);
+		Media media = new Media(menuMusic);
 		MediaPlayer mediaPlayer = new MediaPlayer(media);
 		mediaPlayer.setVolume(0.05); // Volume level (0.0 to 1.0)
 		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE); // Loop the music
 		mediaPlayer.play(); // music player
 
 		// First set of buttons
+
 		Button play = new Button("Begin New Journey");
 		Button tutorial = new Button("Tutorial");
 		Button unlocks = new Button("Unlocks");
 		Button stats = new Button("Stats");
 		Button credits = new Button("Credits");
 		Button quit = new Button("Exit Game");
+		Button shop = new Button("Shop");
+		
 		play.setOnAction(e -> {
 			battleScene(primaryStage);
 			mediaPlayer.stop();
@@ -86,7 +90,10 @@ public class Main extends Application {
 			Platform.exit();
 			mediaPlayer.stop();
 		});
-
+		shop.setOnAction(e -> {
+			shop(primaryStage);
+			mediaPlayer.stop();
+		});
 		// VBox 1 for first set of buttons
 		VBox playbutton = new VBox(10);
 		playbutton.getChildren().addAll(play);
@@ -103,6 +110,13 @@ public class Main extends Application {
 		buttonBox2.setLayoutX(7); // Adjust X for second VBox
 		buttonBox2.setLayoutY(750); // Adjust Y for second VBox
 
+		VBox shopTesting = new VBox(10);
+		shopTesting.getChildren().addAll(shop);
+		shopTesting.setSpacing(10);
+		shopTesting.setPadding(new Insets(20));
+		shopTesting.setLayoutX(10); // Adjust X for second VBox
+		shopTesting.setLayoutY(10); // Adjust Y for second VBox
+		
 		// Load the background image
 		Image image = new Image("applicationImagesBackgrounds/EndlessMountain16x9.png");
 		// Define the background size and position
@@ -112,7 +126,7 @@ public class Main extends Application {
 
 		// Use a Pane to allow free positioning
 		Pane root = new Pane();
-		root.getChildren().addAll(playbutton, buttonBox2); // Add both button lists
+		root.getChildren().addAll(playbutton, buttonBox2, shopTesting); // Add both button lists
 		root.setBackground(new Background(backgroundImage));
 
 		// Set button styles and sizes for both sets of buttons
@@ -143,7 +157,7 @@ public class Main extends Application {
 		Cursor customCursor = Cursor.cursor(cursorImage.getUrl());
 
 		// music player
-		Media media = new Media(path1);
+		Media media = new Media(combatMusic);
 		MediaPlayer mediaPlayer = new MediaPlayer(media);
 		mediaPlayer.setVolume(0.05); // Volume level (0.0 to 1.0)
 		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE); // Loop the music
@@ -540,7 +554,70 @@ public class Main extends Application {
 		});
 
 	}
+	private void shop(Stage primaryStage) {
+		Image cursorImage = new Image("GUIAssets/cursor.png");
+		Cursor customCursor = Cursor.cursor(cursorImage.getUrl());
 
+		// music player
+		Media media = new Media(shopMusic);
+		MediaPlayer mediaPlayer = new MediaPlayer(media);
+		mediaPlayer.setVolume(0.05); // Volume level (0.0 to 1.0)
+		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE); // Loop the music
+		mediaPlayer.play(); // music player
+
+		// Create buttons for everything
+		Button back = new Button("Back");
+		Text itemDescriptions = new Text("Item Descriptions will go at the top here");
+		Text itemImages = new Text("item images should go here, item descriptions should show up when hovered over.");
+		ImageView shopKeeper = new ImageView(new Image("shopAssets/shopKeeper.png"));
+		itemDescriptions.setFill(Color.WHITE);
+		itemImages.setFill(Color.WHITE);
+		Image backgroundImagesetup = new Image("shopAssets/shopBackground.png");
+		BackgroundSize size = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false); // background																									// image
+		BackgroundPosition customPosition = new BackgroundPosition(Side.LEFT, 0, true, Side.TOP, 0, true); // fit to top																					// left
+		BackgroundImage backgroundImagePayoff = new BackgroundImage(backgroundImagesetup, BackgroundRepeat.NO_REPEAT,
+				BackgroundRepeat.NO_REPEAT, customPosition, size);
+		
+		shopKeeper.setFitWidth(0.55 * 1920);
+		shopKeeper.setFitHeight(0.7 * 1080);
+		// Create a Pane for free positioning
+		Pane root = new Pane();
+
+		// Add buttons, images, and back button to the root Pane
+		root.getChildren().add(back);
+		root.getChildren().add(shopKeeper); 	
+		root.getChildren().addAll(itemDescriptions, itemImages);
+
+		root.setBackground(new Background(backgroundImagePayoff)); // set background image
+
+		// -------------------------------------------------------------
+	
+
+		back.setLayoutX(50); // Position X for back button
+		back.setLayoutY(50); // Position Y for back button
+		itemDescriptions.setLayoutX(1080);
+		itemDescriptions.setLayoutY(50);
+		itemImages.setLayoutX(1080);
+		itemImages.setLayoutY(1000);
+		// -------------------------------------------------------------
+		shopKeeper.setLayoutX(20);
+		shopKeeper.setLayoutY(200);
+
+		back.setOnAction(e -> {
+			mediaPlayer.stop(); // Stop the music when the back button is pressed
+			homePage(primaryStage);
+		});
+
+		Scene scene = new Scene(root, 1920, 1080); // Create a scene with the Pane
+		
+		scene.setCursor(customCursor);
+		primaryStage.setScene(scene);
+		primaryStage.show();
+		primaryStage.setOnCloseRequest(event -> {
+			mediaPlayer.stop(); // Stop the music when the stage is closed
+		});
+
+	}
 	// putting this on the sideline, in case we decide we need a play options tab.
 	private void playOptions(Stage primaryStage) {
 		Image cursorImage = new Image("GUIAssets/cursor.png");
