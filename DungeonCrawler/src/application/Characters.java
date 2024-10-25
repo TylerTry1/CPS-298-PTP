@@ -6,7 +6,7 @@ public class Characters {
 
     //public class characterStats {
         String name;
-        int health;
+        double health;
         int damage;
         int defense; // leave this stat at 0 for all characters, need a 0 value in case we want to change it later.
         int accuracy;
@@ -15,8 +15,12 @@ public class Characters {
         int position;
         int speed;
         
-        int getHealth() {
+        double getHealth() {
         	return health;
+        }
+        
+        void setHealth(double health) {
+        	this.health = health;
         }
         
         int getSpeed() {
