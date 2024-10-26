@@ -302,9 +302,9 @@ public class Main extends Application {
 		ImageView heroInPosition4 = new ImageView(new Image("applicationImagesPlayerSprites/Alchemist_Idle.png"));
 		
 		ImageView skillbuttonimage1 = new ImageView(new Image("abilityIconsPaladin/holy_rampart.png"));
-		ImageView skillbuttonimage2 = new ImageView(new Image("abilityIconsPaladin/holy_rampart.png"));
-		ImageView skillbuttonimage3 = new ImageView(new Image("abilityIconsPaladin/holy_rampart.png"));
-		ImageView skillbuttonimage4 = new ImageView(new Image("abilityIconsPaladin/holy_rampart.png"));
+		ImageView skillbuttonimage2 = new ImageView(new Image("abilityIconsPaladin/divineSmite.png"));
+		ImageView skillbuttonimage3 = new ImageView(new Image("abilityIconsPaladin/auraOfCourage.png"));
+		ImageView skillbuttonimage4 = new ImageView(new Image("abilityIconsPaladin/shieldOfFaith.png"));
 		ImageView heroNamePlate = new ImageView(new Image("GUIAssets/nameplate.png"));
 		ImageView enemyNamePlate = new ImageView(new Image("GUIAssets/nameplate.png"));
 		ImageView heroSelectionIndicator4 = new ImageView(new Image("GUIAssets/characterSelectionIndicator.png"));
