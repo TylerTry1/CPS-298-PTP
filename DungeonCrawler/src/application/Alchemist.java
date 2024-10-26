@@ -9,7 +9,7 @@ public class Alchemist extends Characters {
         accuracy = 70;
         crit_chance = 14;
         dodge_chance = 0;
-        position = 3;
+        position = 1;
         speed = 5;
     }
 }

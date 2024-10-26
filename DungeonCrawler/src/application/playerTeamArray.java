@@ -22,29 +22,20 @@ public class playerTeamArray {
 	}
 	
 	boolean checkGameOver() {
-		int numDead = 0;
 		boolean teamDead = false;
 		for (Object character : playerTeam) {
 			if (((Characters) character).getHealth() != 0) {
 				continue;
 			}
 			else {
-				numDead++;
+				teamDead = true;
+				return teamDead;
 			}
 		}
-		
-		if (numDead == 4) {
-			teamDead = true;
-		}
-		
 		return teamDead;
 	}
 	
 	Object[] getTeam() {
 		return playerTeam;
-	}
-	
-	void setTeam(Object[] team) {
-		this.playerTeam = team;
 	}
 }

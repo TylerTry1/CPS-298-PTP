@@ -291,14 +291,16 @@ public class Main extends Application {
 		enemyHealthBarBlackRectangles.getChildren().addAll(enemyHealthBarBlackRectangle1,enemyHealthBarBlackRectangle2,enemyHealthBarBlackRectangle3,enemyHealthBarBlackRectangle4);
 		// -------------------------------------------------------------
 		// Images for everything
-		ImageView enemyInPosition1 = new ImageView(
-				new Image("applicationImagesEnemySprites/Goblin Axeman/Goblin_axeman_1_Idle.png"));
-		ImageView enemyInPosition2 = new ImageView(
-				new Image("applicationImagesEnemySprites/Goblin Axeman/Goblin_axeman_1_Idle.png"));
-		ImageView enemyInPosition3 = new ImageView(
-				new Image("applicationImagesEnemySprites/Goblin Archer/Goblin_Archer_1_Idle.png"));
-		ImageView enemyInPosition4 = new ImageView(
-				new Image("applicationImagesEnemySprites/Goblin Shaman/Goblin_Shaman_1_Idle.png"));
+		ImageView enemyInPosition1 = new ImageView(new Image("applicationImagesEnemySprites/Goblin Axeman/Goblin_axeman_1_Idle.png"));
+		ImageView enemyInPosition2 = new ImageView(new Image("applicationImagesEnemySprites/Goblin Axeman/Goblin_axeman_1_Idle.png"));
+		ImageView enemyInPosition3 = new ImageView(new Image("applicationImagesEnemySprites/Goblin Archer/Goblin_Archer_1_Idle.png"));
+		ImageView enemyInPosition4 = new ImageView(new Image("applicationImagesEnemySprites/Goblin Shaman/Goblin_Shaman_1_Idle.png"));
+		
+		ImageView heroInPosition1 = new ImageView(new Image("applicationImagesPlayerSprites/Paladin_Idle.png"));
+		ImageView heroInPosition2 = new ImageView(new Image("applicationImagesPlayerSprites/Assassin_Idle.png"));
+		ImageView heroInPosition3 = new ImageView(new Image("applicationImagesPlayerSprites/Wizard_Idle.png"));
+		ImageView heroInPosition4 = new ImageView(new Image("applicationImagesPlayerSprites/Alchemist_Idle.png"));
+		
 		ImageView skillbuttonimage1 = new ImageView(new Image("abilityIconsPaladin/holy_rampart.png"));
 		ImageView skillbuttonimage2 = new ImageView(new Image("abilityIconsPaladin/holy_rampart.png"));
 		ImageView skillbuttonimage3 = new ImageView(new Image("abilityIconsPaladin/holy_rampart.png"));
@@ -332,11 +334,24 @@ public class Main extends Application {
 		enemyInPosition3.setFitHeight(0.3 * 1080);
 		enemyInPosition4.setFitWidth(0.08 * 1920);
 		enemyInPosition4.setFitHeight(0.3 * 1080);
+		heroInPosition1.setFitWidth(0.08 * 1920); // Width relative to the screen size (1920x1080)
+		heroInPosition1.setFitHeight(0.3 * 1080); // Height relative to the screen size
+		heroInPosition2.setFitWidth(0.08 * 1920); // 153.6 pixels wide.
+		heroInPosition2.setFitHeight(0.3 * 1080);
+		heroInPosition3.setFitWidth(0.08 * 1920);
+		heroInPosition3.setFitHeight(0.3 * 1080);
+		heroInPosition4.setFitWidth(0.08 * 1920);
+		heroInPosition4.setFitHeight(0.3 * 1080);
+		
 
 		enemyInPosition1.setMouseTransparent(true);
 		enemyInPosition2.setMouseTransparent(true);
 		enemyInPosition3.setMouseTransparent(true);
 		enemyInPosition4.setMouseTransparent(true);
+		heroInPosition1.setMouseTransparent(true);
+		heroInPosition2.setMouseTransparent(true);
+		heroInPosition3.setMouseTransparent(true);
+		heroInPosition4.setMouseTransparent(true);
 		skillbuttonimage1.setMouseTransparent(true);
 		skillbuttonimage2.setMouseTransparent(true);
 		skillbuttonimage3.setMouseTransparent(true);
@@ -431,6 +446,7 @@ public class Main extends Application {
 		// Add buttons, images, and back button to the root Pane
 		root.getChildren().addAll(heroPositions, enemyPositions, back);
 		root.getChildren().addAll(enemyInPosition1, enemyInPosition2, enemyInPosition3, enemyInPosition4);
+		root.getChildren().addAll(heroInPosition1, heroInPosition2, heroInPosition3, heroInPosition4);
 		root.getChildren().add(skillButtons); // skill buttons
 		root.getChildren().addAll(skillbuttonimage1, skillbuttonimage2, skillbuttonimage3, skillbuttonimage4); 																						
 		root.getChildren().addAll(heroNamePlate, enemyNamePlate);
@@ -513,6 +529,15 @@ public class Main extends Application {
 		enemyInPosition3.setLayoutY(250);
 		enemyInPosition4.setLayoutX(1640);
 		enemyInPosition4.setLayoutY(250);
+		// -------------------------------------------------------------
+		heroInPosition1.setLayoutX(740); // spacing of 205 in between each.
+		heroInPosition1.setLayoutY(250);
+		heroInPosition2.setLayoutX(535);
+		heroInPosition2.setLayoutY(250);
+		heroInPosition3.setLayoutX(330);
+		heroInPosition3.setLayoutY(250);
+		heroInPosition4.setLayoutX(125);
+		heroInPosition4.setLayoutY(250);
 		// -------------------------------------------------------------
 		skillbuttonimage1.setLayoutX(586);
 		skillbuttonimage1.setLayoutY(778);// 778 SWEET SPOT // 127 x multiple
