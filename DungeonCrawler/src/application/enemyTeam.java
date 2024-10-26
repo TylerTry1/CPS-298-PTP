@@ -26,6 +26,24 @@ public class enemyTeam extends Enemies {
 				return team;
 			}
 
+			boolean checkGameOver() {
+				int numDead = 0;
+				boolean teamDead = false;
+				for (Object enemy : team) {
+					if (((Enemies) enemy).getHealth() != 0) {
+						continue;
+					}
+					else {
+						numDead++;
+					}
+				}
+				
+				if (numDead ==4) {
+					teamDead = true;
+				}
+				
+				return teamDead;
+			}
 
 }
 		
