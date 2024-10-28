@@ -13,7 +13,7 @@ public class Damage {
         int baseDamage = attacker.damage;
 
         if (isCriticalHit(attacker)) {
-            baseDamage *= 2;
+            baseDamage *= 1.5;
             System.out.println(attacker.name + " scored a critical hit!");
         }
         return baseDamage;
