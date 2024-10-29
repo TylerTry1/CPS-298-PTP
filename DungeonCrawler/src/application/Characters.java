@@ -5,27 +5,105 @@ package application;
 public class Characters {
 
     //public class characterStats {
-        String name;
-        int health;
-        int damage;
-        int defense; // leave this stat at 0 for all characters, need a 0 value in case we want to change it later.
-        int accuracy;
-        int crit_chance;
-        int dodge_chance; // leave this stat at 0 for all characters, need a 0 value in case we want to change it later.
-        int position;
-        int speed;
+        protected String name;
+        protected int health;
+        protected int max_health;
+        protected int damage;
+        protected int defense; // leave this stat at 0 for all characters, need a 0 value in case we want to change it later.
+        protected int accuracy;
+        protected int crit_chance;
+        protected int dodge_chance; // leave this stat at 0 for all characters, need a 0 value in case we want to change it later.
+        protected int position;
+        protected int speed;
+        protected int bleed_resist;
+        protected int posion_resist;
+        protected int burn_resist;
+        
+        String getName() {
+        	return name;
+        }
         
         int getHealth() {
         	return health;
+        }
+        
+        int getMaxHealth() {
+        	return max_health;
+        }
+        
+        int getDamage() {
+        	return damage;
+        }
+        
+        int getDefense() {
+        	return defense;
+        }
+        
+        int getAccuracy() {
+        	return accuracy;
+        }
+        
+        int getCritChance() {
+        	return crit_chance;
+        }
+        
+        int getDodgeChance() {
+        	return dodge_chance;
+        }
+        
+        int getPosition() {
+        	return position;
         }
         
         int getSpeed() {
         	return speed;
         }
         
+        int getBleedResist() {
+        	return bleed_resist;
+        }
+        
+        int getPosionResist() {
+        	return posion_resist;
+        }
+        
+        int getBurnResist() {
+        	return burn_resist;
+        }
+        
+        void setHealth(int health) {
+        	this.health = health;
+        }
+        
+        void setDamage(int damage) {
+        	this.damage = damage;
+        }
+        
+        void setMaxHealth(int max_health) {
+        	this.max_health = max_health;
+        }
+             
         void adjustSpeed(int adjust) {
         	speed += adjust;
         }
+        
+        void setBleedResist(int bleedResist) {
+        	this.bleed_resist = bleedResist;
+        }
+        
+        void setPosionResist(int posion_resist) {
+        	this.posion_resist = posion_resist;
+        }
+        
+        void setBurnResist(int burn_resist) {
+        	this.burn_resist = burn_resist;
+        }
+        
+        void setCritChance(int crit_chance) {
+        	this.crit_chance = crit_chance;
+        }
+        
+        
     //}
 
     /*public class characterDismas extends characterStats {

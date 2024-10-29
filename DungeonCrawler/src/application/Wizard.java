@@ -4,6 +4,7 @@ public class Wizard extends Characters {
 	Wizard() {
         name = "Reynauld";
         health = 54;
+        max_health = 54;
         damage = 18;
         defense = 0;
         accuracy = 70;
@@ -11,5 +12,8 @@ public class Wizard extends Characters {
         dodge_chance = 0;
         position = 1;
         speed = 6;
+        bleed_resist = 0;
+        posion_resist = 0;
+        burn_resist = 10;
     }
 }
