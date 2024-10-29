@@ -8,7 +8,6 @@ import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
@@ -27,6 +26,7 @@ import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Paint;
 import javafx.scene.paint.Stop;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -38,6 +38,9 @@ public class Main extends Application {
 	Media mediaPath2 = new Media(menuMusic);
 	String shopMusic = getClass().getResource("/Music/ShopTheme.mp3").toExternalForm();
 	Media mediaPath3 = new Media(shopMusic);
+	
+	Font KingArthurLegend = Font.loadFont(getClass().getResourceAsStream("/fonts/KingArthurLegend.ttf"), 40);
+	Font Ubuntu = Font.loadFont(getClass().getResourceAsStream("/fonts/UbuntuRegular.ttf"), 40);
 	@Override
 	public void start(Stage primaryStage) {
 		homePage(primaryStage);
@@ -153,6 +156,8 @@ public class Main extends Application {
 	}
 
 	private void battleScene(Stage primaryStage) {
+		
+		
 		Image cursorImage = new Image("GUIAssets/cursor.png");
 		Cursor customCursor = Cursor.cursor(cursorImage.getUrl());
 
@@ -183,6 +188,32 @@ public class Main extends Application {
 
 		Text heroName = new Text("Hero Name");
 		Text enemyName = new Text("Enemy Name");
+		Text enemyBleedResistanceNumberText = new Text("BLD");
+		Text enemyBlightResistanceNumberText = new Text("BLGT");
+		Text enemyBurnResistanceNumberText = new Text("BURN");
+		Text enemyStunResistanceNumberText = new Text("STN");
+		Text enemyMoveResistanceNumberText = new Text("MOV");
+		Text enemyDebuffResistanceNumberText = new Text("DBFF");
+		Text enemyDeathResistanceNumberText = new Text("DTH");
+		heroName.setFont(KingArthurLegend);
+		heroName.setFill(Color.web("#4c4c4c"));
+		enemyName.setFont(KingArthurLegend);
+		enemyName.setFill(Color.web("#4c4c4c"));
+		enemyBleedResistanceNumberText.setFont(Ubuntu);
+		enemyBleedResistanceNumberText.setFill(Color.web("#bc1313"));
+		enemyBlightResistanceNumberText.setFont(Ubuntu);
+		enemyBlightResistanceNumberText.setFill(Color.web("#437c36"));
+		enemyBurnResistanceNumberText.setFont(Ubuntu);
+		enemyBurnResistanceNumberText.setFill(Color.web("#ca7430"));
+		enemyStunResistanceNumberText.setFont(Ubuntu);
+		enemyStunResistanceNumberText.setFill(Color.web("#cfc257"));
+		enemyMoveResistanceNumberText.setFont(Ubuntu);
+		enemyMoveResistanceNumberText.setFill(Color.web("#3f87b7"));
+		enemyDebuffResistanceNumberText.setFont(Ubuntu);
+		enemyDebuffResistanceNumberText.setFill(Color.web("#d5661b"));
+		enemyDeathResistanceNumberText.setFont(Ubuntu);
+		enemyDeathResistanceNumberText.setFill(Color.web("#8e0000"));
+
 		// -------------------------------------------------------------
 
 		Paint redToBlackGradient = new LinearGradient(
@@ -283,6 +314,7 @@ public class Main extends Application {
 		ImageView skillbuttonimage4 = new ImageView(new Image("abilityIconsPaladin/shieldOfFaith.png"));
 		ImageView heroNamePlate = new ImageView(new Image("GUIAssets/nameplate.png"));
 		ImageView enemyNamePlate = new ImageView(new Image("GUIAssets/nameplate.png"));
+		ImageView turnOrderBarLeftAndRight = new ImageView(new Image("GUIAssets/turnOrderBarLeftAndRight.png"));
 		ImageView heroSelectionIndicator4 = new ImageView(new Image("GUIAssets/CharacterSelectionIndicatorSize1.png"));
 		ImageView heroSelectionIndicator3 = new ImageView(new Image("GUIAssets/CharacterSelectionIndicatorSize1.png"));
 		ImageView heroSelectionIndicator2 = new ImageView(new Image("GUIAssets/CharacterSelectionIndicatorSize1.png"));
@@ -301,13 +333,15 @@ public class Main extends Application {
 		ImageView enemyTurnTicker3 = new ImageView(new Image("GUIAssets/turnticker.png"));
 		ImageView enemyTurnTicker4= new ImageView(new Image("GUIAssets/turnticker.png"));
 		
-		ImageView enemyBLDResistance = new ImageView(new Image("GUIAssets/BLDResistance.png"));
-		ImageView enemyBLGTResistance = new ImageView(new Image("GUIAssets/BLGTResistance.png"));
-		ImageView enemyBURNResistance = new ImageView(new Image("GUIAssets/BURNResistance.png"));
-		ImageView enemySTNResistance = new ImageView(new Image("GUIAssets/STNResistance.png"));
-		ImageView enemyMOVResistance = new ImageView(new Image("GUIAssets/MOVResistance.png"));
-		ImageView enemyDBFFResistance = new ImageView(new Image("GUIAssets/DBFFResistance.png"));
-		ImageView enemyDTHResistance = new ImageView(new Image("GUIAssets/DTHResistance.png"));
+		ImageView enemyBLDResistanceIcon = new ImageView(new Image("GUIAssets/BLDResistance.png"));
+		ImageView enemyBLGTResistanceIcon = new ImageView(new Image("GUIAssets/BLGTResistance.png"));
+		ImageView enemyBURNResistanceIcon = new ImageView(new Image("GUIAssets/BURNResistance.png"));
+		ImageView enemySTNResistanceIcon = new ImageView(new Image("GUIAssets/STNResistance.png"));
+		ImageView enemyMOVResistanceIcon = new ImageView(new Image("GUIAssets/MOVResistance.png"));
+		ImageView enemyDBFFResistanceIcon = new ImageView(new Image("GUIAssets/DBFFResistance.png"));
+		ImageView enemyDTHResistanceIcon = new ImageView(new Image("GUIAssets/DTHResistance.png"));
+		
+		
 		
 		Image backgroundImagesetup = new Image("combatBackgrounds/cryptsRoomWallDrain.png");
 		BackgroundSize size = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false); // background
@@ -318,7 +352,7 @@ public class Main extends Application {
 				BackgroundRepeat.NO_REPEAT, customPosition, size);
 
 		HBox enemyResistances = new HBox(50);
-		enemyResistances.getChildren().addAll(enemyBLDResistance, enemyBLGTResistance, enemyBURNResistance, enemySTNResistance, enemyMOVResistance, enemyDBFFResistance, enemyDTHResistance );
+		enemyResistances.getChildren().addAll(enemyBLDResistanceIcon, enemyBLGTResistanceIcon, enemyBURNResistanceIcon, enemySTNResistanceIcon, enemyMOVResistanceIcon, enemyDBFFResistanceIcon, enemyDTHResistanceIcon );
 		HBox heroPositions = new HBox(50);
 		heroPositions.getChildren().addAll(heroPosition4, heroPosition3, heroPosition2, heroPosition1);
 		HBox enemyPositions = new HBox(50);
@@ -360,20 +394,20 @@ public class Main extends Application {
 		skillbuttonimage4.setFitWidth(0.06 * 1920); // placeholder
 		skillbuttonimage4.setFitHeight(0.09 * 1080);
 		// -------------------------------------------------------------
-		enemyBLDResistance.setFitWidth(0.03 * 1920); 
-		enemyBLDResistance.setFitHeight(0.03 * 1080); 
-		enemyBLGTResistance.setFitWidth(0.03 * 1920);
-		enemyBLGTResistance.setFitHeight(0.03 * 1080); 
-		enemyBURNResistance.setFitWidth(0.03 * 1920);
-		enemyBURNResistance.setFitHeight(0.03 * 1080); 
-		enemySTNResistance.setFitWidth(0.03 * 1920);
-		enemySTNResistance.setFitHeight(0.03 * 1080); 
-		enemyMOVResistance.setFitWidth(0.03 * 1920);
-		enemyMOVResistance.setFitHeight(0.03 * 1080); 
-		enemyDBFFResistance.setFitWidth(0.03 * 1920);
-		enemyDBFFResistance.setFitHeight(0.03 * 1080); 
-		enemyDTHResistance.setFitWidth(0.03 * 1920);
-		enemyDTHResistance.setFitHeight(0.03 * 1080); 
+		enemyBLDResistanceIcon.setFitWidth(0.03 * 1920); 
+		enemyBLDResistanceIcon.setFitHeight(0.03 * 1080); 
+		enemyBLGTResistanceIcon.setFitWidth(0.03 * 1920);
+		enemyBLGTResistanceIcon.setFitHeight(0.03 * 1080); 
+		enemyBURNResistanceIcon.setFitWidth(0.03 * 1920);
+		enemyBURNResistanceIcon.setFitHeight(0.03 * 1080); 
+		enemySTNResistanceIcon.setFitWidth(0.03 * 1920);
+		enemySTNResistanceIcon.setFitHeight(0.03 * 1080); 
+		enemyMOVResistanceIcon.setFitWidth(0.03 * 1920);
+		enemyMOVResistanceIcon.setFitHeight(0.03 * 1080); 
+		enemyDBFFResistanceIcon.setFitWidth(0.03 * 1920);
+		enemyDBFFResistanceIcon.setFitHeight(0.03 * 1080); 
+		enemyDTHResistanceIcon.setFitWidth(0.03 * 1920);
+		enemyDTHResistanceIcon.setFitHeight(0.03 * 1080); 
 		// -------------------------------------------------------------
 		enemyInPosition1.setMouseTransparent(true);
 		enemyInPosition2.setMouseTransparent(true);
@@ -396,6 +430,7 @@ public class Main extends Application {
 		enemySelectionIndicator3.setMouseTransparent(true);
 		enemySelectionIndicator4.setMouseTransparent(true);
 		// -------------------------------------------------------------
+		//make images dissapear or appear on button hover.
 		heroPosition1.setOnMouseEntered(e -> {
 			heroSelectionIndicator1.setVisible(true); // Make the image appear on hover
 		});
@@ -428,8 +463,11 @@ public class Main extends Application {
 		});
 		heroSelectionIndicator4.setVisible(false);
 
+		// -------------------------------------------------------------
+
 		enemyPosition1.setOnMouseEntered(e -> {
 			enemySelectionIndicator1.setVisible(true); // Make the image appear on hover
+			
 		});
 		enemyPosition1.setOnMouseExited(e -> {
 			enemySelectionIndicator1.setVisible(false); // Make the image appear on hover
@@ -459,8 +497,6 @@ public class Main extends Application {
 			enemySelectionIndicator4.setVisible(false); // Make the image appear on hover
 		});
 		enemySelectionIndicator4.setVisible(false);
-		heroName.setFill(Color.WHITE);
-		enemyName.setFill(Color.WHITE);
 		// -------------------------------------------------------------
 		// Create a Pane for free positioning
 		Pane root = new Pane();
@@ -471,10 +507,12 @@ public class Main extends Application {
 		root.getChildren().addAll(heroInPosition1, heroInPosition2, heroInPosition3, heroInPosition4);
 		root.getChildren().addAll(heroTurnTicker1, heroTurnTicker2, heroTurnTicker3, heroTurnTicker4);
 		root.getChildren().addAll(enemyTurnTicker1, enemyTurnTicker2, enemyTurnTicker3, enemyTurnTicker4);
-		root.getChildren().addAll(enemyBLDResistance, enemyBLGTResistance, enemyBURNResistance, enemySTNResistance, enemyMOVResistance, enemyDBFFResistance, enemyDTHResistance);
+		root.getChildren().addAll(enemyBLDResistanceIcon, enemyBLGTResistanceIcon, enemyBURNResistanceIcon, enemySTNResistanceIcon, enemyMOVResistanceIcon, enemyDBFFResistanceIcon, enemyDTHResistanceIcon);
+		root.getChildren().addAll(enemyBleedResistanceNumberText, enemyBlightResistanceNumberText, enemyBurnResistanceNumberText, enemyStunResistanceNumberText, enemyMoveResistanceNumberText, enemyDebuffResistanceNumberText, enemyDeathResistanceNumberText);
 		root.getChildren().add(skillButtons); // skill buttons
 		root.getChildren().addAll(skillbuttonimage1, skillbuttonimage2, skillbuttonimage3, skillbuttonimage4); 																						
 		root.getChildren().addAll(heroNamePlate, enemyNamePlate);
+		root.getChildren().add(turnOrderBarLeftAndRight);
 		root.getChildren().addAll(heroName, enemyName);// keep name after name plate to avoid layering issues
 		root.getChildren().addAll(heroSelectionIndicator1, heroSelectionIndicator2, heroSelectionIndicator3,heroSelectionIndicator4); 
 		root.getChildren().addAll(enemySelectionIndicator1, enemySelectionIndicator2, enemySelectionIndicator3, enemySelectionIndicator4); // might need 4 of these.
@@ -496,18 +534,25 @@ public class Main extends Application {
 		skillButtons.setLayoutX(585); // 585 sweet spot
 		skillButtons.setLayoutY(775);
 
-		heroName.setLayoutX(200); // hero's name
-		heroName.setLayoutY(740);
-
-		enemyName.setLayoutX(1660);
-		enemyName.setLayoutY(740);
-
+		heroName.setLayoutX(180); // hero's name
+		heroName.setLayoutY(750);
+		heroName.setScaleX(.65);
+		heroName.setScaleY(.65);
+		
+		enemyName.setLayoutX(1460);
+		enemyName.setLayoutY(750);
+		enemyName.setScaleX(.65);
+		enemyName.setScaleY(.65);
+		
 		heroNamePlate.setLayoutX(-5);
 		heroNamePlate.setLayoutY(710);
 
 		enemyNamePlate.setLayoutX(1415);
 		enemyNamePlate.setLayoutY(710);
 		enemyNamePlate.setScaleX(-1);
+		
+		turnOrderBarLeftAndRight.setLayoutX(0);
+		turnOrderBarLeftAndRight.setLayoutY(0);
 		// -------------------------------------------------------------
 		//health bars
 		heroHealthBarRedRectangles.setLayoutX(155);
@@ -540,21 +585,51 @@ public class Main extends Application {
 		enemyTurnTicker4.setLayoutX(1770);
 		enemyTurnTicker4.setLayoutY(595);
 		// -------------------------------------------------------------
-		enemyBLDResistance.setLayoutX(1410); // these 3 assets are weird, so need eyeball'd placements.
-		enemyBLDResistance.setLayoutY(952); 
-		enemyBLGTResistance.setLayoutX(1480); 
-		enemyBLGTResistance.setLayoutY(953); 
-		enemyBURNResistance.setLayoutX(1563);
-		enemyBURNResistance.setLayoutY(950); 
+		enemyBLDResistanceIcon.setLayoutX(1410); // these 3 assets are weird, so need eyeball'd placements.
+		enemyBLDResistanceIcon.setLayoutY(952); 
+		enemyBLGTResistanceIcon.setLayoutX(1480); 
+		enemyBLGTResistanceIcon.setLayoutY(953); 
+		enemyBURNResistanceIcon.setLayoutX(1563);
+		enemyBURNResistanceIcon.setLayoutY(950); 
 		
-		enemySTNResistance.setLayoutX(1625);//75 spacing
-		enemySTNResistance.setLayoutY(950); 
-		enemyMOVResistance.setLayoutX(1700);
-		enemyMOVResistance.setLayoutY(950); 
-		enemyDBFFResistance.setLayoutX(1775);
-		enemyDBFFResistance.setLayoutY(950); 
-		enemyDTHResistance.setLayoutX(1850); 
-		enemyDTHResistance.setLayoutY(950); 
+		enemySTNResistanceIcon.setLayoutX(1625);//75 spacing
+		enemySTNResistanceIcon.setLayoutY(950); 
+		enemyMOVResistanceIcon.setLayoutX(1700);
+		enemyMOVResistanceIcon.setLayoutY(950); 
+		enemyDBFFResistanceIcon.setLayoutX(1775);
+		enemyDBFFResistanceIcon.setLayoutY(950); 
+		enemyDTHResistanceIcon.setLayoutX(1850); 
+		enemyDTHResistanceIcon.setLayoutY(950); 
+		
+		enemyBleedResistanceNumberText.setLayoutX(1390);
+		enemyBleedResistanceNumberText.setLayoutY(940); 
+		enemyBlightResistanceNumberText.setLayoutX(1460);
+		enemyBlightResistanceNumberText.setLayoutY(940); 
+		enemyBurnResistanceNumberText.setLayoutX(1543);
+		enemyBurnResistanceNumberText.setLayoutY(940); 
+		enemyStunResistanceNumberText.setLayoutX(1605);
+		enemyStunResistanceNumberText.setLayoutY(940); 
+		enemyMoveResistanceNumberText.setLayoutX(1680);
+		enemyMoveResistanceNumberText.setLayoutY(940); 
+		enemyDebuffResistanceNumberText.setLayoutX(1755);
+		enemyDebuffResistanceNumberText.setLayoutY(940); 
+		enemyDeathResistanceNumberText.setLayoutX(1830);
+		enemyDeathResistanceNumberText.setLayoutY(940); 
+		
+		enemyBleedResistanceNumberText.setScaleX(.65);
+		enemyBleedResistanceNumberText.setScaleY(.65); 
+		enemyBlightResistanceNumberText.setScaleX(.65);
+		enemyBlightResistanceNumberText.setScaleY(.65); 
+		enemyBurnResistanceNumberText.setScaleX(.65);
+		enemyBurnResistanceNumberText.setScaleY(.65); 
+		enemyStunResistanceNumberText.setScaleX(.65);
+		enemyStunResistanceNumberText.setScaleY(.65); 
+		enemyMoveResistanceNumberText.setScaleX(.65);
+		enemyMoveResistanceNumberText.setScaleY(.65); 
+		enemyDebuffResistanceNumberText.setScaleX(.65);
+		enemyDebuffResistanceNumberText.setScaleY(.65); 
+		enemyDeathResistanceNumberText.setScaleX(.65);
+		enemyDeathResistanceNumberText.setScaleY(.65); 
 		// -------------------------------------------------------------
 		heroSelectionIndicator1.setLayoutX(733);
 		heroSelectionIndicator1.setLayoutY(420);
@@ -651,9 +726,13 @@ public class Main extends Application {
 		Button back = new Button("Back");
 		Text itemDescriptions = new Text("Item Descriptions will go at the top here");
 		Text itemImages = new Text("item images should go here, item descriptions should show up when hovered over.");
+		itemDescriptions.setFont(KingArthurLegend);
+		itemImages.setFont(KingArthurLegend);
+		
+		
 		ImageView shopKeeper = new ImageView(new Image("shopAssets/shopKeeper.png"));
-		itemDescriptions.setFill(Color.WHITE);
-		itemImages.setFill(Color.WHITE);
+		itemDescriptions.setFill(Color.web("#4c4c4c"));
+		itemImages.setFill(Color.web("#4c4c4c"));
 		Image backgroundImagesetup = new Image("shopAssets/shopBackground.png");
 		BackgroundSize size = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false); // background																									// image
 		BackgroundPosition customPosition = new BackgroundPosition(Side.LEFT, 0, true, Side.TOP, 0, true); // fit to top																					// left
