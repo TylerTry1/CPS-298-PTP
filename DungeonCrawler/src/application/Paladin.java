@@ -12,7 +12,6 @@ public class Paladin extends Characters {
     public Paladin() {
         name = "Dismas"; // Paladin name
         health = 33;
-        max_health = 33;
         damage = 4; 
         defense = 0;
         accuracy = 100;
@@ -20,10 +19,7 @@ public class Paladin extends Characters {
         dodge_chance = 0;
         position = 2;
         speed = 3;
-        bleed_resist = 15;
-        posion_resist = 5;
-        burn_resist = 0;
-        }
+    }
 
 //    // Shield of Faith: Buff that increases defense and redirects attacks from an ally to the paladin
 //    public void useShieldOfFaith(Characters ally) {
@@ -82,4 +78,4 @@ public class Paladin extends Characters {
 //        this.health -= damage;
 //        System.out.println(name + " takes " + damage + " damage. Current health: " + this.health);
 //    }
-//}
+}

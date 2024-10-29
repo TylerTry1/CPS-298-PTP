@@ -50,7 +50,7 @@ public class Main extends Application {
 
 		Media media = new Media(menuMusic);
 		MediaPlayer mediaPlayer = new MediaPlayer(media);
-		mediaPlayer.setVolume(0.05); // Volume level (0.0 to 1.0)
+		mediaPlayer.setVolume(0.00); // Volume level (0.0 to 1.0) use 0.05
 		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE); // Loop the music
 		mediaPlayer.play(); // music player
 
@@ -159,7 +159,7 @@ public class Main extends Application {
 		// music player
 		Media media = new Media(combatMusic);
 		MediaPlayer mediaPlayer = new MediaPlayer(media);
-		mediaPlayer.setVolume(0.05); // Volume level (0.0 to 1.0)
+		mediaPlayer.setVolume(0.00); // Volume level (0.0 to 1.0) use 0.05
 		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE); // Loop the music
 		mediaPlayer.play(); // music player
 
@@ -266,30 +266,6 @@ public class Main extends Application {
 	    enemyHealthBarBlackRectangle4.setArcWidth(5);
 	    enemyHealthBarBlackRectangle4.setArcHeight(5);
 		// -------------------------------------------------------------
-
-		// Create the HBoxes for hero and enemy positions
-		HBox heroPositions = new HBox(50);
-		heroPositions.getChildren().addAll(heroPosition4, heroPosition3, heroPosition2, heroPosition1);
-
-
-		HBox enemyPositions = new HBox(50);
-		enemyPositions.getChildren().addAll(enemyPosition1, enemyPosition2, enemyPosition3, enemyPosition4);
-
-		HBox skillButtons = new HBox(10);
-		skillButtons.getChildren().addAll(skillbutton1, skillbutton2, skillbutton3, skillbutton4, movebutton,
-				passTurnbutton);
-		HBox heroHealthBarRedRectangles = new HBox(105);
-		heroHealthBarRedRectangles.getChildren().addAll(heroHealthBarRedRectangle4,heroHealthBarRedRectangle3,heroHealthBarRedRectangle2,heroHealthBarRedRectangle1);
-		
-		HBox heroHealthBarBlackRectangles = new HBox(105);
-		heroHealthBarBlackRectangles.getChildren().addAll(heroHealthBarBlackRectangle4,heroHealthBarBlackRectangle3,heroHealthBarBlackRectangle2,heroHealthBarBlackRectangle1);
-		
-		HBox enemyHealthBarRedRectangles = new HBox(105);
-		enemyHealthBarRedRectangles.getChildren().addAll(enemyHealthBarRedRectangle1,enemyHealthBarRedRectangle2,enemyHealthBarRedRectangle3,enemyHealthBarRedRectangle4);
-		
-		HBox enemyHealthBarBlackRectangles = new HBox(105);
-		enemyHealthBarBlackRectangles.getChildren().addAll(enemyHealthBarBlackRectangle1,enemyHealthBarBlackRectangle2,enemyHealthBarBlackRectangle3,enemyHealthBarBlackRectangle4);
-		// -------------------------------------------------------------
 		// Images for everything
 		ImageView enemyInPosition1 = new ImageView(new Image("applicationImagesEnemySprites/Goblin Axeman/Goblin_axeman_1_Idle.png"));
 		ImageView enemyInPosition2 = new ImageView(new Image("applicationImagesEnemySprites/Goblin Axeman/Goblin_axeman_1_Idle.png"));
@@ -307,15 +283,32 @@ public class Main extends Application {
 		ImageView skillbuttonimage4 = new ImageView(new Image("abilityIconsPaladin/shieldOfFaith.png"));
 		ImageView heroNamePlate = new ImageView(new Image("GUIAssets/nameplate.png"));
 		ImageView enemyNamePlate = new ImageView(new Image("GUIAssets/nameplate.png"));
-		ImageView heroSelectionIndicator4 = new ImageView(new Image("GUIAssets/characterSelectionIndicator.png"));
-		ImageView heroSelectionIndicator3 = new ImageView(new Image("GUIAssets/characterSelectionIndicator.png"));
-		ImageView heroSelectionIndicator2 = new ImageView(new Image("GUIAssets/characterSelectionIndicator.png"));
-		ImageView heroSelectionIndicator1 = new ImageView(new Image("GUIAssets/characterSelectionIndicator.png"));
-		ImageView enemySelectionIndicator1 = new ImageView(new Image("GUIAssets/enemySelectionIndicator.png"));
-		ImageView enemySelectionIndicator2 = new ImageView(new Image("GUIAssets/enemySelectionIndicator.png"));
-		ImageView enemySelectionIndicator3 = new ImageView(new Image("GUIAssets/enemySelectionIndicator.png"));
-		ImageView enemySelectionIndicator4 = new ImageView(new Image("GUIAssets/enemySelectionIndicator.png"));
-
+		ImageView heroSelectionIndicator4 = new ImageView(new Image("GUIAssets/CharacterSelectionIndicatorSize1.png"));
+		ImageView heroSelectionIndicator3 = new ImageView(new Image("GUIAssets/CharacterSelectionIndicatorSize1.png"));
+		ImageView heroSelectionIndicator2 = new ImageView(new Image("GUIAssets/CharacterSelectionIndicatorSize1.png"));
+		ImageView heroSelectionIndicator1 = new ImageView(new Image("GUIAssets/CharacterSelectionIndicatorSize1.png"));
+		ImageView enemySelectionIndicator1 = new ImageView(new Image("GUIAssets/enemySelectionIndicatorSize1.png"));
+		ImageView enemySelectionIndicator2 = new ImageView(new Image("GUIAssets/enemySelectionIndicatorSize1.png"));
+		ImageView enemySelectionIndicator3 = new ImageView(new Image("GUIAssets/enemySelectionIndicatorSize1.png"));
+		ImageView enemySelectionIndicator4 = new ImageView(new Image("GUIAssets/enemySelectionIndicatorSize1.png"));
+		
+		ImageView heroTurnTicker1 = new ImageView(new Image("GUIAssets/turnticker.png"));
+		ImageView heroTurnTicker2 = new ImageView(new Image("GUIAssets/turnticker.png"));
+		ImageView heroTurnTicker3 = new ImageView(new Image("GUIAssets/turnticker.png"));
+		ImageView heroTurnTicker4 = new ImageView(new Image("GUIAssets/turnticker.png"));
+		ImageView enemyTurnTicker1 = new ImageView(new Image("GUIAssets/turnticker.png"));
+		ImageView enemyTurnTicker2 = new ImageView(new Image("GUIAssets/turnticker.png"));
+		ImageView enemyTurnTicker3 = new ImageView(new Image("GUIAssets/turnticker.png"));
+		ImageView enemyTurnTicker4= new ImageView(new Image("GUIAssets/turnticker.png"));
+		
+		ImageView enemyBLDResistance = new ImageView(new Image("GUIAssets/BLDResistance.png"));
+		ImageView enemyBLGTResistance = new ImageView(new Image("GUIAssets/BLGTResistance.png"));
+		ImageView enemyBURNResistance = new ImageView(new Image("GUIAssets/BURNResistance.png"));
+		ImageView enemySTNResistance = new ImageView(new Image("GUIAssets/STNResistance.png"));
+		ImageView enemyMOVResistance = new ImageView(new Image("GUIAssets/MOVResistance.png"));
+		ImageView enemyDBFFResistance = new ImageView(new Image("GUIAssets/DBFFResistance.png"));
+		ImageView enemyDTHResistance = new ImageView(new Image("GUIAssets/DTHResistance.png"));
+		
 		Image backgroundImagesetup = new Image("combatBackgrounds/cryptsRoomWallDrain.png");
 		BackgroundSize size = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false); // background
 																														// image
@@ -324,6 +317,22 @@ public class Main extends Application {
 		BackgroundImage backgroundImagePayoff = new BackgroundImage(backgroundImagesetup, BackgroundRepeat.NO_REPEAT,
 				BackgroundRepeat.NO_REPEAT, customPosition, size);
 
+		HBox enemyResistances = new HBox(50);
+		enemyResistances.getChildren().addAll(enemyBLDResistance, enemyBLGTResistance, enemyBURNResistance, enemySTNResistance, enemyMOVResistance, enemyDBFFResistance, enemyDTHResistance );
+		HBox heroPositions = new HBox(50);
+		heroPositions.getChildren().addAll(heroPosition4, heroPosition3, heroPosition2, heroPosition1);
+		HBox enemyPositions = new HBox(50);
+		enemyPositions.getChildren().addAll(enemyPosition1, enemyPosition2, enemyPosition3, enemyPosition4);
+		HBox skillButtons = new HBox(10);
+		skillButtons.getChildren().addAll(skillbutton1, skillbutton2, skillbutton3, skillbutton4, movebutton,passTurnbutton);
+		HBox heroHealthBarRedRectangles = new HBox(105);
+		heroHealthBarRedRectangles.getChildren().addAll(heroHealthBarRedRectangle4,heroHealthBarRedRectangle3,heroHealthBarRedRectangle2,heroHealthBarRedRectangle1);
+		HBox heroHealthBarBlackRectangles = new HBox(105);
+		heroHealthBarBlackRectangles.getChildren().addAll(heroHealthBarBlackRectangle4,heroHealthBarBlackRectangle3,heroHealthBarBlackRectangle2,heroHealthBarBlackRectangle1);
+		HBox enemyHealthBarRedRectangles = new HBox(105);
+		enemyHealthBarRedRectangles.getChildren().addAll(enemyHealthBarRedRectangle1,enemyHealthBarRedRectangle2,enemyHealthBarRedRectangle3,enemyHealthBarRedRectangle4);
+		HBox enemyHealthBarBlackRectangles = new HBox(105);
+		enemyHealthBarBlackRectangles.getChildren().addAll(enemyHealthBarBlackRectangle1,enemyHealthBarBlackRectangle2,enemyHealthBarBlackRectangle3,enemyHealthBarBlackRectangle4);
 		// -------------------------------------------------------------
 		// Set the size of the images to match the button size
 		enemyInPosition1.setFitWidth(0.08 * 1920); // Width relative to the screen size (1920x1080)
@@ -342,8 +351,30 @@ public class Main extends Application {
 		heroInPosition3.setFitHeight(0.3 * 1080);
 		heroInPosition4.setFitWidth(0.08 * 1920);
 		heroInPosition4.setFitHeight(0.3 * 1080);
-		
-
+		skillbuttonimage1.setFitWidth(0.06 * 1920); // placeholder 16:9 aspect ratio
+		skillbuttonimage1.setFitHeight(0.09 * 1080);
+		skillbuttonimage2.setFitWidth(0.06 * 1920); // placeholder
+		skillbuttonimage2.setFitHeight(0.09 * 1080);
+		skillbuttonimage3.setFitWidth(0.06 * 1920); // placeholder
+		skillbuttonimage3.setFitHeight(0.09 * 1080);
+		skillbuttonimage4.setFitWidth(0.06 * 1920); // placeholder
+		skillbuttonimage4.setFitHeight(0.09 * 1080);
+		// -------------------------------------------------------------
+		enemyBLDResistance.setFitWidth(0.03 * 1920); 
+		enemyBLDResistance.setFitHeight(0.03 * 1080); 
+		enemyBLGTResistance.setFitWidth(0.03 * 1920);
+		enemyBLGTResistance.setFitHeight(0.03 * 1080); 
+		enemyBURNResistance.setFitWidth(0.03 * 1920);
+		enemyBURNResistance.setFitHeight(0.03 * 1080); 
+		enemySTNResistance.setFitWidth(0.03 * 1920);
+		enemySTNResistance.setFitHeight(0.03 * 1080); 
+		enemyMOVResistance.setFitWidth(0.03 * 1920);
+		enemyMOVResistance.setFitHeight(0.03 * 1080); 
+		enemyDBFFResistance.setFitWidth(0.03 * 1920);
+		enemyDBFFResistance.setFitHeight(0.03 * 1080); 
+		enemyDTHResistance.setFitWidth(0.03 * 1920);
+		enemyDTHResistance.setFitHeight(0.03 * 1080); 
+		// -------------------------------------------------------------
 		enemyInPosition1.setMouseTransparent(true);
 		enemyInPosition2.setMouseTransparent(true);
 		enemyInPosition3.setMouseTransparent(true);
@@ -431,15 +462,6 @@ public class Main extends Application {
 		heroName.setFill(Color.WHITE);
 		enemyName.setFill(Color.WHITE);
 		// -------------------------------------------------------------
-
-		skillbuttonimage1.setFitWidth(0.06 * 1920); // placeholder 16:9 aspect ratio
-		skillbuttonimage1.setFitHeight(0.09 * 1080);
-		skillbuttonimage2.setFitWidth(0.06 * 1920); // placeholder
-		skillbuttonimage2.setFitHeight(0.09 * 1080);
-		skillbuttonimage3.setFitWidth(0.06 * 1920); // placeholder
-		skillbuttonimage3.setFitHeight(0.09 * 1080);
-		skillbuttonimage4.setFitWidth(0.06 * 1920); // placeholder
-		skillbuttonimage4.setFitHeight(0.09 * 1080);
 		// Create a Pane for free positioning
 		Pane root = new Pane();
 
@@ -447,6 +469,9 @@ public class Main extends Application {
 		root.getChildren().addAll(heroPositions, enemyPositions, back);
 		root.getChildren().addAll(enemyInPosition1, enemyInPosition2, enemyInPosition3, enemyInPosition4);
 		root.getChildren().addAll(heroInPosition1, heroInPosition2, heroInPosition3, heroInPosition4);
+		root.getChildren().addAll(heroTurnTicker1, heroTurnTicker2, heroTurnTicker3, heroTurnTicker4);
+		root.getChildren().addAll(enemyTurnTicker1, enemyTurnTicker2, enemyTurnTicker3, enemyTurnTicker4);
+		root.getChildren().addAll(enemyBLDResistance, enemyBLGTResistance, enemyBURNResistance, enemySTNResistance, enemyMOVResistance, enemyDBFFResistance, enemyDTHResistance);
 		root.getChildren().add(skillButtons); // skill buttons
 		root.getChildren().addAll(skillbuttonimage1, skillbuttonimage2, skillbuttonimage3, skillbuttonimage4); 																						
 		root.getChildren().addAll(heroNamePlate, enemyNamePlate);
@@ -497,26 +522,58 @@ public class Main extends Application {
 		enemyHealthBarBlackRectangles.setLayoutX(1055);
 		enemyHealthBarBlackRectangles.setLayoutY(600);
 		// -------------------------------------------------------------
-
-		heroSelectionIndicator1.setLayoutX(750);
-		heroSelectionIndicator1.setLayoutY(560);
-		heroSelectionIndicator2.setLayoutX(545);
-		heroSelectionIndicator2.setLayoutY(560);
-		heroSelectionIndicator3.setLayoutX(340);
-		heroSelectionIndicator3.setLayoutY(560);
-		heroSelectionIndicator4.setLayoutX(135);
-		heroSelectionIndicator4.setLayoutY(560);
+		heroTurnTicker1.setLayoutX(255);// 205 spacing
+		heroTurnTicker1.setLayoutY(595);
+		heroTurnTicker2.setLayoutX(460); 
+		heroTurnTicker2.setLayoutY(595);
+		heroTurnTicker3.setLayoutX(665);
+		heroTurnTicker3.setLayoutY(595);
+		heroTurnTicker4.setLayoutX(870);
+		heroTurnTicker4.setLayoutY(595);
 		// -------------------------------------------------------------
-
-		enemySelectionIndicator1.setLayoutX(1047); // spacing of 205 between each
-		enemySelectionIndicator1.setLayoutY(513);
-		enemySelectionIndicator2.setLayoutX(1252);
-		enemySelectionIndicator2.setLayoutY(513);
-		enemySelectionIndicator3.setLayoutX(1457);
-		enemySelectionIndicator3.setLayoutY(513);
-		enemySelectionIndicator4.setLayoutX(1662);
-		enemySelectionIndicator4.setLayoutY(513);
-
+		enemyTurnTicker1.setLayoutX(1155); // 205 spacing
+		enemyTurnTicker1.setLayoutY(595); 
+		enemyTurnTicker2.setLayoutX(1360);
+		enemyTurnTicker2.setLayoutY(595);
+		enemyTurnTicker3.setLayoutX(1565);
+		enemyTurnTicker3.setLayoutY(595);
+		enemyTurnTicker4.setLayoutX(1770);
+		enemyTurnTicker4.setLayoutY(595);
+		// -------------------------------------------------------------
+		enemyBLDResistance.setLayoutX(1410); // these 3 assets are weird, so need eyeball'd placements.
+		enemyBLDResistance.setLayoutY(952); 
+		enemyBLGTResistance.setLayoutX(1480); 
+		enemyBLGTResistance.setLayoutY(953); 
+		enemyBURNResistance.setLayoutX(1563);
+		enemyBURNResistance.setLayoutY(950); 
+		
+		enemySTNResistance.setLayoutX(1625);//75 spacing
+		enemySTNResistance.setLayoutY(950); 
+		enemyMOVResistance.setLayoutX(1700);
+		enemyMOVResistance.setLayoutY(950); 
+		enemyDBFFResistance.setLayoutX(1775);
+		enemyDBFFResistance.setLayoutY(950); 
+		enemyDTHResistance.setLayoutX(1850); 
+		enemyDTHResistance.setLayoutY(950); 
+		// -------------------------------------------------------------
+		heroSelectionIndicator1.setLayoutX(733);
+		heroSelectionIndicator1.setLayoutY(420);
+		heroSelectionIndicator2.setLayoutX(528);
+		heroSelectionIndicator2.setLayoutY(420);
+		heroSelectionIndicator3.setLayoutX(323);
+		heroSelectionIndicator3.setLayoutY(420);
+		heroSelectionIndicator4.setLayoutX(118);
+		heroSelectionIndicator4.setLayoutY(420);
+		// -------------------------------------------------------------
+		enemySelectionIndicator1.setLayoutX(1019); // spacing of 205 between each
+		enemySelectionIndicator1.setLayoutY(423);
+		enemySelectionIndicator2.setLayoutX(1224);
+		enemySelectionIndicator2.setLayoutY(423);
+		enemySelectionIndicator3.setLayoutX(1429);
+		enemySelectionIndicator3.setLayoutY(423);
+		enemySelectionIndicator4.setLayoutX(1634);
+		enemySelectionIndicator4.setLayoutY(423);
+		// -------------------------------------------------------------
 		back.setLayoutX(50); // Position X for back button
 		back.setLayoutY(50); // Position Y for back button
 		// -------------------------------------------------------------
@@ -586,7 +643,7 @@ public class Main extends Application {
 		// music player
 		Media media = new Media(shopMusic);
 		MediaPlayer mediaPlayer = new MediaPlayer(media);
-		mediaPlayer.setVolume(0.05); // Volume level (0.0 to 1.0)
+		mediaPlayer.setVolume(0.00); // Volume level (0.0 to 1.0), use 0.05
 		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE); // Loop the music
 		mediaPlayer.play(); // music player
 
