@@ -6,17 +6,42 @@ public class Characters {
 
     //public class characterStats {
         String name;
-        int health;
-        int damage;
+        double maxHealth;
+        double health;
+        double damage;
         int defense; // leave this stat at 0 for all characters, need a 0 value in case we want to change it later.
         int accuracy;
         int crit_chance;
         int dodge_chance; // leave this stat at 0 for all characters, need a 0 value in case we want to change it later.
         int position;
         int speed;
+        int poisonResist;
+        int bleedResist;
+        int burnResist;
+        boolean downed = false;
         
-        int getHealth() {
+        void setDowned(boolean down) {
+        	downed = down;
+        }
+        
+        boolean getDowned() {
+        	return downed;
+        }
+        
+        double getHealth() {
         	return health;
+        }
+        
+        double getMaxHealth() {
+        	return maxHealth;
+        }
+        
+        void setMaxHealth(double set) {
+        	maxHealth = set;
+        }
+        
+        void setHealth(double h) {
+        	health = h;
         }
         
         int getSpeed() {
@@ -25,6 +50,45 @@ public class Characters {
         
         void adjustSpeed(int adjust) {
         	speed += adjust;
+        }
+        
+        double getDamage() {
+        	return damage;
+        }
+        
+        void setDamage(double dam) {
+        	damage = dam;
+        }
+        
+        void setPoisonResist(int set) {
+        	poisonResist = set;
+        }
+        
+        int getPoisonResist() {
+        	return poisonResist;
+        }
+        
+        void setBleedResist(int set) {
+        	bleedResist = set;
+        }
+        
+        int getBleedResist() {
+        	return bleedResist;
+        }
+        
+        void setBurnResist(int set) {
+        	burnResist = set;
+        }
+        
+        int getBurnResist() {
+        	return burnResist;
+        }
+        void setCritChance(int set) {
+        	crit_chance = set;
+        }
+        
+        int getCritChance() {
+        	return crit_chance;
         }
     //}
 

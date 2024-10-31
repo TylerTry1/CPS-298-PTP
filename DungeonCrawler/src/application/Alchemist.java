@@ -3,6 +3,7 @@ package application;
 public class Alchemist extends Characters {
 	Alchemist() {
         name = "Reynauld";
+        maxHealth = 54;
         health = 54;
         damage = 18;
         defense = 0;

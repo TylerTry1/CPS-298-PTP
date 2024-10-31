@@ -3,6 +3,7 @@ package application;
 public class Wizard extends Characters {
 	Wizard() {
         name = "Reynauld";
+        maxHealth = 54;
         health = 54;
         damage = 18;
         defense = 0;

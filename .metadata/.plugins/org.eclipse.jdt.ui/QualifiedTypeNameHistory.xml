@@ -7,6 +7,6 @@
     <fullyQualifiedTypeName name="application.Paladin"/>
     <fullyQualifiedTypeName name="application.Wizard"/>
     <fullyQualifiedTypeName name="java.util.Comparator"/>
-    <fullyQualifiedTypeName name="application.enemyTeam"/>
     <fullyQualifiedTypeName name="application.EnemyAbilities"/>
+    <fullyQualifiedTypeName name="application.enemyTeam"/>
 </qualifiedTypeNameHistroy>

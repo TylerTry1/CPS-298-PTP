@@ -9,10 +9,18 @@ public class Arrays_Enemy_Teams extends enemyTeam {
 	int numOfTeams = 15; // Make 15 Random teams. (Can change if we want)
 	Random rand = new Random(); // Random for selection
 	Object[] teams; // Array to store the teams
+	
+	public Arrays_Enemy_Teams(int pos, int size, int numOfTeams) {
+		super(pos, size);
+		// TODO Auto-generated constructor stub
+		this.positions = new int[pos];
+		this.team = new Enemies[size];
+		this.teams = new Object[numOfTeams];
+	}
 		
 	void addToArray(int index, enemyTeam enemyTeam) {
 			
-		teams[index] = enemyTeam;
+		this.teams[index] = enemyTeam;
 	}
 		
 	int getCR() {
@@ -24,13 +32,13 @@ public class Arrays_Enemy_Teams extends enemyTeam {
 	}
 	
 	Object getTeam(int index) { // Get Chosen Team out of array
-		return teams[index];
+		return this.teams[index];
 	}
 	
 public enemyTeam createTeams(int challengeRating) {
 		
 		Random rand = new Random(); // Random for selection
-		enemyTeam teamComp = new enemyTeam();
+		enemyTeam teamComp = new enemyTeam(4, 4);
 		
 		// Create Instances of Enemies
 		goblinScout gS = new goblinScout(java.util.Optional.empty());
@@ -50,7 +58,7 @@ public enemyTeam createTeams(int challengeRating) {
 		boar B = new boar(java.util.Optional.empty());
 	
 		// Array to store them in and pull from
-		Object[] enemies = new Enemies[15]; // We can change the size as/if we make more enemies
+		Enemies[] enemies = new Enemies[15]; // We can change the size as/if we make more enemies
 	
 		// Put Them In the Array
 		enemies[0] = gS;
@@ -71,9 +79,9 @@ public enemyTeam createTeams(int challengeRating) {
 		
 		
 		int nextIndex = 0; // Counter to Check if the positions are full
-		while (teamComp.getTotalChallenge() < challengeRating && teamComp.getPosFull(3)) { // Check if teams challenge level exceeds 
-			int rand1 = rand.nextInt(15);												   // current max or team is full
-			Object tempEnemy = enemies[rand1];
+		while (teamComp.getTotalChallenge() < challengeRating && teamComp.getPosFull(3) && nextIndex < 4) { // Check if teams challenge level exceeds 
+			int rand1 = rand.nextInt(15);												  				    // current max or team is full
+			Enemies tempEnemy = enemies[rand1];
 			
 			teamComp.addToTeam(nextIndex, tempEnemy); // Add the random enemy
 			nextIndex++;
@@ -86,12 +94,13 @@ public enemyTeam createTeams(int challengeRating) {
 	
 	public Arrays_Enemy_Teams createSelection() {
 		
-		Arrays_Enemy_Teams enemyTeamArray = new Arrays_Enemy_Teams();
+		Arrays_Enemy_Teams enemyTeamArray = new Arrays_Enemy_Teams(4, 4, 15);
 		int i = 0;
 		
 		while (i < enemyTeamArray.getNumOfTeams()) {
 			enemyTeam tempTeamComp = createTeams(enemyTeamArray.getCR());
 			enemyTeamArray.addToArray(i, tempTeamComp);
+			i++;
 		}
 		
 		return enemyTeamArray;

@@ -9,8 +9,8 @@ public class Damage {
         this.random = new Random();
     }
 
-    public int calculateDamage(Characters attacker, Characters defender) {
-        int baseDamage = attacker.damage;
+    public double calculateDamage(Characters attacker, Characters defender) {
+        double baseDamage = attacker.damage;
 
         if (isCriticalHit(attacker)) {
             baseDamage *= 1.5;

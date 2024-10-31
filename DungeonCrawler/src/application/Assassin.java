@@ -3,6 +3,7 @@ package application;
 public class Assassin extends Characters {
 	Assassin() {
 		name = "Damian";
+		maxHealth = 72;
 		health = 72;
 		damage = 10;
 		defense = 0;

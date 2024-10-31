@@ -52,7 +52,7 @@ public class Items {
 		
 		//increases one characters damage by 1.1x
 		public void increaseDamage(Characters hero) {
-			hero.setDamage((int) (hero.getDamage()*1.1));
+			hero.setDamage((double) (hero.getDamage()*1.1));
 		}
 	}
 	
@@ -80,7 +80,8 @@ public class Items {
 		
 		//increases one characters health by 1.1x
 		public void increaseMaxHealth(Characters hero) {
-			int healthIncrease = (int) (hero.max_health * 1.1); //gets the total amount of health that character gains
+			double temp = hero.getMaxHealth();
+			double healthIncrease = (double) (temp * 1.1); //gets the total amount of health that character gains
 			hero.setMaxHealth(hero.getMaxHealth()+healthIncrease); //sets the max health to current max health added to the increase
 			hero.setHealth(hero.getHealth()+healthIncrease); //sets current health to current health plus the health increase to keep damage done
 		}
@@ -96,7 +97,7 @@ public class Items {
 		
 		//increases one characters resistances by 10%
 		public void increaseResistances(Characters hero) {
-			hero.setPosionResist(hero.getPosionResist()+10);
+			hero.setPoisonResist(hero.getPoisonResist()+10);
 			hero.setBleedResist(hero.getBleedResist()+10);
 			hero.setBurnResist(hero.getBurnResist()+10);
 		}

@@ -11,6 +11,7 @@ public class Paladin extends Characters {
 
     public Paladin() {
         name = "Dismas"; // Paladin name
+        maxHealth = 33;
         health = 33;
         damage = 4; 
         defense = 0;
