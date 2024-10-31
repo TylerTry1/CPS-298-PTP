@@ -1,5 +1,7 @@
 package application;
 
+import java.util.Random;
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -709,12 +711,26 @@ public class Main extends Application {
 		primaryStage.setOnCloseRequest(event -> {
 			mediaPlayer.stop(); // Stop the music when the stage is closed
 		});
+		
+		
+		enemyTeam enemyTeam1 = new enemyTeam(4,4);
+		Arrays_Enemy_Teams enemyTeamsArray = new Arrays_Enemy_Teams(4,4,15);
+		enemyTeam1 = enemyTeamsArray.createTeams(6);
+		enemyTeamsArray = enemyTeamsArray.createSelection(); // This Function is the current problem...
+		
+		
+		//Random rand = new Random();
+		//int teamSelect = rand.nextInt(15);
+		
+		combatFlow flow = new combatFlow();
+		flow.determineTurnOrder();
+		flow.runCombat();
 
 	}
 	private void shop(Stage primaryStage) {
 		Image cursorImage = new Image("GUIAssets/cursor.png");
 		Cursor customCursor = Cursor.cursor(cursorImage.getUrl());
-
+		
 		// music player
 		Media media = new Media(shopMusic);
 		MediaPlayer mediaPlayer = new MediaPlayer(media);

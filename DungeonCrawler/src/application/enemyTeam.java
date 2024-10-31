@@ -1,13 +1,26 @@
 package application;
 
-import java.util.Random;
 
 public class enemyTeam extends Enemies {
 	
 
 			int totalChallenge = 0;
-			int[] positions = new int[4];
-			Object[] team;
+			int[] positions;
+			Enemies[] team;
+			
+			void addToArray() { // Generic Array Creation to Avoid compile errors
+				team[0] = new Enemies();
+				team[1] = new Enemies();
+				team[2] = new Enemies();
+				team[3] = new Enemies();
+			}
+			
+			public enemyTeam(int pos, int size) {
+				this.positions = new int[pos];
+				this.team = new Enemies[size];
+				addToArray();
+				
+			}
 			
 			int getTotalChallenge() {
 				return totalChallenge;
@@ -18,12 +31,30 @@ public class enemyTeam extends Enemies {
 				return positions[pos] == 0;
 			}
 			
-			void addToTeam(int pos, Object enemy) { // Method for adding an enemy to the current team
-				team[pos] = enemy;
+			void addToTeam(int pos, Enemies enemy) { // Method for adding an enemy to the current team
+				this.team[pos] = enemy;
 			}
 			
-			Object[] getTeam() {
+			Enemies[] getTeam() {
 				return team;
+			}
+			
+			void setTeam(Enemies[] tempTeam) {
+				team = tempTeam;
+			}
+			
+			boolean checkGameOver() {
+				boolean teamDead = false;
+				for (Object enemy : this.team) {
+					if (((Enemies) enemy).getHealth() != 0) {
+						continue;
+					}
+					else {
+						teamDead = true;
+						return teamDead;
+					}
+				}
+				return teamDead;
 			}
 
 

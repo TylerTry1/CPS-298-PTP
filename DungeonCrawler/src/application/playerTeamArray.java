@@ -1,10 +1,5 @@
 package application;
 
-import application.Alchemist;
-import application.Assassin;
-import application.Paladin;
-import application.Wizard;
-
 public class playerTeamArray {
 	
 	Alchemist alchemist = new Alchemist();
@@ -12,7 +7,8 @@ public class playerTeamArray {
 	Paladin paladin = new Paladin();
 	Wizard wizard = new Wizard();
 	
-	Object[] playerTeam;
+	Characters[] playerTeam;
+	
 	
 	void addToArray() {
 		playerTeam[0] = paladin;
@@ -21,9 +17,14 @@ public class playerTeamArray {
 		playerTeam[3] = wizard;
 	}
 	
+	public playerTeamArray(int size) {
+		this.playerTeam = new Characters[4];
+		addToArray();
+	}
+	
 	boolean checkGameOver() {
 		boolean teamDead = false;
-		for (Object character : playerTeam) {
+		for (Object character : this.playerTeam) {
 			if (((Characters) character).getHealth() != 0) {
 				continue;
 			}
@@ -35,7 +36,11 @@ public class playerTeamArray {
 		return teamDead;
 	}
 	
-	Object[] getTeam() {
-		return playerTeam;
+	Characters[] getTeam() {
+		return this.playerTeam;
+	}
+	
+	void setTeam(Characters[] team) {
+		this.playerTeam = team;
 	}
 }
