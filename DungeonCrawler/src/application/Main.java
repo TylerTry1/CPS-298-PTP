@@ -186,7 +186,7 @@ public class Main extends Application {
 		Button skillbutton3 = new Button("skill 3");
 		Button skillbutton4 = new Button("skill 4");
 		Button movebutton = new Button("move");
-		Button passTurnbutton = new Button("pass turn");
+		Button passTurnButton = new Button("pass turn");
 
 		Text heroName = new Text("Hero Name");
 		Text enemyName = new Text("Enemy Name");
@@ -197,6 +197,22 @@ public class Main extends Application {
 		Text enemyMoveResistanceNumberText = new Text("MOV");
 		Text enemyDebuffResistanceNumberText = new Text("DBFF");
 		Text enemyDeathResistanceNumberText = new Text("DTH");
+		Text enemyBleedResistanceNumber = new Text("0"); // replace later with variables
+		Text enemyBlightResistanceNumber= new Text("0");
+		Text enemyBurnResistanceNumber= new Text("0");
+		Text enemyStunResistanceNumber= new Text("0");
+		Text enemyMoveResistanceNumber= new Text("0");
+		Text enemyDebuffResistanceNumber= new Text("0");
+		Text enemyDeathResistanceNumber= new Text("0");
+		Text heroHPPos4 = new Text ("heroHPPos4");
+		Text heroHPPos3 = new Text ("heroHPPos3");
+		Text heroHPPos2 = new Text ("heroHPPos2");
+		Text heroHPPos1 = new Text ("heroHPPos1");
+		Text enemyHPPos1 = new Text ("enemyHPPos1");
+		Text enemyHPPos2 = new Text ("enemyHPPos2");
+		Text enemyHPPos3 = new Text ("enemyHPPos3");
+		Text enemyHPPos4 = new Text ("enemyHPPos4");
+		
 		heroName.setFont(KingArthurLegend);
 		heroName.setFill(Color.web("#4c4c4c"));
 		enemyName.setFont(KingArthurLegend);
@@ -215,7 +231,37 @@ public class Main extends Application {
 		enemyDebuffResistanceNumberText.setFill(Color.web("#d5661b"));
 		enemyDeathResistanceNumberText.setFont(Ubuntu);
 		enemyDeathResistanceNumberText.setFill(Color.web("#8e0000"));
-
+		
+		enemyBleedResistanceNumber.setFont(Ubuntu);
+		enemyBleedResistanceNumber.setFill(Color.web("#4c4c4c"));
+		enemyBlightResistanceNumber.setFont(Ubuntu);
+		enemyBlightResistanceNumber.setFill(Color.web("#4c4c4c"));
+		enemyBurnResistanceNumber.setFont(Ubuntu);
+		enemyBurnResistanceNumber.setFill(Color.web("#4c4c4c"));
+		enemyStunResistanceNumber.setFont(Ubuntu);
+		enemyStunResistanceNumber.setFill(Color.web("#4c4c4c"));
+		enemyMoveResistanceNumber.setFont(Ubuntu);
+		enemyMoveResistanceNumber.setFill(Color.web("#4c4c4c"));
+		enemyDebuffResistanceNumber.setFont(Ubuntu);
+		enemyDebuffResistanceNumber.setFill(Color.web("#4c4c4c"));
+		enemyDeathResistanceNumber.setFont(Ubuntu);
+		enemyDeathResistanceNumber.setFill(Color.web("#4c4c4c"));
+		heroHPPos4.setFont(Ubuntu);
+		heroHPPos4.setFill(Color.web("#bc1313"));
+		heroHPPos3.setFont(Ubuntu);
+		heroHPPos3.setFill(Color.web("#bc1313"));
+		heroHPPos2.setFont(Ubuntu);
+		heroHPPos2.setFill(Color.web("#bc1313"));
+		heroHPPos1.setFont(Ubuntu);
+		heroHPPos1.setFill(Color.web("#bc1313"));
+		enemyHPPos1.setFont(Ubuntu);
+		enemyHPPos1.setFill(Color.web("#bc1313"));
+		enemyHPPos2.setFont(Ubuntu);
+		enemyHPPos2.setFill(Color.web("#bc1313"));
+		enemyHPPos3.setFont(Ubuntu);
+		enemyHPPos3.setFill(Color.web("#bc1313"));
+		enemyHPPos4.setFont(Ubuntu);
+		enemyHPPos4.setFill(Color.web("#bc1313"));
 		// -------------------------------------------------------------
 
 		Paint redToBlackGradient = new LinearGradient(
@@ -314,6 +360,8 @@ public class Main extends Application {
 		ImageView skillbuttonimage2 = new ImageView(new Image("abilityIconsPaladin/divineSmite.png"));
 		ImageView skillbuttonimage3 = new ImageView(new Image("abilityIconsPaladin/auraOfCourage.png"));
 		ImageView skillbuttonimage4 = new ImageView(new Image("abilityIconsPaladin/shieldOfFaith.png"));
+		ImageView skillbuttonimagemove = new ImageView(new Image("GUIAssets/skillbuttonimagemove.png"));
+		ImageView skillbuttonimagepass = new ImageView(new Image("GUIAssets/skillbuttonimagepass.png"));
 		ImageView heroNamePlate = new ImageView(new Image("GUIAssets/nameplate.png"));
 		ImageView enemyNamePlate = new ImageView(new Image("GUIAssets/nameplate.png"));
 		ImageView turnOrderBarLeftAndRight = new ImageView(new Image("GUIAssets/turnOrderBarLeftAndRight.png"));
@@ -360,7 +408,7 @@ public class Main extends Application {
 		HBox enemyPositions = new HBox(50);
 		enemyPositions.getChildren().addAll(enemyPosition1, enemyPosition2, enemyPosition3, enemyPosition4);
 		HBox skillButtons = new HBox(10);
-		skillButtons.getChildren().addAll(skillbutton1, skillbutton2, skillbutton3, skillbutton4, movebutton,passTurnbutton);
+		skillButtons.getChildren().addAll(skillbutton1, skillbutton2, skillbutton3, skillbutton4, movebutton);
 		HBox heroHealthBarRedRectangles = new HBox(105);
 		heroHealthBarRedRectangles.getChildren().addAll(heroHealthBarRedRectangle4,heroHealthBarRedRectangle3,heroHealthBarRedRectangle2,heroHealthBarRedRectangle1);
 		HBox heroHealthBarBlackRectangles = new HBox(105);
@@ -371,22 +419,22 @@ public class Main extends Application {
 		enemyHealthBarBlackRectangles.getChildren().addAll(enemyHealthBarBlackRectangle1,enemyHealthBarBlackRectangle2,enemyHealthBarBlackRectangle3,enemyHealthBarBlackRectangle4);
 		// -------------------------------------------------------------
 		// Set the size of the images to match the button size
-		enemyInPosition1.setFitWidth(0.08 * 1920); // Width relative to the screen size (1920x1080)
-		enemyInPosition1.setFitHeight(0.3 * 1080); // Height relative to the screen size
-		enemyInPosition2.setFitWidth(0.08 * 1920); // 153.6 pixels wide.
-		enemyInPosition2.setFitHeight(0.3 * 1080);
-		enemyInPosition3.setFitWidth(0.08 * 1920);
-		enemyInPosition3.setFitHeight(0.3 * 1080);
-		enemyInPosition4.setFitWidth(0.08 * 1920);
-		enemyInPosition4.setFitHeight(0.3 * 1080);
-		heroInPosition1.setFitWidth(0.08 * 1920); // Width relative to the screen size (1920x1080)
-		heroInPosition1.setFitHeight(0.3 * 1080); // Height relative to the screen size
-		heroInPosition2.setFitWidth(0.08 * 1920); // 153.6 pixels wide.
-		heroInPosition2.setFitHeight(0.3 * 1080);
-		heroInPosition3.setFitWidth(0.08 * 1920);
-		heroInPosition3.setFitHeight(0.3 * 1080);
-		heroInPosition4.setFitWidth(0.08 * 1920);
-		heroInPosition4.setFitHeight(0.3 * 1080);
+		enemyInPosition1.setScaleX(.75);
+		enemyInPosition1.setScaleY(.85); 
+		enemyInPosition2.setScaleX(.75);
+		enemyInPosition2.setScaleY(.85);
+		enemyInPosition3.setScaleX(.75);
+		enemyInPosition3.setScaleY(.85);
+		enemyInPosition4.setScaleX(1);
+		enemyInPosition4.setScaleY(1.1);
+		heroInPosition1.setScaleX(.55);
+		heroInPosition1.setScaleY(.65); 
+		heroInPosition2.setScaleX(.45);
+		heroInPosition2.setScaleY(.45);
+		heroInPosition3.setScaleX(.65);
+		heroInPosition3.setScaleY(.65);
+		heroInPosition4.setScaleX(.55);
+		heroInPosition4.setScaleY(.55);
 		skillbuttonimage1.setFitWidth(0.06 * 1920); // placeholder 16:9 aspect ratio
 		skillbuttonimage1.setFitHeight(0.09 * 1080);
 		skillbuttonimage2.setFitWidth(0.06 * 1920); // placeholder
@@ -395,6 +443,8 @@ public class Main extends Application {
 		skillbuttonimage3.setFitHeight(0.09 * 1080);
 		skillbuttonimage4.setFitWidth(0.06 * 1920); // placeholder
 		skillbuttonimage4.setFitHeight(0.09 * 1080);
+		skillbuttonimagemove.setFitWidth(0.06 * 1920);
+		skillbuttonimagemove.setFitHeight(0.051 * 1920);
 		// -------------------------------------------------------------
 		enemyBLDResistanceIcon.setFitWidth(0.03 * 1920); 
 		enemyBLDResistanceIcon.setFitHeight(0.03 * 1080); 
@@ -431,75 +481,119 @@ public class Main extends Application {
 		enemySelectionIndicator2.setMouseTransparent(true);
 		enemySelectionIndicator3.setMouseTransparent(true);
 		enemySelectionIndicator4.setMouseTransparent(true);
+		skillbuttonimagemove.setMouseTransparent(true);
+		skillbuttonimagepass.setMouseTransparent(true);
+		
+		heroPosition4.setVisible(false);
+		heroPosition3.setVisible(false);
+		heroPosition2.setVisible(false);
+		heroPosition1.setVisible(false);
+		enemyPosition1.setVisible(false);
+		enemyPosition2.setVisible(false);
+		enemyPosition3.setVisible(false);
+		enemyPosition4.setVisible(false);
+		
+		skillbutton1.setVisible(false);
+		skillbutton2.setVisible(false);
+		skillbutton3.setVisible(false);
+		skillbutton4.setVisible(false);
+		movebutton.setVisible(false);
+		passTurnButton.setVisible(false);
+		
 		// -------------------------------------------------------------
 		//make images dissapear or appear on button hover.
-		heroPosition1.setOnMouseEntered(e -> {
-			heroSelectionIndicator1.setVisible(true); // Make the image appear on hover
-		});
-		heroPosition1.setOnMouseExited(e -> {
-			heroSelectionIndicator1.setVisible(false); // Make the image appear on hover
-		});
+		heroPosition1.setOnMouseEntered(e -> {heroSelectionIndicator1.setVisible(true);});
+		heroPosition1.setOnMouseExited(e -> {heroSelectionIndicator1.setVisible(false);});
 		heroSelectionIndicator1.setVisible(false);
-
-		heroPosition2.setOnMouseEntered(e -> {
-			heroSelectionIndicator2.setVisible(true); // Make the image appear on hover
-		});
-		heroPosition2.setOnMouseExited(e -> {
-			heroSelectionIndicator2.setVisible(false); // Make the image appear on hover
-		});
+		
+		heroPosition2.setOnMouseEntered(e -> {heroSelectionIndicator2.setVisible(true);});
+		heroPosition2.setOnMouseExited(e -> {heroSelectionIndicator2.setVisible(false); });
 		heroSelectionIndicator2.setVisible(false);
 
-		heroPosition3.setOnMouseEntered(e -> {
-			heroSelectionIndicator3.setVisible(true); // Make the image appear on hover
-		});
-		heroPosition3.setOnMouseExited(e -> {
-			heroSelectionIndicator3.setVisible(false); // Make the image appear on hover
-		});
+		heroPosition3.setOnMouseEntered(e -> {heroSelectionIndicator3.setVisible(true);});
+		heroPosition3.setOnMouseExited(e -> {heroSelectionIndicator3.setVisible(false);});
 		heroSelectionIndicator3.setVisible(false);
 
-		heroPosition4.setOnMouseEntered(e -> {
-			heroSelectionIndicator4.setVisible(true); // Make the image appear on hover
-		});
-		heroPosition4.setOnMouseExited(e -> {
-			heroSelectionIndicator4.setVisible(false); // Make the image appear on hover
-		});
+		heroPosition4.setOnMouseEntered(e -> {heroSelectionIndicator4.setVisible(true);});
+		heroPosition4.setOnMouseExited(e -> {heroSelectionIndicator4.setVisible(false);});
 		heroSelectionIndicator4.setVisible(false);
-
 		// -------------------------------------------------------------
-
-		enemyPosition1.setOnMouseEntered(e -> {
-			enemySelectionIndicator1.setVisible(true); // Make the image appear on hover
-			
-		});
-		enemyPosition1.setOnMouseExited(e -> {
-			enemySelectionIndicator1.setVisible(false); // Make the image appear on hover
-		});
+		//make images dissapear or appear on button hover.
+		enemyPosition1.setOnMouseEntered(e -> {enemySelectionIndicator1.setVisible(true);});
+		enemyPosition1.setOnMouseExited(e -> {enemySelectionIndicator1.setVisible(false);});
 		enemySelectionIndicator1.setVisible(false);
 
-		enemyPosition2.setOnMouseEntered(e -> {
-			enemySelectionIndicator2.setVisible(true); // Make the image appear on hover
-		});
-		enemyPosition2.setOnMouseExited(e -> {
-			enemySelectionIndicator2.setVisible(false); // Make the image appear on hover
-		});
+		enemyPosition2.setOnMouseEntered(e -> {enemySelectionIndicator2.setVisible(true);});
+		enemyPosition2.setOnMouseExited(e -> {enemySelectionIndicator2.setVisible(false);});
 		enemySelectionIndicator2.setVisible(false);
 
-		enemyPosition3.setOnMouseEntered(e -> {
-			enemySelectionIndicator3.setVisible(true); // Make the image appear on hover
-		});
-		enemyPosition3.setOnMouseExited(e -> {
-			enemySelectionIndicator3.setVisible(false); // Make the image appear on hover
-		});
+		enemyPosition3.setOnMouseEntered(e -> {enemySelectionIndicator3.setVisible(true);});
+		enemyPosition3.setOnMouseExited(e -> {enemySelectionIndicator3.setVisible(false);});
 		enemySelectionIndicator3.setVisible(false);
 
-		enemyPosition4.setOnMouseEntered(e -> {
-			enemySelectionIndicator4.setVisible(true); // Make the image appear on hover
-		});
-		enemyPosition4.setOnMouseExited(e -> {
-			enemySelectionIndicator4.setVisible(false); // Make the image appear on hover
-		});
+		enemyPosition4.setOnMouseEntered(e -> {enemySelectionIndicator4.setVisible(true);});
+		enemyPosition4.setOnMouseExited(e -> {enemySelectionIndicator4.setVisible(false); });
 		enemySelectionIndicator4.setVisible(false);
 		// -------------------------------------------------------------
+		
+		heroHealthBarRedRectangle4.setOnMouseEntered(e -> {heroHPPos4.setVisible(true);});
+		heroHealthBarRedRectangle4.setOnMouseExited(e -> {heroHPPos4.setVisible(false); });
+		heroHPPos4.setVisible(false);
+		heroHealthBarBlackRectangle4.setOnMouseEntered(e -> {heroHPPos4.setVisible(true);});
+		heroHealthBarBlackRectangle4.setOnMouseExited(e -> {heroHPPos4.setVisible(false); });
+		heroHPPos4.setVisible(false);
+		 
+		heroHealthBarRedRectangle3.setOnMouseEntered(e -> {heroHPPos3.setVisible(true);});
+		heroHealthBarRedRectangle3.setOnMouseExited(e -> {heroHPPos3.setVisible(false); });
+		heroHPPos3.setVisible(false);
+		heroHealthBarBlackRectangle3.setOnMouseEntered(e -> {heroHPPos3.setVisible(true);});
+		heroHealthBarBlackRectangle3.setOnMouseExited(e -> {heroHPPos3.setVisible(false); });
+		heroHPPos3.setVisible(false);
+		
+		heroHealthBarRedRectangle2.setOnMouseEntered(e -> {heroHPPos2.setVisible(true);});
+		heroHealthBarRedRectangle2.setOnMouseExited(e -> {heroHPPos2.setVisible(false); });
+		heroHPPos2.setVisible(false);
+		heroHealthBarBlackRectangle2.setOnMouseEntered(e -> {heroHPPos2.setVisible(true);});
+		heroHealthBarBlackRectangle2.setOnMouseExited(e -> {heroHPPos2.setVisible(false); });
+		heroHPPos2.setVisible(false);
+		
+		heroHealthBarRedRectangle1.setOnMouseEntered(e -> {heroHPPos1.setVisible(true);});
+		heroHealthBarRedRectangle1.setOnMouseExited(e -> {heroHPPos1.setVisible(false); });
+		heroHPPos1.setVisible(false);
+		heroHealthBarBlackRectangle1.setOnMouseEntered(e -> {heroHPPos1.setVisible(true);});
+		heroHealthBarBlackRectangle1.setOnMouseExited(e -> {heroHPPos1.setVisible(false); });
+		heroHPPos1.setVisible(false);
+		
+		
+		enemyHealthBarRedRectangle4.setOnMouseEntered(e -> {enemyHPPos4.setVisible(true);});
+		enemyHealthBarRedRectangle4.setOnMouseExited(e -> {enemyHPPos4.setVisible(false); });
+		enemyHPPos4.setVisible(false);
+		enemyHealthBarBlackRectangle4.setOnMouseEntered(e -> {enemyHPPos4.setVisible(true);});
+		enemyHealthBarBlackRectangle4.setOnMouseExited(e -> {enemyHPPos4.setVisible(false); });
+		enemyHPPos4.setVisible(false);
+		
+		enemyHealthBarRedRectangle3.setOnMouseEntered(e -> {enemyHPPos3.setVisible(true);});
+		enemyHealthBarRedRectangle3.setOnMouseExited(e -> {enemyHPPos3.setVisible(false); });
+		enemyHPPos3.setVisible(false);
+		enemyHealthBarBlackRectangle3.setOnMouseEntered(e -> {enemyHPPos3.setVisible(true);});
+		enemyHealthBarBlackRectangle3.setOnMouseExited(e -> {enemyHPPos3.setVisible(false); });
+		enemyHPPos3.setVisible(false);
+		
+		enemyHealthBarRedRectangle2.setOnMouseEntered(e -> {enemyHPPos2.setVisible(true);});
+		enemyHealthBarRedRectangle2.setOnMouseExited(e -> {enemyHPPos2.setVisible(false); });
+		enemyHPPos2.setVisible(false);
+		enemyHealthBarBlackRectangle2.setOnMouseEntered(e -> {enemyHPPos2.setVisible(true);});
+		enemyHealthBarBlackRectangle2.setOnMouseExited(e -> {enemyHPPos2.setVisible(false); });
+		enemyHPPos2.setVisible(false);
+		
+		enemyHealthBarRedRectangle1.setOnMouseEntered(e -> {enemyHPPos1.setVisible(true);});
+		enemyHealthBarRedRectangle1.setOnMouseExited(e -> {enemyHPPos1.setVisible(false); });
+		enemyHPPos1.setVisible(false);
+		enemyHealthBarBlackRectangle1.setOnMouseEntered(e -> {enemyHPPos1.setVisible(true);});
+		enemyHealthBarBlackRectangle1.setOnMouseExited(e -> {enemyHPPos1.setVisible(false); });
+		enemyHPPos1.setVisible(false);
+		// -------------------------------------------------------------
+
 		// Create a Pane for free positioning
 		Pane root = new Pane();
 
@@ -511,8 +605,10 @@ public class Main extends Application {
 		root.getChildren().addAll(enemyTurnTicker1, enemyTurnTicker2, enemyTurnTicker3, enemyTurnTicker4);
 		root.getChildren().addAll(enemyBLDResistanceIcon, enemyBLGTResistanceIcon, enemyBURNResistanceIcon, enemySTNResistanceIcon, enemyMOVResistanceIcon, enemyDBFFResistanceIcon, enemyDTHResistanceIcon);
 		root.getChildren().addAll(enemyBleedResistanceNumberText, enemyBlightResistanceNumberText, enemyBurnResistanceNumberText, enemyStunResistanceNumberText, enemyMoveResistanceNumberText, enemyDebuffResistanceNumberText, enemyDeathResistanceNumberText);
-		root.getChildren().add(skillButtons); // skill buttons
-		root.getChildren().addAll(skillbuttonimage1, skillbuttonimage2, skillbuttonimage3, skillbuttonimage4); 																						
+		root.getChildren().addAll(enemyBleedResistanceNumber,enemyBlightResistanceNumber,enemyBurnResistanceNumber,enemyStunResistanceNumber,enemyMoveResistanceNumber,enemyDebuffResistanceNumber, enemyDeathResistanceNumber);
+		root.getChildren().add(skillButtons); 
+		root.getChildren().add(passTurnButton); 
+		root.getChildren().addAll(skillbuttonimage1, skillbuttonimage2, skillbuttonimage3, skillbuttonimage4, skillbuttonimagemove, skillbuttonimagepass); 																						
 		root.getChildren().addAll(heroNamePlate, enemyNamePlate);
 		root.getChildren().add(turnOrderBarLeftAndRight);
 		root.getChildren().addAll(heroName, enemyName);// keep name after name plate to avoid layering issues
@@ -522,7 +618,9 @@ public class Main extends Application {
 		root.getChildren().add(heroHealthBarRedRectangles);
 		root.getChildren().add(enemyHealthBarBlackRectangles);
 		root.getChildren().add(enemyHealthBarRedRectangles);
-
+		root.getChildren().addAll(heroHPPos4,heroHPPos3,heroHPPos2,heroHPPos1);
+		root.getChildren().addAll(enemyHPPos4,enemyHPPos3,enemyHPPos2,enemyHPPos1);
+		
 		root.setBackground(new Background(backgroundImagePayoff)); // set background image
 
 		// -------------------------------------------------------------
@@ -535,7 +633,10 @@ public class Main extends Application {
 
 		skillButtons.setLayoutX(585); // 585 sweet spot
 		skillButtons.setLayoutY(775);
-
+		
+		passTurnButton.setLayoutX(1222);
+		passTurnButton.setLayoutY(775);
+		
 		heroName.setLayoutX(180); // hero's name
 		heroName.setLayoutY(750);
 		heroName.setScaleX(.65);
@@ -632,6 +733,73 @@ public class Main extends Application {
 		enemyDebuffResistanceNumberText.setScaleY(.65); 
 		enemyDeathResistanceNumberText.setScaleX(.65);
 		enemyDeathResistanceNumberText.setScaleY(.65); 
+		
+		enemyBleedResistanceNumber.setLayoutX(1415); // 77 spacing
+		enemyBleedResistanceNumber.setLayoutY(1020);
+		enemyBleedResistanceNumber.setScaleX(.75);
+		enemyBleedResistanceNumber.setScaleY(.75); 
+		enemyBlightResistanceNumber.setLayoutX(1492);
+		enemyBlightResistanceNumber.setLayoutY(1020); 
+		enemyBlightResistanceNumber.setScaleX(.75);
+		enemyBlightResistanceNumber.setScaleY(.75); 
+		enemyBurnResistanceNumber.setLayoutX(1569);
+		enemyBurnResistanceNumber.setLayoutY(1020); 
+		enemyBurnResistanceNumber.setScaleX(.75);
+		enemyBurnResistanceNumber.setScaleY(.75); 
+		enemyStunResistanceNumber.setLayoutX(1639);
+		enemyStunResistanceNumber.setLayoutY(1020); 
+		enemyStunResistanceNumber.setScaleX(.75);
+		enemyStunResistanceNumber.setScaleY(.75); 
+		enemyMoveResistanceNumber.setLayoutX(1716);
+		enemyMoveResistanceNumber.setLayoutY(1020); 
+		enemyMoveResistanceNumber.setScaleX(.75);
+		enemyMoveResistanceNumber.setScaleY(.75); 
+		enemyDebuffResistanceNumber.setLayoutX(1793);
+		enemyDebuffResistanceNumber.setLayoutY(1020); 
+		enemyDebuffResistanceNumber.setScaleX(.75);
+		enemyDebuffResistanceNumber.setScaleY(.75); 
+		enemyDeathResistanceNumber.setLayoutX(1870);
+		enemyDeathResistanceNumber.setLayoutY(1020); 
+		enemyDeathResistanceNumber.setScaleX(.75);
+		enemyDeathResistanceNumber.setScaleY(.75); 
+		
+		
+		heroHPPos4.setLayoutX(92); 
+		heroHPPos4.setLayoutY(650); 
+		heroHPPos4.setScaleX(.5); 
+		heroHPPos4.setScaleY(.5); 
+		
+		heroHPPos3.setLayoutX(297); // space 205
+		heroHPPos3.setLayoutY(650);
+		heroHPPos3.setScaleX(.5); 
+		heroHPPos3.setScaleY(.5); 
+		
+		heroHPPos2.setLayoutX(503); 
+		heroHPPos2.setLayoutY(650); 
+		heroHPPos2.setScaleX(.5); 
+		heroHPPos2.setScaleY(.5); 
+		
+		heroHPPos1.setLayoutX(708); 
+		heroHPPos1.setLayoutY(650);  
+		heroHPPos1.setScaleX(.5); 
+		heroHPPos1.setScaleY(.5); 
+		
+		enemyHPPos1.setLayoutX(975); 
+		enemyHPPos1.setLayoutY(650);   
+		enemyHPPos1.setScaleX(.5); 
+		enemyHPPos1.setScaleY(.5); 
+		enemyHPPos2.setLayoutX(1180); 
+		enemyHPPos2.setLayoutY(650);  
+		enemyHPPos2.setScaleX(.5); 
+		enemyHPPos2.setScaleY(.5); 
+		enemyHPPos3.setLayoutX(1385); 
+		enemyHPPos3.setLayoutY(650);  
+		enemyHPPos3.setScaleX(.5); 
+		enemyHPPos3.setScaleY(.5); 
+		enemyHPPos4.setLayoutX(1590); 
+		enemyHPPos4.setLayoutY(650); 
+		enemyHPPos4.setScaleX(.5); 
+		enemyHPPos4.setScaleY(.5); 
 		// -------------------------------------------------------------
 		heroSelectionIndicator1.setLayoutX(733);
 		heroSelectionIndicator1.setLayoutY(420);
@@ -655,23 +823,23 @@ public class Main extends Application {
 		back.setLayoutY(50); // Position Y for back button
 		// -------------------------------------------------------------
 		// Manually position the images on top of the buttons
-		enemyInPosition1.setLayoutX(1025); // spacing of 205 in between each.
-		enemyInPosition1.setLayoutY(250);
-		enemyInPosition2.setLayoutX(1230);
-		enemyInPosition2.setLayoutY(250);
-		enemyInPosition3.setLayoutX(1435);
-		enemyInPosition3.setLayoutY(250);
-		enemyInPosition4.setLayoutX(1640);
-		enemyInPosition4.setLayoutY(250);
+		enemyInPosition1.setLayoutX(875); // spacing of 205 in between each.
+		enemyInPosition1.setLayoutY(190);
+		enemyInPosition2.setLayoutX(1080);
+		enemyInPosition2.setLayoutY(190);
+		enemyInPosition3.setLayoutX(1235);
+		enemyInPosition3.setLayoutY(190);
+		enemyInPosition4.setLayoutX(1460);
+		enemyInPosition4.setLayoutY(155);
 		// -------------------------------------------------------------
-		heroInPosition1.setLayoutX(740); // spacing of 205 in between each.
-		heroInPosition1.setLayoutY(250);
-		heroInPosition2.setLayoutX(535);
-		heroInPosition2.setLayoutY(250);
-		heroInPosition3.setLayoutX(330);
-		heroInPosition3.setLayoutY(250);
-		heroInPosition4.setLayoutX(125);
-		heroInPosition4.setLayoutY(250);
+		heroInPosition1.setLayoutX(585); // spacing of 205 in between each.
+		heroInPosition1.setLayoutY(190);
+		heroInPosition2.setLayoutX(380);
+		heroInPosition2.setLayoutY(260);
+		heroInPosition3.setLayoutX(145);
+		heroInPosition3.setLayoutY(200);
+		heroInPosition4.setLayoutX(-50);
+		heroInPosition4.setLayoutY(210);
 		// -------------------------------------------------------------
 		skillbuttonimage1.setLayoutX(586);
 		skillbuttonimage1.setLayoutY(778);// 778 SWEET SPOT // 127 x multiple
@@ -681,6 +849,12 @@ public class Main extends Application {
 		skillbuttonimage3.setLayoutY(778);
 		skillbuttonimage4.setLayoutX(967);
 		skillbuttonimage4.setLayoutY(778);
+		skillbuttonimagemove.setLayoutX(1094);
+		skillbuttonimagemove.setLayoutY(778);
+		skillbuttonimagepass.setLayoutX(1227);
+		skillbuttonimagepass.setLayoutY(791);
+		skillbuttonimagepass.setScaleX(1.35);
+		skillbuttonimagepass.setScaleY(1.35);
 		// -------------------------------------------------------------
 		// Set the button sizes for all buttons in HBoxes
 		heroPositions.getChildren().forEach(button -> {
@@ -696,6 +870,8 @@ public class Main extends Application {
 			((Button) button).prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.06));
 			((Button) button).prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.09));
 		});
+		passTurnButton.prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.015));
+		passTurnButton.prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.09));
 
 		back.setOnAction(e -> {
 			mediaPlayer.stop(); // Stop the music when the back button is pressed
