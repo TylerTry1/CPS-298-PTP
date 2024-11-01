@@ -1,7 +1,6 @@
 package application;
 
-import java.util.Random;
-
+import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -10,8 +9,10 @@ import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.BoxBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
@@ -19,6 +20,7 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -31,6 +33,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class Main extends Application {
 	// music tracks
@@ -171,7 +174,6 @@ public class Main extends Application {
 		mediaPlayer.play(); // music player
 
 		// Create buttons for everything
-		Button back = new Button("Back");
 		Button heroPosition4 = new Button("heroPosition4");
 		Button heroPosition3 = new Button("heroPosition3");
 		Button heroPosition2 = new Button("heroPosition2");
@@ -187,7 +189,10 @@ public class Main extends Application {
 		Button skillbutton4 = new Button("skill 4");
 		Button movebutton = new Button("move");
 		Button passTurnButton = new Button("pass turn");
-
+		
+		Button menuBackButton = new Button ("Back");
+		Button menuQuitButton = new Button ("Quit Game");
+		
 		Text heroName = new Text("Hero Name");
 		Text enemyName = new Text("Enemy Name");
 		Text enemyBleedResistanceNumberText = new Text("BLD");
@@ -214,6 +219,8 @@ public class Main extends Application {
 		Text enemyHPPos4 = new Text ("enemyHPPos4");
 		Text roundNumberText = new Text ("Round #");
 		
+		Text menuQuitGameText = new Text ("Quit Game");
+		
 		heroName.setFont(KingArthurLegend);
 		heroName.setFill(Color.web("#4c4c4c"));
 		enemyName.setFont(KingArthurLegend);
@@ -232,7 +239,8 @@ public class Main extends Application {
 		enemyDebuffResistanceNumberText.setFill(Color.web("#d5661b"));
 		enemyDeathResistanceNumberText.setFont(Ubuntu);
 		enemyDeathResistanceNumberText.setFill(Color.web("#8e0000"));
-		
+		roundNumberText.setFont(KingArthurLegend);
+		roundNumberText.setFill(Color.web("#4c4c4c"));
 		enemyBleedResistanceNumber.setFont(Ubuntu);
 		enemyBleedResistanceNumber.setFill(Color.web("#4c4c4c"));
 		enemyBlightResistanceNumber.setFont(Ubuntu);
@@ -264,8 +272,10 @@ public class Main extends Application {
 		enemyHPPos4.setFont(Ubuntu);
 		enemyHPPos4.setFill(Color.web("#bc1313"));
 		
-		roundNumberText.setFont(KingArthurLegend);
-		roundNumberText.setFill(Color.web("#4c4c4c"));
+
+		
+		menuQuitGameText.setFont(KingArthurLegend);
+		menuQuitGameText.setFill(Color.web("#cfc257"));
 		// -------------------------------------------------------------
 
 		Paint redToBlackGradient = new LinearGradient(
@@ -284,6 +294,7 @@ public class Main extends Application {
 	                new Stop(0, Color.BLACK), // Start color (top)
 	                new Stop(1, Color.rgb(50, 50, 50)) // End color (bottom, darker gray)
 	        );
+		BoxBlur blur = new BoxBlur(10, 10, 3);
 		Rectangle heroHealthBarRedRectangle4 = new Rectangle(100, 15); // Width, Height, Fill Color
 		Rectangle heroHealthBarRedRectangle3 = new Rectangle(100, 15);
 		Rectangle heroHealthBarRedRectangle2 = new Rectangle(100, 15);
@@ -395,13 +406,14 @@ public class Main extends Application {
 		ImageView enemyDBFFResistanceIcon = new ImageView(new Image("GUIAssets/DBFFResistance.png"));
 		ImageView enemyDTHResistanceIcon = new ImageView(new Image("GUIAssets/DTHResistance.png"));
 		
+		ImageView menuBackground = new ImageView(new Image("GUIAssets/menuBackground.png"));
+		ImageView menuBackButtonImage = new ImageView(new Image("GUIAssets/menuBackButtonImage.png"));
+		ImageView menuButtonFrame1 = new ImageView(new Image("GUIAssets/menuButtonFrame.png"));
 		
 		
 		Image backgroundImagesetup = new Image("combatBackgrounds/cryptsRoomWallDrain.png");
-		BackgroundSize size = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false); // background
-																														// image
-		BackgroundPosition customPosition = new BackgroundPosition(Side.LEFT, 0, true, Side.TOP, 0, true); // fit to top
-																											// left
+		BackgroundSize size = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false); // background image
+		BackgroundPosition customPosition = new BackgroundPosition(Side.LEFT, 0, true, Side.TOP, 0, true); // fit to top left
 		BackgroundImage backgroundImagePayoff = new BackgroundImage(backgroundImagesetup, BackgroundRepeat.NO_REPEAT,
 				BackgroundRepeat.NO_REPEAT, customPosition, size);
 
@@ -487,23 +499,28 @@ public class Main extends Application {
 		enemySelectionIndicator4.setMouseTransparent(true);
 		skillbuttonimagemove.setMouseTransparent(true);
 		skillbuttonimagepass.setMouseTransparent(true);
+		menuBackButtonImage.setMouseTransparent(true);
+		menuQuitGameText.setMouseTransparent(true);
 		
-		heroPosition4.setVisible(false);
-		heroPosition3.setVisible(false);
-		heroPosition2.setVisible(false);
-		heroPosition1.setVisible(false);
-		enemyPosition1.setVisible(false);
-		enemyPosition2.setVisible(false);
-		enemyPosition3.setVisible(false);
-		enemyPosition4.setVisible(false);
+		heroPosition4.setOpacity(0);
+		heroPosition3.setOpacity(0);
+		heroPosition2.setOpacity(0);
+		heroPosition1.setOpacity(0);
+		enemyPosition1.setOpacity(0);
+		enemyPosition2.setOpacity(0);
+		enemyPosition3.setOpacity(0);
+		enemyPosition4.setOpacity(0);
+
 		
-		skillbutton1.setVisible(false);
-		skillbutton2.setVisible(false);
-		skillbutton3.setVisible(false);
-		skillbutton4.setVisible(false);
-		movebutton.setVisible(false);
-		passTurnButton.setVisible(false);
+		skillbutton1.setOpacity(0);
+		skillbutton2.setOpacity(0);
+		skillbutton3.setOpacity(0);
+		skillbutton4.setOpacity(0);
+		movebutton.setOpacity(0);
+		passTurnButton.setOpacity(0);
 		
+		menuBackButton.setOpacity(0);
+		menuQuitButton.setOpacity(0);
 		// -------------------------------------------------------------
 		//make images dissapear or appear on button hover.
 		heroPosition1.setOnMouseEntered(e -> {heroSelectionIndicator1.setVisible(true);});
@@ -600,9 +617,18 @@ public class Main extends Application {
 
 		// Create a Pane for free positioning
 		Pane root = new Pane();
-
-		// Add buttons, images, and back button to the root Pane
-		root.getChildren().addAll(heroPositions, enemyPositions, back);
+		Pane combatMenu = new Pane();
+		combatMenu.setStyle("-fx-background-color: rgba(0, 0, 0, 0.7);"); // semi-transparent black
+		combatMenu.setVisible(false); // initially hidden
+        FadeTransition fadeIn = new FadeTransition(Duration.millis(300), combatMenu);
+        fadeIn.setFromValue(0);
+        fadeIn.setToValue(1);
+        FadeTransition fadeOut = new FadeTransition(Duration.millis(300), combatMenu);
+        fadeOut.setFromValue(1);
+        fadeOut.setToValue(0);
+        fadeOut.setOnFinished(e -> combatMenu.setVisible(false)); // Hide after fading out
+		// Add buttons, images
+		root.getChildren().addAll(heroPositions, enemyPositions);
 		root.getChildren().addAll(enemyInPosition1, enemyInPosition2, enemyInPosition3, enemyInPosition4);
 		root.getChildren().addAll(heroInPosition1, heroInPosition2, heroInPosition3, heroInPosition4);
 		root.getChildren().addAll(heroTurnTicker1, heroTurnTicker2, heroTurnTicker3, heroTurnTicker4);
@@ -627,7 +653,12 @@ public class Main extends Application {
 		root.getChildren().addAll(enemyHPPos4,enemyHPPos3,enemyHPPos2,enemyHPPos1);
 		
 		root.setBackground(new Background(backgroundImagePayoff)); // set background image
-
+		
+		combatMenu.getChildren().addAll(menuBackground);
+		combatMenu.getChildren().addAll(menuButtonFrame1);
+		combatMenu.getChildren().addAll(menuBackButton,menuQuitButton);
+		combatMenu.getChildren().add(menuQuitGameText);
+		combatMenu.getChildren().add(menuBackButtonImage);
 		// -------------------------------------------------------------
 		// Manually position the HBoxes and back button
 		heroPositions.setLayoutX(125); // Position X for hero positions
@@ -829,8 +860,6 @@ public class Main extends Application {
 		enemySelectionIndicator4.setLayoutX(1634);
 		enemySelectionIndicator4.setLayoutY(423);
 		// -------------------------------------------------------------
-		back.setLayoutX(50); // Position X for back button
-		back.setLayoutY(50); // Position Y for back button
 		// -------------------------------------------------------------
 		// Manually position the images on top of the buttons
 		enemyInPosition1.setLayoutX(875); // spacing of 205 in between each.
@@ -866,6 +895,36 @@ public class Main extends Application {
 		skillbuttonimagepass.setScaleX(1.35);
 		skillbuttonimagepass.setScaleY(1.35);
 		// -------------------------------------------------------------
+		menuBackground.setLayoutX(450);
+		menuBackground.setLayoutY(0);
+		menuBackground.setScaleX(1);
+		menuBackground.setScaleY(1);
+		
+		menuQuitButton.setLayoutX(925);
+		menuQuitButton.setLayoutY(633);
+		menuQuitButton.setScaleX(7.5);
+		menuQuitButton.setScaleY(2.5);
+		
+		menuBackButtonImage.setLayoutX(1310);
+		menuBackButtonImage.setLayoutY(103);
+		menuBackButtonImage.setScaleX(1);
+		menuBackButtonImage.setScaleY(1);
+		
+		menuBackButton.setLayoutX(1310);
+		menuBackButton.setLayoutY(110);
+		menuBackButton.setScaleX(1);
+		menuBackButton.setScaleY(2);
+		
+		menuButtonFrame1.setLayoutX(650);
+		menuButtonFrame1.setLayoutY(580);
+		menuButtonFrame1.setScaleX(1);
+		menuButtonFrame1.setScaleY(1);
+
+		menuQuitGameText.setLayoutX(835);
+		menuQuitGameText.setLayoutY(660);
+		menuQuitGameText.setScaleX(1);
+		menuQuitGameText.setScaleY(1);
+		// -------------------------------------------------------------
 		// Set the button sizes for all buttons in HBoxes
 		heroPositions.getChildren().forEach(button -> {
 			((Button) button).prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.08));
@@ -883,13 +942,30 @@ public class Main extends Application {
 		passTurnButton.prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.015));
 		passTurnButton.prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.09));
 
-		back.setOnAction(e -> {
+		menuBackButton.setOnAction(e -> {
+		    fadeOut.playFromStart(); 
+			root.setEffect(null); // remove blur
+		});
+		menuQuitButton.setOnAction(e -> {
 			mediaPlayer.stop(); // Stop the music when the back button is pressed
 			homePage(primaryStage);
 		});
-
-		Scene scene = new Scene(root, 1920, 1080); // Create a scene with the Pane
 		
+		
+		Scene scene = new Scene(new StackPane(root, combatMenu), 1920, 1080);
+		scene.setOnKeyPressed(event -> {
+			if (event.getCode() == KeyCode.ESCAPE) {
+				 if (combatMenu.isVisible()) {
+			            fadeOut.playFromStart(); // Start fade out transition
+			            root.setEffect(null);    // Remove blur
+			        } else {
+			            combatMenu.setVisible(true); // Show the menu first
+			            root.setEffect(blur);       // Apply blur to root
+			            fadeIn.playFromStart();     // Fade in the menu
+			        }
+			    }
+		});
+
 		scene.setCursor(customCursor);
 		primaryStage.setScene(scene);
 		primaryStage.show();
