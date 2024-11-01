@@ -192,7 +192,7 @@ public class Main extends Application {
 		Text enemyName = new Text("Enemy Name");
 		Text enemyBleedResistanceNumberText = new Text("BLD");
 		Text enemyBlightResistanceNumberText = new Text("BLGT");
-		Text enemyBurnResistanceNumberText = new Text("BURN");
+		Text enemyBurnResistanceNumberText = new Text("BRN");
 		Text enemyStunResistanceNumberText = new Text("STN");
 		Text enemyMoveResistanceNumberText = new Text("MOV");
 		Text enemyDebuffResistanceNumberText = new Text("DBFF");
@@ -212,6 +212,7 @@ public class Main extends Application {
 		Text enemyHPPos2 = new Text ("enemyHPPos2");
 		Text enemyHPPos3 = new Text ("enemyHPPos3");
 		Text enemyHPPos4 = new Text ("enemyHPPos4");
+		Text roundNumberText = new Text ("Round #");
 		
 		heroName.setFont(KingArthurLegend);
 		heroName.setFill(Color.web("#4c4c4c"));
@@ -262,6 +263,9 @@ public class Main extends Application {
 		enemyHPPos3.setFill(Color.web("#bc1313"));
 		enemyHPPos4.setFont(Ubuntu);
 		enemyHPPos4.setFill(Color.web("#bc1313"));
+		
+		roundNumberText.setFont(KingArthurLegend);
+		roundNumberText.setFill(Color.web("#4c4c4c"));
 		// -------------------------------------------------------------
 
 		Paint redToBlackGradient = new LinearGradient(
@@ -612,6 +616,7 @@ public class Main extends Application {
 		root.getChildren().addAll(heroNamePlate, enemyNamePlate);
 		root.getChildren().add(turnOrderBarLeftAndRight);
 		root.getChildren().addAll(heroName, enemyName);// keep name after name plate to avoid layering issues
+		root.getChildren().add(roundNumberText);
 		root.getChildren().addAll(heroSelectionIndicator1, heroSelectionIndicator2, heroSelectionIndicator3,heroSelectionIndicator4); 
 		root.getChildren().addAll(enemySelectionIndicator1, enemySelectionIndicator2, enemySelectionIndicator3, enemySelectionIndicator4); // might need 4 of these.
 		root.getChildren().add(heroHealthBarBlackRectangles);
@@ -641,6 +646,11 @@ public class Main extends Application {
 		heroName.setLayoutY(750);
 		heroName.setScaleX(.65);
 		heroName.setScaleY(.65);
+		
+		roundNumberText.setLayoutX(1340);
+		roundNumberText.setLayoutY(45);
+		roundNumberText.setScaleX(.95);
+		roundNumberText.setScaleY(.95);
 		
 		enemyName.setLayoutX(1460);
 		enemyName.setLayoutY(750);
@@ -688,35 +698,35 @@ public class Main extends Application {
 		enemyTurnTicker4.setLayoutX(1770);
 		enemyTurnTicker4.setLayoutY(595);
 		// -------------------------------------------------------------
-		enemyBLDResistanceIcon.setLayoutX(1410); // these 3 assets are weird, so need eyeball'd placements.
+		enemyBLDResistanceIcon.setLayoutX(1412); // these 3 assets are weird, so need eyeball'd placements.
 		enemyBLDResistanceIcon.setLayoutY(952); 
 		enemyBLGTResistanceIcon.setLayoutX(1480); 
 		enemyBLGTResistanceIcon.setLayoutY(953); 
-		enemyBURNResistanceIcon.setLayoutX(1563);
+		enemyBURNResistanceIcon.setLayoutX(1564);
 		enemyBURNResistanceIcon.setLayoutY(950); 
 		
-		enemySTNResistanceIcon.setLayoutX(1625);//75 spacing
+		enemySTNResistanceIcon.setLayoutX(1621);//75 spacing
 		enemySTNResistanceIcon.setLayoutY(950); 
-		enemyMOVResistanceIcon.setLayoutX(1700);
+		enemyMOVResistanceIcon.setLayoutX(1695);
 		enemyMOVResistanceIcon.setLayoutY(950); 
-		enemyDBFFResistanceIcon.setLayoutX(1775);
+		enemyDBFFResistanceIcon.setLayoutX(1776);
 		enemyDBFFResistanceIcon.setLayoutY(950); 
-		enemyDTHResistanceIcon.setLayoutX(1850); 
+		enemyDTHResistanceIcon.setLayoutX(1852); 
 		enemyDTHResistanceIcon.setLayoutY(950); 
 		
 		enemyBleedResistanceNumberText.setLayoutX(1390);
 		enemyBleedResistanceNumberText.setLayoutY(940); 
-		enemyBlightResistanceNumberText.setLayoutX(1460);
+		enemyBlightResistanceNumberText.setLayoutX(1456);
 		enemyBlightResistanceNumberText.setLayoutY(940); 
-		enemyBurnResistanceNumberText.setLayoutX(1543);
+		enemyBurnResistanceNumberText.setLayoutX(1541);
 		enemyBurnResistanceNumberText.setLayoutY(940); 
-		enemyStunResistanceNumberText.setLayoutX(1605);
+		enemyStunResistanceNumberText.setLayoutX(1616);
 		enemyStunResistanceNumberText.setLayoutY(940); 
-		enemyMoveResistanceNumberText.setLayoutX(1680);
+		enemyMoveResistanceNumberText.setLayoutX(1678);
 		enemyMoveResistanceNumberText.setLayoutY(940); 
-		enemyDebuffResistanceNumberText.setLayoutX(1755);
+		enemyDebuffResistanceNumberText.setLayoutX(1753);
 		enemyDebuffResistanceNumberText.setLayoutY(940); 
-		enemyDeathResistanceNumberText.setLayoutX(1830);
+		enemyDeathResistanceNumberText.setLayoutX(1842);
 		enemyDeathResistanceNumberText.setLayoutY(940); 
 		
 		enemyBleedResistanceNumberText.setScaleX(.65);
