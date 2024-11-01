@@ -1,12 +1,2 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="application.Enemies"/>
-    <fullyQualifiedTypeName name="application.Arrays_Enemy_Teams"/>
-    <fullyQualifiedTypeName name="application.Alchemist"/>
-    <fullyQualifiedTypeName name="application.Assassin"/>
-    <fullyQualifiedTypeName name="application.Paladin"/>
-    <fullyQualifiedTypeName name="application.Wizard"/>
-    <fullyQualifiedTypeName name="java.util.Comparator"/>
-    <fullyQualifiedTypeName name="application.EnemyAbilities"/>
-    <fullyQualifiedTypeName name="application.enemyTeam"/>
-</qualifiedTypeNameHistroy>
+<qualifiedTypeNameHistroy/>
