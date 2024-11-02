@@ -1,5 +1,6 @@
 package application;
 
+import application.combatFlow.combatControl;
 import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -974,17 +975,8 @@ public class Main extends Application {
 			mediaPlayer.stop(); // Stop the music when the stage is closed
 		});
 		
-		
-		enemyTeam enemyTeam1 = new enemyTeam(4,4);
-		Arrays_Enemy_Teams enemyTeamsArray = new Arrays_Enemy_Teams(4,4,15);
-		enemyTeam1 = enemyTeamsArray.createTeams(6);
-		enemyTeamsArray = enemyTeamsArray.createSelection(); // This Function is the current problem...
-		
-		
-		//Random rand = new Random();
-		//int teamSelect = rand.nextInt(15);
-		
-		combatFlow flow = new combatFlow();
+		Boolean finished = false;
+		combatControl flow = new combatControl(enemyPosition1, enemyPosition2, enemyPosition3, enemyPosition4);
 		flow.determineTurnOrder();
 		flow.runCombat();
 

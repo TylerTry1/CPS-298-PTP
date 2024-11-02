@@ -1,11 +1,14 @@
 package application;
 
+import java.util.List;
+
 public class Assassin extends Characters {
     private static final int POISON_DAMAGE = 5; // Damage per turn from poison
     private static final int POISON_DURATION = 3; // Duration of poison effect
     private static final int BACKSTAB_DAMAGE = 8; // High damage for Backstab
     private static final int DAGGER_BARRAGE_DAMAGE = 3; // Low damage for Dagger Barrage
     private static final int BLEED_DURATION = 3; // Duration of bleed effect
+    private static final double BLEED_DAMAGE = 4; // Damage per turn from bleed
     private boolean isPoisoned = false;
     private int poisonTurnsRemaining = 0;
     
@@ -33,7 +36,7 @@ public void usePoisonedBlade() {
 
 // Piercing Stab: Attack that ignores the enemy's defense
 public void usePiercingStab(Characters enemy) {
-    int damageDealt = this.damage; // Average damage
+    double damageDealt = this.damage; // Average damage
     enemy.takeDamage(damageDealt); // Ignore defense logic
     System.out.println("Dealt " + damageDealt + " damage (ignores defense).");
 }
@@ -49,7 +52,7 @@ public void useBackstab(Characters enemy) {
 public void useDaggerBarrage(List<Characters> enemies) {
     for (Characters enemy : enemies) {
         enemy.takeDamage(DAGGER_BARRAGE_DAMAGE); // Low damage to each enemy
-        enemy.applyBleed(BLEED_DURATION); // Apply bleed effect to each enemy
+        enemy.applyBleed(BLEED_DURATION, BLEED_DAMAGE); // Apply bleed effect to each enemy
         System.out.println("Hit " + enemy.name + " for " + DAGGER_BARRAGE_DAMAGE + " damage and applies bleed.");
     }
 }
@@ -67,11 +70,6 @@ public void updatePoisonStatus() {
             System.out.println(name + " is no longer poisoned.");
         }
     }
-}
-
-public void takeDamage(int damage) {
-    this.health -= damage;
-    System.out.println(name + " takes " + damage + " damage. Current health: " + this.health);
 }
 
 // Method to apply bleed effect to enemies

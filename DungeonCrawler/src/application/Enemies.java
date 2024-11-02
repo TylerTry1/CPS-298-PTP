@@ -8,6 +8,7 @@ public class Enemies {
         String name;
         double health;
         static double damage;
+        static double placeholderDamage;
         static int defense; // leave this stat at 0 for all characters, need a 0 value in case we want to change it later.
         static int accuracy; // leave this stat at 0 for all characters, need a 0 value in case we want to change it later.
         int crit_chance;
@@ -32,12 +33,16 @@ public class Enemies {
         	health = h;
         }
         
+        String getName() {
+        	return name;
+        }
+        
         void adjustSpeed(int adjust) {
         	speed += adjust;
         }
         
-		static Object[] result = {}; // Array to store the amount of damage that will be done, and the positions to damage.
-		static int[] targetPos;
+		static Object[] result = new Object[2]; // Array to store the amount of damage that will be done, and the positions to damage.
+		static int[] targetPos = new int[4];
 		
 		//Function<Object, Object[]>[] functions = new Function[2];
 		interface AbilityFunctions {
@@ -59,6 +64,7 @@ public class Enemies {
 			name = "Goblin Scout";
 			health = 24;
 			damage = 7;
+			placeholderDamage = 0;
 			defense = 0;
 			accuracy = 0; 
 			crit_chance = 10;
@@ -77,12 +83,12 @@ public class Enemies {
 			@Override
 			public Object[] apply() {
 			
-			targetPos[0] = 1;
+				targetPos[0] = 1;
 			
-			result[0] = damage;
-			result[1] = targetPos;
+				result[0] = damage;
+				result[1] = targetPos;
 			
-			return result;
+				return result;
 			}
 		}
 			
@@ -94,7 +100,13 @@ public class Enemies {
 			@Override
 			public Object[] apply() {
 				// TODO Auto-generated method stub
-				return null;
+				// Placeholder results
+				targetPos[0] = 1;
+				
+				result[0] = placeholderDamage;
+				result[1] = targetPos;
+				
+				return result;
 			}
 				// This ability will need to iterate over an array of all team members
 				// so we will come back to it when Enemy_Teams.java is complete.
@@ -107,6 +119,7 @@ public class Enemies {
 			name = "Goblin Axeman";
 			health = 32;
 			damage = 15;
+			placeholderDamage = 0;
 			defense = 0;
 			accuracy = 0;
 			crit_chance = 20;
@@ -142,7 +155,13 @@ public class Enemies {
 			public Object[] apply() {
 				goblinAxeman.accuracy = 25;
 				
-				return null;
+				// Placeholder results
+				targetPos[0] = 1;
+				
+				result[0] = placeholderDamage;
+				result[1] = targetPos;
+				
+				return result;
 			}
 		}
 		
@@ -153,6 +172,7 @@ public class Enemies {
 			name = "Goblin Archer";
 			health = 28;
 			damage = 10;
+			placeholderDamage = 0;
 			defense = 0;
 			accuracy = 0;
 			crit_chance = 15;
@@ -202,6 +222,7 @@ public class Enemies {
 			name = "Goblin Shaman";
 			health = 20;
 			damage = 4;
+			placeholderDamage = 0;
 			defense = 0;
 			accuracy = 0;
 			crit_chance = 10;
@@ -223,7 +244,13 @@ public class Enemies {
 			@Override
 			public Object[] apply() {
 				
-				return null;
+				// Placeholder results
+				targetPos[0] = 1;
+				
+				result[0] = placeholderDamage;
+				result[1] = targetPos;
+				
+				return result;
 			}
 		}
 		
@@ -248,6 +275,7 @@ public class Enemies {
 			name = "Skeleton Swordsman";
 			health = 28;
 			damage = 12;
+			placeholderDamage = 0;
 			defense = 0;
 			accuracy = 0;
 			crit_chance = 12;
@@ -299,6 +327,7 @@ public class Enemies {
 			name = "Skeleton Crossbowmen";
 			health = 25;
 			damage = 10;
+			placeholderDamage = 0;
 			defense = 0;
 			accuracy = 0;
 			crit_chance = 20;
@@ -347,7 +376,13 @@ public class Enemies {
 			public Object[] apply() {
 				damageBoost = true;
 				
-				return null;
+				// Placeholder results
+				targetPos[0] = 1;
+				
+				result[0] = placeholderDamage;
+				result[1] = targetPos;
+				
+				return result;
 			}
 		}
 		
@@ -358,6 +393,7 @@ public class Enemies {
 			name = "Skeleton Defender";
 			health = 35;
 			damage = 15;
+			placeholderDamage = 0;
 			defense = 0;
 			accuracy = 0;
 			crit_chance = 15;
@@ -391,7 +427,13 @@ public class Enemies {
 			public Object[] apply() {
 				skeletonDefender.defense = 20;
 			
-				return null;
+				// Placeholder results
+				targetPos[0] = 1;
+				
+				result[0] = placeholderDamage;
+				result[1] = targetPos;
+				
+				return result;
 			}
 		}
 		
@@ -402,6 +444,7 @@ public class Enemies {
 			name = "Necromancer";
 			health = 25;
 			damage = 12; 
+			placeholderDamage = 0;
 			defense = 0;
 			accuracy = 0;
 			crit_chance = 0;
@@ -426,7 +469,13 @@ public class Enemies {
 				// so we will come back to it when Enemy_Teams.java is complete.
 				// Have to check for body pile
 				
-				return null;
+				// Placeholder results
+				targetPos[0] = 1;
+				
+				result[0] = placeholderDamage;
+				result[1] = targetPos;
+				
+				return result;
 			}
 		}
 
@@ -451,6 +500,7 @@ public class Enemies {
 			name = "Body Pile";
 			health = 20;
 			damage = 0;
+			placeholderDamage = 0;
 			defense = 0;
 			accuracy = 0;
 			crit_chance = 0;
@@ -459,7 +509,7 @@ public class Enemies {
 			size = 1;
 			challenge = 1;
 			abilities[0] = new Squelch();
-			abilities[1] = null;
+			abilities[1] = new Pulse();
 		}
 		
 		record Squelch() implements AbilityFunctions {
@@ -468,10 +518,32 @@ public class Enemies {
 			@Override
 			public Object[] apply() {
 				
+				// Placeholder results
+				targetPos[0] = 1;
 				
-				return null;
+				result[0] = placeholderDamage;
+				result[1] = targetPos;
+				
+				return result;
 			}
 		}
+		
+		record Pulse() implements AbilityFunctions {
+			// Placeholder ability for logic 
+
+			@Override
+			public Object[] apply() {
+				
+				// Placeholder results
+				targetPos[0] = 1;
+				
+				result[0] = placeholderDamage;
+				result[1] = targetPos;
+				
+				return result;
+			}
+		}
+		
 	}
 	
 	public class giantPummeler extends Enemies {
@@ -479,6 +551,7 @@ public class Enemies {
 			name = "Giant Pummeler";
 			health = 50;
 			damage = 25;
+			placeholderDamage = 0;
 			defense = 0;
 			accuracy = 0;
 			crit_chance = 5;
@@ -530,6 +603,7 @@ public class Enemies {
 			name = "Giant Slammer";
 			health = 60;
 			damage = 30;
+			placeholderDamage = 0;
 			defense = 0;
 			accuracy = 0;
 			crit_chance = 8;
@@ -581,6 +655,7 @@ public class Enemies {
 			name = "Zombie Peasant";
 			health = 18;
 			damage = 10;
+			placeholderDamage = 0;
 			defense = 0;
 			accuracy = 0;
 			crit_chance = 5;
@@ -614,7 +689,13 @@ public class Enemies {
 			public Object[] apply() {
 				zombiePeasant.dodge_chance = 25;
 			
-				return null;
+				// Placeholder results
+				targetPos[0] = 1;
+				
+				result[0] = placeholderDamage;
+				result[1] = targetPos;
+				
+				return result;
 			}
 		}
 	}
@@ -624,6 +705,7 @@ public class Enemies {
 			name = "Zombie Knight";
 			health = 35;
 			damage = 25;
+			placeholderDamage = 0;
 			defense = 0;
 			accuracy = 0;
 			crit_chance =15;
@@ -673,6 +755,7 @@ public class Enemies {
 			name = "Minotaur";
 			health = 65;
 			damage = 30;
+			placeholderDamage = 0;
 			defense = 0;
 			accuracy = 0;
 			crit_chance = 25;
@@ -722,6 +805,7 @@ public class Enemies {
 			name = "Boar";
 			health = 40;
 			damage = 18;
+			placeholderDamage = 0;
 			defense = 0;
 			accuracy = 0;
 			crit_chance = 20;

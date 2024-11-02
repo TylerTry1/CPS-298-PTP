@@ -68,13 +68,4 @@ public class Alchemist extends Characters {
     public void takeDamage(int damage) {
         this.health -= damage;
     }
-
-    // Heal self method
-    public void healSelf(int amount) {
-        this.health += amount;
-        if (this.health > maxHealth) {
-            this.health = maxHealth; // Cap healing at max health
-        }
-        System.out.println(name + " healed for " + amount + " health. Current health: " + this.health);
-    }
 }

@@ -90,6 +90,32 @@ public class Characters {
         int getCritChance() {
         	return crit_chance;
         }
+        
+        String getName() {
+        	return name;
+        }
+        
+        public void takeDamage(double damage) {
+            this.health -= damage;
+            System.out.println(name + " takes " + damage + " damage. Current health: " + this.health);
+        }
+        
+        public void applyBleed(int duration, double damage) {
+        	int numTurns = 0;
+        	while (numTurns < duration) {
+        		this.health -= damage;
+        		numTurns++;
+        	}
+        }
+        
+        // Heal self method
+        public void healSelf(int amount) {
+            this.health += amount;
+            if (this.health > maxHealth) {
+                this.health = maxHealth; // Cap healing at max health
+            }
+            System.out.println(name + " healed for " + amount + " health. Current health: " + this.health);
+        }
     //}
 
     /*public class characterDismas extends characterStats {
