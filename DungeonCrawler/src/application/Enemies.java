@@ -3,12 +3,12 @@ package application;
 //import java.util.ArrayList;
 import java.util.Optional; // For Optional Parameters
 
-public class Enemies {
+public class Enemies extends entities {
 	
         String name;
         double health;
-        static double damage;
-        static double placeholderDamage;
+        static double[] damage = new double[1];
+        static double[] placeholderDamage = new double[1];
         static int defense; // leave this stat at 0 for all characters, need a 0 value in case we want to change it later.
         static int accuracy; // leave this stat at 0 for all characters, need a 0 value in case we want to change it later.
         int crit_chance;
@@ -41,12 +41,12 @@ public class Enemies {
         	speed += adjust;
         }
         
-		static Object[] result = new Object[2]; // Array to store the amount of damage that will be done, and the positions to damage.
-		static int[] targetPos = new int[4];
+		static double[][] result = new double[2][4]; // Array to store the amount of damage that will be done, and the positions to damage.
+		static double[] targetPos = new double[4];
 		
 		//Function<Object, Object[]>[] functions = new Function[2];
 		interface AbilityFunctions {
-			Object[] apply();
+			double[][] apply();
 		}
 		
 
@@ -63,8 +63,8 @@ public class Enemies {
 		public goblinScout(Optional <Integer> pos) {
 			name = "Goblin Scout";
 			health = 24;
-			damage = 7;
-			placeholderDamage = 0;
+			damage[0] = 7.0;
+			placeholderDamage[0] = 0;
 			defense = 0;
 			accuracy = 0; 
 			crit_chance = 10;
@@ -81,11 +81,12 @@ public class Enemies {
 		record Slice() implements AbilityFunctions {
 
 			@Override
-			public Object[] apply() {
+			public double[][] apply() {
 			
-				targetPos[0] = 1;
+				targetPos = new double[1];
+				targetPos[0] = 1.0;
 			
-				result[0] = damage;
+				result[0] = goblinScout.damage;
 				result[1] = targetPos;
 			
 				return result;
@@ -98,12 +99,13 @@ public class Enemies {
 		record Recon() implements AbilityFunctions {
 
 			@Override
-			public Object[] apply() {
+			public double[][] apply() {
 				// TODO Auto-generated method stub
 				// Placeholder results
-				targetPos[0] = 1;
+				targetPos = new double[1];
+				targetPos[0] = 1.0;
 				
-				result[0] = placeholderDamage;
+				result[0] = goblinScout.placeholderDamage;
 				result[1] = targetPos;
 				
 				return result;
@@ -118,8 +120,8 @@ public class Enemies {
 		public goblinAxeman(Optional <Integer> pos) {
 			name = "Goblin Axeman";
 			health = 32;
-			damage = 15;
-			placeholderDamage = 0;
+			damage[0] = 15.0;
+			placeholderDamage[0] = 0.0;
 			defense = 0;
 			accuracy = 0;
 			crit_chance = 20;
@@ -136,29 +138,29 @@ public class Enemies {
 		record AxeSlash() implements AbilityFunctions {
 
 			@Override
-			public Object[] apply() {
-				targetPos[0] = 2;
-				targetPos[1] = 1;
+			public double[][] apply() {
+				targetPos = new double[2];
+				targetPos[0] = 1;
+				targetPos[1] = 2;
 			
-			result[0] = damage;
-			result[1] = targetPos;
-				result[0] = damage;
+				result[0] = goblinAxeman.damage;
 				result[1] = targetPos;
 			
-			return result;
+				return result;
 			}
 		}
 		
 		// Shield Stance
 		record ShieldStance() implements AbilityFunctions {
 			@Override
-			public Object[] apply() {
+			public double[][] apply() {
 				goblinAxeman.accuracy = 25;
 				
 				// Placeholder results
+				targetPos = new double[1];
 				targetPos[0] = 1;
 				
-				result[0] = placeholderDamage;
+				result[0] = goblinAxeman.placeholderDamage;
 				result[1] = targetPos;
 				
 				return result;
@@ -171,8 +173,8 @@ public class Enemies {
 		public goblinArcher(Optional <Integer> pos) {
 			name = "Goblin Archer";
 			health = 28;
-			damage = 10;
-			placeholderDamage = 0;
+			damage[0] = 10;
+			placeholderDamage[0] = 0;
 			defense = 0;
 			accuracy = 0;
 			crit_chance = 15;
@@ -189,11 +191,12 @@ public class Enemies {
 		record VolleyShot() implements AbilityFunctions {
 
 			@Override
-			public Object[] apply() {
-				targetPos[0] = 4;
-				targetPos[1] = 3;
+			public double[][] apply() {
+				targetPos = new double[2];
+				targetPos[0] = 3;
+				targetPos[1] = 4;
 				
-				result[0] = damage;
+				result[0] = goblinArcher.damage;
 				result[1] = targetPos;
 			
 				return result;
@@ -203,14 +206,17 @@ public class Enemies {
 		// Snipe
 		record Snipe() implements AbilityFunctions {
 			
+			static private double[] damage = new double[1];
+
 			@Override
-			public Object[] apply() {
-				damage = damage * 1.75;
+			public double[][] apply() {
+				Snipe.damage[0] = goblinArcher.damage[0] * 1.75;
+				targetPos = new double[1];
 				targetPos[0] = 4;
 				
-				result[0] = damage;
+				result[0] = Snipe.damage;
 				result[1] = targetPos;
-				damage = 10; // Return Damage to normal.
+				//damage = 10; // Return Damage to normal.
 				return result;
 			}
 		}
@@ -221,8 +227,8 @@ public class Enemies {
 		public goblinShaman(Optional <Integer> pos) {
 			name = "Goblin Shaman";
 			health = 20;
-			damage = 4;
-			placeholderDamage = 0;
+			damage[0] = 4;
+			placeholderDamage[0] = 0;
 			defense = 0;
 			accuracy = 0;
 			crit_chance = 10;
@@ -242,12 +248,13 @@ public class Enemies {
 			
 			
 			@Override
-			public Object[] apply() {
+			public double[][] apply() {
 				
 				// Placeholder results
+				targetPos = new double[1];
 				targetPos[0] = 1;
 				
-				result[0] = placeholderDamage;
+				result[0] = goblinShaman.placeholderDamage;
 				result[1] = targetPos;
 				
 				return result;
@@ -258,10 +265,11 @@ public class Enemies {
 		record StaffSlam() implements AbilityFunctions {
 
 			@Override
-			public Object[] apply() {
+			public double[][] apply() {
+				targetPos = new double[1];
 				targetPos[0] = 1;
 				
-				result[0] = damage;
+				result[0] = goblinShaman.damage;
 				result[1] = targetPos;
 			
 				return result;
@@ -274,8 +282,8 @@ public class Enemies {
 		public skeletonSwordsman(Optional <Integer> pos) {
 			name = "Skeleton Swordsman";
 			health = 28;
-			damage = 12;
-			placeholderDamage = 0;
+			damage[0] = 12;
+			placeholderDamage[0] = 0;
 			defense = 0;
 			accuracy = 0;
 			crit_chance = 12;
@@ -292,11 +300,12 @@ public class Enemies {
 		record RushSlash() implements AbilityFunctions {
 
 			@Override
-			public Object[] apply() {
-				targetPos[0] = 2;
-				targetPos[1] = 1;
+			public double[][] apply() {
+				targetPos = new double[2];
+				targetPos[0] = 1;
+				targetPos[1] = 2;
 				
-				result[0] = damage;
+				result[0] = skeletonSwordsman.damage;
 				result[1] = targetPos;
 			
 				return result;
@@ -306,15 +315,18 @@ public class Enemies {
 		// Vertical Slash
 		record VerticalSlash() implements AbilityFunctions {
 			
+			static private double[] damage = new double[1];
+
 			@Override
-			public Object[] apply() {
-				damage = damage * 1.25;
+			public double[][] apply() {
+				VerticalSlash.damage[0]  = skeletonSwordsman.damage[0] * 1.25;
+				targetPos = new double[1];
 				targetPos[0] = 1;
 				
-				result[0] = damage;
+				result[0] = skeletonSwordsman.damage;
 				result[1] = targetPos;
 			
-				damage = 12; // Return Damage to normal.
+				skeletonSwordsman.damage[0] = 12; // Return Damage to normal.
 				return result;
 			}
 		}
@@ -326,8 +338,8 @@ public class Enemies {
 		public skeletonCrossbowman(Optional <Integer> pos) {
 			name = "Skeleton Crossbowmen";
 			health = 25;
-			damage = 10;
-			placeholderDamage = 0;
+			damage[0] = 10;
+			placeholderDamage[0] = 0;
 			defense = 0;
 			accuracy = 0;
 			crit_chance = 20;
@@ -345,25 +357,28 @@ public class Enemies {
 		// Burst Shot
 		record BurstShot() implements AbilityFunctions {
 			
+			static private double[] damage = new double[1];
+
 			@Override
-			public Object[] apply() {
+			public double[][] apply() {
 				
 				if (damageBoost) {
-					damage = skeletonCrossbowman.damage * 1.25;
+					BurstShot.damage[0] = skeletonCrossbowman.damage[0] * 1.25;
 					damageBoost = false; // Reset Boost
 				}
 				else {
-					damage = skeletonCrossbowman.damage * 0.75;
+					BurstShot.damage[0] = skeletonCrossbowman.damage[0] * 0.75;
 				}
-				targetPos[0] = 4;
-				targetPos[1] = 3;
-				targetPos[2] = 2;
-				targetPos[3] = 1;
+				targetPos = new double[4];
+				targetPos[0] = 1;
+				targetPos[1] = 2;
+				targetPos[2] = 3;
+				targetPos[3] = 4;
 			
-				result[0] = damage;
+				result[0] = BurstShot.damage;
 				result[1] = targetPos;
 			
-				damage = 10; // Return Damage to Normal
+				skeletonCrossbowman.damage[0] = 10; // Return Damage to Normal
 				return result;
 			}
 			
@@ -373,13 +388,14 @@ public class Enemies {
 		record TakeAim() implements AbilityFunctions {
 			
 			@Override
-			public Object[] apply() {
+			public double[][] apply() {
 				damageBoost = true;
 				
 				// Placeholder results
+				targetPos = new double[1];
 				targetPos[0] = 1;
 				
-				result[0] = placeholderDamage;
+				result[0] = skeletonCrossbowman.placeholderDamage;
 				result[1] = targetPos;
 				
 				return result;
@@ -392,8 +408,8 @@ public class Enemies {
 		public skeletonDefender(Optional <Integer> pos) {
 			name = "Skeleton Defender";
 			health = 35;
-			damage = 15;
-			placeholderDamage = 0;
+			damage[0] = 15;
+			placeholderDamage[0] = 0;
 			defense = 0;
 			accuracy = 0;
 			crit_chance = 15;
@@ -409,10 +425,11 @@ public class Enemies {
 		// Mace Slam
 		record MaceSlam() implements AbilityFunctions {
 			@Override
-			public Object[] apply() {
+			public double[][] apply() {
+				targetPos = new double[1];
 				targetPos[0] = 1;
 				
-				result[0] = damage;
+				result[0] = skeletonDefender.damage;
 				result[1] = targetPos;
 			
 				return result;
@@ -424,13 +441,14 @@ public class Enemies {
 		record BuckleDown() implements AbilityFunctions {
 			
 			@Override
-			public Object[] apply() {
+			public double[][] apply() {
 				skeletonDefender.defense = 20;
 			
 				// Placeholder results
+				targetPos = new double[1];
 				targetPos[0] = 1;
 				
-				result[0] = placeholderDamage;
+				result[0] = skeletonDefender.placeholderDamage;
 				result[1] = targetPos;
 				
 				return result;
@@ -443,8 +461,8 @@ public class Enemies {
 		public necromancer(Optional <Integer> pos) {
 			name = "Necromancer";
 			health = 25;
-			damage = 12; 
-			placeholderDamage = 0;
+			damage[0] = 12; 
+			placeholderDamage[0] = 0;
 			defense = 0;
 			accuracy = 0;
 			crit_chance = 0;
@@ -464,15 +482,16 @@ public class Enemies {
 		record SummonUndead() implements AbilityFunctions {
 			
 			@Override
-			public Object[] apply() {
+			public double[][] apply() {
 				// This ability will need to iterate over an array of all team members
 				// so we will come back to it when Enemy_Teams.java is complete.
 				// Have to check for body pile
 				
 				// Placeholder results
+				targetPos = new double[1];
 				targetPos[0] = 1;
 				
-				result[0] = placeholderDamage;
+				result[0] = necromancer.placeholderDamage;
 				result[1] = targetPos;
 				
 				return result;
@@ -483,10 +502,11 @@ public class Enemies {
 		// Dark Magic Blast
 		record DarkMagicBlast() implements AbilityFunctions {
 			@Override
-			public Object[] apply() {
+			public double[][] apply() {
+				targetPos = new double[1];
 				targetPos[0] = 1;
 				
-				result[0] = damage;
+				result[0] = necromancer.damage;
 				result[1] = targetPos;
 			
 				return result;
@@ -499,8 +519,8 @@ public class Enemies {
 		public bodyPile(Optional <Integer> pos) {
 			name = "Body Pile";
 			health = 20;
-			damage = 0;
-			placeholderDamage = 0;
+			damage[0] = 0;
+			placeholderDamage[0] = 0;
 			defense = 0;
 			accuracy = 0;
 			crit_chance = 0;
@@ -516,12 +536,13 @@ public class Enemies {
 			// Placeholder ability for logic 
 
 			@Override
-			public Object[] apply() {
+			public double[][] apply() {
 				
 				// Placeholder results
+				targetPos = new double[1];
 				targetPos[0] = 1;
 				
-				result[0] = placeholderDamage;
+				result[0] = bodyPile.placeholderDamage;
 				result[1] = targetPos;
 				
 				return result;
@@ -532,12 +553,13 @@ public class Enemies {
 			// Placeholder ability for logic 
 
 			@Override
-			public Object[] apply() {
+			public double[][] apply() {
 				
 				// Placeholder results
+				targetPos = new double[1];
 				targetPos[0] = 1;
 				
-				result[0] = placeholderDamage;
+				result[0] = bodyPile.placeholderDamage;
 				result[1] = targetPos;
 				
 				return result;
@@ -550,8 +572,8 @@ public class Enemies {
 		public giantPummeler(Optional <Integer> pos) {
 			name = "Giant Pummeler";
 			health = 50;
-			damage = 25;
-			placeholderDamage = 0;
+			damage[0] = 25;
+			placeholderDamage[0] = 0;
 			defense = 0;
 			accuracy = 0;
 			crit_chance = 5;
@@ -566,18 +588,21 @@ public class Enemies {
 		// Shockwave
 		record Shockwave() implements AbilityFunctions {
 			
+			static private double[] damage = new double[1];
+
 			@Override
-			public Object[] apply() {
-				damage = giantPummeler.damage * 0.75;
-				targetPos[0] = 4;
-				targetPos[1] = 3;
-				targetPos[2] = 2;
-				targetPos[3] = 1;
+			public double[][] apply() {
+				Shockwave.damage[0] = giantPummeler.damage[0] * 0.75;
+				targetPos = new double[4];
+				targetPos[0] = 1;
+				targetPos[1] = 2;
+				targetPos[2] = 3;
+				targetPos[3] = 4;
 				
-				result[0] = damage;
+				result[0] = Shockwave.damage;
 				result[1] = targetPos;
 			
-				damage = 25; // Return Damage to normal
+				giantPummeler.damage[0] = 25; // Return Damage to normal
 				return result;
 			}
 		}
@@ -586,11 +611,12 @@ public class Enemies {
 		record GroundSlam() implements AbilityFunctions {
 			
 			@Override
-			public Object[] apply() {
-				targetPos[0] = 2;
-				targetPos[1] = 1;
+			public double[][] apply() {
+				targetPos = new double[2];
+				targetPos[0] = 1;
+				targetPos[1] = 2;
 			
-				result[0] = damage;
+				result[0] = giantPummeler.damage;
 				result[1] = targetPos;
 			
 				return result;
@@ -602,8 +628,8 @@ public class Enemies {
 		public giantSlammer(Optional <Integer> pos) {
 			name = "Giant Slammer";
 			health = 60;
-			damage = 30;
-			placeholderDamage = 0;
+			damage[0] = 30;
+			placeholderDamage[0] = 0;
 			defense = 0;
 			accuracy = 0;
 			crit_chance = 8;
@@ -618,18 +644,21 @@ public class Enemies {
 		// Sweep
 		record Sweep() implements AbilityFunctions {
 			
+			static private double[] damage = new double[1];
+
 			@Override
-			public Object[] apply() {
-				damage = giantSlammer.damage * 0.75;
-				targetPos[0] = 4;
-				targetPos[1] = 3;
-				targetPos[2] = 2;
-				targetPos[3] = 1;
+			public double[][] apply() {
+				Sweep.damage[0] = giantSlammer.damage[0] * 0.75;
+				targetPos = new double[4];
+				targetPos[0] = 1;
+				targetPos[1] = 2;
+				targetPos[2] = 3;
+				targetPos[3] = 4;
 				
-				result[0] = damage;
+				result[0] = Sweep.damage;
 				result[1] = targetPos;
 			
-				damage = 30; // Return Damage to normal
+				giantSlammer.damage[0] = 30; // Return Damage to normal
 				return result;
 			}
 		}
@@ -638,11 +667,12 @@ public class Enemies {
 		record MaceCrush()  implements AbilityFunctions {
 
 			@Override
-			public Object[] apply() {
-				targetPos[0] = 2;
-				targetPos[1] = 1;
+			public double[][] apply() {
+				targetPos = new double[2];
+				targetPos[0] = 1;
+				targetPos[1] = 2;
 			
-				result[0] = damage;
+				result[0] = giantSlammer.damage;
 				result[1] = targetPos;
 			
 				return result;
@@ -654,8 +684,8 @@ public class Enemies {
 		public zombiePeasant(Optional <Integer> pos) {
 			name = "Zombie Peasant";
 			health = 18;
-			damage = 10;
-			placeholderDamage = 0;
+			damage[0] = 10;
+			placeholderDamage[0] = 0;
 			defense = 0;
 			accuracy = 0;
 			crit_chance = 5;
@@ -672,10 +702,11 @@ public class Enemies {
 		record Bite() implements AbilityFunctions {
 
 			@Override
-			public Object[] apply() {
+			public double[][] apply() {
+				targetPos = new double[1];
 				targetPos[0] = 1;
 				
-				result[0] = damage;
+				result[0] = zombiePeasant.damage;
 				result[1] = targetPos;
 			
 				return result;
@@ -686,13 +717,14 @@ public class Enemies {
 		record Sway() implements AbilityFunctions {
 			
 			@Override
-			public Object[] apply() {
+			public double[][] apply() {
 				zombiePeasant.dodge_chance = 25;
 			
 				// Placeholder results
+				targetPos = new double[1];
 				targetPos[0] = 1;
 				
-				result[0] = placeholderDamage;
+				result[0] = zombiePeasant.placeholderDamage;
 				result[1] = targetPos;
 				
 				return result;
@@ -704,8 +736,8 @@ public class Enemies {
 		public zombieKnight(Optional <Integer> pos) {
 			name = "Zombie Knight";
 			health = 35;
-			damage = 25;
-			placeholderDamage = 0;
+			damage[0] = 25;
+			placeholderDamage[0] = 0;
 			defense = 0;
 			accuracy = 0;
 			crit_chance =15;
@@ -722,10 +754,11 @@ public class Enemies {
 		record ShoulderSlam() implements AbilityFunctions {
 
 			@Override
-			public Object[] apply() {
+			public double[][] apply() {
+				targetPos = new double[1];
 				targetPos[0] = 1;
 				
-				result[0] = damage;
+				result[0] = zombieKnight.damage;
 				result[1] = targetPos;
 			
 				return result;
@@ -736,13 +769,14 @@ public class Enemies {
 		record  SwordSweep() implements AbilityFunctions {
 			
 			@Override
-			public Object[] apply() {
-				targetPos[0] = 4;
-				targetPos[1] = 3;
-				targetPos[2] = 2;
-				targetPos[3] = 1;
+			public double[][] apply() {
+				targetPos = new double[4];
+				targetPos[0] = 1;
+				targetPos[1] = 2;
+				targetPos[2] = 3;
+				targetPos[3] = 4;
 				
-				result[0] = damage;
+				result[0] = zombieKnight.damage;
 				result[1] = targetPos;
 			
 				return result;
@@ -754,8 +788,8 @@ public class Enemies {
 		public minotaur(Optional <Integer> pos) {
 			name = "Minotaur";
 			health = 65;
-			damage = 30;
-			placeholderDamage = 0;
+			damage[0] = 30;
+			placeholderDamage[0] = 0;
 			defense = 0;
 			accuracy = 0;
 			crit_chance = 25;
@@ -771,13 +805,14 @@ public class Enemies {
 		record Rush() implements AbilityFunctions {
 
 			@Override
-			public Object[] apply() {
-				targetPos[0] = 4;
-				targetPos[1] = 3;
-				targetPos[2] = 2;
-				targetPos[3] = 1;
+			public double[][] apply() {
+				targetPos = new double[4];
+				targetPos[0] = 1;
+				targetPos[1] = 2;
+				targetPos[2] = 3;
+				targetPos[3] = 4;
 				
-				result[0] = damage;
+				result[0] = minotaur.damage;
 				result[1] = targetPos;
 			
 				return result;
@@ -788,11 +823,12 @@ public class Enemies {
 		record AxeSlash() implements AbilityFunctions {
 
 			@Override
-			public Object[] apply() {
-				targetPos[0] = 2;
-				targetPos[1] = 1;
+			public double[][] apply() {
+				targetPos = new double[2];
+				targetPos[0] = 1;
+				targetPos[1] = 2;
 			
-				result[0] = damage;
+				result[0] = minotaur.damage;
 				result[1] = targetPos;
 			
 				return result;
@@ -804,8 +840,8 @@ public class Enemies {
 		public boar(Optional <Integer> pos) {
 			name = "Boar";
 			health = 40;
-			damage = 18;
-			placeholderDamage = 0;
+			damage[0] = 18;
+			placeholderDamage[0] = 0;
 			defense = 0;
 			accuracy = 0;
 			crit_chance = 20;
@@ -821,10 +857,11 @@ public class Enemies {
 		record TuskSwipe() implements AbilityFunctions{
 
 			@Override
-			public Object[] apply() {
+			public double[][] apply() {
+				targetPos = new double[1];
 				targetPos[0] = 1;
 				
-				result[0] = damage;
+				result[0] = boar.damage;
 				result[1] = targetPos;
 			
 				return result;
@@ -835,11 +872,12 @@ public class Enemies {
 		record Frenzy() implements AbilityFunctions {
 
 			@Override
-			public Object[] apply() {
-				targetPos[0] = 2;
-				targetPos[1] = 1;
+			public double[][] apply() {
+				targetPos = new double[2];
+				targetPos[0] = 1;
+				targetPos[1] = 2;
 			
-				result[0] = damage;
+				result[0] = boar.damage;
 				result[1] = targetPos;
 			
 				return result;

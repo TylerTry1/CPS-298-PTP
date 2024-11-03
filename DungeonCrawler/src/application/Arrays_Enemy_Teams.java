@@ -8,14 +8,14 @@ public class Arrays_Enemy_Teams extends enemyTeam {
 	int challengeRating = 6; // Hardcoded Challenge Rating for now
 	int numOfTeams = 15; // Make 15 Random teams. (Can change if we want)
 	Random rand = new Random(); // Random for selection
-	Object[] teams; // Array to store the teams
+	enemyTeam[] teams; // Array to store the teams
 	
 	public Arrays_Enemy_Teams(int pos, int size, int numOfTeams) {
 		super(pos, size);
 		// TODO Auto-generated constructor stub
 		this.positions = new int[pos];
 		this.team = new Enemies[size];
-		this.teams = new Object[numOfTeams];
+		this.teams = new enemyTeam[numOfTeams];
 	}
 		
 	void addToArray(int index, enemyTeam enemyTeam) {

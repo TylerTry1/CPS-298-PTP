@@ -2,7 +2,7 @@ package application;
 
 //import java.util.ArrayList;
 //import java.util.Scanner;
-public class Characters {
+public class Characters extends entities {
 
     //public class characterStats {
         String name;

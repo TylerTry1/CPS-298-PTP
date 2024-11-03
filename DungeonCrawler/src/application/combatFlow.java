@@ -18,13 +18,12 @@ public class combatFlow {
 	double tempHealth = 0;
 	int speedAdjust = rand.nextInt(max - min) + max; // Random Speed adjust with range -2 to 2.
 	boolean teamDead = false;
-	Object[] order; // Array to use for storing the combat order.
 	playerTeamArray playerTeam = new playerTeamArray(4);
 	Characters currentCharacter = new Characters();
 	enemyTeam enemyTeam = new enemyTeam(4, 4);
 	Enemies currentEnemy = new Enemies();
 	Arrays_Enemy_Teams enemyTeamsArray = new Arrays_Enemy_Teams(4, 4, 15);
-	Object[] turnOrder = new Object[8];
+	entities[] turnOrder = new entities[8];
 	
 	
 	static public class combatControl extends combatFlow {	
@@ -36,16 +35,14 @@ public class combatFlow {
 	
 		}
 	
-	
-
-	
 	// Temp function for testing player input: 
-	void tempPlayerChoice(Characters current) {
+	void tempPlayerChoice(Characters current, int choice) {
 		
 		currentDamage = current.getDamage();
 		Enemies[] tempEnemyTeam = enemyTeam.getTeam();
 		
-		enemyPosition1.setOnAction(e -> {
+		switch(choice) {
+		case 1:
 			currentEnemy = (Enemies) tempEnemyTeam[0];
 			tempHealth = currentEnemy.getHealth();
 			tempHealth -= currentDamage;
@@ -53,9 +50,9 @@ public class combatFlow {
 			tempEnemyTeam[0] = currentEnemy;
 			enemyTeam.setTeam(tempEnemyTeam);
 			System.out.println(currentEnemy.name + " damaged for " + currentDamage + ".");
-		});
 		
-		enemyPosition2.setOnAction(e -> {
+		
+		case 2:
 			currentEnemy = (Enemies) tempEnemyTeam[1];
 			tempHealth = currentEnemy.getHealth();
 			tempHealth -= currentDamage;
@@ -63,9 +60,9 @@ public class combatFlow {
 			tempEnemyTeam[1] = currentEnemy;
 			enemyTeam.setTeam(tempEnemyTeam);
 			System.out.println(currentEnemy.name + " damaged for " + currentDamage + ".");
-		});
 		
-		enemyPosition3.setOnAction(e -> {
+		
+		case 3:
 			currentEnemy = (Enemies) tempEnemyTeam[2];
 			tempHealth = currentEnemy.getHealth();
 			tempHealth -= currentDamage;
@@ -73,9 +70,9 @@ public class combatFlow {
 			tempEnemyTeam[2] = currentEnemy;
 			enemyTeam.setTeam(tempEnemyTeam);
 			System.out.println(currentEnemy.name + " damaged for " + currentDamage + ".");
-		});
 		
-		enemyPosition4.setOnAction(e -> {
+		
+		case 4:
 			currentEnemy = (Enemies) tempEnemyTeam[3];
 			tempHealth = currentEnemy.getHealth();
 			tempHealth -= currentDamage;
@@ -83,7 +80,9 @@ public class combatFlow {
 			tempEnemyTeam[3] = currentEnemy;
 			enemyTeam.setTeam(tempEnemyTeam);
 			System.out.println(currentEnemy.name + " damaged for " + currentDamage + ".");
-		});
+		
+		
+		}
 	}
 	
 	public void determineTurnOrder() {
@@ -94,12 +93,12 @@ public class combatFlow {
 		
 		
 		
-		Object[] temp1 =  playerTeam.getTeam(); // Temp Arrays for merging for turn order
-		Object[] temp2 = enemyTeam.getTeam();
-		Object[] temp3;
-		temp3 = new Object[8]; // Extra Array for sorting. Should be big enough, increase size if necessary.
+		Characters[] temp1 =  playerTeam.getTeam(); // Temp Arrays for merging for turn order
+		Enemies[] temp2 = enemyTeam.getTeam();
+		entities[] temp3;
+		temp3 = new entities[8]; // Extra Array for sorting. Should be big enough, increase size if necessary.
 		for (int i = 0; i < temp3.length - 1; i++) {
-			temp3[i] = new Enemies();
+			temp3[i] = new entities();
 		}
 		
 		System.arraycopy(temp1, 0, turnOrder, 0, temp1.length); // Merge the player team and the enemy team to determine turn order
@@ -109,7 +108,7 @@ public class combatFlow {
 		
 		// Adjust Speed of all characters for variability. 
 		int count = 0;
-		for (Object entity : turnOrder) {
+		for (entities entity : turnOrder) {
 			speedAdjust = rand.nextInt(max - min) + max; // Random Speed adjust with range -2 to 2. Change it every time the loop runs for variation
 			if (entity instanceof Enemies) {
 				((Enemies) entity).adjustSpeed(speedAdjust);
@@ -126,15 +125,19 @@ public class combatFlow {
 		}
 		turnOrder = temp3; // Reinitialize.
 		
-		temp3 = new Object[8]; // Reinitialize temp array for turn sorting.
+		temp3 = new entities[8]; // Reinitialize temp array for turn sorting.
 		for (int i = 0; i < temp3.length - 1; i++) {
-			temp3[i] = new Enemies();
+			temp3[i] = new entities();
 		}
 		count = 0;
 		int i = 0;
 		int tempCount = 0;
 		
-		for (Object entity : turnOrder) {
+		for (entities now : turnOrder) {
+			System.out.println(now.getClass());;
+		}
+		
+		for (entities entity : turnOrder) {
 			i = 0;
 			tempCount = 0;
 			// If next element in array is enemy:
@@ -145,11 +148,11 @@ public class combatFlow {
 					System.out.println(((Enemies) entity).getName() + " Placed in Order.");
 				}
 				else {
-					for (Object entity2 : temp3) { // Otherwise iterate over the current turn order for comparison
+					for (entities entity2 : temp3) { // Otherwise iterate over the current turn order for comparison
 						if (entity2 instanceof Enemies) {
 							if (((Enemies) entity).getSpeed() < ((Enemies) entity2).getSpeed()) {
 								tempCount++;
-								continue;
+								//continue;
 							}
 							else {
 								i = temp3.length - 1;
@@ -159,14 +162,14 @@ public class combatFlow {
 								}
 								temp3[tempCount] = entity;
 								count++;
-								
+								break;
 							}
 							
 						}
 						else if (entity2 instanceof Characters) {
 							if (((Enemies) entity).getSpeed() < ((Characters) entity2).getSpeed()) {
 								tempCount++;
-								continue;
+								//continue;
 							}
 							else {
 								i = temp3.length - 1;
@@ -176,6 +179,7 @@ public class combatFlow {
 								}
 								temp3[tempCount] = entity;
 								count++;
+								break;
 							}
 						}
 					}
@@ -191,11 +195,11 @@ public class combatFlow {
 					System.out.println(((Characters) entity).getName() + " Placed in Order.");
 				}
 				else {
-					for (Object entity2 : temp3) { // Otherwise iterate over the current turn order for comparison
+					for (entities entity2 : temp3) { // Otherwise iterate over the current turn order for comparison
 						if (entity2 instanceof Enemies) {
 							if (((Characters) entity).getSpeed() < ((Enemies) entity2).getSpeed()) {
 								tempCount++;
-								continue;
+								//continue;
 							}
 							else {
 								i = temp3.length - 1;
@@ -205,13 +209,13 @@ public class combatFlow {
 								}
 								temp3[tempCount] = entity;
 								count++;
-								
+								break;
 							}
 						}
 						else if (entity2 instanceof Characters) {
 							if (((Characters) entity).getSpeed() < ((Characters) entity2).getSpeed()) {
 								tempCount++;
-								continue;
+								//continue;
 							}
 							else {
 								i = temp3.length - 1;
@@ -221,7 +225,7 @@ public class combatFlow {
 								}
 								temp3[tempCount] = entity;
 								count++;
-								
+								break;
 							}
 						}
 					}
@@ -233,6 +237,119 @@ public class combatFlow {
 		turnOrder = temp3; // Finally Ordered Based on Speed.
 		System.out.println("Turn Order Set.");
 		
+		for (entities now : turnOrder) {
+			System.out.println(now.getClass());;
+		}
+		
+	}
+	
+	public void processEnemyDamage(entities current) {
+		
+		currentDamage = 0;
+		int abilitySelect;
+		double tempHealth;
+		double[] positionsToDamage;
+		boolean downed = false;
+		Characters[] tempTeam = playerTeam.getTeam();
+		
+		int count = 1;
+		Enemies activeEnemy = (Enemies) current;
+		System.out.println(activeEnemy.getName()+ "'s Turn.");
+		abilitySelect = rand.nextInt(2);
+		double[][] result = (double[][]) activeEnemy.abilities[abilitySelect].apply(); // Randomly select and activate ability.
+		
+		for (double[] damageOrPos : result) { // Iterate through the ability's result (damage and positions)
+			if (count == 1) { // Damage
+				currentDamage = damageOrPos[0];
+				count++;
+			}
+			else if (count == 2) { // Positions
+				positionsToDamage =  damageOrPos;
+				tempTeam = playerTeam.getTeam();
+				for (double currentPos : positionsToDamage) { // Go through all the positions to damage
+					if (currentPos != 0) {
+					switch((int) currentPos) { // Damage based on position
+					case 1:
+						 currentCharacter = (Characters) tempTeam[0];
+						 if (currentCharacter.getHealth() != 0) { // If the character is not already down, process damage. 
+							 tempHealth = currentCharacter.getHealth();
+							 tempHealth -= currentDamage; 
+							 if (tempHealth <= 0) {
+								 tempHealth = 0;
+								 downed = true;
+								 currentCharacter.setDowned(downed); // Adjust character sprite when we can.
+							 }
+							 currentCharacter.setHealth(tempHealth); // Reinitialize character health
+							 tempTeam[0] = currentCharacter; // Reinitialize character in team.
+							 playerTeam.setTeam(tempTeam); // Reinitialize team.
+							 System.out.println(currentCharacter.name + " damaged for " + currentDamage + ".");
+							 break;
+						 }
+						 else {
+							 System.out.println(currentCharacter.name + " is downed.");
+						 }
+					case 2:
+						currentCharacter = (Characters) tempTeam[1];
+						 if (currentCharacter.getHealth() != 0) { // If the character is not already down, process damage. 
+							 tempHealth = currentCharacter.getHealth();
+							 tempHealth -= currentDamage; 
+							 if (tempHealth <= 0) {
+								 tempHealth = 0;
+								 downed = true;
+								 currentCharacter.setDowned(downed); // Adjust character sprite when we can.
+							 }
+							 currentCharacter.setHealth(tempHealth); // Reinitialize character health
+							 tempTeam[1] = currentCharacter; // Reinitialize character in team.
+							 playerTeam.setTeam(tempTeam); // Reinitialize team.
+							 System.out.println(currentCharacter.name + " damaged for " + currentDamage + ".");
+							 break;
+						 }
+						 else {
+							 System.out.println(currentCharacter.name + " is downed.");
+						 }
+					case 3:
+						currentCharacter = (Characters) tempTeam[2];
+						 if (currentCharacter.getHealth() != 0) { // If the character is not already down, process damage. 
+							 tempHealth = currentCharacter.getHealth();
+							 tempHealth -= currentDamage; 
+							 if (tempHealth <= 0) {
+								 tempHealth = 0;
+								 downed = true;
+								 currentCharacter.setDowned(downed); // Adjust character sprite when we can.
+							 }
+							 currentCharacter.setHealth(tempHealth); // Reinitialize character health
+							 tempTeam[2] = currentCharacter; // Reinitialize character in team.
+							 playerTeam.setTeam(tempTeam); // Reinitialize team.
+							 System.out.println(currentCharacter.name + " damaged for " + currentDamage + ".");
+							 break;
+						 }
+						 else {
+							 System.out.println(currentCharacter.name + " is downed.");
+						 }
+					case 4:
+						currentCharacter = (Characters) tempTeam[3];
+						 if (currentCharacter.getHealth() != 0) { // If the character is not already down, process damage. 
+							 tempHealth = currentCharacter.getHealth();
+							 tempHealth -= currentDamage; 
+							 if (tempHealth <= 0) {
+								 tempHealth = 0;
+								 downed = true;
+								 currentCharacter.setDowned(downed); // Adjust character sprite when we can.
+							 }
+							 currentCharacter.setHealth(tempHealth); // Reinitialize character health
+							 tempTeam[3] = currentCharacter; // Reinitialize character in team.
+							 playerTeam.setTeam(tempTeam); // Reinitialize team.
+							 System.out.println(currentCharacter.name + " damaged for " + currentDamage + ".");
+							 break;
+						 }
+						 else {
+							 System.out.println(currentCharacter.name + " is downed.");
+						 }
+					}
+					}
+				}
+			}
+		}
 	}
 	
 	public void runCombat() {
@@ -241,18 +358,16 @@ public class combatFlow {
 			teamDead = playerTeam.checkGameOver();
 			teamDead = enemyTeam.checkGameOver(); // Check initially for player and enemy health errors.
 			
-			int abilitySelect;
-			double tempHealth;
-			int[] positionsToDamage;
-			boolean downed = false;
-			Characters[] tempTeam = playerTeam.getTeam();
 			int turnCount = 0;
 			
+			
 			System.out.println("Starting Combat:");
-			for (Object current : turnOrder) { // Give everyone their turns
+			for (entities current : turnOrder) { // Give everyone their turns
 				
-				System.out.println(current.getClass());
+				//System.out.println(current.getClass());
+				current = turnOrder[turnCount];
 				turnCount++;
+				
 				teamDead = playerTeam.checkGameOver();
 				teamDead = enemyTeam.checkGameOver(); // Check every character and enemies turn to see if either team is dead.
 				System.out.println("Turn " + turnCount);
@@ -263,108 +378,17 @@ public class combatFlow {
 				*/
 				// Enemy turns: 
 				if (current instanceof Enemies) {
-					int count = 1;
-					Enemies activeEnemy = (Enemies) current;
-					System.out.println(activeEnemy.getName()+ "'s Turn.");
-					abilitySelect = rand.nextInt(2);
-					Object[] result = activeEnemy.abilities[abilitySelect].apply(); // Randomly select and activate ability.
-					for (Object damageOrPos : result) { // Iterate through the ability's result (damage and positions)
-						if (count == 1) { // Damage
-							currentDamage = (double) damageOrPos;
-							count++;
-						}
-						else if (count == 2) { // Positions
-							positionsToDamage = (int[]) damageOrPos;
-							tempTeam = playerTeam.getTeam();
-							for (int currentPos : positionsToDamage) { // Go through all the positions to damage
-								switch(currentPos) { // Damage based on position
-								case 1:
-									 currentCharacter = (Characters) tempTeam[0];
-									 if (currentCharacter.getHealth() != 0) { // If the character is not already down, process damage. 
-										 tempHealth = currentCharacter.getHealth();
-										 tempHealth -= currentDamage; 
-										 if (tempHealth <= 0) {
-											 tempHealth = 0;
-											 downed = true;
-											 currentCharacter.setDowned(downed); // Adjust character sprite when we can.
-										 }
-										 currentCharacter.setHealth(tempHealth); // Reinitialize character health
-										 tempTeam[0] = currentCharacter; // Reinitialize character in team.
-										 playerTeam.setTeam(tempTeam); // Reinitialize team.
-										 System.out.println(currentCharacter.name + " damaged for " + currentDamage + ".");
-										 break;
-									 }
-									 else {
-										 System.out.println(currentCharacter.name + " is downed.");
-									 }
-								case 2:
-									currentCharacter = (Characters) tempTeam[1];
-									 if (currentCharacter.getHealth() != 0) { // If the character is not already down, process damage. 
-										 tempHealth = currentCharacter.getHealth();
-										 tempHealth -= currentDamage; 
-										 if (tempHealth <= 0) {
-											 tempHealth = 0;
-											 downed = true;
-											 currentCharacter.setDowned(downed); // Adjust character sprite when we can.
-										 }
-										 currentCharacter.setHealth(tempHealth); // Reinitialize character health
-										 tempTeam[1] = currentCharacter; // Reinitialize character in team.
-										 playerTeam.setTeam(tempTeam); // Reinitialize team.
-										 System.out.println(currentCharacter.name + " damaged for " + currentDamage + ".");
-										 break;
-									 }
-									 else {
-										 System.out.println(currentCharacter.name + " is downed.");
-									 }
-								case 3:
-									currentCharacter = (Characters) tempTeam[2];
-									 if (currentCharacter.getHealth() != 0) { // If the character is not already down, process damage. 
-										 tempHealth = currentCharacter.getHealth();
-										 tempHealth -= currentDamage; 
-										 if (tempHealth <= 0) {
-											 tempHealth = 0;
-											 downed = true;
-											 currentCharacter.setDowned(downed); // Adjust character sprite when we can.
-										 }
-										 currentCharacter.setHealth(tempHealth); // Reinitialize character health
-										 tempTeam[2] = currentCharacter; // Reinitialize character in team.
-										 playerTeam.setTeam(tempTeam); // Reinitialize team.
-										 System.out.println(currentCharacter.name + " damaged for " + currentDamage + ".");
-										 break;
-									 }
-									 else {
-										 System.out.println(currentCharacter.name + " is downed.");
-									 }
-								case 4:
-									currentCharacter = (Characters) tempTeam[3];
-									 if (currentCharacter.getHealth() != 0) { // If the character is not already down, process damage. 
-										 tempHealth = currentCharacter.getHealth();
-										 tempHealth -= currentDamage; 
-										 if (tempHealth <= 0) {
-											 tempHealth = 0;
-											 downed = true;
-											 currentCharacter.setDowned(downed); // Adjust character sprite when we can.
-										 }
-										 currentCharacter.setHealth(tempHealth); // Reinitialize character health
-										 tempTeam[3] = currentCharacter; // Reinitialize character in team.
-										 playerTeam.setTeam(tempTeam); // Reinitialize team.
-										 System.out.println(currentCharacter.name + " damaged for " + currentDamage + ".");
-										 break;
-									 }
-									 else {
-										 System.out.println(currentCharacter.name + " is downed.");
-									 }
-								}
-							}
-						}
-					}
+					processEnemyDamage(current);
 				}
 				
 				// Player Turns: 
 				else if (current instanceof Characters) {
 					System.out.println(((Characters) current).getName() + "'s Turn.");
 					currentCharacter = (Characters) current;
-					tempPlayerChoice(currentCharacter); // Placeholder damage function for testing
+					enemyPosition1.setOnAction(event -> tempPlayerChoice(currentCharacter, 1));
+					enemyPosition2.setOnAction(event -> tempPlayerChoice(currentCharacter, 2));
+					enemyPosition3.setOnAction(event -> tempPlayerChoice(currentCharacter, 3));
+					enemyPosition4.setOnAction(event -> tempPlayerChoice(currentCharacter, 4));// Placeholder damage function for testing
 				}
 				
 				
