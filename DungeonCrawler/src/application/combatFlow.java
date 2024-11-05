@@ -1,7 +1,8 @@
 package application;
 
-import javafx.scene.control.Button;
 import java.util.Random;
+
+import javafx.scene.control.Button;
 
 public class combatFlow {
 	

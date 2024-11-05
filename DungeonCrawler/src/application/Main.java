@@ -10,6 +10,8 @@ import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -184,13 +186,20 @@ public class Main extends Application {
 		Button enemyPosition3 = new Button("enemyPosition3");
 		Button enemyPosition4 = new Button("enemyPosition4");
 
-		Button skillbutton1 = new Button("skill 1");
-		Button skillbutton2 = new Button("skill 2");
-		Button skillbutton3 = new Button("skill 3");
-		Button skillbutton4 = new Button("skill 4");
-		Button movebutton = new Button("move");
-		Button passTurnButton = new Button("pass turn");
-		
+		ToggleGroup skillButtonGroup = new ToggleGroup();
+		RadioButton skillbutton1 = new RadioButton("skill 1");
+		skillbutton1.setToggleGroup(skillButtonGroup);
+		RadioButton skillbutton2 = new RadioButton("skill 2");
+		skillbutton2.setToggleGroup(skillButtonGroup);
+		RadioButton skillbutton3 = new RadioButton("skill 3");
+		skillbutton3.setToggleGroup(skillButtonGroup);
+		RadioButton skillbutton4 = new RadioButton("skill 4");
+		skillbutton4.setToggleGroup(skillButtonGroup);
+		RadioButton movebutton = new RadioButton("move");
+		movebutton.setToggleGroup(skillButtonGroup);
+		RadioButton passTurnButton = new RadioButton("pass turn");
+		passTurnButton.setToggleGroup(skillButtonGroup);
+		 
 		Button menuBackButton = new Button ("Back");
 		Button menuQuitButton = new Button ("Quit Game");
 		
@@ -203,22 +212,22 @@ public class Main extends Application {
 		Text enemyMoveResistanceNumberText = new Text("MOV");
 		Text enemyDebuffResistanceNumberText = new Text("DBFF");
 		Text enemyDeathResistanceNumberText = new Text("DTH");
-		Text enemyBleedResistanceNumber = new Text("0"); // replace later with variables
-		Text enemyBlightResistanceNumber= new Text("0");
-		Text enemyBurnResistanceNumber= new Text("0");
-		Text enemyStunResistanceNumber= new Text("0");
-		Text enemyMoveResistanceNumber= new Text("0");
-		Text enemyDebuffResistanceNumber= new Text("0");
-		Text enemyDeathResistanceNumber= new Text("0");
-		Text heroHPPos4 = new Text ("heroHPPos4");
-		Text heroHPPos3 = new Text ("heroHPPos3");
-		Text heroHPPos2 = new Text ("heroHPPos2");
-		Text heroHPPos1 = new Text ("heroHPPos1");
-		Text enemyHPPos1 = new Text ("enemyHPPos1");
-		Text enemyHPPos2 = new Text ("enemyHPPos2");
-		Text enemyHPPos3 = new Text ("enemyHPPos3");
-		Text enemyHPPos4 = new Text ("enemyHPPos4");
-		Text roundNumberText = new Text ("Round #");
+		Text enemyBleedResistanceNumber = new Text("0"); // var
+		Text enemyBlightResistanceNumber= new Text("0"); // var
+		Text enemyBurnResistanceNumber= new Text("0"); // var
+		Text enemyStunResistanceNumber= new Text("0"); // var
+		Text enemyMoveResistanceNumber= new Text("0"); // var
+		Text enemyDebuffResistanceNumber= new Text("0"); // var
+		Text enemyDeathResistanceNumber= new Text("0"); // var
+		Text heroHPPos4 = new Text ("heroHPPos4"); // var
+		Text heroHPPos3 = new Text ("heroHPPos3"); // var
+		Text heroHPPos2 = new Text ("heroHPPos2"); // var
+		Text heroHPPos1 = new Text ("heroHPPos1"); // var
+		Text enemyHPPos1 = new Text ("enemyHPPos1"); // var
+		Text enemyHPPos2 = new Text ("enemyHPPos2"); // var
+		Text enemyHPPos3 = new Text ("enemyHPPos3"); // var
+		Text enemyHPPos4 = new Text ("enemyHPPos4"); // var
+		Text roundNumberText = new Text ("Round #"); // var
 		
 		Text menuQuitGameText = new Text ("Quit Game");
 		
@@ -372,10 +381,10 @@ public class Main extends Application {
 		ImageView heroInPosition3 = new ImageView(new Image("applicationImagesPlayerSprites/Wizard_Idle.png"));
 		ImageView heroInPosition4 = new ImageView(new Image("applicationImagesPlayerSprites/Alchemist_Idle.png"));
 		
-		ImageView skillbuttonimage1 = new ImageView(new Image("abilityIconsPaladin/holy_rampart.png"));
-		ImageView skillbuttonimage2 = new ImageView(new Image("abilityIconsPaladin/divineSmite.png"));
-		ImageView skillbuttonimage3 = new ImageView(new Image("abilityIconsPaladin/auraOfCourage.png"));
-		ImageView skillbuttonimage4 = new ImageView(new Image("abilityIconsPaladin/shieldOfFaith.png"));
+		ImageView skillbuttonimage1 = new ImageView(new Image("abilityIconsPaladin/holy_rampart.png")); // var
+		ImageView skillbuttonimage2 = new ImageView(new Image("abilityIconsPaladin/divineSmite.png")); // var
+		ImageView skillbuttonimage3 = new ImageView(new Image("abilityIconsPaladin/auraOfCourage.png")); // var
+		ImageView skillbuttonimage4 = new ImageView(new Image("abilityIconsPaladin/shieldOfFaith.png")); // var
 		ImageView skillbuttonimagemove = new ImageView(new Image("GUIAssets/skillbuttonimagemove.png"));
 		ImageView skillbuttonimagepass = new ImageView(new Image("GUIAssets/skillbuttonimagepass.png"));
 		ImageView heroNamePlate = new ImageView(new Image("GUIAssets/nameplate.png"));
@@ -417,7 +426,44 @@ public class Main extends Application {
 		BackgroundPosition customPosition = new BackgroundPosition(Side.LEFT, 0, true, Side.TOP, 0, true); // fit to top left
 		BackgroundImage backgroundImagePayoff = new BackgroundImage(backgroundImagesetup, BackgroundRepeat.NO_REPEAT,
 				BackgroundRepeat.NO_REPEAT, customPosition, size);
+		
+		FadeTransition fadeInHeroHPPos1 = FadeUtils.createFade(heroHPPos1, 0, 1, 200);
+		FadeTransition fadeInHeroHPPos2 = FadeUtils.createFade(heroHPPos2, 0, 1, 200);
+		FadeTransition fadeInHeroHPPos3 = FadeUtils.createFade(heroHPPos3, 0, 1, 200);
+		FadeTransition fadeInHeroHPPos4 = FadeUtils.createFade(heroHPPos4, 0, 1, 200);
+		FadeTransition fadeOutHeroHPPos1 = FadeUtils.createFade(heroHPPos1, 1, 0, 200);
+		FadeTransition fadeOutHeroHPPos2 = FadeUtils.createFade(heroHPPos2, 1, 0, 200);
+		FadeTransition fadeOutHeroHPPos3 = FadeUtils.createFade(heroHPPos3, 1, 0, 200);
+		FadeTransition fadeOutHeroHPPos4 = FadeUtils.createFade(heroHPPos4, 1, 0, 200);
+		
+		FadeTransition fadeInEnemyHPPos1 = FadeUtils.createFade(enemyHPPos1, 0, 1, 200);
+		FadeTransition fadeInEnemyHPPos2 = FadeUtils.createFade(enemyHPPos2, 0, 1, 200);
+		FadeTransition fadeInEnemyHPPos3 = FadeUtils.createFade(enemyHPPos3, 0, 1, 200);
+		FadeTransition fadeInEnemyHPPos4 = FadeUtils.createFade(enemyHPPos4, 0, 1, 200);
+		FadeTransition fadeOutEnemyHPPos1 = FadeUtils.createFade(enemyHPPos1, 1, 0, 200);
+		FadeTransition fadeOutEnemyHPPos2 = FadeUtils.createFade(enemyHPPos2, 1, 0, 200);
+		FadeTransition fadeOutEnemyHPPos3 = FadeUtils.createFade(enemyHPPos3, 1, 0, 200);
+		FadeTransition fadeOutEnemyHPPos4 = FadeUtils.createFade(enemyHPPos4, 1, 0, 200);
 
+		
+	    FadeTransition fadeInHeroSelectionIndicator1 = FadeUtils.createFade(heroSelectionIndicator1, 0, 1, 200);
+	    FadeTransition fadeInHeroSelectionIndicator2 = FadeUtils.createFade(heroSelectionIndicator2, 0, 1, 200);
+	    FadeTransition fadeInHeroSelectionIndicator3 = FadeUtils.createFade(heroSelectionIndicator3, 0, 1, 200);
+	    FadeTransition fadeInHeroSelectionIndicator4 = FadeUtils.createFade(heroSelectionIndicator4, 0, 1, 200);
+	    FadeTransition fadeOutHeroSelectionIndicator1 = FadeUtils.createFade(heroSelectionIndicator1, 1, 0, 200);
+	    FadeTransition fadeOutHeroSelectionIndicator2 = FadeUtils.createFade(heroSelectionIndicator2, 1, 0, 200);
+	    FadeTransition fadeOutHeroSelectionIndicator3 = FadeUtils.createFade(heroSelectionIndicator3, 1, 0, 200);
+	    FadeTransition fadeOutHeroSelectionIndicator4 = FadeUtils.createFade(heroSelectionIndicator4, 1, 0, 200);
+	    
+        FadeTransition fadeInEnemySelectionIndicator1 = FadeUtils.createFade(enemySelectionIndicator1, 0, 1, 200);
+        FadeTransition fadeInEnemySelectionIndicator2 = FadeUtils.createFade(enemySelectionIndicator2, 0, 1, 200);
+        FadeTransition fadeInEnemySelectionIndicator3 = FadeUtils.createFade(enemySelectionIndicator3, 0, 1, 200);
+        FadeTransition fadeInEnemySelectionIndicator4 = FadeUtils.createFade(enemySelectionIndicator4, 0, 1, 200);
+        FadeTransition fadeOutEnemySelectionIndicator1 = FadeUtils.createFade(enemySelectionIndicator1, 1, 0, 200);
+        FadeTransition fadeOutEnemySelectionIndicator2 = FadeUtils.createFade(enemySelectionIndicator2, 1, 0, 200);
+        FadeTransition fadeOutEnemySelectionIndicator3 = FadeUtils.createFade(enemySelectionIndicator3, 1, 0, 200);
+        FadeTransition fadeOutEnemySelectionIndicator4 = FadeUtils.createFade(enemySelectionIndicator4, 1, 0, 200);
+        
 		HBox enemyResistances = new HBox(50);
 		enemyResistances.getChildren().addAll(enemyBLDResistanceIcon, enemyBLGTResistanceIcon, enemyBURNResistanceIcon, enemySTNResistanceIcon, enemyMOVResistanceIcon, enemyDBFFResistanceIcon, enemyDTHResistanceIcon );
 		HBox heroPositions = new HBox(50);
@@ -524,95 +570,147 @@ public class Main extends Application {
 		menuQuitButton.setOpacity(0);
 		// -------------------------------------------------------------
 		//make images dissapear or appear on button hover.
-		heroPosition1.setOnMouseEntered(e -> {heroSelectionIndicator1.setVisible(true);});
-		heroPosition1.setOnMouseExited(e -> {heroSelectionIndicator1.setVisible(false);});
+		heroPosition1.setOnMouseEntered(e -> {heroSelectionIndicator1.setVisible(true);
+		fadeInHeroSelectionIndicator1.play();
+		});
+		heroPosition1.setOnMouseExited(e -> {
+			fadeOutHeroSelectionIndicator1.play();
+		});
 		heroSelectionIndicator1.setVisible(false);
 		
-		heroPosition2.setOnMouseEntered(e -> {heroSelectionIndicator2.setVisible(true);});
-		heroPosition2.setOnMouseExited(e -> {heroSelectionIndicator2.setVisible(false); });
+		heroPosition2.setOnMouseEntered(e -> {heroSelectionIndicator2.setVisible(true);
+		fadeInHeroSelectionIndicator2.play();
+		});
+		heroPosition2.setOnMouseExited(e -> {
+			fadeOutHeroSelectionIndicator2.play();
+		});
 		heroSelectionIndicator2.setVisible(false);
 
-		heroPosition3.setOnMouseEntered(e -> {heroSelectionIndicator3.setVisible(true);});
-		heroPosition3.setOnMouseExited(e -> {heroSelectionIndicator3.setVisible(false);});
+		heroPosition3.setOnMouseEntered(e -> {heroSelectionIndicator3.setVisible(true);
+		fadeInHeroSelectionIndicator3.play();
+		});
+		heroPosition3.setOnMouseExited(e -> {
+			fadeOutHeroSelectionIndicator3.play();
+		});
 		heroSelectionIndicator3.setVisible(false);
 
-		heroPosition4.setOnMouseEntered(e -> {heroSelectionIndicator4.setVisible(true);});
-		heroPosition4.setOnMouseExited(e -> {heroSelectionIndicator4.setVisible(false);});
+		heroPosition4.setOnMouseEntered(e -> {heroSelectionIndicator4.setVisible(true);
+		fadeInHeroSelectionIndicator4.play();
+		});
+		heroPosition4.setOnMouseExited(e -> {
+			fadeOutHeroSelectionIndicator4.play();
+		});
 		heroSelectionIndicator4.setVisible(false);
 		// -------------------------------------------------------------
 		//make images dissapear or appear on button hover.
-		enemyPosition1.setOnMouseEntered(e -> {enemySelectionIndicator1.setVisible(true);});
-		enemyPosition1.setOnMouseExited(e -> {enemySelectionIndicator1.setVisible(false);});
+		enemyPosition1.setOnMouseEntered(e -> {
+		    enemySelectionIndicator1.setVisible(true);
+		    fadeInEnemySelectionIndicator1.play();
+		});
+		enemyPosition1.setOnMouseExited(e -> {
+		fadeOutEnemySelectionIndicator1.play();
+		});
 		enemySelectionIndicator1.setVisible(false);
-
-		enemyPosition2.setOnMouseEntered(e -> {enemySelectionIndicator2.setVisible(true);});
-		enemyPosition2.setOnMouseExited(e -> {enemySelectionIndicator2.setVisible(false);});
+		
+		enemyPosition2.setOnMouseEntered(e -> {
+			enemySelectionIndicator2.setVisible(true);
+			fadeInEnemySelectionIndicator2.play();
+		});
+		enemyPosition2.setOnMouseExited(e -> {
+		fadeOutEnemySelectionIndicator2.play();
+		});
 		enemySelectionIndicator2.setVisible(false);
 
-		enemyPosition3.setOnMouseEntered(e -> {enemySelectionIndicator3.setVisible(true);});
-		enemyPosition3.setOnMouseExited(e -> {enemySelectionIndicator3.setVisible(false);});
+		enemyPosition3.setOnMouseEntered(e -> {
+			enemySelectionIndicator3.setVisible(true);
+			fadeInEnemySelectionIndicator3.play();
+		});
+		enemyPosition3.setOnMouseExited(e -> {
+		fadeOutEnemySelectionIndicator3.play();
+		});
 		enemySelectionIndicator3.setVisible(false);
 
-		enemyPosition4.setOnMouseEntered(e -> {enemySelectionIndicator4.setVisible(true);});
-		enemyPosition4.setOnMouseExited(e -> {enemySelectionIndicator4.setVisible(false); });
+		enemyPosition4.setOnMouseEntered(e -> {
+			enemySelectionIndicator4.setVisible(true);
+			fadeInEnemySelectionIndicator4.play();
+		});
+		enemyPosition4.setOnMouseExited(e -> {
+		fadeOutEnemySelectionIndicator4.play();
+		});
 		enemySelectionIndicator4.setVisible(false);
 		// -------------------------------------------------------------
 		
-		heroHealthBarRedRectangle4.setOnMouseEntered(e -> {heroHPPos4.setVisible(true);});
-		heroHealthBarRedRectangle4.setOnMouseExited(e -> {heroHPPos4.setVisible(false); });
+		heroHealthBarRedRectangle4.setOnMouseEntered(e -> {heroHPPos4.setVisible(true);
+		fadeInHeroHPPos4.play();});
+		heroHealthBarRedRectangle4.setOnMouseExited(e -> {fadeOutHeroHPPos4.play();});
 		heroHPPos4.setVisible(false);
-		heroHealthBarBlackRectangle4.setOnMouseEntered(e -> {heroHPPos4.setVisible(true);});
-		heroHealthBarBlackRectangle4.setOnMouseExited(e -> {heroHPPos4.setVisible(false); });
+		heroHealthBarBlackRectangle4.setOnMouseEntered(e -> {heroHPPos4.setVisible(true);
+		fadeInHeroHPPos4.play();});
+		heroHealthBarBlackRectangle4.setOnMouseExited(e -> {fadeOutHeroHPPos4.play();});
 		heroHPPos4.setVisible(false);
 		 
-		heroHealthBarRedRectangle3.setOnMouseEntered(e -> {heroHPPos3.setVisible(true);});
-		heroHealthBarRedRectangle3.setOnMouseExited(e -> {heroHPPos3.setVisible(false); });
+		heroHealthBarRedRectangle3.setOnMouseEntered(e -> {heroHPPos3.setVisible(true);
+		fadeInHeroHPPos3.play();});
+		heroHealthBarRedRectangle3.setOnMouseExited(e -> {fadeOutHeroHPPos3.play();});
 		heroHPPos3.setVisible(false);
-		heroHealthBarBlackRectangle3.setOnMouseEntered(e -> {heroHPPos3.setVisible(true);});
-		heroHealthBarBlackRectangle3.setOnMouseExited(e -> {heroHPPos3.setVisible(false); });
+		heroHealthBarBlackRectangle3.setOnMouseEntered(e -> {heroHPPos3.setVisible(true);
+		fadeInHeroHPPos3.play();});
+		heroHealthBarBlackRectangle3.setOnMouseExited(e -> {fadeOutHeroHPPos3.play();});
 		heroHPPos3.setVisible(false);
 		
-		heroHealthBarRedRectangle2.setOnMouseEntered(e -> {heroHPPos2.setVisible(true);});
-		heroHealthBarRedRectangle2.setOnMouseExited(e -> {heroHPPos2.setVisible(false); });
+		heroHealthBarRedRectangle2.setOnMouseEntered(e -> {heroHPPos2.setVisible(true);
+		fadeInHeroHPPos2.play();});
+		heroHealthBarRedRectangle2.setOnMouseExited(e -> {fadeOutHeroHPPos2.play();});
 		heroHPPos2.setVisible(false);
-		heroHealthBarBlackRectangle2.setOnMouseEntered(e -> {heroHPPos2.setVisible(true);});
-		heroHealthBarBlackRectangle2.setOnMouseExited(e -> {heroHPPos2.setVisible(false); });
+		heroHealthBarBlackRectangle2.setOnMouseEntered(e -> {heroHPPos2.setVisible(true);
+		fadeInHeroHPPos2.play();});
+		heroHealthBarBlackRectangle2.setOnMouseExited(e -> {fadeOutHeroHPPos2.play();});
 		heroHPPos2.setVisible(false);
 		
-		heroHealthBarRedRectangle1.setOnMouseEntered(e -> {heroHPPos1.setVisible(true);});
-		heroHealthBarRedRectangle1.setOnMouseExited(e -> {heroHPPos1.setVisible(false); });
+		heroHealthBarRedRectangle1.setOnMouseEntered(e -> {heroHPPos1.setVisible(true);
+		fadeInHeroHPPos1.play();});
+		heroHealthBarRedRectangle1.setOnMouseExited(e -> {fadeOutHeroHPPos1.play();});
 		heroHPPos1.setVisible(false);
-		heroHealthBarBlackRectangle1.setOnMouseEntered(e -> {heroHPPos1.setVisible(true);});
-		heroHealthBarBlackRectangle1.setOnMouseExited(e -> {heroHPPos1.setVisible(false); });
+		heroHealthBarBlackRectangle1.setOnMouseEntered(e -> {heroHPPos1.setVisible(true);
+		fadeInHeroHPPos1.play();});
+		heroHealthBarBlackRectangle1.setOnMouseExited(e -> {fadeOutHeroHPPos1.play();});
 		heroHPPos1.setVisible(false);
 		
 		
-		enemyHealthBarRedRectangle4.setOnMouseEntered(e -> {enemyHPPos4.setVisible(true);});
-		enemyHealthBarRedRectangle4.setOnMouseExited(e -> {enemyHPPos4.setVisible(false); });
+		enemyHealthBarRedRectangle4.setOnMouseEntered(e -> {enemyHPPos4.setVisible(true);
+		fadeInEnemyHPPos4.play();});
+		enemyHealthBarRedRectangle4.setOnMouseExited(e -> {fadeOutEnemyHPPos4.play();});
 		enemyHPPos4.setVisible(false);
-		enemyHealthBarBlackRectangle4.setOnMouseEntered(e -> {enemyHPPos4.setVisible(true);});
-		enemyHealthBarBlackRectangle4.setOnMouseExited(e -> {enemyHPPos4.setVisible(false); });
+		enemyHealthBarBlackRectangle4.setOnMouseEntered(e -> {enemyHPPos4.setVisible(true);
+		fadeInEnemyHPPos4.play();});
+		enemyHealthBarBlackRectangle4.setOnMouseExited(e -> {fadeOutEnemyHPPos4.play();});
 		enemyHPPos4.setVisible(false);
 		
-		enemyHealthBarRedRectangle3.setOnMouseEntered(e -> {enemyHPPos3.setVisible(true);});
-		enemyHealthBarRedRectangle3.setOnMouseExited(e -> {enemyHPPos3.setVisible(false); });
+		enemyHealthBarRedRectangle3.setOnMouseEntered(e -> {enemyHPPos3.setVisible(true);
+		fadeInEnemyHPPos3.play();});
+		enemyHealthBarRedRectangle3.setOnMouseExited(e -> {fadeOutEnemyHPPos3.play();});
 		enemyHPPos3.setVisible(false);
-		enemyHealthBarBlackRectangle3.setOnMouseEntered(e -> {enemyHPPos3.setVisible(true);});
-		enemyHealthBarBlackRectangle3.setOnMouseExited(e -> {enemyHPPos3.setVisible(false); });
+		enemyHealthBarBlackRectangle3.setOnMouseEntered(e -> {enemyHPPos3.setVisible(true);
+		fadeInEnemyHPPos3.play();});
+		enemyHealthBarBlackRectangle3.setOnMouseExited(e -> {fadeOutEnemyHPPos3.play();});
 		enemyHPPos3.setVisible(false);
 		
-		enemyHealthBarRedRectangle2.setOnMouseEntered(e -> {enemyHPPos2.setVisible(true);});
-		enemyHealthBarRedRectangle2.setOnMouseExited(e -> {enemyHPPos2.setVisible(false); });
+		enemyHealthBarRedRectangle2.setOnMouseEntered(e -> {enemyHPPos2.setVisible(true);
+		fadeInEnemyHPPos2.play();});
+		enemyHealthBarRedRectangle2.setOnMouseExited(e -> {fadeOutEnemyHPPos2.play();});
 		enemyHPPos2.setVisible(false);
-		enemyHealthBarBlackRectangle2.setOnMouseEntered(e -> {enemyHPPos2.setVisible(true);});
-		enemyHealthBarBlackRectangle2.setOnMouseExited(e -> {enemyHPPos2.setVisible(false); });
+		enemyHealthBarBlackRectangle2.setOnMouseEntered(e -> {enemyHPPos2.setVisible(true);
+		fadeInEnemyHPPos2.play();});
+		enemyHealthBarBlackRectangle2.setOnMouseExited(e -> {fadeOutEnemyHPPos2.play();});
 		enemyHPPos2.setVisible(false);
 		
-		enemyHealthBarRedRectangle1.setOnMouseEntered(e -> {enemyHPPos1.setVisible(true);});
-		enemyHealthBarRedRectangle1.setOnMouseExited(e -> {enemyHPPos1.setVisible(false); });
+		enemyHealthBarRedRectangle1.setOnMouseEntered(e -> {enemyHPPos1.setVisible(true);
+		fadeInEnemyHPPos1.play();});
+		enemyHealthBarRedRectangle1.setOnMouseExited(e -> {fadeOutEnemyHPPos1.play();});
 		enemyHPPos1.setVisible(false);
-		enemyHealthBarBlackRectangle1.setOnMouseEntered(e -> {enemyHPPos1.setVisible(true);});
-		enemyHealthBarBlackRectangle1.setOnMouseExited(e -> {enemyHPPos1.setVisible(false); });
+		enemyHealthBarBlackRectangle1.setOnMouseEntered(e -> {enemyHPPos1.setVisible(true);
+		fadeInEnemyHPPos1.play();});
+		enemyHealthBarBlackRectangle1.setOnMouseExited(e -> {fadeOutEnemyHPPos1.play();});
 		enemyHPPos1.setVisible(false);
 		// -------------------------------------------------------------
 
@@ -628,6 +726,9 @@ public class Main extends Application {
         fadeOut.setFromValue(1);
         fadeOut.setToValue(0);
         fadeOut.setOnFinished(e -> combatMenu.setVisible(false)); // Hide after fading out
+        
+
+        
 		// Add buttons, images
 		root.getChildren().addAll(heroPositions, enemyPositions);
 		root.getChildren().addAll(enemyInPosition1, enemyInPosition2, enemyInPosition3, enemyInPosition4);
@@ -937,9 +1038,10 @@ public class Main extends Application {
 			((Button) button).prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.3));
 		});
 		skillButtons.getChildren().forEach(button -> {
-			((Button) button).prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.06));
-			((Button) button).prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.09));
+		    ((RadioButton) button).prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.06));
+		    ((RadioButton) button).prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.09));
 		});
+
 		passTurnButton.prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.015));
 		passTurnButton.prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.09));
 
