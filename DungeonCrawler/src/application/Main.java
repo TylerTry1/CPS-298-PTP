@@ -50,10 +50,11 @@ public class Main extends Application {
 	
 	Font KingArthurLegend = Font.loadFont(getClass().getResourceAsStream("/fonts/KingArthurLegend.ttf"), 40);
 	Font Ubuntu = Font.loadFont(getClass().getResourceAsStream("/fonts/UbuntuRegular.ttf"), 40);
+	Font DwarvenAxe = Font.loadFont(getClass().getResourceAsStream("/fonts/DwarvenAxe.ttf"), 40);
 	@Override
 	public void start(Stage primaryStage) {
 		initialization(primaryStage);
-
+//		shop(primaryStage);
 	}
 
 	private void initialization(Stage primaryStage) { // this scene is used specifically so that we can make our application full screen.
@@ -61,9 +62,7 @@ public class Main extends Application {
 	    Cursor customCursor = Cursor.cursor(cursorImage.getUrl());
 	    
 	    Button play = new Button("Enter Game");
-	    play.setOnAction(e -> {
-	        homePage(primaryStage);
-	    });
+	    play.setOnAction(e -> {homePage(primaryStage);});
 	    // VBox 1 for first set of buttons
 	    VBox playbutton = new VBox(10);
 	    playbutton.getChildren().addAll(play);
@@ -74,21 +73,18 @@ public class Main extends Application {
 	    Image image = new Image("applicationImagesBackgrounds/EndlessMountain16x9.png");
 	    BackgroundSize size = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false);
 	    BackgroundImage backgroundImage = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT,
-	            BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, size);
-	    // Use a Pane to allow free positioning
+	    BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, size);
 	    Pane root = new Pane();
 	    root.getChildren().addAll(playbutton); // Add both button lists
 	    root.setBackground(new Background(backgroundImage));
 	    // Set button styles and sizes for both sets of buttons
 	    playbutton.getChildren().forEach(button -> {
 	        ((Button) button).prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.2)); // Adjust size
-	        ((Button) button).prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.08));
-	    });
+	        ((Button) button).prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.08));});
 	    Scene scene = new Scene(root, 1920, 1080); // Screen size
 	    // Ensure the stage stays in fullscreen mode when the scene changes
 	    primaryStage.sceneProperty().addListener((obs, oldScene, newScene) -> {
-	    	primaryStage.setMaximized(true);
-	    });
+	    primaryStage.setMaximized(true);});
 	    scene.setCursor(customCursor);
 	    primaryStage.setTitle("Endless Mountain of Monsters");
 	    primaryStage.initStyle(StageStyle.UNDECORATED); // Set only once, before showing the stage
@@ -1242,55 +1238,116 @@ public class Main extends Application {
 
 		// Create buttons for everything
 		Button back = new Button("Back");
-		Text itemDescriptions = new Text("Item Descriptions will go at the top here");
-		Text itemImages = new Text("item images should go here, item descriptions should show up when hovered over.");
-		itemDescriptions.setFont(KingArthurLegend);
-		itemImages.setFont(KingArthurLegend);
+		Text itemDescriptions = new Text("Item Descriptions will go here");
+		Text item1Price = new Text("1");
+		Text item2Price = new Text("2");
+		Text item3Price = new Text("3");
+		Text playerGold = new Text("playerGold");
+		Text purchaseConfirmation = new Text("Buy (item) for (char) (-X Gold)");
+
 		
+		itemDescriptions.setFont(DwarvenAxe);
+		item1Price.setFont(DwarvenAxe);
+		item2Price.setFont(DwarvenAxe);
+		item3Price.setFont(DwarvenAxe);
+		playerGold.setFont(DwarvenAxe);
+		purchaseConfirmation.setFont(DwarvenAxe);
+		
+		itemDescriptions.setFill(Color.web("#4c4c4c"));
+		item1Price.setFill(Color.web("#4c4c4c"));
+		item2Price.setFill(Color.web("#4c4c4c"));
+		item3Price.setFill(Color.web("#4c4c4c"));
+		playerGold.setFill(Color.web("#FFEB80"));
+		purchaseConfirmation.setFill(Color.web("#4c4c4c"));
 		
 		ImageView shopKeeper = new ImageView(new Image("shopAssets/shopKeeper.png"));
 		ImageView itemForSaleFrame1 = new ImageView(new Image("shopAssets/itemForSaleFrame.png"));
 		ImageView itemForSaleFrame2 = new ImageView(new Image("shopAssets/itemForSaleFrame.png"));
 		ImageView itemForSaleFrame3 = new ImageView(new Image("shopAssets/itemForSaleFrame.png"));
-		
-		itemDescriptions.setFill(Color.web("#4c4c4c"));
-		itemImages.setFill(Color.web("#4c4c4c"));
+		ImageView shopSeparatonBar1 = new ImageView(new Image("shopAssets/shopSeparatonBar.png"));
+		ImageView shopSeparatonBar2 = new ImageView(new Image("shopAssets/shopSeparatonBar.png"));
+		ImageView shopSeparatonBar3 = new ImageView(new Image("shopAssets/shopSeparatonBar.png"));
+
+		ImageView goldIcon = new ImageView(new Image("shopAssets/goldIcon.png"));
+		ImageView paladinPlayerIcon= new ImageView(new Image("applicationImagesHeroSprites/Paladin/paladinPlayerIcon.png"));
+		ImageView assassinPlayerIcon= new ImageView(new Image("applicationImagesHeroSprites/Assassin/assassinPlayerIcon.png"));
+		ImageView wizardPlayerIcon= new ImageView(new Image("applicationImagesHeroSprites/Wizard/wizardPlayerIcon.png"));
+		ImageView alchemistPlayerIcon= new ImageView(new Image("applicationImagesHeroSprites/Alchemist/alchemistPlayerIcon.png"));
+
 		Image backgroundImagesetup = new Image("shopAssets/shopBackground.png");
 		BackgroundSize size = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false); // background																									// image
 		BackgroundPosition customPosition = new BackgroundPosition(Side.LEFT, 0, true, Side.TOP, 0, true); // fit to top																					// left
 		BackgroundImage backgroundImagePayoff = new BackgroundImage(backgroundImagesetup, BackgroundRepeat.NO_REPEAT,
 				BackgroundRepeat.NO_REPEAT, customPosition, size);
 		
-		shopKeeper.setFitWidth(0.55 * 1920);
-		shopKeeper.setFitHeight(0.7 * 1080);
-		// Create a Pane for free positioning
 		Pane root = new Pane();
 
 		// Add buttons, images, and back button to the root Pane
 		root.getChildren().add(back);
 		root.getChildren().add(shopKeeper); 	
-		root.getChildren().addAll(itemForSaleFrame1,itemForSaleFrame2,itemForSaleFrame3);
-		root.getChildren().addAll(itemDescriptions, itemImages);
+		root.getChildren().addAll(itemForSaleFrame1, itemForSaleFrame2, itemForSaleFrame3, shopSeparatonBar1, shopSeparatonBar2, shopSeparatonBar3, goldIcon);
+		root.getChildren().addAll(paladinPlayerIcon,assassinPlayerIcon,wizardPlayerIcon,alchemistPlayerIcon);
+		root.getChildren().addAll(playerGold, purchaseConfirmation);
+		root.getChildren().addAll(itemDescriptions,item1Price,item2Price,item3Price);
 
 		root.setBackground(new Background(backgroundImagePayoff)); // set background image
 
 		// -------------------------------------------------------------
-	
+		paladinPlayerIcon.setLayoutX(1785);
+		paladinPlayerIcon.setLayoutY(800);
+		assassinPlayerIcon.setLayoutX(1585);
+		assassinPlayerIcon.setLayoutY(800);
+		wizardPlayerIcon.setLayoutX(1385);
+		wizardPlayerIcon.setLayoutY(800);
+		alchemistPlayerIcon.setLayoutX(1185);
+		alchemistPlayerIcon.setLayoutY(800);
+		
+		paladinPlayerIcon.setScaleX(1.75);
+		paladinPlayerIcon.setScaleY(1.75);
+		assassinPlayerIcon.setScaleX(1.75);
+		assassinPlayerIcon.setScaleY(1.75);
+		wizardPlayerIcon.setScaleX(1.75);
+		wizardPlayerIcon.setScaleY(1.75);
+		alchemistPlayerIcon.setScaleX(1.75);
+		alchemistPlayerIcon.setScaleY(1.75);
+		
 
 		back.setLayoutX(50); // Position X for back button
 		back.setLayoutY(50); // Position Y for back button
-		itemDescriptions.setLayoutX(1080);
-		itemDescriptions.setLayoutY(50);
-		itemImages.setLayoutX(1080);
-		itemImages.setLayoutY(1000);
+		itemDescriptions.setLayoutX(1180);
+		itemDescriptions.setLayoutY(600);
+		purchaseConfirmation.setLayoutX(1300);
+		purchaseConfirmation.setLayoutY(1010);
+		purchaseConfirmation.setScaleX(1.9);
+		purchaseConfirmation.setScaleY(1.9);
 		// -------------------------------------------------------------
+		shopSeparatonBar1.setLayoutX(1100);
+		shopSeparatonBar1.setLayoutY(690);
+		shopSeparatonBar1.setScaleX(1);
+		shopSeparatonBar1.setScaleY(1.5);
+		shopSeparatonBar2.setLayoutX(1100);
+		shopSeparatonBar2.setLayoutY(950);
+		shopSeparatonBar2.setScaleX(1);
+		shopSeparatonBar2.setScaleY(1.5);
+		shopSeparatonBar3.setLayoutX(1100);
+		shopSeparatonBar3.setLayoutY(1175);
+		shopSeparatonBar3.setScaleX(1);
+		shopSeparatonBar3.setScaleY(1.5);
 		
-		itemForSaleFrame1.setLayoutX(1);
-		itemForSaleFrame1.setLayoutY(50);
-		itemForSaleFrame2.setLayoutX(1);
-		itemForSaleFrame2.setLayoutY(50);
-		itemForSaleFrame3.setLayoutX(1);
-		itemForSaleFrame3.setLayoutY(50);
+		
+		item1Price.setLayoutX(1247);
+		item1Price.setLayoutY(350);
+		item2Price.setLayoutX(1497);
+		item2Price.setLayoutY(350);
+		item3Price.setLayoutX(1747);
+		item3Price.setLayoutY(350);
+		
+		itemForSaleFrame1.setLayoutX(925);
+		itemForSaleFrame1.setLayoutY(-230);
+		itemForSaleFrame2.setLayoutX(1175);
+		itemForSaleFrame2.setLayoutY(-230);
+		itemForSaleFrame3.setLayoutX(1425);
+		itemForSaleFrame3.setLayoutY(-230);
 		
 		itemForSaleFrame1.setScaleX(.5);
 		itemForSaleFrame1.setScaleY(.5);
@@ -1298,10 +1355,20 @@ public class Main extends Application {
 		itemForSaleFrame2.setScaleY(.5);
 		itemForSaleFrame3.setScaleX(.5);
 		itemForSaleFrame3.setScaleY(.5);
+		
+		goldIcon.setLayoutX(160);
+		goldIcon.setLayoutY(900);
+		goldIcon.setScaleX(1.5);
+		goldIcon.setScaleY(1.5);
+		playerGold.setLayoutX(375);
+		playerGold.setLayoutY(965);
+		playerGold.setScaleX(2.25);
+		playerGold.setScaleY(2.25);
 		// -------------------------------------------------------------
 		shopKeeper.setLayoutX(20);
 		shopKeeper.setLayoutY(200);
-
+		shopKeeper.setFitWidth(0.55 * 1920);
+		shopKeeper.setFitHeight(0.7 * 1080);
 		back.setOnAction(e -> {
 			mediaPlayer.stop(); // Stop the music when the back button is pressed
 			homePage(primaryStage);
