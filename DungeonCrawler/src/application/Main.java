@@ -56,7 +56,7 @@ public class Main extends Application {
 
 	}
 
-	private void initialization(Stage primaryStage) {
+	private void initialization(Stage primaryStage) { // this scene is used specifically so that we can make our application full screen.
 	    Image cursorImage = new Image("GUIAssets/cursor.png");
 	    Cursor customCursor = Cursor.cursor(cursorImage.getUrl());
 	    
@@ -64,7 +64,6 @@ public class Main extends Application {
 	    play.setOnAction(e -> {
 	        homePage(primaryStage);
 	    });
-	   
 	    // VBox 1 for first set of buttons
 	    VBox playbutton = new VBox(10);
 	    playbutton.getChildren().addAll(play);
@@ -1250,6 +1249,10 @@ public class Main extends Application {
 		
 		
 		ImageView shopKeeper = new ImageView(new Image("shopAssets/shopKeeper.png"));
+		ImageView itemForSaleFrame1 = new ImageView(new Image("shopAssets/itemForSaleFrame.png"));
+		ImageView itemForSaleFrame2 = new ImageView(new Image("shopAssets/itemForSaleFrame.png"));
+		ImageView itemForSaleFrame3 = new ImageView(new Image("shopAssets/itemForSaleFrame.png"));
+		
 		itemDescriptions.setFill(Color.web("#4c4c4c"));
 		itemImages.setFill(Color.web("#4c4c4c"));
 		Image backgroundImagesetup = new Image("shopAssets/shopBackground.png");
@@ -1266,6 +1269,7 @@ public class Main extends Application {
 		// Add buttons, images, and back button to the root Pane
 		root.getChildren().add(back);
 		root.getChildren().add(shopKeeper); 	
+		root.getChildren().addAll(itemForSaleFrame1,itemForSaleFrame2,itemForSaleFrame3);
 		root.getChildren().addAll(itemDescriptions, itemImages);
 
 		root.setBackground(new Background(backgroundImagePayoff)); // set background image
@@ -1279,6 +1283,21 @@ public class Main extends Application {
 		itemDescriptions.setLayoutY(50);
 		itemImages.setLayoutX(1080);
 		itemImages.setLayoutY(1000);
+		// -------------------------------------------------------------
+		
+		itemForSaleFrame1.setLayoutX(1);
+		itemForSaleFrame1.setLayoutY(50);
+		itemForSaleFrame2.setLayoutX(1);
+		itemForSaleFrame2.setLayoutY(50);
+		itemForSaleFrame3.setLayoutX(1);
+		itemForSaleFrame3.setLayoutY(50);
+		
+		itemForSaleFrame1.setScaleX(.5);
+		itemForSaleFrame1.setScaleY(.5);
+		itemForSaleFrame2.setScaleX(.5);
+		itemForSaleFrame2.setScaleY(.5);
+		itemForSaleFrame3.setScaleX(.5);
+		itemForSaleFrame3.setScaleY(.5);
 		// -------------------------------------------------------------
 		shopKeeper.setLayoutX(20);
 		shopKeeper.setLayoutY(200);
