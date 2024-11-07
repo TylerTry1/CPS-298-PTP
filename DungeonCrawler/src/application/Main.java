@@ -406,7 +406,12 @@ public class Main extends Application {
 		ImageView enemyTurnTicker1 = new ImageView(new Image("GUIAssets/turnticker.png"));
 		ImageView enemyTurnTicker2 = new ImageView(new Image("GUIAssets/turnticker.png"));
 		ImageView enemyTurnTicker3 = new ImageView(new Image("GUIAssets/turnticker.png"));
-		ImageView enemyTurnTicker4= new ImageView(new Image("GUIAssets/turnticker.png"));
+		ImageView enemyTurnTicker4 = new ImageView(new Image("GUIAssets/turnticker.png"));
+		ImageView skillButtonSelectedFrame1 = new ImageView(new Image("GUIAssets/skillButtonSelectedFrame.png"));
+		ImageView skillButtonSelectedFrame2 = new ImageView(new Image("GUIAssets/skillButtonSelectedFrame.png"));
+		ImageView skillButtonSelectedFrame3 = new ImageView(new Image("GUIAssets/skillButtonSelectedFrame.png"));
+		ImageView skillButtonSelectedFrame4 = new ImageView(new Image("GUIAssets/skillButtonSelectedFrame.png"));
+		ImageView skillButtonMoveSelectedFrame = new ImageView(new Image("GUIAssets/skillButtonSelectedFrame.png"));
 		
 		ImageView enemyBLDResistanceIcon = new ImageView(new Image("GUIAssets/BLDResistance.png"));
 		ImageView enemyBLGTResistanceIcon = new ImageView(new Image("GUIAssets/BLGTResistance.png"));
@@ -444,7 +449,17 @@ public class Main extends Application {
 		FadeTransition fadeOutEnemyHPPos2 = FadeUtils.createFade(enemyHPPos2, 1, 0, 200);
 		FadeTransition fadeOutEnemyHPPos3 = FadeUtils.createFade(enemyHPPos3, 1, 0, 200);
 		FadeTransition fadeOutEnemyHPPos4 = FadeUtils.createFade(enemyHPPos4, 1, 0, 200);
-
+		
+		FadeTransition fadeInSkillButtonSelectedFrame1 = FadeUtils.createFade(enemyHPPos1, 0, 1, 200);
+		FadeTransition fadeInSkillButtonSelectedFrame2 = FadeUtils.createFade(enemyHPPos1, 0, 1, 200);
+		FadeTransition fadeInSkillButtonSelectedFrame3 = FadeUtils.createFade(enemyHPPos1, 0, 1, 200);
+		FadeTransition fadeInSkillButtonSelectedFrame4 = FadeUtils.createFade(enemyHPPos1, 0, 1, 200);
+		FadeTransition fadeInSkillButtonMoveSelectedFrame = FadeUtils.createFade(enemyHPPos1, 0, 1, 200);
+		FadeTransition fadeOutSkillButtonSelectedFrame1 = FadeUtils.createFade(enemyHPPos1, 1, 0, 200);
+		FadeTransition fadeOutSkillButtonSelectedFrame2 = FadeUtils.createFade(enemyHPPos1, 1, 0, 200);
+		FadeTransition fadeOutSkillButtonSelectedFrame3 = FadeUtils.createFade(enemyHPPos1, 1, 0, 200);
+		FadeTransition fadeOutSkillButtonSelectedFrame4 = FadeUtils.createFade(enemyHPPos1, 1, 0, 200);
+		FadeTransition fadeOutSkillButtonMoveSelectedFrame = FadeUtils.createFade(enemyHPPos1, 1, 0, 200);
 		
 	    FadeTransition fadeInHeroSelectionIndicator1 = FadeUtils.createFade(heroSelectionIndicator1, 0, 1, 200);
 	    FadeTransition fadeInHeroSelectionIndicator2 = FadeUtils.createFade(heroSelectionIndicator2, 0, 1, 200);
@@ -508,6 +523,19 @@ public class Main extends Application {
 		skillbuttonimage4.setFitHeight(0.09 * 1080);
 		skillbuttonimagemove.setFitWidth(0.06 * 1920);
 		skillbuttonimagemove.setFitHeight(0.051 * 1920);
+		
+		skillButtonSelectedFrame1.setFitWidth(0.06 * 1920);
+		skillButtonSelectedFrame1.setFitHeight(0.09 * 1080);
+		skillButtonSelectedFrame2.setFitWidth(0.06 * 1920);
+		skillButtonSelectedFrame2.setFitHeight(0.09 * 1080);
+		skillButtonSelectedFrame3.setFitWidth(0.06 * 1920);
+		skillButtonSelectedFrame3.setFitHeight(0.09 * 1080);
+		skillButtonSelectedFrame4.setFitWidth(0.06 * 1920);
+		skillButtonSelectedFrame4.setFitHeight(0.09 * 1080);
+		skillButtonMoveSelectedFrame.setFitWidth(0.06 * 1920);
+		skillButtonMoveSelectedFrame.setFitHeight(0.09 * 1080);
+		
+
 		// -------------------------------------------------------------
 		enemyBLDResistanceIcon.setFitWidth(0.03 * 1920); 
 		enemyBLDResistanceIcon.setFitHeight(0.03 * 1080); 
@@ -548,6 +576,16 @@ public class Main extends Application {
 		skillbuttonimagepass.setMouseTransparent(true);
 		menuBackButtonImage.setMouseTransparent(true);
 		menuQuitGameText.setMouseTransparent(true);
+		skillButtonSelectedFrame1.setMouseTransparent(true);
+		skillButtonSelectedFrame2.setMouseTransparent(true);
+		skillButtonSelectedFrame3.setMouseTransparent(true);
+		skillButtonSelectedFrame4.setMouseTransparent(true);
+		skillButtonMoveSelectedFrame.setMouseTransparent(true);
+		skillButtonSelectedFrame1.setVisible(false);
+		skillButtonSelectedFrame2.setVisible(false);
+		skillButtonSelectedFrame3.setVisible(false);
+		skillButtonSelectedFrame4.setVisible(false);
+		skillButtonMoveSelectedFrame.setVisible(false);
 		
 		heroPosition4.setOpacity(0);
 		heroPosition3.setOpacity(0);
@@ -568,6 +606,43 @@ public class Main extends Application {
 		
 		menuBackButton.setOpacity(0);
 		menuQuitButton.setOpacity(0);
+		// -------------------------------------------------------------
+		skillbutton1.setOnAction(e -> { // clicking on skill buttons makes the indicator visible, and disables visibility of all others.
+			// i was going to do fade transistions here, but it seems like it doesn't work on button clicks, but only button hovers?
+			skillButtonSelectedFrame1.setVisible(true);
+			skillButtonSelectedFrame2.setVisible(false);
+			skillButtonSelectedFrame3.setVisible(false);
+			skillButtonSelectedFrame4.setVisible(false);
+			skillButtonMoveSelectedFrame.setVisible(false);
+		});
+		skillbutton2.setOnAction(e -> {
+			skillButtonSelectedFrame1.setVisible(false);
+			skillButtonSelectedFrame2.setVisible(true);
+			skillButtonSelectedFrame3.setVisible(false);
+			skillButtonSelectedFrame4.setVisible(false);
+			skillButtonMoveSelectedFrame.setVisible(false);
+		});
+		skillbutton3.setOnAction(e -> {
+			skillButtonSelectedFrame1.setVisible(false);
+			skillButtonSelectedFrame2.setVisible(false);
+			skillButtonSelectedFrame3.setVisible(true);
+			skillButtonSelectedFrame4.setVisible(false);
+			skillButtonMoveSelectedFrame.setVisible(false);
+		});
+		skillbutton4.setOnAction(e -> {
+			skillButtonSelectedFrame1.setVisible(false);
+			skillButtonSelectedFrame2.setVisible(false);
+			skillButtonSelectedFrame3.setVisible(false);
+			skillButtonSelectedFrame4.setVisible(true);
+			skillButtonMoveSelectedFrame.setVisible(false);
+		});
+		movebutton.setOnAction(e -> {
+			skillButtonSelectedFrame1.setVisible(false);
+			skillButtonSelectedFrame2.setVisible(false);
+			skillButtonSelectedFrame3.setVisible(false);
+			skillButtonSelectedFrame4.setVisible(false);
+			skillButtonMoveSelectedFrame.setVisible(true);
+		});
 		// -------------------------------------------------------------
 		//make images dissapear or appear on button hover.
 		heroPosition1.setOnMouseEntered(e -> {heroSelectionIndicator1.setVisible(true);
@@ -741,6 +816,7 @@ public class Main extends Application {
 		root.getChildren().add(skillButtons); 
 		root.getChildren().add(passTurnButton); 
 		root.getChildren().addAll(skillbuttonimage1, skillbuttonimage2, skillbuttonimage3, skillbuttonimage4, skillbuttonimagemove, skillbuttonimagepass); 																						
+		root.getChildren().addAll(skillButtonSelectedFrame1,skillButtonSelectedFrame2,skillButtonSelectedFrame3,skillButtonSelectedFrame4,skillButtonMoveSelectedFrame);
 		root.getChildren().addAll(heroNamePlate, enemyNamePlate);
 		root.getChildren().add(turnOrderBarLeftAndRight);
 		root.getChildren().addAll(heroName, enemyName);// keep name after name plate to avoid layering issues
@@ -831,6 +907,7 @@ public class Main extends Application {
 		enemyTurnTicker4.setLayoutX(1770);
 		enemyTurnTicker4.setLayoutY(595);
 		// -------------------------------------------------------------
+
 		enemyBLDResistanceIcon.setLayoutX(1412); // these 3 assets are weird, so need eyeball'd placements.
 		enemyBLDResistanceIcon.setLayoutY(952); 
 		enemyBLGTResistanceIcon.setLayoutX(1480); 
@@ -996,6 +1073,28 @@ public class Main extends Application {
 		skillbuttonimagepass.setLayoutY(791);
 		skillbuttonimagepass.setScaleX(1.35);
 		skillbuttonimagepass.setScaleY(1.35);
+		
+		skillButtonSelectedFrame1.setLayoutX(586);
+		skillButtonSelectedFrame1.setLayoutY(778);// 778 SWEET SPOT // 127 x multiple
+		skillButtonSelectedFrame2.setLayoutX(713);
+		skillButtonSelectedFrame2.setLayoutY(778);
+		skillButtonSelectedFrame3.setLayoutX(840);
+		skillButtonSelectedFrame3.setLayoutY(778);
+		skillButtonSelectedFrame4.setLayoutX(967);
+		skillButtonSelectedFrame4.setLayoutY(778);
+		skillButtonMoveSelectedFrame.setLayoutX(1094);
+		skillButtonMoveSelectedFrame.setLayoutY(778);
+		
+		skillButtonSelectedFrame1.setScaleX(1.6);
+		skillButtonSelectedFrame1.setScaleY(1.6);// 778 SWEET SPOT // 127 x multiple
+		skillButtonSelectedFrame2.setScaleX(1.6);
+		skillButtonSelectedFrame2.setScaleY(1.6);
+		skillButtonSelectedFrame3.setScaleX(1.6);
+		skillButtonSelectedFrame3.setScaleY(1.6);
+		skillButtonSelectedFrame4.setScaleX(1.6);
+		skillButtonSelectedFrame4.setScaleY(1.6);
+		skillButtonMoveSelectedFrame.setScaleX(1.6);
+		skillButtonMoveSelectedFrame.setScaleY(1.6);
 		// -------------------------------------------------------------
 		menuBackground.setLayoutX(450);
 		menuBackground.setLayoutY(0);
