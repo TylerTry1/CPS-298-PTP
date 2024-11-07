@@ -36,6 +36,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 public class Main extends Application {
@@ -51,117 +52,163 @@ public class Main extends Application {
 	Font Ubuntu = Font.loadFont(getClass().getResourceAsStream("/fonts/UbuntuRegular.ttf"), 40);
 	@Override
 	public void start(Stage primaryStage) {
-		homePage(primaryStage);
+		initialization(primaryStage);
 
 	}
 
+	private void initialization(Stage primaryStage) {
+	    Image cursorImage = new Image("GUIAssets/cursor.png");
+	    Cursor customCursor = Cursor.cursor(cursorImage.getUrl());
+	    
+	    Button play = new Button("Enter Game");
+	    play.setOnAction(e -> {
+	        homePage(primaryStage);
+	    });
+	   
+	    // VBox 1 for first set of buttons
+	    VBox playbutton = new VBox(10);
+	    playbutton.getChildren().addAll(play);
+	    playbutton.setSpacing(10);
+	    playbutton.setPadding(new Insets(20));
+	    playbutton.setLayoutX(768); // Adjust X for play button
+	    playbutton.setLayoutY(930); // Adjust Y for play button
+	    Image image = new Image("applicationImagesBackgrounds/EndlessMountain16x9.png");
+	    BackgroundSize size = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false);
+	    BackgroundImage backgroundImage = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT,
+	            BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, size);
+	    // Use a Pane to allow free positioning
+	    Pane root = new Pane();
+	    root.getChildren().addAll(playbutton); // Add both button lists
+	    root.setBackground(new Background(backgroundImage));
+	    // Set button styles and sizes for both sets of buttons
+	    playbutton.getChildren().forEach(button -> {
+	        ((Button) button).prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.2)); // Adjust size
+	        ((Button) button).prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.08));
+	    });
+	    Scene scene = new Scene(root, 1920, 1080); // Screen size
+	    // Ensure the stage stays in fullscreen mode when the scene changes
+	    primaryStage.sceneProperty().addListener((obs, oldScene, newScene) -> {
+	    	primaryStage.setMaximized(true);
+	    });
+	    scene.setCursor(customCursor);
+	    primaryStage.setTitle("Endless Mountain of Monsters");
+	    primaryStage.initStyle(StageStyle.UNDECORATED); // Set only once, before showing the stage
+	    primaryStage.setMaximized(true);
+	    primaryStage.setScene(scene);
+	    primaryStage.show();
+	}
+	
 	private void homePage(Stage primaryStage) {
-		Image cursorImage = new Image("GUIAssets/cursor.png");
-		Cursor customCursor = Cursor.cursor(cursorImage.getUrl());
+	    Image cursorImage = new Image("GUIAssets/cursor.png");
+	    Cursor customCursor = Cursor.cursor(cursorImage.getUrl());
 
-		Media media = new Media(menuMusic);
-		MediaPlayer mediaPlayer = new MediaPlayer(media);
-		mediaPlayer.setVolume(0.00); // Volume level (0.0 to 1.0) use 0.05
-		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE); // Loop the music
-		mediaPlayer.play(); // music player
+	    Media media = new Media(menuMusic);
+	    MediaPlayer mediaPlayer = new MediaPlayer(media);
+	    mediaPlayer.setVolume(0.00); // Volume level (0.0 to 1.0) use 0.05
+	    mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE); // Loop the music
+	    mediaPlayer.play(); // music player
 
-		// First set of buttons
+	    // First set of buttons
+	    Button play = new Button("Begin New Journey");
+	    Button tutorial = new Button("Tutorial");
+	    Button unlocks = new Button("Unlocks");
+	    Button stats = new Button("Stats");
+	    Button credits = new Button("Credits");
+	    Button quit = new Button("Exit Game");
+	    Button shop = new Button("Shop");
 
-		Button play = new Button("Begin New Journey");
-		Button tutorial = new Button("Tutorial");
-		Button unlocks = new Button("Unlocks");
-		Button stats = new Button("Stats");
-		Button credits = new Button("Credits");
-		Button quit = new Button("Exit Game");
-		Button shop = new Button("Shop");
-		
-		play.setOnAction(e -> {
-			battleScene(primaryStage);
-			mediaPlayer.stop();
-		});
+	    play.setOnAction(e -> {
+	        battleScene(primaryStage);
+	        mediaPlayer.stop();
+	    });
 
-		tutorial.setOnAction(e -> {
-			textTutorial(primaryStage);
-			mediaPlayer.stop();
-		});
-		unlocks.setOnAction(e -> {
-			unlocks(primaryStage);
-			mediaPlayer.stop();
-		});
-		stats.setOnAction(e -> {
-			stats(primaryStage);
-			mediaPlayer.stop();
-		});
-		credits.setOnAction(e -> {
-			credits(primaryStage);
-			mediaPlayer.stop();
+	    tutorial.setOnAction(e -> {
+	        textTutorial(primaryStage);
+	        mediaPlayer.stop();
+	    });
+	    unlocks.setOnAction(e -> {
+	        unlocks(primaryStage);
+	        mediaPlayer.stop();
+	    });
+	    stats.setOnAction(e -> {
+	        stats(primaryStage);
+	        mediaPlayer.stop();
+	    });
+	    credits.setOnAction(e -> {
+	        credits(primaryStage);
+	        mediaPlayer.stop();
+	    });
+	    quit.setOnAction(e -> {
+	        Platform.exit();
+	        mediaPlayer.stop();
+	    });
+	    shop.setOnAction(e -> {
+	        shop(primaryStage);
+	        mediaPlayer.stop();
+	    });
 
-		});
-		quit.setOnAction(e -> {
-			Platform.exit();
-			mediaPlayer.stop();
-		});
-		shop.setOnAction(e -> {
-			shop(primaryStage);
-			mediaPlayer.stop();
-		});
-		// VBox 1 for first set of buttons
-		VBox playbutton = new VBox(10);
-		playbutton.getChildren().addAll(play);
-		playbutton.setSpacing(10);
-		playbutton.setPadding(new Insets(20));
-		playbutton.setLayoutX(768); // Adjust X for play button
-		playbutton.setLayoutY(930); // Adjust Y for play button
+	    // VBox 1 for first set of buttons
+	    VBox playbutton = new VBox(10);
+	    playbutton.getChildren().addAll(play);
+	    playbutton.setSpacing(10);
+	    playbutton.setPadding(new Insets(20));
+	    playbutton.setLayoutX(768); // Adjust X for play button
+	    playbutton.setLayoutY(930); // Adjust Y for play button
 
-		// VBox 2 for second set of buttons
-		VBox buttonBox2 = new VBox(10);
-		buttonBox2.getChildren().addAll(tutorial, unlocks, stats, credits, quit);
-		buttonBox2.setSpacing(10);
-		buttonBox2.setPadding(new Insets(20));
-		buttonBox2.setLayoutX(7); // Adjust X for second VBox
-		buttonBox2.setLayoutY(750); // Adjust Y for second VBox
+	    // VBox 2 for second set of buttons
+	    VBox buttonBox2 = new VBox(10);
+	    buttonBox2.getChildren().addAll(tutorial, unlocks, stats, credits, quit);
+	    buttonBox2.setSpacing(10);
+	    buttonBox2.setPadding(new Insets(20));
+	    buttonBox2.setLayoutX(7); // Adjust X for second VBox
+	    buttonBox2.setLayoutY(750); // Adjust Y for second VBox
 
-		VBox shopTesting = new VBox(10);
-		shopTesting.getChildren().addAll(shop);
-		shopTesting.setSpacing(10);
-		shopTesting.setPadding(new Insets(20));
-		shopTesting.setLayoutX(10); // Adjust X for second VBox
-		shopTesting.setLayoutY(10); // Adjust Y for second VBox
-		
-		// Load the background image
-		Image image = new Image("applicationImagesBackgrounds/EndlessMountain16x9.png");
-		// Define the background size and position
-		BackgroundSize size = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false);
-		BackgroundImage backgroundImage = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT,
-				BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, size);
+	    VBox shopTesting = new VBox(10);
+	    shopTesting.getChildren().addAll(shop);
+	    shopTesting.setSpacing(10);
+	    shopTesting.setPadding(new Insets(20));
+	    shopTesting.setLayoutX(10); // Adjust X for second VBox
+	    shopTesting.setLayoutY(10); // Adjust Y for second VBox
 
-		// Use a Pane to allow free positioning
-		Pane root = new Pane();
-		root.getChildren().addAll(playbutton, buttonBox2, shopTesting); // Add both button lists
-		root.setBackground(new Background(backgroundImage));
+	    // Load the background image
+	    Image image = new Image("applicationImagesBackgrounds/EndlessMountain16x9.png");
+	    // Define the background size and position
+	    BackgroundSize size = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false);
+	    BackgroundImage backgroundImage = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT,
+	            BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, size);
 
-		// Set button styles and sizes for both sets of buttons
-		playbutton.getChildren().forEach(button -> {
-			((Button) button).prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.2)); // Adjust the size
-																									// as needed
-			((Button) button).prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.08));
-		});
+	    // Use a Pane to allow free positioning
+	    Pane root = new Pane();
+	    root.getChildren().addAll(playbutton, buttonBox2, shopTesting); // Add both button lists
+	    root.setBackground(new Background(backgroundImage));
 
-		buttonBox2.getChildren().forEach(button -> {
-			((Button) button).prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.1)); // Adjust the size
-																									// as needed
-			((Button) button).prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.04));
-		});
+	    // Set button styles and sizes for both sets of buttons
+	    playbutton.getChildren().forEach(button -> {
+	        ((Button) button).prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.2)); // Adjust size
+	        ((Button) button).prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.08));
+	    });
 
-		Scene scene = new Scene(root, 1920, 1080); // screen size
-		scene.setCursor(customCursor);
-		primaryStage.setTitle("Endless Mountain of Monsters");
-		primaryStage.setScene(scene);
-		primaryStage.show();
-		primaryStage.setOnCloseRequest(event -> {
-			mediaPlayer.stop(); // Stop the music when the stage is closed
-		});
+	    buttonBox2.getChildren().forEach(button -> {
+	        ((Button) button).prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.1)); // Adjust size
+	        ((Button) button).prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.04));
+	    });
+
+	    Scene scene = new Scene(root, 1920, 1080); // Screen size
+
+	    // Ensure the stage stays in fullscreen mode when the scene changes
+	    primaryStage.sceneProperty().addListener((obs, oldScene, newScene) -> {
+	    });
+
+	    scene.setCursor(customCursor);
+	    primaryStage.setTitle("Endless Mountain of Monsters");
+	    primaryStage.setMaximized(true);
+	    primaryStage.setScene(scene);
+	    primaryStage.show();
+
+	    // Stop the music when the stage is closed
+	    primaryStage.setOnCloseRequest(event -> mediaPlayer.stop());
 	}
+
 
 	private void battleScene(Stage primaryStage) {
 		
@@ -1150,9 +1197,10 @@ public class Main extends Application {
 		});
 		menuQuitButton.setOnAction(e -> {
 			mediaPlayer.stop(); // Stop the music when the back button is pressed
+			
 			homePage(primaryStage);
 		});
-		
+		primaryStage.setMaximized(true);
 		
 		Scene scene = new Scene(new StackPane(root, combatMenu), 1920, 1080);
 		scene.setOnKeyPressed(event -> {
