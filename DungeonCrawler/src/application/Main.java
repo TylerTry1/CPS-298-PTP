@@ -53,8 +53,8 @@ public class Main extends Application {
 	Font DwarvenAxe = Font.loadFont(getClass().getResourceAsStream("/fonts/DwarvenAxe.ttf"), 40);
 	@Override
 	public void start(Stage primaryStage) {
-		initialization(primaryStage);
-//		shop(primaryStage);
+//		initialization(primaryStage);
+		shop(primaryStage);
 	}
 
 	private void initialization(Stage primaryStage) { // this scene is used specifically so that we can make our application full screen.
@@ -1245,6 +1245,16 @@ public class Main extends Application {
 		Text playerGold = new Text("playerGold");
 		Text purchaseConfirmation = new Text("Buy (item) for (char) (-X Gold)");
 
+		Button item1Button = new Button("item1");
+		Button item2Button = new Button("item2");
+		Button item3Button = new Button("item3");
+		Button purchaseConfirmationButton = new Button("purchaseConfirmationButton");
+
+		Button charChoiceAlchemistButton= new Button("charChoiceAlchemist");
+		Button charChoiceWizardButton= new Button("charChoiceWizard");
+		Button charChoiceAssassinButton= new Button("charChoiceAssassin");
+		Button charChoicePaladinButton= new Button("charChoicePaladin");
+
 		
 		itemDescriptions.setFont(DwarvenAxe);
 		item1Price.setFont(DwarvenAxe);
@@ -1281,17 +1291,62 @@ public class Main extends Application {
 				BackgroundRepeat.NO_REPEAT, customPosition, size);
 		
 		Pane root = new Pane();
+		
+		alchemistPlayerIcon.setMouseTransparent(true);
+		wizardPlayerIcon.setMouseTransparent(true);
+		assassinPlayerIcon.setMouseTransparent(true);
+		paladinPlayerIcon.setMouseTransparent(true);
+//		charChoiceAlchemistButton.setVisible(false);
 
 		// Add buttons, images, and back button to the root Pane
 		root.getChildren().add(back);
 		root.getChildren().add(shopKeeper); 	
 		root.getChildren().addAll(itemForSaleFrame1, itemForSaleFrame2, itemForSaleFrame3, shopSeparatonBar1, shopSeparatonBar2, shopSeparatonBar3, goldIcon);
+		root.getChildren().addAll(item1Button, item2Button, item3Button, purchaseConfirmationButton);
+		root.getChildren().addAll(charChoiceAlchemistButton, charChoiceWizardButton, charChoiceAssassinButton, charChoicePaladinButton);
 		root.getChildren().addAll(paladinPlayerIcon,assassinPlayerIcon,wizardPlayerIcon,alchemistPlayerIcon);
 		root.getChildren().addAll(playerGold, purchaseConfirmation);
 		root.getChildren().addAll(itemDescriptions,item1Price,item2Price,item3Price);
 
 		root.setBackground(new Background(backgroundImagePayoff)); // set background image
 
+		// -------------------------------------------------------------
+		item1Button.setLayoutX(1231);
+		item1Button.setLayoutY(148);
+		item2Button.setLayoutX(1481);
+		item2Button.setLayoutY(148);
+		item3Button.setLayoutX(1731);
+		item3Button.setLayoutY(148);
+		purchaseConfirmationButton.setLayoutX(1425);
+		purchaseConfirmationButton.setLayoutY(990);
+		
+		item1Button.setScaleX(2.5);
+		item1Button.setScaleY(8.75);
+		item2Button.setScaleX(2.5);
+		item2Button.setScaleY(8.75);
+		item3Button.setScaleX(2.5);
+		item3Button.setScaleY(8.75);
+		purchaseConfirmationButton.setScaleX(4.7);
+		purchaseConfirmationButton.setScaleY(3);
+		
+		
+		charChoiceAlchemistButton.setLayoutX(1148);
+		charChoiceAlchemistButton.setLayoutY(812);
+		charChoiceWizardButton.setLayoutX(1357);
+		charChoiceWizardButton.setLayoutY(812);
+		charChoiceAssassinButton.setLayoutX(1555);
+		charChoiceAssassinButton.setLayoutY(812);
+		charChoicePaladinButton.setLayoutX(1755);
+		charChoicePaladinButton.setLayoutY(812);
+		
+		charChoiceAlchemistButton.setScaleX(1);
+		charChoiceAlchemistButton.setScaleY(4.95);
+		charChoiceWizardButton.setScaleX(1.1);
+		charChoiceWizardButton.setScaleY(4.95);
+		charChoiceAssassinButton.setScaleX(1.05);
+		charChoiceAssassinButton.setScaleY(4.95);
+		charChoicePaladinButton.setScaleX(1.1);
+		charChoicePaladinButton.setScaleY(4.95);
 		// -------------------------------------------------------------
 		paladinPlayerIcon.setLayoutX(1785);
 		paladinPlayerIcon.setLayoutY(800);
@@ -1311,7 +1366,8 @@ public class Main extends Application {
 		alchemistPlayerIcon.setScaleX(1.75);
 		alchemistPlayerIcon.setScaleY(1.75);
 		
-
+		
+		
 		back.setLayoutX(50); // Position X for back button
 		back.setLayoutY(50); // Position Y for back button
 		itemDescriptions.setLayoutX(1180);
