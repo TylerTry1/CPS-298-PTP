@@ -1242,12 +1242,16 @@ public class Main extends Application {
 		Text item2Price = new Text("2");
 		Text item3Price = new Text("3");
 		Text playerGold = new Text("playerGold");
-		Text purchaseConfirmation = new Text("Buy (item) for (char) (-X Gold)");
+		Text purchaseConfirmationText = new Text("Buy (item) for (char) (-X Gold)");
 		Text exitShopText = new Text("exit shop");
 
-		Button item1Button = new Button("item1");
-		Button item2Button = new Button("item2");
-		Button item3Button = new Button("item3");
+		ToggleGroup itemSelection = new ToggleGroup();
+		RadioButton item1Button = new RadioButton("item1");
+		item1Button.setToggleGroup(itemSelection);
+		RadioButton item2Button = new RadioButton("item2");
+		item2Button.setToggleGroup(itemSelection);
+		RadioButton item3Button = new RadioButton("item3");
+		item3Button.setToggleGroup(itemSelection);
 		Button purchaseConfirmationButton = new Button("purchaseConfirmationButton");
 
 		Button charChoiceAlchemistButton= new Button("charChoiceAlchemist");
@@ -1261,7 +1265,7 @@ public class Main extends Application {
 		item2Price.setFont(DwarvenAxe);
 		item3Price.setFont(DwarvenAxe);
 		playerGold.setFont(DwarvenAxe);
-		purchaseConfirmation.setFont(DwarvenAxe);
+		purchaseConfirmationText.setFont(DwarvenAxe);
 		exitShopText.setFont(DwarvenAxe);
 		
 		itemDescriptions.setFill(Color.web("#4c4c4c"));
@@ -1269,18 +1273,26 @@ public class Main extends Application {
 		item2Price.setFill(Color.web("#4c4c4c"));
 		item3Price.setFill(Color.web("#4c4c4c"));
 		playerGold.setFill(Color.web("#FFEB80"));
-		purchaseConfirmation.setFill(Color.web("#4c4c4c"));
+		purchaseConfirmationText.setFill(Color.web("#4c4c4c"));
 		exitShopText.setFill(Color.web("#4c4c4c"));
 		
 		ImageView shopKeeper = new ImageView(new Image("shopAssets/shopKeeper.png"));
 		ImageView itemForSaleFrame1 = new ImageView(new Image("shopAssets/itemForSaleFrame.png"));
 		ImageView itemForSaleFrame2 = new ImageView(new Image("shopAssets/itemForSaleFrame.png"));
 		ImageView itemForSaleFrame3 = new ImageView(new Image("shopAssets/itemForSaleFrame.png"));
+		
+		ImageView itemForSaleFrameArrow1 = new ImageView(new Image("shopAssets/selectionArrow.png"));
+		ImageView itemForSaleFrameArrow2 = new ImageView(new Image("shopAssets/selectionArrow.png"));
+		ImageView itemForSaleFrameArrow3 = new ImageView(new Image("shopAssets/selectionArrow.png"));
+
+		
+		
 		ImageView exitShopBanner = new ImageView(new Image("shopAssets/itemForSaleFrame.png"));
 		ImageView shopSeparatonBar1 = new ImageView(new Image("shopAssets/shopSeparatonBar.png"));
 		ImageView shopSeparatonBar2 = new ImageView(new Image("shopAssets/shopSeparatonBar.png"));
 		ImageView shopSeparatonBar3 = new ImageView(new Image("shopAssets/shopSeparatonBar.png"));
-
+		ImageView purchaseConfirmationImage = new ImageView(new Image("shopAssets/itemForSaleFrame.png"));
+		
 		ImageView goldIcon = new ImageView(new Image("shopAssets/goldIcon.png"));
 		ImageView paladinPlayerIcon= new ImageView(new Image("applicationImagesHeroSprites/Paladin/paladinPlayerIcon.png"));
 		ImageView assassinPlayerIcon= new ImageView(new Image("applicationImagesHeroSprites/Assassin/assassinPlayerIcon.png"));
@@ -1299,7 +1311,7 @@ public class Main extends Application {
 		
 		Pane root = new Pane();
 		
-		purchaseConfirmation.setMouseTransparent(true);
+		purchaseConfirmationText.setMouseTransparent(true);
 		alchemistPlayerIcon.setMouseTransparent(true);
 		wizardPlayerIcon.setMouseTransparent(true);
 		assassinPlayerIcon.setMouseTransparent(true);
@@ -1311,11 +1323,19 @@ public class Main extends Application {
 		charSelectedAssassin.setVisible(false);
 		charSelectedPaladin.setVisible(false);
 		
-	
+		itemForSaleFrameArrow1.setVisible(false);
+		itemForSaleFrameArrow2.setVisible(false);
+		itemForSaleFrameArrow3.setVisible(false);
+		
 		charChoiceAlchemistButton.setOpacity(0);
 		charChoiceWizardButton.setOpacity(0);
 		charChoiceAssassinButton.setOpacity(0);
 		charChoicePaladinButton.setOpacity(0);
+		purchaseConfirmationButton.setOpacity(0);
+		item1Button.setOpacity(0);
+		item2Button.setOpacity(0);
+		item3Button.setOpacity(0);
+		
 		back.setOpacity(0);
 		
 		
@@ -1343,26 +1363,52 @@ public class Main extends Application {
 			charSelectedWizard.setVisible(false);
 			charSelectedAssassin.setVisible(false);
 			charSelectedPaladin.setVisible(true);
-
 		});
+//--------------------------------------------------------------------------------
+
+			item1Button.setOnAction(e -> {
+				itemForSaleFrameArrow1.setVisible(true);
+				itemForSaleFrameArrow2.setVisible(false);
+				itemForSaleFrameArrow3.setVisible(false);
+			});
+			item2Button.setOnAction(e -> {
+				itemForSaleFrameArrow1.setVisible(false);
+				itemForSaleFrameArrow2.setVisible(true);
+				itemForSaleFrameArrow3.setVisible(false);
+			});
+			item3Button.setOnAction(e -> {
+				itemForSaleFrameArrow1.setVisible(false);
+				itemForSaleFrameArrow2.setVisible(false);
+				itemForSaleFrameArrow3.setVisible(true);
+			});
+			
+//--------------------------------------------------------------------------------
+
 		back.setOnMouseEntered(e -> {
 			exitShopText.setFill(Color.web("#d10000"));
 		});
 		back.setOnMouseExited(e -> {
 			exitShopText.setFill(Color.web("#4c4c4c"));
 		});
+		purchaseConfirmationButton.setOnMouseEntered(e -> {
+			purchaseConfirmationText.setFill(Color.web("#d10000"));
+		});
+		purchaseConfirmationButton.setOnMouseExited(e -> {
+			purchaseConfirmationText.setFill(Color.web("#4c4c4c"));
+		});
 		
 //		charChoiceAlchemistButton.setVisible(false);
 
 		// Add buttons, images, and back button to the root Pane
 
-		root.getChildren().add(shopKeeper); 	
+		root.getChildren().addAll(shopKeeper, purchaseConfirmationImage); 	
 		root.getChildren().addAll(itemForSaleFrame1, itemForSaleFrame2, itemForSaleFrame3, shopSeparatonBar1, shopSeparatonBar2, shopSeparatonBar3, goldIcon);
+		root.getChildren().addAll(itemForSaleFrameArrow1,itemForSaleFrameArrow2,itemForSaleFrameArrow3);
 		root.getChildren().addAll(item1Button, item2Button, item3Button, purchaseConfirmationButton);
 		root.getChildren().addAll(charChoiceAlchemistButton, charChoiceWizardButton, charChoiceAssassinButton, charChoicePaladinButton);
 		root.getChildren().addAll(paladinPlayerIcon,assassinPlayerIcon,wizardPlayerIcon,alchemistPlayerIcon);
 		root.getChildren().addAll(charSelectedAlchemist,charSelectedWizard,charSelectedAssassin,charSelectedPaladin);
-		root.getChildren().addAll(playerGold, purchaseConfirmation);
+		root.getChildren().addAll(playerGold, purchaseConfirmationText);
 		root.getChildren().addAll(itemDescriptions,item1Price,item2Price,item3Price);
 		root.getChildren().addAll(exitShopBanner);
 		root.getChildren().addAll(back);
@@ -1379,17 +1425,44 @@ public class Main extends Application {
 		item2Button.setLayoutY(148);
 		item3Button.setLayoutX(1731);
 		item3Button.setLayoutY(148);
-		purchaseConfirmationButton.setLayoutX(1425);
+		
+		itemForSaleFrameArrow1.setLayoutX(1244);
+		itemForSaleFrameArrow1.setLayoutY(5);
+		itemForSaleFrameArrow1.setScaleX(1);
+		itemForSaleFrameArrow1.setScaleY(3);
+		itemForSaleFrameArrow1.setRotate(90);
+		
+		itemForSaleFrameArrow2.setLayoutX(1494);
+		itemForSaleFrameArrow2.setLayoutY(5);
+		itemForSaleFrameArrow2.setScaleX(1);
+		itemForSaleFrameArrow2.setScaleY(3);
+		itemForSaleFrameArrow2.setRotate(90);
+		
+		itemForSaleFrameArrow3.setLayoutX(1744);
+		itemForSaleFrameArrow3.setLayoutY(5);
+		itemForSaleFrameArrow3.setScaleX(1);
+		itemForSaleFrameArrow3.setScaleY(3);
+		itemForSaleFrameArrow3.setRotate(90);
+		
+		purchaseConfirmationButton.setLayoutX(1420);
 		purchaseConfirmationButton.setLayoutY(990);
+		purchaseConfirmationButton.setScaleX(4.9);
+		purchaseConfirmationButton.setScaleY(3);
+		
+		purchaseConfirmationImage.setLayoutX(659);
+		purchaseConfirmationImage.setLayoutY(607);
+		purchaseConfirmationImage.setScaleX(.3);
+		purchaseConfirmationImage.setScaleY(1.65);
+		purchaseConfirmationImage.setRotate(90);
+		
 		
 		item1Button.setScaleX(2.5);
-		item1Button.setScaleY(8.75);
+		item1Button.setScaleY(13.75);
 		item2Button.setScaleX(2.5);
-		item2Button.setScaleY(8.75);
+		item2Button.setScaleY(13.75);
 		item3Button.setScaleX(2.5);
-		item3Button.setScaleY(8.75);
-		purchaseConfirmationButton.setScaleX(4.7);
-		purchaseConfirmationButton.setScaleY(3);
+		item3Button.setScaleY(13.75);
+
 		// -------------------------------------------------------------
 		// frames around character images that appear if the char is selected
 		charSelectedAlchemist.setLayoutX(1157);
@@ -1464,10 +1537,10 @@ public class Main extends Application {
 		itemDescriptions.setLayoutX(1180);
 		itemDescriptions.setLayoutY(600);
 		
-		purchaseConfirmation.setLayoutX(1300);
-		purchaseConfirmation.setLayoutY(1010);
-		purchaseConfirmation.setScaleX(1.9);
-		purchaseConfirmation.setScaleY(1.9);
+		purchaseConfirmationText.setLayoutX(1300);
+		purchaseConfirmationText.setLayoutY(1010);
+		purchaseConfirmationText.setScaleX(1.9);
+		purchaseConfirmationText.setScaleY(1.9);
 		// -------------------------------------------------------------
 		shopSeparatonBar1.setLayoutX(1100);
 		shopSeparatonBar1.setLayoutY(690);
