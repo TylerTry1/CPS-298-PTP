@@ -40,6 +40,7 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 public class Main extends Application {
+	private Stage loadingStage;
 	// music tracks
 	String combatMusic = getClass().getResource("/Music/DD1RuinsTheme.mp3").toExternalForm();
 	Media mediaPath = new Media(combatMusic);
@@ -53,6 +54,7 @@ public class Main extends Application {
 	Font DwarvenAxe = Font.loadFont(getClass().getResourceAsStream("/fonts/DwarvenAxe.ttf"), 40);
 	@Override
 	public void start(Stage primaryStage) {
+//		setupLoadingStage(primaryStage);
 		initialization(primaryStage);
 //		shop(primaryStage);
 	}
@@ -63,6 +65,7 @@ public class Main extends Application {
 	    
 	    Button play = new Button("Enter Game");
 	    play.setOnAction(e -> {homePage(primaryStage);});
+//        FadeUtils.transitionBetweenStages(primaryStage, loadingStage, () -> homePage(primaryStage));});
 	    // VBox 1 for first set of buttons
 	    VBox playbutton = new VBox(10);
 	    playbutton.getChildren().addAll(play);
@@ -545,7 +548,7 @@ public class Main extends Application {
 		enemyInPosition2.setScaleY(.85);
 		enemyInPosition3.setScaleX(.75);
 		enemyInPosition3.setScaleY(.85);
-		enemyInPosition4.setScaleX(1);
+		enemyInPosition4.setScaleX(1);	
 		enemyInPosition4.setScaleY(1.1);
 		heroInPosition1.setScaleX(.55);
 		heroInPosition1.setScaleY(.65); 
@@ -1970,7 +1973,21 @@ public class Main extends Application {
 
 		primaryStage.setScene(scene);
 	}
-
+//	 private void setupLoadingStage(Stage primaryStage) {
+//			Image cursorImage = new Image("GUIAssets/cursor.png");
+//			Cursor customCursor = Cursor.cursor(cursorImage.getUrl());
+//	        loadingStage = new Stage();
+//	        StackPane loadingRoot = new StackPane();
+//	        loadingRoot.setStyle("-fx-background-color: black;");
+//	        Scene scene = new Scene(loadingRoot, 1920, 1080);
+//	        
+//		    loadingRoot.sceneProperty().addListener((obs, oldScene, newScene) -> {
+//		    });
+//	        
+//			scene.setCursor(customCursor);
+//	        loadingStage.setScene(scene);
+//		    primaryStage.setMaximized(true);
+//	    }
 	public static void main(String[] args) {
 		launch(args);
 	}
