@@ -53,8 +53,8 @@ public class Main extends Application {
 	Font DwarvenAxe = Font.loadFont(getClass().getResourceAsStream("/fonts/DwarvenAxe.ttf"), 40);
 	@Override
 	public void start(Stage primaryStage) {
-//		initialization(primaryStage);
-		shop(primaryStage);
+		initialization(primaryStage);
+//		shop(primaryStage);
 	}
 
 	private void initialization(Stage primaryStage) { // this scene is used specifically so that we can make our application full screen.
@@ -629,6 +629,28 @@ public class Main extends Application {
 		skillButtonSelectedFrame4.setVisible(false);
 		skillButtonMoveSelectedFrame.setVisible(false);
 		
+		enemyBLDResistanceIcon.setVisible(false);
+		enemyBLGTResistanceIcon.setVisible(false);
+		enemyBURNResistanceIcon.setVisible(false);
+		enemySTNResistanceIcon.setVisible(false);
+		enemyMOVResistanceIcon.setVisible(false);
+		enemyDBFFResistanceIcon.setVisible(false);
+		enemyDTHResistanceIcon.setVisible(false);
+		enemyBleedResistanceNumberText.setVisible(false);
+		enemyBlightResistanceNumberText.setVisible(false);
+		enemyBurnResistanceNumberText.setVisible(false);
+		enemyStunResistanceNumberText.setVisible(false);
+		enemyMoveResistanceNumberText.setVisible(false);
+		enemyDebuffResistanceNumberText.setVisible(false);
+		enemyDeathResistanceNumberText.setVisible(false);
+		enemyBleedResistanceNumber.setVisible(false);
+		enemyBlightResistanceNumber.setVisible(false);
+		enemyBurnResistanceNumber.setVisible(false);
+		enemyStunResistanceNumber.setVisible(false);
+		enemyMoveResistanceNumber.setVisible(false);
+		enemyDebuffResistanceNumber.setVisible(false);
+		enemyDeathResistanceNumber.setVisible(false);
+		
 		heroPosition4.setOpacity(0);
 		heroPosition3.setOpacity(0);
 		heroPosition2.setOpacity(0);
@@ -720,40 +742,237 @@ public class Main extends Application {
 		// -------------------------------------------------------------
 		//make images dissapear or appear on button hover.
 		enemyPosition1.setOnMouseEntered(e -> {
+		    // Show all elements and play fade-in animation
+		    enemyBLDResistanceIcon.setVisible(true);
+		    enemyBLGTResistanceIcon.setVisible(true);
+		    enemyBURNResistanceIcon.setVisible(true);
+		    enemySTNResistanceIcon.setVisible(true);
+		    enemyMOVResistanceIcon.setVisible(true);
+		    enemyDBFFResistanceIcon.setVisible(true);
+		    enemyDTHResistanceIcon.setVisible(true);
+		    enemyBleedResistanceNumberText.setVisible(true);
+		    enemyBlightResistanceNumberText.setVisible(true);
+		    enemyBurnResistanceNumberText.setVisible(true);
+		    enemyStunResistanceNumberText.setVisible(true);
+		    enemyMoveResistanceNumberText.setVisible(true);
+		    enemyDebuffResistanceNumberText.setVisible(true);
+		    enemyDeathResistanceNumberText.setVisible(true);
+		    enemyBleedResistanceNumber.setVisible(true);
+		    enemyBlightResistanceNumber.setVisible(true);
+		    enemyBurnResistanceNumber.setVisible(true);
+		    enemyStunResistanceNumber.setVisible(true);
+		    enemyMoveResistanceNumber.setVisible(true);
+		    enemyDebuffResistanceNumber.setVisible(true);
+		    enemyDeathResistanceNumber.setVisible(true);
 		    enemySelectionIndicator1.setVisible(true);
 		    fadeInEnemySelectionIndicator1.play();
 		});
+
 		enemyPosition1.setOnMouseExited(e -> {
-		fadeOutEnemySelectionIndicator1.play();
+		    // Play fade-out animation
+		    fadeOutEnemySelectionIndicator1.play();
+		    enemyBLDResistanceIcon.setVisible(false);
+	        enemyBLGTResistanceIcon.setVisible(false);
+	        enemyBURNResistanceIcon.setVisible(false);
+	        enemySTNResistanceIcon.setVisible(false);
+	        enemyMOVResistanceIcon.setVisible(false);
+	        enemyDBFFResistanceIcon.setVisible(false);
+	        enemyDTHResistanceIcon.setVisible(false);
+	        enemyBleedResistanceNumberText.setVisible(false);
+	        enemyBlightResistanceNumberText.setVisible(false);
+	        enemyBurnResistanceNumberText.setVisible(false);
+	        enemyStunResistanceNumberText.setVisible(false);
+	        enemyMoveResistanceNumberText.setVisible(false);
+	        enemyDebuffResistanceNumberText.setVisible(false);
+	        enemyDeathResistanceNumberText.setVisible(false);
+	        enemyBleedResistanceNumber.setVisible(false);
+	        enemyBlightResistanceNumber.setVisible(false);
+	        enemyBurnResistanceNumber.setVisible(false);
+	        enemyStunResistanceNumber.setVisible(false);
+	        enemyMoveResistanceNumber.setVisible(false);
+	        enemyDebuffResistanceNumber.setVisible(false);
+	        enemyDeathResistanceNumber.setVisible(false);
+		    // After fade-out completes, set elements to invisible
+		    fadeOutEnemySelectionIndicator1.setOnFinished(event -> {
+		        enemySelectionIndicator1.setVisible(false);
+		       
+		    });
 		});
-		enemySelectionIndicator1.setVisible(false);
-		
+
+
 		enemyPosition2.setOnMouseEntered(e -> {
-			enemySelectionIndicator2.setVisible(true);
-			fadeInEnemySelectionIndicator2.play();
+		    // Show all elements and play fade-in animation
+		    enemyBLDResistanceIcon.setVisible(true);
+		    enemyBLGTResistanceIcon.setVisible(true);
+		    enemyBURNResistanceIcon.setVisible(true);
+		    enemySTNResistanceIcon.setVisible(true);
+		    enemyMOVResistanceIcon.setVisible(true);
+		    enemyDBFFResistanceIcon.setVisible(true);
+		    enemyDTHResistanceIcon.setVisible(true);
+		    enemyBleedResistanceNumberText.setVisible(true);
+		    enemyBlightResistanceNumberText.setVisible(true);
+		    enemyBurnResistanceNumberText.setVisible(true);
+		    enemyStunResistanceNumberText.setVisible(true);
+		    enemyMoveResistanceNumberText.setVisible(true);
+		    enemyDebuffResistanceNumberText.setVisible(true);
+		    enemyDeathResistanceNumberText.setVisible(true);
+		    enemyBleedResistanceNumber.setVisible(true);
+		    enemyBlightResistanceNumber.setVisible(true);
+		    enemyBurnResistanceNumber.setVisible(true);
+		    enemyStunResistanceNumber.setVisible(true);
+		    enemyMoveResistanceNumber.setVisible(true);
+		    enemyDebuffResistanceNumber.setVisible(true);
+		    enemyDeathResistanceNumber.setVisible(true);
+		    enemySelectionIndicator2.setVisible(true);
+		    fadeInEnemySelectionIndicator2.play();
 		});
+
 		enemyPosition2.setOnMouseExited(e -> {
-		fadeOutEnemySelectionIndicator2.play();
+		    // Play fade-out animation
+		    fadeOutEnemySelectionIndicator2.play();
+		    enemyBLDResistanceIcon.setVisible(false);
+	        enemyBLGTResistanceIcon.setVisible(false);
+	        enemyBURNResistanceIcon.setVisible(false);
+	        enemySTNResistanceIcon.setVisible(false);
+	        enemyMOVResistanceIcon.setVisible(false);
+	        enemyDBFFResistanceIcon.setVisible(false);
+	        enemyDTHResistanceIcon.setVisible(false);
+	        enemyBleedResistanceNumberText.setVisible(false);
+	        enemyBlightResistanceNumberText.setVisible(false);
+	        enemyBurnResistanceNumberText.setVisible(false);
+	        enemyStunResistanceNumberText.setVisible(false);
+	        enemyMoveResistanceNumberText.setVisible(false);
+	        enemyDebuffResistanceNumberText.setVisible(false);
+	        enemyDeathResistanceNumberText.setVisible(false);
+	        enemyBleedResistanceNumber.setVisible(false);
+	        enemyBlightResistanceNumber.setVisible(false);
+	        enemyBurnResistanceNumber.setVisible(false);
+	        enemyStunResistanceNumber.setVisible(false);
+	        enemyMoveResistanceNumber.setVisible(false);
+	        enemyDebuffResistanceNumber.setVisible(false);
+	        enemyDeathResistanceNumber.setVisible(false);
+		    // After fade-out completes, set elements to invisible
+		    fadeOutEnemySelectionIndicator2.setOnFinished(event -> {
+		        enemySelectionIndicator2.setVisible(false);
+		     
+		    });
 		});
-		enemySelectionIndicator2.setVisible(false);
 
 		enemyPosition3.setOnMouseEntered(e -> {
-			enemySelectionIndicator3.setVisible(true);
-			fadeInEnemySelectionIndicator3.play();
+		    // Show all elements and play fade-in animation
+		    enemyBLDResistanceIcon.setVisible(true);
+		    enemyBLGTResistanceIcon.setVisible(true);
+		    enemyBURNResistanceIcon.setVisible(true);
+		    enemySTNResistanceIcon.setVisible(true);
+		    enemyMOVResistanceIcon.setVisible(true);
+		    enemyDBFFResistanceIcon.setVisible(true);
+		    enemyDTHResistanceIcon.setVisible(true);
+		    enemyBleedResistanceNumberText.setVisible(true);
+		    enemyBlightResistanceNumberText.setVisible(true);
+		    enemyBurnResistanceNumberText.setVisible(true);
+		    enemyStunResistanceNumberText.setVisible(true);
+		    enemyMoveResistanceNumberText.setVisible(true);
+		    enemyDebuffResistanceNumberText.setVisible(true);
+		    enemyDeathResistanceNumberText.setVisible(true);
+		    enemyBleedResistanceNumber.setVisible(true);
+		    enemyBlightResistanceNumber.setVisible(true);
+		    enemyBurnResistanceNumber.setVisible(true);
+		    enemyStunResistanceNumber.setVisible(true);
+		    enemyMoveResistanceNumber.setVisible(true);
+		    enemyDebuffResistanceNumber.setVisible(true);
+		    enemyDeathResistanceNumber.setVisible(true);
+		    enemySelectionIndicator3.setVisible(true);
+		    fadeInEnemySelectionIndicator3.play();
 		});
+
 		enemyPosition3.setOnMouseExited(e -> {
-		fadeOutEnemySelectionIndicator3.play();
+		    // Play fade-out animation
+		    fadeOutEnemySelectionIndicator3.play();
+		    enemyBLDResistanceIcon.setVisible(false);
+	        enemyBLGTResistanceIcon.setVisible(false);
+	        enemyBURNResistanceIcon.setVisible(false);
+	        enemySTNResistanceIcon.setVisible(false);
+	        enemyMOVResistanceIcon.setVisible(false);
+	        enemyDBFFResistanceIcon.setVisible(false);
+	        enemyDTHResistanceIcon.setVisible(false);
+	        enemyBleedResistanceNumberText.setVisible(false);
+	        enemyBlightResistanceNumberText.setVisible(false);
+	        enemyBurnResistanceNumberText.setVisible(false);
+	        enemyStunResistanceNumberText.setVisible(false);
+	        enemyMoveResistanceNumberText.setVisible(false);
+	        enemyDebuffResistanceNumberText.setVisible(false);
+	        enemyDeathResistanceNumberText.setVisible(false);
+	        enemyBleedResistanceNumber.setVisible(false);
+	        enemyBlightResistanceNumber.setVisible(false);
+	        enemyBurnResistanceNumber.setVisible(false);
+	        enemyStunResistanceNumber.setVisible(false);
+	        enemyMoveResistanceNumber.setVisible(false);
+	        enemyDebuffResistanceNumber.setVisible(false);
+	        enemyDeathResistanceNumber.setVisible(false);
+		    // After fade-out completes, set elements to invisible
+		    fadeOutEnemySelectionIndicator3.setOnFinished(event -> {
+		        enemySelectionIndicator3.setVisible(false);
+		       
+		    });
 		});
-		enemySelectionIndicator3.setVisible(false);
 
 		enemyPosition4.setOnMouseEntered(e -> {
-			enemySelectionIndicator4.setVisible(true);
-			fadeInEnemySelectionIndicator4.play();
+		    // Show all elements and play fade-in animation
+		    enemyBLDResistanceIcon.setVisible(true);
+		    enemyBLGTResistanceIcon.setVisible(true);
+		    enemyBURNResistanceIcon.setVisible(true);
+		    enemySTNResistanceIcon.setVisible(true);
+		    enemyMOVResistanceIcon.setVisible(true);
+		    enemyDBFFResistanceIcon.setVisible(true);
+		    enemyDTHResistanceIcon.setVisible(true);
+		    enemyBleedResistanceNumberText.setVisible(true);
+		    enemyBlightResistanceNumberText.setVisible(true);
+		    enemyBurnResistanceNumberText.setVisible(true);
+		    enemyStunResistanceNumberText.setVisible(true);
+		    enemyMoveResistanceNumberText.setVisible(true);
+		    enemyDebuffResistanceNumberText.setVisible(true);
+		    enemyDeathResistanceNumberText.setVisible(true);
+		    enemyBleedResistanceNumber.setVisible(true);
+		    enemyBlightResistanceNumber.setVisible(true);
+		    enemyBurnResistanceNumber.setVisible(true);
+		    enemyStunResistanceNumber.setVisible(true);
+		    enemyMoveResistanceNumber.setVisible(true);
+		    enemyDebuffResistanceNumber.setVisible(true);
+		    enemyDeathResistanceNumber.setVisible(true);
+		    enemySelectionIndicator4.setVisible(true);
+		    fadeInEnemySelectionIndicator4.play();
 		});
+
 		enemyPosition4.setOnMouseExited(e -> {
-		fadeOutEnemySelectionIndicator4.play();
+		    // Play fade-out animation
+		    fadeOutEnemySelectionIndicator4.play();
+		    enemyBLDResistanceIcon.setVisible(false);
+	        enemyBLGTResistanceIcon.setVisible(false);
+	        enemyBURNResistanceIcon.setVisible(false);
+	        enemySTNResistanceIcon.setVisible(false);
+	        enemyMOVResistanceIcon.setVisible(false);
+	        enemyDBFFResistanceIcon.setVisible(false);
+	        enemyDTHResistanceIcon.setVisible(false);
+	        enemyBleedResistanceNumberText.setVisible(false);
+	        enemyBlightResistanceNumberText.setVisible(false);
+	        enemyBurnResistanceNumberText.setVisible(false);
+	        enemyStunResistanceNumberText.setVisible(false);
+	        enemyMoveResistanceNumberText.setVisible(false);
+	        enemyDebuffResistanceNumberText.setVisible(false);
+	        enemyDeathResistanceNumberText.setVisible(false);
+	        enemyBleedResistanceNumber.setVisible(false);
+	        enemyBlightResistanceNumber.setVisible(false);
+	        enemyBurnResistanceNumber.setVisible(false);
+	        enemyStunResistanceNumber.setVisible(false);
+	        enemyMoveResistanceNumber.setVisible(false);
+	        enemyDebuffResistanceNumber.setVisible(false);
+	        enemyDeathResistanceNumber.setVisible(false);
+		    // After fade-out completes, set elements to invisible
+		    fadeOutEnemySelectionIndicator4.setOnFinished(event -> {
+		        enemySelectionIndicator4.setVisible(false);
+		       
+		    });
 		});
-		enemySelectionIndicator4.setVisible(false);
 		// -------------------------------------------------------------
 		
 		heroHealthBarRedRectangle4.setOnMouseEntered(e -> {heroHPPos4.setVisible(true);
