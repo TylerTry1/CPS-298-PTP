@@ -19,7 +19,7 @@ public class Wizard extends Characters {
         accuracy = 90;
         crit_chance = 20; // Lower crit chance for magic attacks
         dodge_chance = 10; // Chance to dodge attacks
-        position = 1; // Back row position for a ranged attacker
+        position = 3; // Back row position for a ranged attacker
         speed = 4; // Average speed for a wizard
     }
 

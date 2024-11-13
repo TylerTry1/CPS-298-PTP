@@ -2,7 +2,9 @@ package application;
 
 import java.util.Random;
 
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 
 public class combatFlow {
 	
@@ -19,13 +21,26 @@ public class combatFlow {
 	double tempHealth = 0;
 	int speedAdjust = rand.nextInt(max - min) + max; // Random Speed adjust with range -2 to 2.
 	boolean teamDead = false;
+	boolean buttonClicked = false;
 	playerTeamArray playerTeam = new playerTeamArray(4);
 	Characters currentCharacter = new Characters();
 	enemyTeam enemyTeam = new enemyTeam(4, 4);
 	Enemies currentEnemy = new Enemies();
 	Arrays_Enemy_Teams enemyTeamsArray = new Arrays_Enemy_Teams(4, 4, 15);
 	entities[] turnOrder = new entities[8];
+	int count;
 	
+	entities[] getTurnOrder() {
+		return turnOrder;
+	}
+	
+	playerTeamArray getPlayerTeamArray( ) {
+		return playerTeam;
+	}
+	
+	enemyTeam getEnemyTeam() {
+		return enemyTeam;
+	}
 	
 	static public class combatControl extends combatFlow {	
 		public combatControl(Button e1, Button e2, Button e3, Button e4){ // This may be the only way to reference the buttons
@@ -37,7 +52,7 @@ public class combatFlow {
 		}
 	
 	// Temp function for testing player input: 
-	void tempPlayerChoice(Characters current, int choice) {
+	void tempPlayerChoice(Characters current, int choice, int tempCount) {
 		
 		currentDamage = current.getDamage();
 		Enemies[] tempEnemyTeam = enemyTeam.getTeam();
@@ -51,7 +66,8 @@ public class combatFlow {
 			tempEnemyTeam[0] = currentEnemy;
 			enemyTeam.setTeam(tempEnemyTeam);
 			System.out.println(currentEnemy.name + " damaged for " + currentDamage + ".");
-		
+			tempCount++;
+			break;
 		
 		case 2:
 			currentEnemy = (Enemies) tempEnemyTeam[1];
@@ -61,7 +77,8 @@ public class combatFlow {
 			tempEnemyTeam[1] = currentEnemy;
 			enemyTeam.setTeam(tempEnemyTeam);
 			System.out.println(currentEnemy.name + " damaged for " + currentDamage + ".");
-		
+			tempCount++;
+			break;
 		
 		case 3:
 			currentEnemy = (Enemies) tempEnemyTeam[2];
@@ -71,7 +88,8 @@ public class combatFlow {
 			tempEnemyTeam[2] = currentEnemy;
 			enemyTeam.setTeam(tempEnemyTeam);
 			System.out.println(currentEnemy.name + " damaged for " + currentDamage + ".");
-		
+			tempCount++;
+			break;
 		
 		case 4:
 			currentEnemy = (Enemies) tempEnemyTeam[3];
@@ -81,19 +99,22 @@ public class combatFlow {
 			tempEnemyTeam[3] = currentEnemy;
 			enemyTeam.setTeam(tempEnemyTeam);
 			System.out.println(currentEnemy.name + " damaged for " + currentDamage + ".");
-		
+			tempCount++;
+			break;
 		
 		}
 	}
 	
 	public void determineTurnOrder() {
 		
+		// Create current Enemy Team:
 		enemyTeamsArray = enemyTeamsArray.createSelection(); // Create array of teams to pull from
 		int teamSelect = rand.nextInt(15);
 		enemyTeam = (enemyTeam) enemyTeamsArray.getTeam(teamSelect); // Select enemy team from array randomly.
+		//
 		
 		
-		
+		// Create temporary arrays for sorting:
 		Characters[] temp1 =  playerTeam.getTeam(); // Temp Arrays for merging for turn order
 		Enemies[] temp2 = enemyTeam.getTeam();
 		entities[] temp3;
@@ -104,6 +125,8 @@ public class combatFlow {
 		
 		System.arraycopy(temp1, 0, turnOrder, 0, temp1.length); // Merge the player team and the enemy team to determine turn order
 		System.arraycopy(temp2, 0, turnOrder, temp1.length, temp2.length);
+		//
+		
 		
 		
 		
@@ -125,7 +148,10 @@ public class combatFlow {
 			}
 		}
 		turnOrder = temp3; // Reinitialize.
+		// Speed Adjusted
 		
+		
+		// Reinitialize and set variables
 		temp3 = new entities[8]; // Reinitialize temp array for turn sorting.
 		for (int i = 0; i < temp3.length - 1; i++) {
 			temp3[i] = new entities();
@@ -137,10 +163,17 @@ public class combatFlow {
 		for (entities now : turnOrder) {
 			System.out.println(now.getClass());;
 		}
+		//
 		
+		
+		
+		// Actual Turn Sorting:
 		for (entities entity : turnOrder) {
+			// Reset Variables
 			i = 0;
 			tempCount = 0;
+			
+			
 			// If next element in array is enemy:
 			if (entity instanceof Enemies) {
 				if (count == 0) { // Place it in if empty
@@ -188,6 +221,9 @@ public class combatFlow {
 				}
 			}
 			
+			
+			
+			
 			// If next element in array is character:
 			else if (entity instanceof Characters) {
 				if (count == 0) {  // Place it in if empty
@@ -233,16 +269,25 @@ public class combatFlow {
 					System.out.println(((Characters) entity).getName() + " Placed in Order.");
 				}
 			}
+			// 
+			
+			
+		
+			
 			
 		}
 		turnOrder = temp3; // Finally Ordered Based on Speed.
 		System.out.println("Turn Order Set.");
 		
+		
+		// Testing print statement
 		for (entities now : turnOrder) {
 			System.out.println(now.getClass());;
 		}
 		
 	}
+	
+	
 	
 	public void processEnemyDamage(entities current) {
 		
@@ -353,50 +398,115 @@ public class combatFlow {
 		}
 	}
 	
-	public void runCombat() {
+    //Creating EventHandler   
+    EventHandler<MouseEvent> handler = new EventHandler<MouseEvent>() {
+       
+       @Override  
+       public void handle(MouseEvent event) {  
+          // TODO Auto-generated method stub  
+          if(event.getSource()==enemyPosition1) {  
+        	  tempPlayerChoice(currentCharacter, 1, count);
+        	  count++;
+        	  buttonClicked = true;
+        	  return;
+          }  
+          if(event.getSource()==enemyPosition2) {  
+        	  tempPlayerChoice(currentCharacter, 2, count);
+        	  count++;
+        	  buttonClicked = true;
+        	  return;
+          }  
+          if(event.getSource()==enemyPosition3) {  
+        	  tempPlayerChoice(currentCharacter, 3, count);
+        	  count++;
+        	  buttonClicked = true;
+        	  return;
+          }  
+          if(event.getSource()==enemyPosition4) {  
+        	  tempPlayerChoice(currentCharacter, 4, count);
+        	  count++;
+        	  buttonClicked = true;
+        	  return;
+          }  
+          event.consume();  
+       }  
+          
+    };
+	
+	public int runCombat(int c) {
 		// Play Loop
 			
 			teamDead = playerTeam.checkGameOver();
 			teamDead = enemyTeam.checkGameOver(); // Check initially for player and enemy health errors.
 			
-			int turnCount = 0;
+			buttonClicked = false;
+			count = c;
+
+			entities current;
+			current = turnOrder[count];
 			
-			
-			System.out.println("Starting Combat:");
-			for (entities current : turnOrder) { // Give everyone their turns
-				
-				//System.out.println(current.getClass());
-				current = turnOrder[turnCount];
-				turnCount++;
-				
-				teamDead = playerTeam.checkGameOver();
-				teamDead = enemyTeam.checkGameOver(); // Check every character and enemies turn to see if either team is dead.
-				System.out.println("Turn " + turnCount);
-				/*
-				if (teamDead) {
-					System.out.println("Combat Over");
-				}
-				*/
-				// Enemy turns: 
-				if (current instanceof Enemies) {
-					processEnemyDamage(current);
-				}
-				
-				// Player Turns: 
-				else if (current instanceof Characters) {
-					System.out.println(((Characters) current).getName() + "'s Turn.");
-					currentCharacter = (Characters) current;
-					enemyPosition1.setOnAction(event -> tempPlayerChoice(currentCharacter, 1));
-					enemyPosition2.setOnAction(event -> tempPlayerChoice(currentCharacter, 2));
-					enemyPosition3.setOnAction(event -> tempPlayerChoice(currentCharacter, 3));
-					enemyPosition4.setOnAction(event -> tempPlayerChoice(currentCharacter, 4));// Placeholder damage function for testing
-				}
-				
-				
-				
+			// Automated enemy turn processing
+			if (current instanceof Enemies) {
+				processEnemyDamage(current);
+				count++;
+				return count;
 			}
-			System.out.println("Round Over.");
-	
+			
+			// Player turn, waits for button click
+			else if (current instanceof Characters) {
+				
+				if (current instanceof Paladin) {
+					System.out.println(((Characters) current).getName() + "'s Turn.");
+					while (!buttonClicked) {
+						enemyPosition1.setOnMouseClicked(handler);
+						enemyPosition2.setOnMouseClicked(handler);
+						enemyPosition3.setOnMouseClicked(handler);
+						enemyPosition4.setOnMouseClicked(handler);
+					}
+					return count;
+				}
+				else if (current instanceof Assassin) {
+					System.out.println(((Characters) current).getName() + "'s Turn.");
+					while (!buttonClicked) {
+						enemyPosition1.setOnMouseClicked(handler);
+						enemyPosition2.setOnMouseClicked(handler);
+						enemyPosition3.setOnMouseClicked(handler);
+						enemyPosition4.setOnMouseClicked(handler);
+					}
+					return count;
+				}
+					
+				else if (current instanceof Wizard) {
+					System.out.println(((Characters) current).getName() + "'s Turn.");
+					while (!buttonClicked) {
+						enemyPosition1.setOnMouseClicked(handler);
+						enemyPosition2.setOnMouseClicked(handler);
+						enemyPosition3.setOnMouseClicked(handler);
+						enemyPosition4.setOnMouseClicked(handler);
+					}
+					return count;
+				}
+				else if (current instanceof Alchemist) {
+					System.out.println(((Characters) current).getName() + "'s Turn.");
+					while (!buttonClicked) {
+						enemyPosition1.setOnMouseClicked(handler);
+						enemyPosition2.setOnMouseClicked(handler);
+						enemyPosition3.setOnMouseClicked(handler);
+						enemyPosition4.setOnMouseClicked(handler);
+					}
+					return count;
+				}
+			}
+			//System.out.println("Round Over.");
+			
+			else {
+				System.out.println("Round Over.");
+				return count;
+			}
+			
+			// Throwaway return statement to avoid compile errors
+			return count;
+			
 	}
 	}
 }

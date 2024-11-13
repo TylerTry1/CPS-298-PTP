@@ -18,7 +18,7 @@ public class Paladin extends Characters {
         accuracy = 100;
         crit_chance = 32;
         dodge_chance = 0;
-        position = 2;
+        position = 1;
         speed = 3;
     }
 

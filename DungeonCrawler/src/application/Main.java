@@ -1,5 +1,8 @@
 package application;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import application.combatFlow.combatControl;
 import javafx.animation.FadeTransition;
 import javafx.application.Application;
@@ -48,6 +51,7 @@ public class Main extends Application {
 	Media mediaPath2 = new Media(menuMusic);
 	String shopMusic = getClass().getResource("/Music/ShopTheme.mp3").toExternalForm();
 	Media mediaPath3 = new Media(shopMusic);
+	int count = 0; // For use in combat
 	
 	Font KingArthurLegend = Font.loadFont(getClass().getResourceAsStream("/fonts/KingArthurLegend.ttf"), 40);
 	Font Ubuntu = Font.loadFont(getClass().getResourceAsStream("/fonts/UbuntuRegular.ttf"), 40);
@@ -1440,10 +1444,72 @@ public class Main extends Application {
 			mediaPlayer.stop(); // Stop the music when the stage is closed
 		});
 		
-		Boolean finished = false;
+		
 		combatControl flow = new combatControl(enemyPosition1, enemyPosition2, enemyPosition3, enemyPosition4);
 		flow.determineTurnOrder();
-		flow.runCombat();
+		entities[] tempTurnOrder = flow.getTurnOrder();
+		playerTeamArray tempPTeamArray = flow.getPlayerTeamArray();
+		Characters[] tempPTeam = tempPTeamArray.getTeam();
+		enemyTeam tempETeamArray = flow.getEnemyTeam();
+		Enemies[] tempETeam = tempETeamArray.getTeam();
+		count = 0;
+		
+		// This task checks if either team is dead, and if not
+		// runs the primary combat control method.
+		TimerTask task = new TimerTask() {
+
+			@Override
+			public void run() {
+				if (tempPTeamArray.checkGameOver() || tempETeamArray.checkGameOver()) {
+					System.out.println("Game Over.");
+				}
+					
+				else {
+						
+					// Reset turn counter if order has been run through
+					if (count > 7)
+						count = 0;
+					
+					count = flow.runCombat(count);
+				}
+			}
+		};
+		
+		Timer timer = new Timer();
+		
+		System.out.println("Starting Combat:");
+		timer.schedule(task, 2000, 5000);
+		
+		
+		
+		// This will be what we implement and add animation stuff to 
+		// when we get to that stage: 
+		/*
+		Timeline fiveSecondsCombat = new Timeline(
+                			new KeyFrame(Duration.seconds(5), 
+                			new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+                //System.out.println("this is called every 5 seconds on UI thread");
+				if (tempPTeamArray.checkGameOver() || tempETeamArray.checkGameOver()) {
+					System.out.println("Game Over.");
+				}
+					
+				else {
+						
+					// Reset turn counter if order has been run through
+					if (count > 7)
+						count = 0;
+					
+					count = flow.runCombat(count);
+				}
+            }
+        }));
+		fiveSecondsCombat.setCycleCount(Timeline.INDEFINITE);
+		fiveSecondsCombat.play();
+		*/
+
 
 	}
 	private void shop(Stage primaryStage) {

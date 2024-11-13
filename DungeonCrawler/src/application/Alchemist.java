@@ -18,7 +18,7 @@ public class Alchemist extends Characters {
         accuracy = 70;
         crit_chance = 14;
         dodge_chance = 0;
-        position = 1;
+        position = 4;
         speed = 5;
     }
 	// Acid Puddle: Creates a puddle that poisons enemies

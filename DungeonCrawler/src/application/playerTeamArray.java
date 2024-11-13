@@ -24,16 +24,21 @@ public class playerTeamArray {
 	
 	boolean checkGameOver() {
 		boolean teamDead = false;
+		int downedCount = 0;
 		for (Object character : this.playerTeam) {
 			if (((Characters) character).getHealth() != 0) {
 				continue;
 			}
 			else {
-				teamDead = true;
-				return teamDead;
+				downedCount++;
 			}
 		}
-		return teamDead;
+		if (downedCount == 4) {
+			teamDead = true;
+			return teamDead;
+		}
+		else
+			return teamDead;
 	}
 	
 	Characters[] getTeam() {
