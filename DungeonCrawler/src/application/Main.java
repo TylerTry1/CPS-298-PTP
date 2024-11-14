@@ -38,6 +38,7 @@ import javafx.scene.paint.Stop;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -66,29 +67,56 @@ public class Main extends Application {
 
 	private void initialization(Stage primaryStage) { // this scene is used specifically so that we can make our application full screen.
 	    Image cursorImage = new Image("GUIAssets/cursor.png");
+
 	    Cursor customCursor = Cursor.cursor(cursorImage.getUrl());
-	    
+	    ImageView enterGame = new ImageView(new Image("shopAssets/itemForSaleFrame.png"));
 	    Button play = new Button("Enter Game");
+	    Text enterGameText = new Text ("Enter Game");
+	    enterGameText.setFont(DwarvenAxe);
+	    enterGameText.setFill(Color.web("#d5d5d5"));
 	    play.setOnAction(e -> {homePage(primaryStage);});
 //        FadeUtils.transitionBetweenStages(primaryStage, loadingStage, () -> homePage(primaryStage));});
 	    // VBox 1 for first set of buttons
 	    VBox playbutton = new VBox(10);
 	    playbutton.getChildren().addAll(play);
+	    
+	    enterGame.setLayoutX(310);
+	    enterGame.setLayoutY(635); 
+	    enterGame.setScaleX(.5);
+	    enterGame.setScaleY(.8);
+	    enterGame.setRotate(90);
+	    enterGame.setMouseTransparent(true);
+	    
+	    enterGameText.setLayoutX(910);
+	    enterGameText.setLayoutY(975); 
+	    enterGameText.setScaleX(2);
+	    enterGameText.setScaleY(2);
+	    enterGameText.setMouseTransparent(true);
+	    
 	    playbutton.setSpacing(10);
 	    playbutton.setPadding(new Insets(20));
 	    playbutton.setLayoutX(768); // Adjust X for play button
-	    playbutton.setLayoutY(930); // Adjust Y for play button
+	    playbutton.setLayoutY(880); // Adjust Y for play button
+	    playbutton.setOpacity(0);
+	    
+	    playbutton.setOnMouseEntered(e -> {enterGameText.setFill(Color.web("#d10000"));});
+	    playbutton.setOnMouseExited(e -> {enterGameText.setFill(Color.web("#d5d5d5"));});
+
 	    Image image = new Image("applicationImagesBackgrounds/EndlessMountain16x9.png");
 	    BackgroundSize size = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false);
 	    BackgroundImage backgroundImage = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT,
 	    BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, size);
+	    
 	    Pane root = new Pane();
+	    root.getChildren().addAll(enterGame);
 	    root.getChildren().addAll(playbutton); // Add both button lists
+	    root.getChildren().addAll(enterGameText);
+	    
 	    root.setBackground(new Background(backgroundImage));
 	    // Set button styles and sizes for both sets of buttons
 	    playbutton.getChildren().forEach(button -> {
 	        ((Button) button).prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.2)); // Adjust size
-	        ((Button) button).prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.08));});
+	        ((Button) button).prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.12));});
 	    Scene scene = new Scene(root, 1920, 1080); // Screen size
 	    // Ensure the stage stays in fullscreen mode when the scene changes
 	    primaryStage.sceneProperty().addListener((obs, oldScene, newScene) -> {
@@ -103,6 +131,7 @@ public class Main extends Application {
 	
 	private void homePage(Stage primaryStage) {
 	    Image cursorImage = new Image("GUIAssets/cursor.png");
+	    ImageView enterGame = new ImageView(new Image("shopAssets/itemForSaleFrame.png"));
 	    Cursor customCursor = Cursor.cursor(cursorImage.getUrl());
 
 	    Media media = new Media(menuMusic);
@@ -114,12 +143,35 @@ public class Main extends Application {
 	    // First set of buttons
 	    Button play = new Button("Begin New Journey");
 	    Button tutorial = new Button("Tutorial");
-	    Button unlocks = new Button("Unlocks");
-	    Button stats = new Button("Stats");
+//	    Button unlocks = new Button("Unlocks");
+//	    Button stats = new Button("Stats");
 	    Button credits = new Button("Credits");
 	    Button quit = new Button("Exit Game");
 	    Button shop = new Button("Shop");
 
+	    Text enterGameText = new Text ("Begin New Journey");
+	    
+	    enterGameText.setFont(DwarvenAxe);
+	    enterGameText.setFill(Color.web("#d5d5d5"));
+	    
+	    enterGame.setLayoutX(310);
+	    enterGame.setLayoutY(635); 
+	    enterGame.setScaleX(.5);
+	    enterGame.setScaleY(.8);
+	    enterGame.setRotate(90);
+	    enterGame.setMouseTransparent(true);
+//	    enterGame.setVisible(false);
+	    
+	    enterGameText.setLayoutX(855);
+	    enterGameText.setLayoutY(975); 
+	    enterGameText.setScaleX(1.4);
+	    enterGameText.setScaleY(2);
+	    enterGameText.setMouseTransparent(true);
+	    
+	    
+	    
+	    play.setOnMouseEntered(e -> {enterGameText.setFill(Color.web("#d10000"));});
+	    play.setOnMouseExited(e -> {enterGameText.setFill(Color.web("#d5d5d5"));});
 	    play.setOnAction(e -> {
 	        battleScene(primaryStage);
 	        mediaPlayer.stop();
@@ -129,14 +181,14 @@ public class Main extends Application {
 	        textTutorial(primaryStage);
 	        mediaPlayer.stop();
 	    });
-	    unlocks.setOnAction(e -> {
-	        unlocks(primaryStage);
-	        mediaPlayer.stop();
-	    });
-	    stats.setOnAction(e -> {
-	        stats(primaryStage);
-	        mediaPlayer.stop();
-	    });
+//	    unlocks.setOnAction(e -> {
+//	        unlocks(primaryStage);
+//	        mediaPlayer.stop();
+//	    });
+//	    stats.setOnAction(e -> {
+//	        stats(primaryStage);
+//	        mediaPlayer.stop();
+//	    });
 	    credits.setOnAction(e -> {
 	        credits(primaryStage);
 	        mediaPlayer.stop();
@@ -156,15 +208,18 @@ public class Main extends Application {
 	    playbutton.setSpacing(10);
 	    playbutton.setPadding(new Insets(20));
 	    playbutton.setLayoutX(768); // Adjust X for play button
-	    playbutton.setLayoutY(930); // Adjust Y for play button
+	    playbutton.setLayoutY(900); // Adjust Y for play button
+	    playbutton.setScaleX(1.05);
+	    playbutton.setScaleY(1.6);
+	    playbutton.setOpacity(0);
 
 	    // VBox 2 for second set of buttons
 	    VBox buttonBox2 = new VBox(10);
-	    buttonBox2.getChildren().addAll(tutorial, unlocks, stats, credits, quit);
+	    buttonBox2.getChildren().addAll(tutorial, credits, quit); // unlocks, stats,
 	    buttonBox2.setSpacing(10);
 	    buttonBox2.setPadding(new Insets(20));
 	    buttonBox2.setLayoutX(7); // Adjust X for second VBox
-	    buttonBox2.setLayoutY(750); // Adjust Y for second VBox
+	    buttonBox2.setLayoutY(880); // Adjust Y for second VBox
 
 	    VBox shopTesting = new VBox(10);
 	    shopTesting.getChildren().addAll(shop);
@@ -182,8 +237,14 @@ public class Main extends Application {
 
 	    // Use a Pane to allow free positioning
 	    Pane root = new Pane();
-	    root.getChildren().addAll(playbutton, buttonBox2, shopTesting); // Add both button lists
+	 // Add both button lists
+	    root.getChildren().addAll(enterGame);
+	    root.getChildren().addAll(enterGameText);
+	    root.getChildren().addAll(playbutton, buttonBox2, shopTesting);
+	    
+	    
 	    root.setBackground(new Background(backgroundImage));
+	    
 
 	    // Set button styles and sizes for both sets of buttons
 	    playbutton.getChildren().forEach(button -> {
@@ -218,7 +279,11 @@ public class Main extends Application {
 		
 		Image cursorImage = new Image("GUIAssets/cursor.png");
 		Cursor customCursor = Cursor.cursor(cursorImage.getUrl());
-
+		
+		String heroName = "hero name Variable"; // this will be used for our hero's name to change. // var
+		String enemyName = "enemy name Variable"; // var
+		
+		
 		// music player
 		Media media = new Media(combatMusic);
 		MediaPlayer mediaPlayer = new MediaPlayer(media);
@@ -245,16 +310,16 @@ public class Main extends Application {
 		skillbutton3.setToggleGroup(skillButtonGroup);
 		RadioButton skillbutton4 = new RadioButton("skill 4");
 		skillbutton4.setToggleGroup(skillButtonGroup);
-		RadioButton movebutton = new RadioButton("move");
-		movebutton.setToggleGroup(skillButtonGroup);
+//		RadioButton movebutton = new RadioButton("move");
+//		movebutton.setToggleGroup(skillButtonGroup);
 		RadioButton passTurnButton = new RadioButton("pass turn");
 		passTurnButton.setToggleGroup(skillButtonGroup);
 		 
 		Button menuBackButton = new Button ("Back");
 		Button menuQuitButton = new Button ("Quit Game");
 		
-		Text heroName = new Text("Hero Name");
-		Text enemyName = new Text("Enemy Name");
+		Text heroNameText = new Text(heroName);
+		Text enemyNameText = new Text(enemyName);
 		Text enemyBleedResistanceNumberText = new Text("BLD");
 		Text enemyBlightResistanceNumberText = new Text("BLGT");
 		Text enemyBurnResistanceNumberText = new Text("BRN");
@@ -277,62 +342,68 @@ public class Main extends Application {
 		Text enemyHPPos2 = new Text ("enemyHPPos2"); // var
 		Text enemyHPPos3 = new Text ("enemyHPPos3"); // var
 		Text enemyHPPos4 = new Text ("enemyHPPos4"); // var
-		Text roundNumberText = new Text ("Round #"); // var
+		Text roundNumberText = new Text ("Round" ); // var + roundCounter
+		
+		Text moveDescriptionText = new Text ("DMG:  CRIT:(critpercent)"); // var
+		Text moveNameText = new Text ("movename"); // var
 		
 		Text menuQuitGameText = new Text ("Quit Game");
 		
-		heroName.setFont(KingArthurLegend);
-		heroName.setFill(Color.web("#4c4c4c"));
-		enemyName.setFont(KingArthurLegend);
-		enemyName.setFill(Color.web("#4c4c4c"));
-		enemyBleedResistanceNumberText.setFont(Ubuntu);
+		heroNameText.setFont(KingArthurLegend);
+		heroNameText.setFill(Color.web("#FFEB80"));
+		enemyNameText.setFont(KingArthurLegend);
+		enemyNameText.setFill(Color.web("d10000"));
+		enemyBleedResistanceNumberText.setFont(DwarvenAxe);
 		enemyBleedResistanceNumberText.setFill(Color.web("#bc1313"));
-		enemyBlightResistanceNumberText.setFont(Ubuntu);
+		enemyBlightResistanceNumberText.setFont(DwarvenAxe);
 		enemyBlightResistanceNumberText.setFill(Color.web("#437c36"));
-		enemyBurnResistanceNumberText.setFont(Ubuntu);
+		enemyBurnResistanceNumberText.setFont(DwarvenAxe);
 		enemyBurnResistanceNumberText.setFill(Color.web("#ca7430"));
-		enemyStunResistanceNumberText.setFont(Ubuntu);
+		enemyStunResistanceNumberText.setFont(DwarvenAxe);
 		enemyStunResistanceNumberText.setFill(Color.web("#cfc257"));
-		enemyMoveResistanceNumberText.setFont(Ubuntu);
+		enemyMoveResistanceNumberText.setFont(DwarvenAxe);
 		enemyMoveResistanceNumberText.setFill(Color.web("#3f87b7"));
-		enemyDebuffResistanceNumberText.setFont(Ubuntu);
+		enemyDebuffResistanceNumberText.setFont(DwarvenAxe);
 		enemyDebuffResistanceNumberText.setFill(Color.web("#d5661b"));
-		enemyDeathResistanceNumberText.setFont(Ubuntu);
+		enemyDeathResistanceNumberText.setFont(DwarvenAxe);
 		enemyDeathResistanceNumberText.setFill(Color.web("#8e0000"));
 		roundNumberText.setFont(KingArthurLegend);
-		roundNumberText.setFill(Color.web("#4c4c4c"));
-		enemyBleedResistanceNumber.setFont(Ubuntu);
-		enemyBleedResistanceNumber.setFill(Color.web("#4c4c4c"));
-		enemyBlightResistanceNumber.setFont(Ubuntu);
-		enemyBlightResistanceNumber.setFill(Color.web("#4c4c4c"));
-		enemyBurnResistanceNumber.setFont(Ubuntu);
-		enemyBurnResistanceNumber.setFill(Color.web("#4c4c4c"));
-		enemyStunResistanceNumber.setFont(Ubuntu);
-		enemyStunResistanceNumber.setFill(Color.web("#4c4c4c"));
-		enemyMoveResistanceNumber.setFont(Ubuntu);
-		enemyMoveResistanceNumber.setFill(Color.web("#4c4c4c"));
-		enemyDebuffResistanceNumber.setFont(Ubuntu);
-		enemyDebuffResistanceNumber.setFill(Color.web("#4c4c4c"));
-		enemyDeathResistanceNumber.setFont(Ubuntu);
-		enemyDeathResistanceNumber.setFill(Color.web("#4c4c4c"));
-		heroHPPos4.setFont(Ubuntu);
+		roundNumberText.setFill(Color.web("#d5d5d5"));
+		enemyBleedResistanceNumber.setFont(DwarvenAxe);
+		enemyBleedResistanceNumber.setFill(Color.web("#d5d5d5"));
+		enemyBlightResistanceNumber.setFont(DwarvenAxe);
+		enemyBlightResistanceNumber.setFill(Color.web("#d5d5d5"));
+		enemyBurnResistanceNumber.setFont(DwarvenAxe);
+		enemyBurnResistanceNumber.setFill(Color.web("#d5d5d5"));
+		enemyStunResistanceNumber.setFont(DwarvenAxe);
+		enemyStunResistanceNumber.setFill(Color.web("#d5d5d5"));
+		enemyMoveResistanceNumber.setFont(DwarvenAxe);
+		enemyMoveResistanceNumber.setFill(Color.web("#d5d5d5"));
+		enemyDebuffResistanceNumber.setFont(DwarvenAxe);
+		enemyDebuffResistanceNumber.setFill(Color.web("#d5d5d5"));
+		enemyDeathResistanceNumber.setFont(DwarvenAxe);
+		enemyDeathResistanceNumber.setFill(Color.web("#d5d5d5"));
+		heroHPPos4.setFont(DwarvenAxe);
 		heroHPPos4.setFill(Color.web("#bc1313"));
-		heroHPPos3.setFont(Ubuntu);
+		heroHPPos3.setFont(DwarvenAxe);
 		heroHPPos3.setFill(Color.web("#bc1313"));
-		heroHPPos2.setFont(Ubuntu);
+		heroHPPos2.setFont(DwarvenAxe);
 		heroHPPos2.setFill(Color.web("#bc1313"));
-		heroHPPos1.setFont(Ubuntu);
+		heroHPPos1.setFont(DwarvenAxe);
 		heroHPPos1.setFill(Color.web("#bc1313"));
-		enemyHPPos1.setFont(Ubuntu);
+		enemyHPPos1.setFont(DwarvenAxe);
 		enemyHPPos1.setFill(Color.web("#bc1313"));
-		enemyHPPos2.setFont(Ubuntu);
+		enemyHPPos2.setFont(DwarvenAxe);
 		enemyHPPos2.setFill(Color.web("#bc1313"));
-		enemyHPPos3.setFont(Ubuntu);
+		enemyHPPos3.setFont(DwarvenAxe);
 		enemyHPPos3.setFill(Color.web("#bc1313"));
-		enemyHPPos4.setFont(Ubuntu);
+		enemyHPPos4.setFont(DwarvenAxe);
 		enemyHPPos4.setFill(Color.web("#bc1313"));
-		
-
+		moveDescriptionText.setFont(DwarvenAxe); 
+		moveDescriptionText.setFill(Color.web("#d5d5d5"));
+		moveNameText.setFont(DwarvenAxe); 
+		moveNameText.setFill(Color.web("#d5d5d5"));
+		moveNameText.setTextAlignment(TextAlignment.CENTER);
 		
 		menuQuitGameText.setFont(KingArthurLegend);
 		menuQuitGameText.setFill(Color.web("#cfc257"));
@@ -355,18 +426,18 @@ public class Main extends Application {
 	                new Stop(1, Color.rgb(50, 50, 50)) // End color (bottom, darker gray)
 	        );
 		BoxBlur blur = new BoxBlur(10, 10, 3);
-		Rectangle heroHealthBarRedRectangle4 = new Rectangle(100, 15); // Width, Height, Fill Color
-		Rectangle heroHealthBarRedRectangle3 = new Rectangle(100, 15);
-		Rectangle heroHealthBarRedRectangle2 = new Rectangle(100, 15);
-		Rectangle heroHealthBarRedRectangle1 = new Rectangle(100, 15);
+		Rectangle heroHealthBarRedRectangle4 = new Rectangle(100, 15); // Width, Height, Fill Color // var
+		Rectangle heroHealthBarRedRectangle3 = new Rectangle(100, 15); // var
+		Rectangle heroHealthBarRedRectangle2 = new Rectangle(100, 15); // var
+		Rectangle heroHealthBarRedRectangle1 = new Rectangle(100, 15); // var
 		Rectangle heroHealthBarBlackRectangle4 = new Rectangle(100, 15); // Width, Height, Fill Color
 		Rectangle heroHealthBarBlackRectangle3 = new Rectangle(100, 15);
 		Rectangle heroHealthBarBlackRectangle2 = new Rectangle(100, 15);
 		Rectangle heroHealthBarBlackRectangle1 = new Rectangle(100, 15);
-		Rectangle enemyHealthBarRedRectangle1 = new Rectangle(100, 15);
-		Rectangle enemyHealthBarRedRectangle2 = new Rectangle(100, 15);
-		Rectangle enemyHealthBarRedRectangle3 = new Rectangle(100, 15);
-		Rectangle enemyHealthBarRedRectangle4 = new Rectangle(100, 15);
+		Rectangle enemyHealthBarRedRectangle1 = new Rectangle(100, 15); // var
+		Rectangle enemyHealthBarRedRectangle2 = new Rectangle(100, 15); // var
+		Rectangle enemyHealthBarRedRectangle3 = new Rectangle(100, 15); // var
+		Rectangle enemyHealthBarRedRectangle4 = new Rectangle(100, 15); // var
 		Rectangle enemyHealthBarBlackRectangle1 = new Rectangle(100, 15);
 		Rectangle enemyHealthBarBlackRectangle2 = new Rectangle(100, 15);
 		Rectangle enemyHealthBarBlackRectangle3 = new Rectangle(100, 15);
@@ -421,10 +492,10 @@ public class Main extends Application {
 	    enemyHealthBarBlackRectangle4.setArcHeight(5);
 		// -------------------------------------------------------------
 		// Images for everything
-		ImageView enemyInPosition1 = new ImageView(new Image("applicationImagesEnemySprites/Goblin Axeman/Goblin_axeman_1_Idle.png"));
-		ImageView enemyInPosition2 = new ImageView(new Image("applicationImagesEnemySprites/Goblin Axeman/Goblin_axeman_1_Idle.png"));
-		ImageView enemyInPosition3 = new ImageView(new Image("applicationImagesEnemySprites/Goblin Archer/Goblin_Archer_1_Idle.png"));
-		ImageView enemyInPosition4 = new ImageView(new Image("applicationImagesEnemySprites/Goblin Shaman/Goblin_Shaman_1_Idle.png"));
+		ImageView enemyInPosition1 = new ImageView(new Image("applicationImagesEnemySprites/Goblin Axeman/Goblin_axeman_1_Idle.png")); // var
+		ImageView enemyInPosition2 = new ImageView(new Image("applicationImagesEnemySprites/Goblin Axeman/Goblin_axeman_1_Idle.png")); // var
+		ImageView enemyInPosition3 = new ImageView(new Image("applicationImagesEnemySprites/Goblin Archer/Goblin_Archer_1_Idle.png")); // var
+		ImageView enemyInPosition4 = new ImageView(new Image("applicationImagesEnemySprites/Goblin Shaman/Goblin_Shaman_1_Idle.png")); // var
 		
 		ImageView heroInPosition1 = new ImageView(new Image("applicationImagesPlayerSprites/Paladin_Idle.png"));
 		ImageView heroInPosition2 = new ImageView(new Image("applicationImagesPlayerSprites/Assassin_Idle.png"));
@@ -435,10 +506,10 @@ public class Main extends Application {
 		ImageView skillbuttonimage2 = new ImageView(new Image("abilityIconsPaladin/divineSmite.png")); // var
 		ImageView skillbuttonimage3 = new ImageView(new Image("abilityIconsPaladin/auraOfCourage.png")); // var
 		ImageView skillbuttonimage4 = new ImageView(new Image("abilityIconsPaladin/shieldOfFaith.png")); // var
-		ImageView skillbuttonimagemove = new ImageView(new Image("GUIAssets/skillbuttonimagemove.png"));
+//		ImageView skillbuttonimagemove = new ImageView(new Image("GUIAssets/skillbuttonimagemove.png"));
 		ImageView skillbuttonimagepass = new ImageView(new Image("GUIAssets/skillbuttonimagepass.png"));
-		ImageView heroNamePlate = new ImageView(new Image("GUIAssets/nameplate.png"));
-		ImageView enemyNamePlate = new ImageView(new Image("GUIAssets/nameplate.png"));
+		ImageView heroNameTextPlate = new ImageView(new Image("GUIAssets/nameplate.png"));
+		ImageView enemyNameTextPlate = new ImageView(new Image("GUIAssets/nameplate.png"));
 		ImageView turnOrderBarLeftAndRight = new ImageView(new Image("GUIAssets/turnOrderBarLeftAndRight.png"));
 		ImageView heroSelectionIndicator4 = new ImageView(new Image("GUIAssets/CharacterSelectionIndicatorSize1.png"));
 		ImageView heroSelectionIndicator3 = new ImageView(new Image("GUIAssets/CharacterSelectionIndicatorSize1.png"));
@@ -449,19 +520,19 @@ public class Main extends Application {
 		ImageView enemySelectionIndicator3 = new ImageView(new Image("GUIAssets/enemySelectionIndicatorSize1.png"));
 		ImageView enemySelectionIndicator4 = new ImageView(new Image("GUIAssets/enemySelectionIndicatorSize1.png"));
 		
-		ImageView heroTurnTicker1 = new ImageView(new Image("GUIAssets/turnticker.png"));
-		ImageView heroTurnTicker2 = new ImageView(new Image("GUIAssets/turnticker.png"));
-		ImageView heroTurnTicker3 = new ImageView(new Image("GUIAssets/turnticker.png"));
-		ImageView heroTurnTicker4 = new ImageView(new Image("GUIAssets/turnticker.png"));
-		ImageView enemyTurnTicker1 = new ImageView(new Image("GUIAssets/turnticker.png"));
-		ImageView enemyTurnTicker2 = new ImageView(new Image("GUIAssets/turnticker.png"));
-		ImageView enemyTurnTicker3 = new ImageView(new Image("GUIAssets/turnticker.png"));
-		ImageView enemyTurnTicker4 = new ImageView(new Image("GUIAssets/turnticker.png"));
+		ImageView heroTurnTicker1 = new ImageView(new Image("GUIAssets/turnticker.png")); // var
+		ImageView heroTurnTicker2 = new ImageView(new Image("GUIAssets/turnticker.png")); // var
+		ImageView heroTurnTicker3 = new ImageView(new Image("GUIAssets/turnticker.png")); // var
+		ImageView heroTurnTicker4 = new ImageView(new Image("GUIAssets/turnticker.png")); // var
+		ImageView enemyTurnTicker1 = new ImageView(new Image("GUIAssets/turnticker.png")); // var
+		ImageView enemyTurnTicker2 = new ImageView(new Image("GUIAssets/turnticker.png")); // var
+		ImageView enemyTurnTicker3 = new ImageView(new Image("GUIAssets/turnticker.png")); // var
+		ImageView enemyTurnTicker4 = new ImageView(new Image("GUIAssets/turnticker.png")); // var
 		ImageView skillButtonSelectedFrame1 = new ImageView(new Image("GUIAssets/skillButtonSelectedFrame.png"));
 		ImageView skillButtonSelectedFrame2 = new ImageView(new Image("GUIAssets/skillButtonSelectedFrame.png"));
 		ImageView skillButtonSelectedFrame3 = new ImageView(new Image("GUIAssets/skillButtonSelectedFrame.png"));
 		ImageView skillButtonSelectedFrame4 = new ImageView(new Image("GUIAssets/skillButtonSelectedFrame.png"));
-		ImageView skillButtonMoveSelectedFrame = new ImageView(new Image("GUIAssets/skillButtonSelectedFrame.png"));
+//		ImageView skillButtonMoveSelectedFrame = new ImageView(new Image("GUIAssets/skillButtonSelectedFrame.png"));
 		
 		ImageView enemyBLDResistanceIcon = new ImageView(new Image("GUIAssets/BLDResistance.png"));
 		ImageView enemyBLGTResistanceIcon = new ImageView(new Image("GUIAssets/BLGTResistance.png"));
@@ -476,7 +547,7 @@ public class Main extends Application {
 		ImageView menuButtonFrame1 = new ImageView(new Image("GUIAssets/menuButtonFrame.png"));
 		
 		
-		Image backgroundImagesetup = new Image("combatBackgrounds/cryptsRoomWallDrain.png");
+		Image backgroundImagesetup = new Image("combatBackgrounds/cryptsRoomWallDrain.png");  // var
 		BackgroundSize size = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false); // background image
 		BackgroundPosition customPosition = new BackgroundPosition(Side.LEFT, 0, true, Side.TOP, 0, true); // fit to top left
 		BackgroundImage backgroundImagePayoff = new BackgroundImage(backgroundImagesetup, BackgroundRepeat.NO_REPEAT,
@@ -536,7 +607,7 @@ public class Main extends Application {
 		HBox enemyPositions = new HBox(50);
 		enemyPositions.getChildren().addAll(enemyPosition1, enemyPosition2, enemyPosition3, enemyPosition4);
 		HBox skillButtons = new HBox(10);
-		skillButtons.getChildren().addAll(skillbutton1, skillbutton2, skillbutton3, skillbutton4, movebutton);
+		skillButtons.getChildren().addAll(skillbutton1, skillbutton2, skillbutton3, skillbutton4);// ,movebutton
 		HBox heroHealthBarRedRectangles = new HBox(105);
 		heroHealthBarRedRectangles.getChildren().addAll(heroHealthBarRedRectangle4,heroHealthBarRedRectangle3,heroHealthBarRedRectangle2,heroHealthBarRedRectangle1);
 		HBox heroHealthBarBlackRectangles = new HBox(105);
@@ -571,8 +642,8 @@ public class Main extends Application {
 		skillbuttonimage3.setFitHeight(0.09 * 1080);
 		skillbuttonimage4.setFitWidth(0.06 * 1920); // placeholder
 		skillbuttonimage4.setFitHeight(0.09 * 1080);
-		skillbuttonimagemove.setFitWidth(0.06 * 1920);
-		skillbuttonimagemove.setFitHeight(0.051 * 1920);
+//		skillbuttonimagemove.setFitWidth(0.06 * 1920);
+//		skillbuttonimagemove.setFitHeight(0.051 * 1920);
 		
 		skillButtonSelectedFrame1.setFitWidth(0.06 * 1920);
 		skillButtonSelectedFrame1.setFitHeight(0.09 * 1080);
@@ -582,9 +653,9 @@ public class Main extends Application {
 		skillButtonSelectedFrame3.setFitHeight(0.09 * 1080);
 		skillButtonSelectedFrame4.setFitWidth(0.06 * 1920);
 		skillButtonSelectedFrame4.setFitHeight(0.09 * 1080);
-		skillButtonMoveSelectedFrame.setFitWidth(0.06 * 1920);
-		skillButtonMoveSelectedFrame.setFitHeight(0.09 * 1080);
-		
+//		skillButtonMoveSelectedFrame.setFitWidth(0.06 * 1920);
+//		skillButtonMoveSelectedFrame.setFitHeight(0.09 * 1080);
+	
 
 		// -------------------------------------------------------------
 		enemyBLDResistanceIcon.setFitWidth(0.03 * 1920); 
@@ -622,7 +693,7 @@ public class Main extends Application {
 		enemySelectionIndicator2.setMouseTransparent(true);
 		enemySelectionIndicator3.setMouseTransparent(true);
 		enemySelectionIndicator4.setMouseTransparent(true);
-		skillbuttonimagemove.setMouseTransparent(true);
+//		skillbuttonimagemove.setMouseTransparent(true);
 		skillbuttonimagepass.setMouseTransparent(true);
 		menuBackButtonImage.setMouseTransparent(true);
 		menuQuitGameText.setMouseTransparent(true);
@@ -630,12 +701,12 @@ public class Main extends Application {
 		skillButtonSelectedFrame2.setMouseTransparent(true);
 		skillButtonSelectedFrame3.setMouseTransparent(true);
 		skillButtonSelectedFrame4.setMouseTransparent(true);
-		skillButtonMoveSelectedFrame.setMouseTransparent(true);
+//		skillButtonMoveSelectedFrame.setMouseTransparent(true);
 		skillButtonSelectedFrame1.setVisible(false);
 		skillButtonSelectedFrame2.setVisible(false);
 		skillButtonSelectedFrame3.setVisible(false);
 		skillButtonSelectedFrame4.setVisible(false);
-		skillButtonMoveSelectedFrame.setVisible(false);
+//		skillButtonMoveSelectedFrame.setVisible(false);
 		
 		enemyBLDResistanceIcon.setVisible(false);
 		enemyBLGTResistanceIcon.setVisible(false);
@@ -659,6 +730,8 @@ public class Main extends Application {
 		enemyDebuffResistanceNumber.setVisible(false);
 		enemyDeathResistanceNumber.setVisible(false);
 		
+		enemyNameText.setVisible(false);
+		
 		heroPosition4.setOpacity(0);
 		heroPosition3.setOpacity(0);
 		heroPosition2.setOpacity(0);
@@ -672,7 +745,7 @@ public class Main extends Application {
 		skillbutton2.setOpacity(0);
 		skillbutton3.setOpacity(0);
 		skillbutton4.setOpacity(0);
-		movebutton.setOpacity(0);
+//		movebutton.setOpacity(0);
 		passTurnButton.setOpacity(0);
 		
 		menuBackButton.setOpacity(0);
@@ -684,38 +757,39 @@ public class Main extends Application {
 			skillButtonSelectedFrame2.setVisible(false);
 			skillButtonSelectedFrame3.setVisible(false);
 			skillButtonSelectedFrame4.setVisible(false);
-			skillButtonMoveSelectedFrame.setVisible(false);
+//			skillButtonMoveSelectedFrame.setVisible(false);
 		});
 		skillbutton2.setOnAction(e -> {
 			skillButtonSelectedFrame1.setVisible(false);
 			skillButtonSelectedFrame2.setVisible(true);
 			skillButtonSelectedFrame3.setVisible(false);
 			skillButtonSelectedFrame4.setVisible(false);
-			skillButtonMoveSelectedFrame.setVisible(false);
+//			skillButtonMoveSelectedFrame.setVisible(false);
 		});
 		skillbutton3.setOnAction(e -> {
 			skillButtonSelectedFrame1.setVisible(false);
 			skillButtonSelectedFrame2.setVisible(false);
 			skillButtonSelectedFrame3.setVisible(true);
 			skillButtonSelectedFrame4.setVisible(false);
-			skillButtonMoveSelectedFrame.setVisible(false);
+//			skillButtonMoveSelectedFrame.setVisible(false);
 		});
 		skillbutton4.setOnAction(e -> {
 			skillButtonSelectedFrame1.setVisible(false);
 			skillButtonSelectedFrame2.setVisible(false);
 			skillButtonSelectedFrame3.setVisible(false);
 			skillButtonSelectedFrame4.setVisible(true);
-			skillButtonMoveSelectedFrame.setVisible(false);
+//			skillButtonMoveSelectedFrame.setVisible(false);
 		});
-		movebutton.setOnAction(e -> {
-			skillButtonSelectedFrame1.setVisible(false);
-			skillButtonSelectedFrame2.setVisible(false);
-			skillButtonSelectedFrame3.setVisible(false);
-			skillButtonSelectedFrame4.setVisible(false);
-			skillButtonMoveSelectedFrame.setVisible(true);
-		});
+//		movebutton.setOnAction(e -> {
+//			skillButtonSelectedFrame1.setVisible(false);
+//			skillButtonSelectedFrame2.setVisible(false);
+//			skillButtonSelectedFrame3.setVisible(false);
+//			skillButtonSelectedFrame4.setVisible(false);
+//			skillButtonMoveSelectedFrame.setVisible(true);
+//		});
 		// -------------------------------------------------------------
 		//make images dissapear or appear on button hover.
+		// none of this is correct. these need to be changed so that when a move is selected, it only shows visible on which enemies can be attacked.  // var
 		heroPosition1.setOnMouseEntered(e -> {heroSelectionIndicator1.setVisible(true);
 		fadeInHeroSelectionIndicator1.play();
 		});
@@ -747,10 +821,57 @@ public class Main extends Application {
 			fadeOutHeroSelectionIndicator4.play();
 		});
 		heroSelectionIndicator4.setVisible(false);
+		
+		
+		enemyPosition1.setOnMouseEntered(e -> {enemySelectionIndicator1.setVisible(true);
+		enemyNameText.setVisible(true);
+		fadeInEnemySelectionIndicator1.play();
+		});
+		enemyPosition1.setOnMouseExited(e -> {
+			enemyNameText.setVisible(false);
+			fadeOutEnemySelectionIndicator1.play();
+		});
+		
+		enemySelectionIndicator1.setVisible(false);
+		
+		enemyPosition2.setOnMouseEntered(e -> {enemySelectionIndicator2.setVisible(true);
+		enemyNameText.setVisible(true);
+		fadeInEnemySelectionIndicator2.play();
+		});
+		enemyPosition2.setOnMouseExited(e -> {
+			enemyNameText.setVisible(false);
+			fadeOutEnemySelectionIndicator2.play();
+		});
+		
+		enemySelectionIndicator2.setVisible(false);
+		
+		enemyPosition3.setOnMouseEntered(e -> {enemySelectionIndicator3.setVisible(true);
+		enemyNameText.setVisible(true);
+		fadeInEnemySelectionIndicator3.play();
+		});
+		enemyPosition3.setOnMouseExited(e -> {
+			enemyNameText.setVisible(false);
+			fadeOutEnemySelectionIndicator3.play();
+		});
+		
+		enemySelectionIndicator3.setVisible(false);
+		
+		enemyPosition4.setOnMouseEntered(e -> {enemySelectionIndicator4.setVisible(true);
+		enemyNameText.setVisible(true);
+		fadeInEnemySelectionIndicator4.play();
+		});
+		enemyPosition4.setOnMouseExited(e -> {
+			enemyNameText.setVisible(false);
+			fadeOutEnemySelectionIndicator4.play();
+		});
+		
+		enemySelectionIndicator4.setVisible(false);
+
 		// -------------------------------------------------------------
 		//make images dissapear or appear on button hover.
 		enemyPosition1.setOnMouseEntered(e -> {
 		    // Show all elements and play fade-in animation
+			enemyNameText.setVisible(true);
 		    enemyBLDResistanceIcon.setVisible(true);
 		    enemyBLGTResistanceIcon.setVisible(true);
 		    enemyBURNResistanceIcon.setVisible(true);
@@ -982,6 +1103,8 @@ public class Main extends Application {
 		    });
 		});
 		// -------------------------------------------------------------
+
+		
 		
 		heroHealthBarRedRectangle4.setOnMouseEntered(e -> {heroHPPos4.setVisible(true);
 		fadeInHeroHPPos4.play();});
@@ -1059,16 +1182,30 @@ public class Main extends Application {
 
 		// Create a Pane for free positioning
 		Pane root = new Pane();
+		Pane attackSplashScreen = new Pane();
 		Pane combatMenu = new Pane();
+		
+		attackSplashScreen.setStyle("-fx-background-color: rgba(0, 0, 0, 0.3);"); // semi-transparent black
+		combatMenu.setVisible(false); // initially hidden
+		FadeTransition fadeInAttackSplashScreen = new FadeTransition(Duration.millis(100), combatMenu);
+		fadeInAttackSplashScreen.setFromValue(0);
+		fadeInAttackSplashScreen.setToValue(1);
+		FadeTransition fadeOutAttackSplashScreen = new FadeTransition(Duration.millis(100), combatMenu);
+		fadeOutAttackSplashScreen.setFromValue(1);
+		fadeOutAttackSplashScreen.setToValue(0);
+		fadeOutAttackSplashScreen.setOnFinished(e -> combatMenu.setVisible(false)); // Hide after fading out
+		
+		// -------------------------------------------------------------
+		
 		combatMenu.setStyle("-fx-background-color: rgba(0, 0, 0, 0.7);"); // semi-transparent black
 		combatMenu.setVisible(false); // initially hidden
-        FadeTransition fadeIn = new FadeTransition(Duration.millis(300), combatMenu);
-        fadeIn.setFromValue(0);
-        fadeIn.setToValue(1);
-        FadeTransition fadeOut = new FadeTransition(Duration.millis(300), combatMenu);
-        fadeOut.setFromValue(1);
-        fadeOut.setToValue(0);
-        fadeOut.setOnFinished(e -> combatMenu.setVisible(false)); // Hide after fading out
+        FadeTransition fadeInCombatMenu = new FadeTransition(Duration.millis(300), combatMenu);
+        fadeInCombatMenu.setFromValue(0);
+        fadeInCombatMenu.setToValue(1);
+        FadeTransition fadeOutCombatMenu = new FadeTransition(Duration.millis(300), combatMenu);
+        fadeOutCombatMenu.setFromValue(1);
+        fadeOutCombatMenu.setToValue(0);
+        fadeOutCombatMenu.setOnFinished(e -> combatMenu.setVisible(false)); // Hide after fading out
         
 
         
@@ -1083,11 +1220,11 @@ public class Main extends Application {
 		root.getChildren().addAll(enemyBleedResistanceNumber,enemyBlightResistanceNumber,enemyBurnResistanceNumber,enemyStunResistanceNumber,enemyMoveResistanceNumber,enemyDebuffResistanceNumber, enemyDeathResistanceNumber);
 		root.getChildren().add(skillButtons); 
 		root.getChildren().add(passTurnButton); 
-		root.getChildren().addAll(skillbuttonimage1, skillbuttonimage2, skillbuttonimage3, skillbuttonimage4, skillbuttonimagemove, skillbuttonimagepass); 																						
-		root.getChildren().addAll(skillButtonSelectedFrame1,skillButtonSelectedFrame2,skillButtonSelectedFrame3,skillButtonSelectedFrame4,skillButtonMoveSelectedFrame);
-		root.getChildren().addAll(heroNamePlate, enemyNamePlate);
+		root.getChildren().addAll(skillbuttonimage1, skillbuttonimage2, skillbuttonimage3, skillbuttonimage4, skillbuttonimagepass); // , skillbuttonimagemove																				
+		root.getChildren().addAll(skillButtonSelectedFrame1,skillButtonSelectedFrame2,skillButtonSelectedFrame3,skillButtonSelectedFrame4); // ,skillButtonMoveSelectedFrame
+		root.getChildren().addAll(heroNameTextPlate, enemyNameTextPlate);
 		root.getChildren().add(turnOrderBarLeftAndRight);
-		root.getChildren().addAll(heroName, enemyName);// keep name after name plate to avoid layering issues
+		root.getChildren().addAll(heroNameText, enemyNameText);// keep name after name plate to avoid layering issues
 		root.getChildren().add(roundNumberText);
 		root.getChildren().addAll(heroSelectionIndicator1, heroSelectionIndicator2, heroSelectionIndicator3,heroSelectionIndicator4); 
 		root.getChildren().addAll(enemySelectionIndicator1, enemySelectionIndicator2, enemySelectionIndicator3, enemySelectionIndicator4); // might need 4 of these.
@@ -1097,6 +1234,7 @@ public class Main extends Application {
 		root.getChildren().add(enemyHealthBarRedRectangles);
 		root.getChildren().addAll(heroHPPos4,heroHPPos3,heroHPPos2,heroHPPos1);
 		root.getChildren().addAll(enemyHPPos4,enemyHPPos3,enemyHPPos2,enemyHPPos1);
+		root.getChildren().addAll(moveDescriptionText,moveNameText);
 		
 		root.setBackground(new Background(backgroundImagePayoff)); // set background image
 		
@@ -1112,34 +1250,28 @@ public class Main extends Application {
 
 		enemyPositions.setLayoutX(1025); // Position X for enemy positions
 		enemyPositions.setLayoutY(250); // Position Y for enemy positions
-
-		skillButtons.setLayoutX(585); // 585 sweet spot
-		skillButtons.setLayoutY(775);
 		
-		passTurnButton.setLayoutX(1222);
-		passTurnButton.setLayoutY(775);
-		
-		heroName.setLayoutX(180); // hero's name
-		heroName.setLayoutY(750);
-		heroName.setScaleX(.65);
-		heroName.setScaleY(.65);
+		heroNameText.setLayoutX(-50); // hero's name
+		heroNameText.setLayoutY(750);
+		heroNameText.setScaleX(.65);
+		heroNameText.setScaleY(.65);
 		
 		roundNumberText.setLayoutX(1340);
 		roundNumberText.setLayoutY(45);
 		roundNumberText.setScaleX(.95);
 		roundNumberText.setScaleY(.95);
 		
-		enemyName.setLayoutX(1460);
-		enemyName.setLayoutY(750);
-		enemyName.setScaleX(.65);
-		enemyName.setScaleY(.65);
+		enemyNameText.setLayoutX(1460);
+		enemyNameText.setLayoutY(750);
+		enemyNameText.setScaleX(.65);
+		enemyNameText.setScaleY(.65);
 		
-		heroNamePlate.setLayoutX(-5);
-		heroNamePlate.setLayoutY(710);
+		heroNameTextPlate.setLayoutX(-5);
+		heroNameTextPlate.setLayoutY(710);
 
-		enemyNamePlate.setLayoutX(1415);
-		enemyNamePlate.setLayoutY(710);
-		enemyNamePlate.setScaleX(-1);
+		enemyNameTextPlate.setLayoutX(1415);
+		enemyNameTextPlate.setLayoutY(710);
+		enemyNameTextPlate.setScaleX(-1);
 		
 		turnOrderBarLeftAndRight.setLayoutX(0);
 		turnOrderBarLeftAndRight.setLayoutY(0);
@@ -1156,6 +1288,12 @@ public class Main extends Application {
 	
 		enemyHealthBarBlackRectangles.setLayoutX(1055);
 		enemyHealthBarBlackRectangles.setLayoutY(600);
+		// -------------------------------------------------------------
+		moveDescriptionText.setLayoutX(25);
+		moveDescriptionText.setLayoutY(800);
+		
+		moveNameText.setLayoutX(900);
+		moveNameText.setLayoutY(800);
 		// -------------------------------------------------------------
 		heroTurnTicker1.setLayoutX(255);// 205 spacing
 		heroTurnTicker1.setLayoutY(595);
@@ -1192,19 +1330,19 @@ public class Main extends Application {
 		enemyDTHResistanceIcon.setLayoutX(1852); 
 		enemyDTHResistanceIcon.setLayoutY(950); 
 		
-		enemyBleedResistanceNumberText.setLayoutX(1390);
+		enemyBleedResistanceNumberText.setLayoutX(1403);
 		enemyBleedResistanceNumberText.setLayoutY(940); 
-		enemyBlightResistanceNumberText.setLayoutX(1456);
+		enemyBlightResistanceNumberText.setLayoutX(1469);
 		enemyBlightResistanceNumberText.setLayoutY(940); 
-		enemyBurnResistanceNumberText.setLayoutX(1541);
+		enemyBurnResistanceNumberText.setLayoutX(1554);
 		enemyBurnResistanceNumberText.setLayoutY(940); 
-		enemyStunResistanceNumberText.setLayoutX(1616);
+		enemyStunResistanceNumberText.setLayoutX(1629);
 		enemyStunResistanceNumberText.setLayoutY(940); 
-		enemyMoveResistanceNumberText.setLayoutX(1678);
+		enemyMoveResistanceNumberText.setLayoutX(1696);
 		enemyMoveResistanceNumberText.setLayoutY(940); 
-		enemyDebuffResistanceNumberText.setLayoutX(1753);
+		enemyDebuffResistanceNumberText.setLayoutX(1771);
 		enemyDebuffResistanceNumberText.setLayoutY(940); 
-		enemyDeathResistanceNumberText.setLayoutX(1842);
+		enemyDeathResistanceNumberText.setLayoutX(1855);
 		enemyDeathResistanceNumberText.setLayoutY(940); 
 		
 		enemyBleedResistanceNumberText.setScaleX(.65);
@@ -1222,31 +1360,31 @@ public class Main extends Application {
 		enemyDeathResistanceNumberText.setScaleX(.65);
 		enemyDeathResistanceNumberText.setScaleY(.65); 
 		
-		enemyBleedResistanceNumber.setLayoutX(1415); // 77 spacing
+		enemyBleedResistanceNumber.setLayoutX(1418); // 77 spacing
 		enemyBleedResistanceNumber.setLayoutY(1020);
 		enemyBleedResistanceNumber.setScaleX(.75);
 		enemyBleedResistanceNumber.setScaleY(.75); 
-		enemyBlightResistanceNumber.setLayoutX(1492);
+		enemyBlightResistanceNumber.setLayoutX(1495);
 		enemyBlightResistanceNumber.setLayoutY(1020); 
 		enemyBlightResistanceNumber.setScaleX(.75);
 		enemyBlightResistanceNumber.setScaleY(.75); 
-		enemyBurnResistanceNumber.setLayoutX(1569);
+		enemyBurnResistanceNumber.setLayoutX(1572);
 		enemyBurnResistanceNumber.setLayoutY(1020); 
 		enemyBurnResistanceNumber.setScaleX(.75);
 		enemyBurnResistanceNumber.setScaleY(.75); 
-		enemyStunResistanceNumber.setLayoutX(1639);
+		enemyStunResistanceNumber.setLayoutX(1642);
 		enemyStunResistanceNumber.setLayoutY(1020); 
 		enemyStunResistanceNumber.setScaleX(.75);
 		enemyStunResistanceNumber.setScaleY(.75); 
-		enemyMoveResistanceNumber.setLayoutX(1716);
+		enemyMoveResistanceNumber.setLayoutX(1719);
 		enemyMoveResistanceNumber.setLayoutY(1020); 
 		enemyMoveResistanceNumber.setScaleX(.75);
 		enemyMoveResistanceNumber.setScaleY(.75); 
-		enemyDebuffResistanceNumber.setLayoutX(1793);
+		enemyDebuffResistanceNumber.setLayoutX(1796);
 		enemyDebuffResistanceNumber.setLayoutY(1020); 
 		enemyDebuffResistanceNumber.setScaleX(.75);
 		enemyDebuffResistanceNumber.setScaleY(.75); 
-		enemyDeathResistanceNumber.setLayoutX(1870);
+		enemyDeathResistanceNumber.setLayoutX(1873);
 		enemyDeathResistanceNumber.setLayoutY(1020); 
 		enemyDeathResistanceNumber.setScaleX(.75);
 		enemyDeathResistanceNumber.setScaleY(.75); 
@@ -1327,31 +1465,38 @@ public class Main extends Application {
 		heroInPosition4.setLayoutX(-50);
 		heroInPosition4.setLayoutY(210);
 		// -------------------------------------------------------------
-		skillbuttonimage1.setLayoutX(586);
-		skillbuttonimage1.setLayoutY(778);// 778 SWEET SPOT // 127 x multiple
-		skillbuttonimage2.setLayoutX(713);
-		skillbuttonimage2.setLayoutY(778);
-		skillbuttonimage3.setLayoutX(840);
-		skillbuttonimage3.setLayoutY(778);
-		skillbuttonimage4.setLayoutX(967);
-		skillbuttonimage4.setLayoutY(778);
-		skillbuttonimagemove.setLayoutX(1094);
-		skillbuttonimagemove.setLayoutY(778);
-		skillbuttonimagepass.setLayoutX(1227);
-		skillbuttonimagepass.setLayoutY(791);
+		
+		skillButtons.setLayoutX(696); // 585 sweet spot
+		skillButtons.setLayoutY(828);
+		
+		passTurnButton.setLayoutX(1077);
+		passTurnButton.setLayoutY(828);
+		
+		skillbuttonimage1.setLayoutX(696);
+		skillbuttonimage1.setLayoutY(828);// 778 SWEET SPOT // 127 x multiple
+		skillbuttonimage2.setLayoutX(823);
+		skillbuttonimage2.setLayoutY(828);
+		skillbuttonimage3.setLayoutX(950);
+		skillbuttonimage3.setLayoutY(828);
+		skillbuttonimage4.setLayoutX(1077);
+		skillbuttonimage4.setLayoutY(828);
+//		skillbuttonimagemove.setLayoutX(1094);
+//		skillbuttonimagemove.setLayoutY(778);
+		skillbuttonimagepass.setLayoutX(1207); // 1227
+		skillbuttonimagepass.setLayoutY(841); // 791
 		skillbuttonimagepass.setScaleX(1.35);
 		skillbuttonimagepass.setScaleY(1.35);
 		
-		skillButtonSelectedFrame1.setLayoutX(586);
-		skillButtonSelectedFrame1.setLayoutY(778);// 778 SWEET SPOT // 127 x multiple
-		skillButtonSelectedFrame2.setLayoutX(713);
-		skillButtonSelectedFrame2.setLayoutY(778);
-		skillButtonSelectedFrame3.setLayoutX(840);
-		skillButtonSelectedFrame3.setLayoutY(778);
-		skillButtonSelectedFrame4.setLayoutX(967);
-		skillButtonSelectedFrame4.setLayoutY(778);
-		skillButtonMoveSelectedFrame.setLayoutX(1094);
-		skillButtonMoveSelectedFrame.setLayoutY(778);
+		skillButtonSelectedFrame1.setLayoutX(696);
+		skillButtonSelectedFrame1.setLayoutY(828);// 778 SWEET SPOT // 127 x multiple
+		skillButtonSelectedFrame2.setLayoutX(823);
+		skillButtonSelectedFrame2.setLayoutY(828);
+		skillButtonSelectedFrame3.setLayoutX(950);
+		skillButtonSelectedFrame3.setLayoutY(828);
+		skillButtonSelectedFrame4.setLayoutX(1077);
+		skillButtonSelectedFrame4.setLayoutY(828);
+//		skillButtonMoveSelectedFrame.setLayoutX(1094);
+//		skillButtonMoveSelectedFrame.setLayoutY(778);
 		
 		skillButtonSelectedFrame1.setScaleX(1.6);
 		skillButtonSelectedFrame1.setScaleY(1.6);// 778 SWEET SPOT // 127 x multiple
@@ -1361,8 +1506,8 @@ public class Main extends Application {
 		skillButtonSelectedFrame3.setScaleY(1.6);
 		skillButtonSelectedFrame4.setScaleX(1.6);
 		skillButtonSelectedFrame4.setScaleY(1.6);
-		skillButtonMoveSelectedFrame.setScaleX(1.6);
-		skillButtonMoveSelectedFrame.setScaleY(1.6);
+//		skillButtonMoveSelectedFrame.setScaleX(1.6);
+//		skillButtonMoveSelectedFrame.setScaleY(1.6);
 		// -------------------------------------------------------------
 		menuBackground.setLayoutX(450);
 		menuBackground.setLayoutY(0);
@@ -1413,7 +1558,7 @@ public class Main extends Application {
 		passTurnButton.prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.09));
 
 		menuBackButton.setOnAction(e -> {
-		    fadeOut.playFromStart(); 
+			fadeOutCombatMenu.playFromStart(); 
 			root.setEffect(null); // remove blur
 		});
 		menuQuitButton.setOnAction(e -> {
@@ -1427,12 +1572,12 @@ public class Main extends Application {
 		scene.setOnKeyPressed(event -> {
 			if (event.getCode() == KeyCode.ESCAPE) {
 				 if (combatMenu.isVisible()) {
-			            fadeOut.playFromStart(); // Start fade out transition
+					 fadeOutCombatMenu.playFromStart(); // Start fade out transition
 			            root.setEffect(null);    // Remove blur
 			        } else {
 			            combatMenu.setVisible(true); // Show the menu first
 			            root.setEffect(blur);       // Apply blur to root
-			            fadeIn.playFromStart();     // Fade in the menu
+			            fadeInCombatMenu.playFromStart();     // Fade in the menu
 			        }
 			    }
 		});
@@ -1570,13 +1715,13 @@ public class Main extends Application {
 		purchaseConfirmationText.setFont(DwarvenAxe);
 		exitShopText.setFont(DwarvenAxe);
 		
-		itemDescriptions.setFill(Color.web("#4c4c4c"));
-		item1Price.setFill(Color.web("#4c4c4c"));
-		item2Price.setFill(Color.web("#4c4c4c"));
-		item3Price.setFill(Color.web("#4c4c4c"));
+		itemDescriptions.setFill(Color.web("#d5d5d5"));
+		item1Price.setFill(Color.web("#d5d5d5"));
+		item2Price.setFill(Color.web("#d5d5d5"));
+		item3Price.setFill(Color.web("#d5d5d5"));
 		playerGold.setFill(Color.web("#FFEB80"));
-		purchaseConfirmationText.setFill(Color.web("#4c4c4c"));
-		exitShopText.setFill(Color.web("#4c4c4c"));
+		purchaseConfirmationText.setFill(Color.web("#d5d5d5"));
+		exitShopText.setFill(Color.web("#d5d5d5"));
 		
 		ImageView shopKeeper = new ImageView(new Image("shopAssets/shopKeeper.png"));
 		ImageView itemForSaleFrame1 = new ImageView(new Image("shopAssets/itemForSaleFrame.png"));
@@ -1690,13 +1835,13 @@ public class Main extends Application {
 			exitShopText.setFill(Color.web("#d10000"));
 		});
 		back.setOnMouseExited(e -> {
-			exitShopText.setFill(Color.web("#4c4c4c"));
+			exitShopText.setFill(Color.web("#d5d5d5"));
 		});
 		purchaseConfirmationButton.setOnMouseEntered(e -> {
 			purchaseConfirmationText.setFill(Color.web("#d10000"));
 		});
 		purchaseConfirmationButton.setOnMouseExited(e -> {
-			purchaseConfirmationText.setFill(Color.web("#4c4c4c"));
+			purchaseConfirmationText.setFill(Color.web("#d5d5d5"));
 		});
 		
 //		charChoiceAlchemistButton.setVisible(false);
@@ -1906,34 +2051,7 @@ public class Main extends Application {
 		});
 
 	}
-	// putting this on the sideline, in case we decide we need a play options tab.
-	private void playOptions(Stage primaryStage) {
-		Image cursorImage = new Image("GUIAssets/cursor.png");
-		Cursor customCursor = Cursor.cursor(cursorImage.getUrl());
-		Button back = new Button("Back");
-
-		back.setOnAction(e -> homePage(primaryStage));
-
-		VBox root = new VBox(10);
-		root.getChildren().addAll(back);
-		root.setSpacing(10);
-		root.setPadding(new Insets(20));
-
-		// Bind button width to 40% of the scene's width and height
-		root.getChildren().forEach(button -> {
-			((Button) button).prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.1));
-			((Button) button).prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.04));
-		});
-
-		root.setStyle("-fx-background-color: black;");
-		Scene scene = new Scene(root, 1920, 1080);
-
-//        primaryStage.setFullScreen(true);
-		primaryStage.setScene(scene);
-//        primaryStage.requestFocus();
-
-	}
-
+	
 	private void textTutorial(Stage primaryStage) {
 		Image cursorImage = new Image("GUIAssets/cursor.png");
 		Cursor customCursor = Cursor.cursor(cursorImage.getUrl());
@@ -1963,67 +2081,7 @@ public class Main extends Application {
 
 		primaryStage.setScene(scene);
 	}
-
-	private void unlocks(Stage primaryStage) {
-		Image cursorImage = new Image("GUIAssets/cursor.png");
-		Cursor customCursor = Cursor.cursor(cursorImage.getUrl());
-		Button back = new Button("Back");
-		back.setOnAction(e -> homePage(primaryStage));
-
-		// Create a Label for displaying text
-		Label tutorialText = new Label("This is where we list all the unlocks the player has completed.");
-		tutorialText.setStyle("-fx-text-fill: white; -fx-font-size: 16px;"); // Set text color to white and font size
-
-		VBox root = new VBox(10);
-		root.getChildren().addAll(tutorialText, back); // Add the Label above the Back button
-		root.setSpacing(10);
-		root.setPadding(new Insets(20));
-
-		// Bind button size properties to scale with the window
-		root.getChildren().forEach(node -> {
-			if (node instanceof Button) {
-				((Button) node).prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.1));
-				((Button) node).prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.04));
-			}
-		});
-
-		root.setStyle("-fx-background-color: black;"); // Set background color to black
-		Scene scene = new Scene(root, 1920, 1080);
-		scene.setCursor(customCursor);
-
-		primaryStage.setScene(scene);
-	}
-
-	private void stats(Stage primaryStage) {
-		Image cursorImage = new Image("GUIAssets/cursor.png");
-		Cursor customCursor = Cursor.cursor(cursorImage.getUrl());
-		Button back = new Button("Back");
-		back.setOnAction(e -> homePage(primaryStage));
-
-		// Create a Label for displaying text
-		Label tutorialText = new Label("This is where we will keep track of all the player's statistics.");
-		tutorialText.setStyle("-fx-text-fill: white; -fx-font-size: 16px;"); // Set text color to white and font size
-
-		VBox root = new VBox(10);
-		root.getChildren().addAll(tutorialText, back); // Add the Label above the Back button
-		root.setSpacing(10);
-		root.setPadding(new Insets(20));
-
-		// Bind button size properties to scale with the window
-		root.getChildren().forEach(node -> {
-			if (node instanceof Button) {
-				((Button) node).prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.1));
-				((Button) node).prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.04));
-			}
-		});
-
-		root.setStyle("-fx-background-color: black;"); // Set background color to black
-		Scene scene = new Scene(root, 1920, 1080);
-		scene.setCursor(customCursor);
-
-		primaryStage.setScene(scene);
-	}
-
+	
 	private void credits(Stage primaryStage) {
 		Image cursorImage = new Image("GUIAssets/cursor.png");
 		Cursor customCursor = Cursor.cursor(cursorImage.getUrl());
@@ -2053,6 +2111,98 @@ public class Main extends Application {
 
 		primaryStage.setScene(scene);
 	}
+	
+//	// putting this on the sideline, in case we decide we need a play options tab.
+//	private void playOptions(Stage primaryStage) {
+//		Image cursorImage = new Image("GUIAssets/cursor.png");
+//		Cursor customCursor = Cursor.cursor(cursorImage.getUrl());
+//		Button back = new Button("Back");
+//
+//		back.setOnAction(e -> homePage(primaryStage));
+//
+//		VBox root = new VBox(10);
+//		root.getChildren().addAll(back);
+//		root.setSpacing(10);
+//		root.setPadding(new Insets(20));
+//
+//		// Bind button width to 40% of the scene's width and height
+//		root.getChildren().forEach(button -> {
+//			((Button) button).prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.1));
+//			((Button) button).prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.04));
+//		});
+//
+//		root.setStyle("-fx-background-color: black;");
+//		Scene scene = new Scene(root, 1920, 1080);
+//
+////        primaryStage.setFullScreen(true);
+//		primaryStage.setScene(scene);
+////        primaryStage.requestFocus();
+//
+//	}
+
+
+
+//	private void unlocks(Stage primaryStage) {
+//		Image cursorImage = new Image("GUIAssets/cursor.png");
+//		Cursor customCursor = Cursor.cursor(cursorImage.getUrl());
+//		Button back = new Button("Back");
+//		back.setOnAction(e -> homePage(primaryStage));
+//
+//		// Create a Label for displaying text
+//		Label tutorialText = new Label("This is where we list all the unlocks the player has completed.");
+//		tutorialText.setStyle("-fx-text-fill: white; -fx-font-size: 16px;"); // Set text color to white and font size
+//
+//		VBox root = new VBox(10);
+//		root.getChildren().addAll(tutorialText, back); // Add the Label above the Back button
+//		root.setSpacing(10);
+//		root.setPadding(new Insets(20));
+//
+//		// Bind button size properties to scale with the window
+//		root.getChildren().forEach(node -> {
+//			if (node instanceof Button) {
+//				((Button) node).prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.1));
+//				((Button) node).prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.04));
+//			}
+//		});
+//
+//		root.setStyle("-fx-background-color: black;"); // Set background color to black
+//		Scene scene = new Scene(root, 1920, 1080);
+//		scene.setCursor(customCursor);
+//
+//		primaryStage.setScene(scene);
+//	}
+//
+//	private void stats(Stage primaryStage) {
+//		Image cursorImage = new Image("GUIAssets/cursor.png");
+//		Cursor customCursor = Cursor.cursor(cursorImage.getUrl());
+//		Button back = new Button("Back");
+//		back.setOnAction(e -> homePage(primaryStage));
+//
+//		// Create a Label for displaying text
+//		Label tutorialText = new Label("This is where we will keep track of all the player's statistics.");
+//		tutorialText.setStyle("-fx-text-fill: white; -fx-font-size: 16px;"); // Set text color to white and font size
+//
+//		VBox root = new VBox(10);
+//		root.getChildren().addAll(tutorialText, back); // Add the Label above the Back button
+//		root.setSpacing(10);
+//		root.setPadding(new Insets(20));
+//
+//		// Bind button size properties to scale with the window
+//		root.getChildren().forEach(node -> {
+//			if (node instanceof Button) {
+//				((Button) node).prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.1));
+//				((Button) node).prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.04));
+//			}
+//		});
+
+//		root.setStyle("-fx-background-color: black;"); // Set background color to black
+//		Scene scene = new Scene(root, 1920, 1080);
+//		scene.setCursor(customCursor);
+//
+//		primaryStage.setScene(scene);
+//	}
+
+
 //	 private void setupLoadingStage(Stage primaryStage) {
 //			Image cursorImage = new Image("GUIAssets/cursor.png");
 //			Cursor customCursor = Cursor.cursor(cursorImage.getUrl());
