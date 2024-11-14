@@ -282,7 +282,7 @@ public class Main extends Application {
 		
 		String heroName = "hero name Variable"; // this will be used for our hero's name to change. // var
 		String enemyName = "enemy name Variable"; // var
-		
+		String moveName = "moveName";
 		
 		// music player
 		Media media = new Media(combatMusic);
@@ -345,7 +345,7 @@ public class Main extends Application {
 		Text roundNumberText = new Text ("Round" ); // var + roundCounter
 		
 		Text moveDescriptionText = new Text ("DMG:  CRIT:(critpercent)"); // var
-		Text moveNameText = new Text ("movename"); // var
+		Text moveNameText = new Text (moveName); // var
 		
 		Text menuQuitGameText = new Text ("Quit Game");
 		
@@ -546,6 +546,7 @@ public class Main extends Application {
 		ImageView menuBackButtonImage = new ImageView(new Image("GUIAssets/menuBackButtonImage.png"));
 		ImageView menuButtonFrame1 = new ImageView(new Image("GUIAssets/menuButtonFrame.png"));
 		
+//		ImageView attackSplashBackground = new ImageView(new Image(""));
 		
 		Image backgroundImagesetup = new Image("combatBackgrounds/cryptsRoomWallDrain.png");  // var
 		BackgroundSize size = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false); // background image
@@ -1182,18 +1183,23 @@ public class Main extends Application {
 
 		// Create a Pane for free positioning
 		Pane root = new Pane();
-		Pane attackSplashScreen = new Pane();
+//		Pane attackSplashScreen = new Pane();
 		Pane combatMenu = new Pane();
+//		
+//		attackSplashScreen.setStyle("-fx-background-color: rgba(0, 0, 0, 0.3);"); // semi-transparent black
+//		combatMenu.setVisible(false); // initially hidden
+//		FadeTransition fadeInAttackSplashScreen = new FadeTransition(Duration.millis(100), combatMenu);
+//		fadeInAttackSplashScreen.setFromValue(0);
+//		fadeInAttackSplashScreen.setToValue(1);
+//		FadeTransition fadeOutAttackSplashScreen = new FadeTransition(Duration.millis(100), combatMenu);
+//		fadeOutAttackSplashScreen.setFromValue(1);
+//		fadeOutAttackSplashScreen.setToValue(0);
+//		fadeOutAttackSplashScreen.setOnFinished(e -> combatMenu.setVisible(false)); // Hide after fading out
 		
-		attackSplashScreen.setStyle("-fx-background-color: rgba(0, 0, 0, 0.3);"); // semi-transparent black
-		combatMenu.setVisible(false); // initially hidden
-		FadeTransition fadeInAttackSplashScreen = new FadeTransition(Duration.millis(100), combatMenu);
-		fadeInAttackSplashScreen.setFromValue(0);
-		fadeInAttackSplashScreen.setToValue(1);
-		FadeTransition fadeOutAttackSplashScreen = new FadeTransition(Duration.millis(100), combatMenu);
-		fadeOutAttackSplashScreen.setFromValue(1);
-		fadeOutAttackSplashScreen.setToValue(0);
-		fadeOutAttackSplashScreen.setOnFinished(e -> combatMenu.setVisible(false)); // Hide after fading out
+//		combatMenu.getChildren().addAll(charAttacking1, charAttacking2);
+//		combatMenu.getChildren().addAll();
+		
+		//I need two different attack splash screens, one for enemies attacking, and one for characters attacking.
 		
 		// -------------------------------------------------------------
 		
