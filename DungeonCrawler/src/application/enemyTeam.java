@@ -23,6 +23,9 @@ public class enemyTeam extends Enemies {
 			}
 			
 			int getTotalChallenge() {
+				for (Enemies enemy : team) {
+					totalChallenge += enemy.getChallenge();
+				}
 				return totalChallenge;
 			}
 			

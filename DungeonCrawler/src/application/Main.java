@@ -52,6 +52,7 @@ public class Main extends Application {
 	String shopMusic = getClass().getResource("/Music/ShopTheme.mp3").toExternalForm();
 	Media mediaPath3 = new Media(shopMusic);
 	int count = 0; // For use in combat
+	int fightsWon = 0;
 	
 	Font KingArthurLegend = Font.loadFont(getClass().getResourceAsStream("/fonts/KingArthurLegend.ttf"), 40);
 	Font Ubuntu = Font.loadFont(getClass().getResourceAsStream("/fonts/UbuntuRegular.ttf"), 40);
@@ -1446,6 +1447,8 @@ public class Main extends Application {
 		
 		
 		combatControl flow = new combatControl(enemyPosition1, enemyPosition2, enemyPosition3, enemyPosition4);
+		flow.createEnemyTeam();
+		flow.adjustSpeeds();
 		flow.determineTurnOrder();
 		entities[] tempTurnOrder = flow.getTurnOrder();
 		playerTeamArray tempPTeamArray = flow.getPlayerTeamArray();
@@ -1453,6 +1456,7 @@ public class Main extends Application {
 		enemyTeam tempETeamArray = flow.getEnemyTeam();
 		Enemies[] tempETeam = tempETeamArray.getTeam();
 		count = 0;
+		Timer timer = new Timer();
 		
 		// This task checks if either team is dead, and if not
 		// runs the primary combat control method.
@@ -1461,7 +1465,19 @@ public class Main extends Application {
 			@Override
 			public void run() {
 				if (tempPTeamArray.checkGameOver() || tempETeamArray.checkGameOver()) {
-					System.out.println("Game Over.");
+					if(tempPTeamArray.checkGameOver()) {
+						System.out.println("Player Team Defeated. Game Over.");
+						timer.cancel();
+						timer.purge();
+						// Game over Screen?
+					}
+					else if (tempETeamArray.checkGameOver()) {
+						System.out.println("Enemy Team Defeated. Round Over.");
+						fightsWon++;
+						timer.cancel();
+						timer.purge();
+						// Shop Scene, continue to next round?
+					}
 				}
 					
 				else {
@@ -1474,8 +1490,6 @@ public class Main extends Application {
 				}
 			}
 		};
-		
-		Timer timer = new Timer();
 		
 		System.out.println("Starting Combat:");
 		timer.schedule(task, 2000, 5000);
@@ -1506,7 +1520,7 @@ public class Main extends Application {
 				}
             }
         }));
-		fiveSecondsCombat.setCycleCount(Timeline.INDEFINITE);
+		fiveSecondsCombat.setCycleCount(Timeline.INDEFINITE); // Probably won't be indefinite, have to look into this
 		fiveSecondsCombat.play();
 		*/
 

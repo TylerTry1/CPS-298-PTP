@@ -7,8 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 
 public class combatFlow {
-	
-	//public Main main;
+
 	Random rand = new Random(); 
 	Button enemyPosition1 = new Button("enemyPosition1");
 	Button enemyPosition2 = new Button("enemyPosition2");
@@ -27,6 +26,7 @@ public class combatFlow {
 	enemyTeam enemyTeam = new enemyTeam(4, 4);
 	Enemies currentEnemy = new Enemies();
 	Arrays_Enemy_Teams enemyTeamsArray = new Arrays_Enemy_Teams(4, 4, 15);
+	entities[] temp3 = new entities[8]; // Extra Array for sorting. Should be big enough, increase size if necessary.
 	entities[] turnOrder = new entities[8];
 	int count;
 	
@@ -56,69 +56,122 @@ public class combatFlow {
 		
 		currentDamage = current.getDamage();
 		Enemies[] tempEnemyTeam = enemyTeam.getTeam();
+		boolean downed = false;
 		
 		switch(choice) {
 		case 1:
 			currentEnemy = (Enemies) tempEnemyTeam[0];
-			tempHealth = currentEnemy.getHealth();
-			tempHealth -= currentDamage;
-			currentEnemy.setHealth(tempHealth);
-			tempEnemyTeam[0] = currentEnemy;
-			enemyTeam.setTeam(tempEnemyTeam);
-			System.out.println(currentEnemy.name + " damaged for " + currentDamage + ".");
+			if (currentEnemy.getHealth() != 0) {
+				tempHealth = currentEnemy.getHealth();
+				tempHealth -= currentDamage;
+				if (tempHealth <= 0) {
+					tempHealth = 0;
+					downed = true;
+					currentEnemy.setDowned(downed);
+				}
+				currentEnemy.setHealth(tempHealth);
+				tempEnemyTeam[0] = currentEnemy;
+				enemyTeam.setTeam(tempEnemyTeam);
+				System.out.println(currentEnemy.name + " damaged for " + currentDamage + ".");
+			}
+			else {
+				System.out.println(currentEnemy.name + " is downed.");
+			}
 			tempCount++;
 			break;
 		
 		case 2:
 			currentEnemy = (Enemies) tempEnemyTeam[1];
-			tempHealth = currentEnemy.getHealth();
-			tempHealth -= currentDamage;
-			currentEnemy.setHealth(tempHealth);
-			tempEnemyTeam[1] = currentEnemy;
-			enemyTeam.setTeam(tempEnemyTeam);
-			System.out.println(currentEnemy.name + " damaged for " + currentDamage + ".");
+			if (currentEnemy.getHealth() != 0) {
+				tempHealth = currentEnemy.getHealth();
+				tempHealth -= currentDamage;
+				if (tempHealth <= 0) {
+					tempHealth = 0;
+					downed = true;
+					currentEnemy.setDowned(downed);
+				}
+				currentEnemy.setHealth(tempHealth);
+				tempEnemyTeam[1] = currentEnemy;
+				enemyTeam.setTeam(tempEnemyTeam);
+				System.out.println(currentEnemy.name + " damaged for " + currentDamage + ".");
+			}
+			else {
+				System.out.println(currentEnemy.name + " is downed.");
+			}
 			tempCount++;
 			break;
 		
 		case 3:
 			currentEnemy = (Enemies) tempEnemyTeam[2];
-			tempHealth = currentEnemy.getHealth();
-			tempHealth -= currentDamage;
-			currentEnemy.setHealth(tempHealth);
-			tempEnemyTeam[2] = currentEnemy;
-			enemyTeam.setTeam(tempEnemyTeam);
-			System.out.println(currentEnemy.name + " damaged for " + currentDamage + ".");
+			if (currentEnemy.getHealth() != 0) {
+				tempHealth = currentEnemy.getHealth();
+				tempHealth -= currentDamage;
+				if (tempHealth <= 0) {
+					tempHealth = 0;
+					downed = true;
+					currentEnemy.setDowned(downed);
+				}
+				currentEnemy.setHealth(tempHealth);
+				tempEnemyTeam[2] = currentEnemy;
+				enemyTeam.setTeam(tempEnemyTeam);
+				System.out.println(currentEnemy.name + " damaged for " + currentDamage + ".");
+			}
+			else {
+				System.out.println(currentEnemy.name + " is downed.");
+			}
 			tempCount++;
 			break;
 		
 		case 4:
 			currentEnemy = (Enemies) tempEnemyTeam[3];
-			tempHealth = currentEnemy.getHealth();
-			tempHealth -= currentDamage;
-			currentEnemy.setHealth(tempHealth);
-			tempEnemyTeam[3] = currentEnemy;
-			enemyTeam.setTeam(tempEnemyTeam);
-			System.out.println(currentEnemy.name + " damaged for " + currentDamage + ".");
+			if (currentEnemy.getHealth() != 0) {
+				tempHealth = currentEnemy.getHealth();
+				tempHealth -= currentDamage;
+				if (tempHealth <= 0) {
+					tempHealth = 0;
+					downed = true;
+					currentEnemy.setDowned(downed);
+				}
+				currentEnemy.setHealth(tempHealth);
+				tempEnemyTeam[3] = currentEnemy;
+				enemyTeam.setTeam(tempEnemyTeam);
+				System.out.println(currentEnemy.name + " damaged for " + currentDamage + ".");
+			}
+			else {
+				System.out.println(currentEnemy.name + " is downed.");
+			}
 			tempCount++;
 			break;
 		
 		}
 	}
 	
-	public void determineTurnOrder() {
+	
+	// Might need functions for these, not sure.
+	/*
+	public void resetEnemyTeam() {
 		
+	}
+	
+	public void resetPlayerTeam() {
+		
+	}
+	*/
+	
+	public void createEnemyTeam() {
 		// Create current Enemy Team:
 		enemyTeamsArray = enemyTeamsArray.createSelection(); // Create array of teams to pull from
 		int teamSelect = rand.nextInt(15);
 		enemyTeam = (enemyTeam) enemyTeamsArray.getTeam(teamSelect); // Select enemy team from array randomly.
 		//
-		
+	}
+	
+	public void adjustSpeeds() {
 		
 		// Create temporary arrays for sorting:
 		Characters[] temp1 =  playerTeam.getTeam(); // Temp Arrays for merging for turn order
 		Enemies[] temp2 = enemyTeam.getTeam();
-		entities[] temp3;
-		temp3 = new entities[8]; // Extra Array for sorting. Should be big enough, increase size if necessary.
+		
 		for (int i = 0; i < temp3.length - 1; i++) {
 			temp3[i] = new entities();
 		}
@@ -151,6 +204,10 @@ public class combatFlow {
 		// Speed Adjusted
 		
 		
+	}
+	
+	public void determineTurnOrder() {
+		
 		// Reinitialize and set variables
 		temp3 = new entities[8]; // Reinitialize temp array for turn sorting.
 		for (int i = 0; i < temp3.length - 1; i++) {
@@ -176,13 +233,16 @@ public class combatFlow {
 			
 			// If next element in array is enemy:
 			if (entity instanceof Enemies) {
+				
 				if (count == 0) { // Place it in if empty
 					temp3[count] = entity;
 					count++;
 					System.out.println(((Enemies) entity).getName() + " Placed in Order.");
 				}
+				
 				else {
 					for (entities entity2 : temp3) { // Otherwise iterate over the current turn order for comparison
+						
 						if (entity2 instanceof Enemies) {
 							if (((Enemies) entity).getSpeed() < ((Enemies) entity2).getSpeed()) {
 								tempCount++;
@@ -200,6 +260,7 @@ public class combatFlow {
 							}
 							
 						}
+						
 						else if (entity2 instanceof Characters) {
 							if (((Enemies) entity).getSpeed() < ((Characters) entity2).getSpeed()) {
 								tempCount++;
@@ -216,6 +277,18 @@ public class combatFlow {
 								break;
 							}
 						}
+						
+						else if (entity2 instanceof entities) {
+							i = temp3.length - 1;
+							while (i > tempCount) {
+								temp3[i] = temp3[i - 1];
+								i--;
+							}
+							temp3[tempCount] = entity;
+							count++;
+							break;
+						}
+						
 					}
 					System.out.println(((Enemies) entity).getName() + " Placed in Order.");
 				}
@@ -233,6 +306,7 @@ public class combatFlow {
 				}
 				else {
 					for (entities entity2 : temp3) { // Otherwise iterate over the current turn order for comparison
+						
 						if (entity2 instanceof Enemies) {
 							if (((Characters) entity).getSpeed() < ((Enemies) entity2).getSpeed()) {
 								tempCount++;
@@ -249,6 +323,7 @@ public class combatFlow {
 								break;
 							}
 						}
+						
 						else if (entity2 instanceof Characters) {
 							if (((Characters) entity).getSpeed() < ((Characters) entity2).getSpeed()) {
 								tempCount++;
@@ -264,6 +339,17 @@ public class combatFlow {
 								count++;
 								break;
 							}
+						}
+						
+						else if (entity2 instanceof entities) {
+							i = temp3.length - 1;
+							while (i > tempCount) {
+								temp3[i] = temp3[i - 1];
+								i--;
+							}
+							temp3[tempCount] = entity;
+							count++;
+							break;
 						}
 					}
 					System.out.println(((Characters) entity).getName() + " Placed in Order.");
@@ -300,7 +386,7 @@ public class combatFlow {
 		
 		int count = 1;
 		Enemies activeEnemy = (Enemies) current;
-		System.out.println(activeEnemy.getName()+ "'s Turn.");
+		//System.out.println(activeEnemy.getName()+ "'s Turn.");
 		abilitySelect = rand.nextInt(2);
 		double[][] result = (double[][]) activeEnemy.abilities[abilitySelect].apply(); // Randomly select and activate ability.
 		
@@ -333,6 +419,7 @@ public class combatFlow {
 						 }
 						 else {
 							 System.out.println(currentCharacter.name + " is downed.");
+							 break;
 						 }
 					case 2:
 						currentCharacter = (Characters) tempTeam[1];
@@ -352,6 +439,7 @@ public class combatFlow {
 						 }
 						 else {
 							 System.out.println(currentCharacter.name + " is downed.");
+							 break;
 						 }
 					case 3:
 						currentCharacter = (Characters) tempTeam[2];
@@ -371,6 +459,7 @@ public class combatFlow {
 						 }
 						 else {
 							 System.out.println(currentCharacter.name + " is downed.");
+							 break;
 						 }
 					case 4:
 						currentCharacter = (Characters) tempTeam[3];
@@ -390,6 +479,7 @@ public class combatFlow {
 						 }
 						 else {
 							 System.out.println(currentCharacter.name + " is downed.");
+							 break;
 						 }
 					}
 					}
@@ -447,52 +537,87 @@ public class combatFlow {
 			
 			// Automated enemy turn processing
 			if (current instanceof Enemies) {
-				processEnemyDamage(current);
+				System.out.println(((Enemies) current).getName() + "'s Turn.");
+				
+				if (((Enemies) current).getHealth() != 0.0)
+					processEnemyDamage(current);
+				else
+					System.out.println(((Enemies) current).getName() + " is downed.");
+				
 				count++;
 				return count;
 			}
 			
 			// Player turn, waits for button click
+			// Add skip turn/skill buttons, etc in here. 
 			else if (current instanceof Characters) {
 				
 				if (current instanceof Paladin) {
 					System.out.println(((Characters) current).getName() + "'s Turn.");
-					while (!buttonClicked) {
-						enemyPosition1.setOnMouseClicked(handler);
-						enemyPosition2.setOnMouseClicked(handler);
-						enemyPosition3.setOnMouseClicked(handler);
-						enemyPosition4.setOnMouseClicked(handler);
+					
+					if(((Characters)current).getHealth() == 0) {
+						System.out.println(((Characters) current).getName() + " is downed.");
+						count++;
+					}
+					else {
+						while (!buttonClicked) {
+							enemyPosition1.setOnMouseClicked(handler);
+							enemyPosition2.setOnMouseClicked(handler);
+							enemyPosition3.setOnMouseClicked(handler);
+							enemyPosition4.setOnMouseClicked(handler);
+						}
 					}
 					return count;
 				}
 				else if (current instanceof Assassin) {
 					System.out.println(((Characters) current).getName() + "'s Turn.");
-					while (!buttonClicked) {
-						enemyPosition1.setOnMouseClicked(handler);
-						enemyPosition2.setOnMouseClicked(handler);
-						enemyPosition3.setOnMouseClicked(handler);
-						enemyPosition4.setOnMouseClicked(handler);
+					
+					if(((Characters)current).getHealth() == 0) {
+						System.out.println(((Characters) current).getName() + " is downed.");
+						count++;
+					}
+					else {
+						while (!buttonClicked) {
+							enemyPosition1.setOnMouseClicked(handler);
+							enemyPosition2.setOnMouseClicked(handler);
+							enemyPosition3.setOnMouseClicked(handler);
+							enemyPosition4.setOnMouseClicked(handler);
+						}
 					}
 					return count;
 				}
 					
 				else if (current instanceof Wizard) {
 					System.out.println(((Characters) current).getName() + "'s Turn.");
-					while (!buttonClicked) {
-						enemyPosition1.setOnMouseClicked(handler);
-						enemyPosition2.setOnMouseClicked(handler);
-						enemyPosition3.setOnMouseClicked(handler);
-						enemyPosition4.setOnMouseClicked(handler);
+					
+					if(((Characters)current).getHealth() == 0) {
+						System.out.println(((Characters) current).getName() + " is downed.");
+						count++;
+					}
+					else {
+						while (!buttonClicked) {
+							enemyPosition1.setOnMouseClicked(handler);
+							enemyPosition2.setOnMouseClicked(handler);
+							enemyPosition3.setOnMouseClicked(handler);
+							enemyPosition4.setOnMouseClicked(handler);
+						}
 					}
 					return count;
 				}
 				else if (current instanceof Alchemist) {
 					System.out.println(((Characters) current).getName() + "'s Turn.");
-					while (!buttonClicked) {
-						enemyPosition1.setOnMouseClicked(handler);
-						enemyPosition2.setOnMouseClicked(handler);
-						enemyPosition3.setOnMouseClicked(handler);
-						enemyPosition4.setOnMouseClicked(handler);
+					
+					if(((Characters)current).getHealth() == 0) {
+						System.out.println(((Characters) current).getName() + " is downed.");
+						count++;
+					}
+					else {
+						while (!buttonClicked) {
+							enemyPosition1.setOnMouseClicked(handler);
+							enemyPosition2.setOnMouseClicked(handler);
+							enemyPosition3.setOnMouseClicked(handler);
+							enemyPosition4.setOnMouseClicked(handler);
+						}
 					}
 					return count;
 				}

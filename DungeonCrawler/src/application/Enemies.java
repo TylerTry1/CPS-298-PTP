@@ -1,6 +1,5 @@
 package application;
 
-//import java.util.ArrayList;
 import java.util.Optional; // For Optional Parameters
 
 public class Enemies extends entities {
@@ -17,8 +16,17 @@ public class Enemies extends entities {
         int size;
         int challenge; // For determine team comps (testing this)
         int speed;
+        boolean downed = false;
         int getChallenge() {
         	return challenge;
+        }
+        
+        void setDowned(boolean down) {
+        	downed = down;
+        }
+        
+        boolean getDowned() {
+        	return downed;
         }
         
         int getSpeed() {
@@ -40,6 +48,7 @@ public class Enemies extends entities {
         void adjustSpeed(int adjust) {
         	speed += adjust;
         }
+        
         
 		static double[][] result = new double[2][4]; // Array to store the amount of damage that will be done, and the positions to damage.
 		static double[] targetPos = new double[4];
@@ -101,6 +110,10 @@ public class Enemies extends entities {
 			@Override
 			public double[][] apply() {
 				// TODO Auto-generated method stub
+				
+				
+				
+				
 				// Placeholder results
 				targetPos = new double[1];
 				targetPos[0] = 1.0;

@@ -79,7 +79,7 @@ public enemyTeam createTeams(int challengeRating) {
 		
 		
 		int nextIndex = 0; // Counter to Check if the positions are full
-		while (teamComp.getTotalChallenge() < challengeRating && teamComp.getPosFull(3) && nextIndex < 4) { // Check if teams challenge level exceeds 
+		while (/*teamComp.getTotalChallenge() < challengeRating &&   Can uncomment this to customize difficulty*/ teamComp.getPosFull(3) && nextIndex < 4) { // Check if teams challenge level exceeds 
 			int rand1 = rand.nextInt(15);												  				    // current max or team is full
 			Enemies tempEnemy = enemies[rand1];
 			
