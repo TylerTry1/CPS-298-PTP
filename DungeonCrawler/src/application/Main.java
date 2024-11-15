@@ -11,6 +11,7 @@ import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Side;
 import javafx.scene.Cursor;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -559,7 +560,8 @@ public class Main extends Application {
 		ImageView enemyAttackingBloodStain  = new ImageView(new Image("GUIAssets/enemyAttackingBloodStain.png"));
 		ImageView heroAttackingBloodStain  = new ImageView(new Image("GUIAssets/heroAttackingBloodStain.png"));
 		
-		Image backgroundImagesetup = new Image("combatBackgrounds/cryptsRoomWallDrain.png");  // var
+//		Image backgroundImagesetup = new Image("combatBackgrounds/cryptsRoomWallDrain.png");  // var
+		Image backgroundImagesetup = new Image("combatBackgrounds/combatBackground1.png");  // var
 		BackgroundSize size = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false); // background image
 		BackgroundPosition customPosition = new BackgroundPosition(Side.LEFT, 0, true, Side.TOP, 0, true); // fit to top left
 		BackgroundImage backgroundImagePayoff = new BackgroundImage(backgroundImagesetup, BackgroundRepeat.NO_REPEAT,
@@ -582,17 +584,6 @@ public class Main extends Application {
 		FadeTransition fadeOutEnemyHPPos2 = FadeUtils.createFade(enemyHPPos2, 1, 0, 200);
 		FadeTransition fadeOutEnemyHPPos3 = FadeUtils.createFade(enemyHPPos3, 1, 0, 200);
 		FadeTransition fadeOutEnemyHPPos4 = FadeUtils.createFade(enemyHPPos4, 1, 0, 200);
-		
-		FadeTransition fadeInSkillButtonSelectedFrame1 = FadeUtils.createFade(enemyHPPos1, 0, 1, 200);
-		FadeTransition fadeInSkillButtonSelectedFrame2 = FadeUtils.createFade(enemyHPPos1, 0, 1, 200);
-		FadeTransition fadeInSkillButtonSelectedFrame3 = FadeUtils.createFade(enemyHPPos1, 0, 1, 200);
-		FadeTransition fadeInSkillButtonSelectedFrame4 = FadeUtils.createFade(enemyHPPos1, 0, 1, 200);
-		FadeTransition fadeInSkillButtonMoveSelectedFrame = FadeUtils.createFade(enemyHPPos1, 0, 1, 200);
-		FadeTransition fadeOutSkillButtonSelectedFrame1 = FadeUtils.createFade(enemyHPPos1, 1, 0, 200);
-		FadeTransition fadeOutSkillButtonSelectedFrame2 = FadeUtils.createFade(enemyHPPos1, 1, 0, 200);
-		FadeTransition fadeOutSkillButtonSelectedFrame3 = FadeUtils.createFade(enemyHPPos1, 1, 0, 200);
-		FadeTransition fadeOutSkillButtonSelectedFrame4 = FadeUtils.createFade(enemyHPPos1, 1, 0, 200);
-		FadeTransition fadeOutSkillButtonMoveSelectedFrame = FadeUtils.createFade(enemyHPPos1, 1, 0, 200);
 		
 	    FadeTransition fadeInHeroSelectionIndicator1 = FadeUtils.createFade(heroSelectionIndicator1, 0, 1, 200);
 	    FadeTransition fadeInHeroSelectionIndicator2 = FadeUtils.createFade(heroSelectionIndicator2, 0, 1, 200);
@@ -1196,6 +1187,7 @@ public class Main extends Application {
 
 		// Create a Pane for free positioning
 		Pane root = new Pane();
+		
 		Pane heroAttackSplashScreen = new Pane();
 		Pane enemyAttackSplashScreen = new Pane();
 		
@@ -1245,12 +1237,19 @@ public class Main extends Application {
         fadeOutCombatMenu.setToValue(0);
         fadeOutCombatMenu.setOnFinished(e -> combatMenu.setVisible(false)); // Hide after fading out
         
-
+        Group darkenGroup = new Group();
+        darkenGroup.getChildren().addAll(heroPositions, enemyPositions);
+        darkenGroup.getChildren().addAll(enemyInPosition1, enemyInPosition2, enemyInPosition3, enemyInPosition4);
+        darkenGroup.getChildren().addAll(heroInPosition1, heroInPosition2, heroInPosition3, heroInPosition4);
+        // Create a semi-transparent black overlay for the Group
+        Rectangle darkOverlay = new Rectangle(1920, 1080); // Adjust size as needed
+        darkOverlay.setFill(Color.rgb(0, 0, 0, 0.25)); // 25% opacity
+        darkOverlay.setMouseTransparent(true); // Allow clicks to pass through
+        // Add the overlay on top of the Group
+        darkenGroup.getChildren().add(darkOverlay);
         
 		// Add buttons, images
-		root.getChildren().addAll(heroPositions, enemyPositions);
-		root.getChildren().addAll(enemyInPosition1, enemyInPosition2, enemyInPosition3, enemyInPosition4);
-		root.getChildren().addAll(heroInPosition1, heroInPosition2, heroInPosition3, heroInPosition4);
+		root.getChildren().addAll(darkenGroup);
 		root.getChildren().addAll(heroTurnTicker1, heroTurnTicker2, heroTurnTicker3, heroTurnTicker4);
 		root.getChildren().addAll(enemyTurnTicker1, enemyTurnTicker2, enemyTurnTicker3, enemyTurnTicker4);
 		root.getChildren().addAll(enemyBLDResistanceIcon, enemyBLGTResistanceIcon, enemyBURNResistanceIcon, enemySTNResistanceIcon, enemyMOVResistanceIcon, enemyDBFFResistanceIcon, enemyDTHResistanceIcon);
