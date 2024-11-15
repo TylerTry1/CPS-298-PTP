@@ -5,6 +5,7 @@ import java.util.TimerTask;
 
 import application.combatFlow.combatControl;
 import javafx.animation.FadeTransition;
+import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -46,12 +47,15 @@ import javafx.util.Duration;
 public class Main extends Application {
 	private Stage loadingStage;
 	// music tracks
+	
 	String combatMusic = getClass().getResource("/Music/DD1RuinsTheme.mp3").toExternalForm();
 	Media mediaPath = new Media(combatMusic);
 	String menuMusic = getClass().getResource("/Music/MainMenu.mp3").toExternalForm();
 	Media mediaPath2 = new Media(menuMusic);
 	String shopMusic = getClass().getResource("/Music/ShopTheme.mp3").toExternalForm();
 	Media mediaPath3 = new Media(shopMusic);
+	String gameOver =  getClass().getResource("/Music/gameOver.mp3").toExternalForm();
+	Media mediaPath4 = new Media(gameOver);
 	int count = 0; // For use in combat
 	int fightsWon = 0;
 	
@@ -63,6 +67,7 @@ public class Main extends Application {
 //		setupLoadingStage(primaryStage);
 		initialization(primaryStage);
 //		shop(primaryStage);
+//		gameOver(primaryStage);
 	}
 
 	private void initialization(Stage primaryStage) { // this scene is used specifically so that we can make our application full screen.
@@ -148,6 +153,7 @@ public class Main extends Application {
 	    Button credits = new Button("Credits");
 	    Button quit = new Button("Exit Game");
 	    Button shop = new Button("Shop");
+	    Button gameOver = new Button ("Game Over Sample");
 
 	    Text enterGameText = new Text ("Begin New Journey");
 	    
@@ -201,6 +207,10 @@ public class Main extends Application {
 	        shop(primaryStage);
 	        mediaPlayer.stop();
 	    });
+	    gameOver.setOnAction(e -> {
+	        gameOver(primaryStage);
+	        mediaPlayer.stop();
+	    });
 
 	    // VBox 1 for first set of buttons
 	    VBox playbutton = new VBox(10);
@@ -222,7 +232,7 @@ public class Main extends Application {
 	    buttonBox2.setLayoutY(880); // Adjust Y for second VBox
 
 	    VBox shopTesting = new VBox(10);
-	    shopTesting.getChildren().addAll(shop);
+	    shopTesting.getChildren().addAll(shop, gameOver);
 	    shopTesting.setSpacing(10);
 	    shopTesting.setPadding(new Insets(20));
 	    shopTesting.setLayoutX(10); // Adjust X for second VBox
@@ -240,7 +250,7 @@ public class Main extends Application {
 	 // Add both button lists
 	    root.getChildren().addAll(enterGame);
 	    root.getChildren().addAll(enterGameText);
-	    root.getChildren().addAll(playbutton, buttonBox2, shopTesting);
+	    root.getChildren().addAll(playbutton, buttonBox2, shopTesting, gameOver);
 	    
 	    
 	    root.setBackground(new Background(backgroundImage));
@@ -546,7 +556,8 @@ public class Main extends Application {
 		ImageView menuBackButtonImage = new ImageView(new Image("GUIAssets/menuBackButtonImage.png"));
 		ImageView menuButtonFrame1 = new ImageView(new Image("GUIAssets/menuButtonFrame.png"));
 		
-//		ImageView attackSplashBackground = new ImageView(new Image(""));
+		ImageView enemyAttackingBloodStain  = new ImageView(new Image("GUIAssets/enemyAttackingBloodStain.png"));
+		ImageView heroAttackingBloodStain  = new ImageView(new Image("GUIAssets/heroAttackingBloodStain.png"));
 		
 		Image backgroundImagesetup = new Image("combatBackgrounds/cryptsRoomWallDrain.png");  // var
 		BackgroundSize size = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false); // background image
@@ -600,6 +611,8 @@ public class Main extends Application {
         FadeTransition fadeOutEnemySelectionIndicator2 = FadeUtils.createFade(enemySelectionIndicator2, 1, 0, 200);
         FadeTransition fadeOutEnemySelectionIndicator3 = FadeUtils.createFade(enemySelectionIndicator3, 1, 0, 200);
         FadeTransition fadeOutEnemySelectionIndicator4 = FadeUtils.createFade(enemySelectionIndicator4, 1, 0, 200);
+        
+        PauseTransition twoSecDelay = new PauseTransition(Duration.seconds(2));
         
 		HBox enemyResistances = new HBox(50);
 		enemyResistances.getChildren().addAll(enemyBLDResistanceIcon, enemyBLGTResistanceIcon, enemyBURNResistanceIcon, enemySTNResistanceIcon, enemyMOVResistanceIcon, enemyDBFFResistanceIcon, enemyDTHResistanceIcon );
@@ -1183,23 +1196,42 @@ public class Main extends Application {
 
 		// Create a Pane for free positioning
 		Pane root = new Pane();
-//		Pane attackSplashScreen = new Pane();
+		Pane heroAttackSplashScreen = new Pane();
+		Pane enemyAttackSplashScreen = new Pane();
+		
 		Pane combatMenu = new Pane();
-//		
-//		attackSplashScreen.setStyle("-fx-background-color: rgba(0, 0, 0, 0.3);"); // semi-transparent black
-//		combatMenu.setVisible(false); // initially hidden
-//		FadeTransition fadeInAttackSplashScreen = new FadeTransition(Duration.millis(100), combatMenu);
-//		fadeInAttackSplashScreen.setFromValue(0);
-//		fadeInAttackSplashScreen.setToValue(1);
-//		FadeTransition fadeOutAttackSplashScreen = new FadeTransition(Duration.millis(100), combatMenu);
-//		fadeOutAttackSplashScreen.setFromValue(1);
-//		fadeOutAttackSplashScreen.setToValue(0);
-//		fadeOutAttackSplashScreen.setOnFinished(e -> combatMenu.setVisible(false)); // Hide after fading out
 		
-//		combatMenu.getChildren().addAll(charAttacking1, charAttacking2);
-//		combatMenu.getChildren().addAll();
 		
-		//I need two different attack splash screens, one for enemies attacking, and one for characters attacking.
+		heroAttackSplashScreen.setStyle("-fx-background-color: rgba(0, 0, 0, 0.3);"); // semi-transparent black
+		heroAttackSplashScreen.setVisible(false); // initially hidden
+		FadeTransition fadeInheroAttackSplashScreen = new FadeTransition(Duration.millis(100), heroAttackSplashScreen);
+		fadeInheroAttackSplashScreen.setFromValue(0);
+		fadeInheroAttackSplashScreen.setToValue(1);
+		twoSecDelay.play();
+		FadeTransition fadeOutheroAttackSplashScreen = new FadeTransition(Duration.millis(100), heroAttackSplashScreen);
+		fadeOutheroAttackSplashScreen.setFromValue(1);
+		fadeOutheroAttackSplashScreen.setToValue(0);
+		fadeOutheroAttackSplashScreen.setOnFinished(e -> heroAttackSplashScreen.setVisible(false)); // Hide after fading out
+		
+		enemyAttackSplashScreen.getChildren().addAll(heroAttackingBloodStain);
+//		enemyAttackSplashScreen.getChildren().addAll(charAttacking, charDefending); // var
+
+		// -------------------------------------------------------------
+
+		
+		enemyAttackSplashScreen.setStyle("-fx-background-color: rgba(0, 0, 0, 0.3);"); // semi-transparent black
+		enemyAttackSplashScreen.setVisible(false); // initially hidden
+		FadeTransition fadeInenemyAttackSplashScreen = new FadeTransition(Duration.millis(100), enemyAttackSplashScreen);
+		fadeInenemyAttackSplashScreen.setFromValue(0);
+		fadeInenemyAttackSplashScreen.setToValue(1);
+		twoSecDelay.play();
+		FadeTransition fadeOutenemyAttackSplashScreen = new FadeTransition(Duration.millis(100), enemyAttackSplashScreen);
+		fadeOutenemyAttackSplashScreen.setFromValue(1);
+		fadeOutenemyAttackSplashScreen.setToValue(0);
+		fadeOutenemyAttackSplashScreen.setOnFinished(e -> enemyAttackSplashScreen.setVisible(false)); // Hide after fading out
+		
+		enemyAttackSplashScreen.getChildren().addAll(enemyAttackingBloodStain);
+//		enemyAttackSplashScreen.getChildren().addAll(charAttacking, charDefending); // var
 		
 		// -------------------------------------------------------------
 		
@@ -2056,6 +2088,139 @@ public class Main extends Application {
 			mediaPlayer.stop(); // Stop the music when the stage is closed
 		});
 
+	}
+	
+	private void gameOver(Stage primaryStage) {
+		Media media = new Media(gameOver);
+		MediaPlayer mediaPlayer = new MediaPlayer(media);
+		mediaPlayer.setVolume(0.05); // Volume level (0.0 to 1.0) use 0.05
+		mediaPlayer.play(); // music player
+
+		Image cursorImage = new Image("GUIAssets/cursor.png");
+		Cursor customCursor = Cursor.cursor(cursorImage.getUrl());
+		ImageView enterGame = new ImageView(new Image("shopAssets/itemForSaleFrame.png"));
+		ImageView exitGame = new ImageView(new Image("shopAssets/itemForSaleFrame.png"));
+		ImageView gameOverFrame = new ImageView(new Image("applicationImagesBackgrounds/gameOverFrame.png"));
+		ImageView gameOverSkeletonLeft = new ImageView(new Image("GUIAssets/gameOverSkeleton.png"));
+		ImageView gameOverSkeletonRight = new ImageView(new Image("GUIAssets/gameOverSkeleton.png"));
+
+		Button play = new Button("New Journey");
+		Button exit = new Button("Exit Game");
+		Text exitGameText = new Text("Exit Game");
+		Text newRunText = new Text("New Journey");
+		Text gameOver = new Text("Game Over");
+		
+		play.setOnAction(e -> battleScene(primaryStage));
+		exit.setOnAction(e -> homePage(primaryStage));
+
+		gameOver.setFill(Color.web("#d10000"));
+		gameOver.setFont(DwarvenAxe);
+		newRunText.setFill(Color.web("#d5d5d5"));
+		newRunText.setFont(DwarvenAxe);
+		newRunText.setFill(Color.web("#d5d5d5"));
+		exitGameText.setFont(DwarvenAxe);
+		exitGameText.setFill(Color.web("#d5d5d5"));
+
+		gameOverSkeletonLeft.setLayoutX(0);
+		gameOverSkeletonLeft.setLayoutY(720);
+		gameOverSkeletonLeft.setScaleX(1);
+		gameOverSkeletonLeft.setScaleY(1);
+		gameOverSkeletonLeft.setScaleX(-1);
+		
+		gameOverSkeletonRight.setLayoutX(1670);
+		gameOverSkeletonRight.setLayoutY(720);
+		gameOverSkeletonRight.setScaleX(1);
+		gameOverSkeletonRight.setScaleY(1);
+		
+		
+		gameOver.setLayoutX(900);
+		gameOver.setLayoutY(350);
+		gameOver.setScaleX(4);
+		gameOver.setScaleY(4);
+
+		gameOverFrame.setLayoutX(520);
+		gameOverFrame.setLayoutY(0);
+		gameOverFrame.setScaleX(1);
+		gameOverFrame.setScaleY(1);
+
+		enterGame.setLayoutX(310);
+		enterGame.setLayoutY(435);
+		enterGame.setScaleX(.5);
+		enterGame.setScaleY(.8);
+		enterGame.setRotate(90);
+		enterGame.setMouseTransparent(true);
+		exitGame.setLayoutX(310);
+		exitGame.setLayoutY(635);
+		exitGame.setScaleX(.5);
+		exitGame.setScaleY(.8);
+		exitGame.setRotate(90);
+		exitGame.setMouseTransparent(true);
+		
+		newRunText.setLayoutX(895);
+		newRunText.setLayoutY(775);
+		newRunText.setScaleX(2);
+		newRunText.setScaleY(2);
+		newRunText.setMouseTransparent(true);
+
+		play.setLayoutX(935); // Adjust X for play button
+		play.setLayoutY(750); // Adjust Y for play button
+		play.setScaleX(4.8);
+		play.setScaleY(5);
+		play.setOpacity(0);
+
+		exit.setLayoutX(945); // Adjust X for play button
+		exit.setLayoutY(950); // Adjust Y for play button
+		exit.setScaleX(5.8);
+		exit.setScaleY(5);
+		exit.setOpacity(0);
+
+
+		exitGameText.setLayoutX(905);
+		exitGameText.setLayoutY(975);
+		exitGameText.setScaleX(2);
+		exitGameText.setScaleY(2);
+		exitGameText.setMouseTransparent(true);
+
+
+	    play.setOnMouseEntered(e -> {newRunText.setFill(Color.web("#d10000"));});
+	    play.setOnMouseExited(e -> {newRunText.setFill(Color.web("#d5d5d5"));});
+	    play.setOnAction(e -> {
+	        battleScene(primaryStage);
+	        mediaPlayer.stop();
+	    });
+	    
+	    exit.setOnMouseEntered(e -> {exitGameText.setFill(Color.web("#d10000"));});
+	    exit.setOnMouseExited(e -> {exitGameText.setFill(Color.web("#d5d5d5"));});
+	    exit.setOnAction(e -> {
+	        homePage(primaryStage);
+	        mediaPlayer.stop();
+	    });
+		
+		
+	    Image image = new Image("applicationImagesBackgrounds/gameOverBackground.png");
+	    // Define the background size and position
+	    BackgroundSize size = new BackgroundSize(1, 1, true, true, false, false);
+	    BackgroundImage backgroundImage = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT,
+	            BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, size);
+		
+		Pane root = new Pane();
+		root.getChildren().addAll(gameOverFrame,gameOverSkeletonLeft,gameOverSkeletonRight);
+		root.getChildren().addAll(play, exit); 
+		root.getChildren().addAll(enterGame, exitGame);
+		root.getChildren().addAll(exitGameText, newRunText, gameOver);
+
+	    root.setBackground(new Background(backgroundImage)); 
+		
+		root.setPadding(new Insets(20));
+		Scene scene = new Scene(root, 1920, 1080);
+		scene.setCursor(customCursor);
+
+		scene.setCursor(customCursor);
+		primaryStage.setTitle("Endless Mountain of Monsters");
+		primaryStage.setMaximized(true);
+		primaryStage.setScene(scene);
+		primaryStage.show();
+		primaryStage.setOnCloseRequest(event -> mediaPlayer.stop());
 	}
 	
 	private void textTutorial(Stage primaryStage) {
