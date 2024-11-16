@@ -76,6 +76,7 @@ public class Main extends Application {
 
 	    Cursor customCursor = Cursor.cursor(cursorImage.getUrl());
 	    ImageView enterGame = new ImageView(new Image("shopAssets/itemForSaleFrame.png"));
+	    ImageView logo = new ImageView(new Image("applicationImagesBackgrounds/endlessMountainLogoWhite.png"));
 	    Button play = new Button("Enter Game");
 	    Text enterGameText = new Text ("Enter Game");
 	    enterGameText.setFont(DwarvenAxe);
@@ -85,6 +86,11 @@ public class Main extends Application {
 	    // VBox 1 for first set of buttons
 	    VBox playbutton = new VBox(10);
 	    playbutton.getChildren().addAll(play);
+
+	    logo.setLayoutX(465);
+	    logo.setLayoutY(-200); 
+	    logo.setScaleX(.75);
+	    logo.setScaleY(.75);
 	    
 	    enterGame.setLayoutX(310);
 	    enterGame.setLayoutY(635); 
@@ -114,6 +120,7 @@ public class Main extends Application {
 	    BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, size);
 	    
 	    Pane root = new Pane();
+	    root.getChildren().addAll(logo);
 	    root.getChildren().addAll(enterGame);
 	    root.getChildren().addAll(playbutton); // Add both button lists
 	    root.getChildren().addAll(enterGameText);
@@ -138,6 +145,7 @@ public class Main extends Application {
 	private void homePage(Stage primaryStage) {
 	    Image cursorImage = new Image("GUIAssets/cursor.png");
 	    ImageView enterGame = new ImageView(new Image("shopAssets/itemForSaleFrame.png"));
+	    ImageView logo = new ImageView(new Image("applicationImagesBackgrounds/endlessMountainLogoWhite.png"));
 	    Cursor customCursor = Cursor.cursor(cursorImage.getUrl());
 
 	    Media media = new Media(menuMusic);
@@ -160,6 +168,12 @@ public class Main extends Application {
 	    
 	    enterGameText.setFont(DwarvenAxe);
 	    enterGameText.setFill(Color.web("#d5d5d5"));
+	    
+	  
+	    logo.setLayoutX(465);
+	    logo.setLayoutY(-200); 
+	    logo.setScaleX(.75);
+	    logo.setScaleY(.75);
 	    
 	    enterGame.setLayoutX(310);
 	    enterGame.setLayoutY(635); 
@@ -249,7 +263,7 @@ public class Main extends Application {
 	    // Use a Pane to allow free positioning
 	    Pane root = new Pane();
 	 // Add both button lists
-	    root.getChildren().addAll(enterGame);
+	    root.getChildren().addAll(enterGame, logo);
 	    root.getChildren().addAll(enterGameText);
 	    root.getChildren().addAll(playbutton, buttonBox2, shopTesting, gameOver);
 	    
