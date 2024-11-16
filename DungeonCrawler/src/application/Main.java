@@ -30,6 +30,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
@@ -76,9 +77,19 @@ public class Main extends Application {
 
 	    Cursor customCursor = Cursor.cursor(cursorImage.getUrl());
 	    ImageView enterGame = new ImageView(new Image("shopAssets/itemForSaleFrame.png"));
-	    ImageView logo = new ImageView(new Image("applicationImagesBackgrounds/endlessMountainLogoWhite.png"));
+	    ImageView logoWhite = new ImageView(new Image("applicationImagesBackgrounds/endlessMountainLogoWhite.png"));
+	    ImageView logoBlack = new ImageView(new Image("applicationImagesBackgrounds/endlessMountainLogoBlack.png"));
+	    
 	    Button play = new Button("Enter Game");
 	    Text enterGameText = new Text ("Enter Game");
+	    Text titlewhite = new Text ("ENDLESS MOUNTAIN \n   OF MONSTERS");
+	    Text titleblack = new Text ("ENDLESS MOUNTAIN \n   OF MONSTERS");
+	    
+	    titleblack.setFont(DwarvenAxe);
+	    titlewhite.setFont(DwarvenAxe);
+	    titlewhite.setFill(Color.web("#d5d5d5"));
+	    titleblack.setFill(Color.web("#000000"));
+	    
 	    enterGameText.setFont(DwarvenAxe);
 	    enterGameText.setFill(Color.web("#d5d5d5"));
 	    play.setOnAction(e -> {homePage(primaryStage);});
@@ -87,10 +98,25 @@ public class Main extends Application {
 	    VBox playbutton = new VBox(10);
 	    playbutton.getChildren().addAll(play);
 
-	    logo.setLayoutX(465);
-	    logo.setLayoutY(-200); 
-	    logo.setScaleX(.75);
-	    logo.setScaleY(.75);
+	    titleblack.setLayoutX(865);
+	    titleblack.setLayoutY(650); 
+	    titleblack.setScaleX(2.55);
+	    titleblack.setScaleY(2.6);
+	    
+	    titlewhite.setLayoutX(865);
+	    titlewhite.setLayoutY(650); 
+	    titlewhite.setScaleX(2.5);
+	    titlewhite.setScaleY(2.5);
+	    
+	    logoBlack.setLayoutX(465);
+	    logoBlack.setLayoutY(-200); 
+	    logoBlack.setScaleX(.77);
+	    logoBlack.setScaleY(.77);
+	    
+	    logoWhite.setLayoutX(465);
+	    logoWhite.setLayoutY(-200); 
+	    logoWhite.setScaleX(.75);
+	    logoWhite.setScaleY(.75);
 	    
 	    enterGame.setLayoutX(310);
 	    enterGame.setLayoutY(635); 
@@ -120,7 +146,10 @@ public class Main extends Application {
 	    BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, size);
 	    
 	    Pane root = new Pane();
-	    root.getChildren().addAll(logo);
+	    root.getChildren().addAll(logoBlack);
+	    root.getChildren().addAll(logoWhite);
+	    root.getChildren().addAll(titleblack);
+	    root.getChildren().addAll(titlewhite);
 	    root.getChildren().addAll(enterGame);
 	    root.getChildren().addAll(playbutton); // Add both button lists
 	    root.getChildren().addAll(enterGameText);
@@ -145,7 +174,10 @@ public class Main extends Application {
 	private void homePage(Stage primaryStage) {
 	    Image cursorImage = new Image("GUIAssets/cursor.png");
 	    ImageView enterGame = new ImageView(new Image("shopAssets/itemForSaleFrame.png"));
-	    ImageView logo = new ImageView(new Image("applicationImagesBackgrounds/endlessMountainLogoWhite.png"));
+	    ImageView logoWhite = new ImageView(new Image("applicationImagesBackgrounds/endlessMountainLogoWhite.png"));
+	    ImageView logoBlack = new ImageView(new Image("applicationImagesBackgrounds/endlessMountainLogoBlack.png"));
+	    
+	    
 	    Cursor customCursor = Cursor.cursor(cursorImage.getUrl());
 
 	    Media media = new Media(menuMusic);
@@ -163,17 +195,38 @@ public class Main extends Application {
 	    Button quit = new Button("Exit Game");
 	    Button shop = new Button("Shop");
 	    Button gameOver = new Button ("Game Over Sample");
-
-	    Text enterGameText = new Text ("Begin New Journey");
+	    Button goldEarned = new Button ("Gold Earned Sample");
 	    
+	    Text enterGameText = new Text ("Begin New Journey");
+	    Text titlewhite = new Text ("ENDLESS MOUNTAIN \n   OF MONSTERS");
+	    Text titleblack = new Text ("ENDLESS MOUNTAIN \n   OF MONSTERS");
+	    
+	    titleblack.setFont(DwarvenAxe);
+	    titlewhite.setFont(DwarvenAxe);
+	    titlewhite.setFill(Color.web("#d5d5d5"));
+	    titleblack.setFill(Color.web("#000000"));
 	    enterGameText.setFont(DwarvenAxe);
 	    enterGameText.setFill(Color.web("#d5d5d5"));
 	    
-	  
-	    logo.setLayoutX(465);
-	    logo.setLayoutY(-200); 
-	    logo.setScaleX(.75);
-	    logo.setScaleY(.75);
+	    titleblack.setLayoutX(865);
+	    titleblack.setLayoutY(650); 
+	    titleblack.setScaleX(2.55);
+	    titleblack.setScaleY(2.6);
+	    
+	    titlewhite.setLayoutX(865);
+	    titlewhite.setLayoutY(650); 
+	    titlewhite.setScaleX(2.5);
+	    titlewhite.setScaleY(2.5);
+	    
+	    logoBlack.setLayoutX(465);
+	    logoBlack.setLayoutY(-200); 
+	    logoBlack.setScaleX(.77);
+	    logoBlack.setScaleY(.77);
+	    
+	    logoWhite.setLayoutX(465);
+	    logoWhite.setLayoutY(-200); 
+	    logoWhite.setScaleX(.75);
+	    logoWhite.setScaleY(.75);
 	    
 	    enterGame.setLayoutX(310);
 	    enterGame.setLayoutY(635); 
@@ -227,6 +280,11 @@ public class Main extends Application {
 	        mediaPlayer.stop();
 	    });
 
+	    goldEarned.setOnAction(e -> {
+	    	goldEarned(primaryStage);
+	        mediaPlayer.stop();
+	    });
+	    
 	    // VBox 1 for first set of buttons
 	    VBox playbutton = new VBox(10);
 	    playbutton.getChildren().addAll(play);
@@ -247,7 +305,7 @@ public class Main extends Application {
 	    buttonBox2.setLayoutY(880); // Adjust Y for second VBox
 
 	    VBox shopTesting = new VBox(10);
-	    shopTesting.getChildren().addAll(shop, gameOver);
+	    shopTesting.getChildren().addAll(shop, gameOver, goldEarned);
 	    shopTesting.setSpacing(10);
 	    shopTesting.setPadding(new Insets(20));
 	    shopTesting.setLayoutX(10); // Adjust X for second VBox
@@ -263,7 +321,11 @@ public class Main extends Application {
 	    // Use a Pane to allow free positioning
 	    Pane root = new Pane();
 	 // Add both button lists
-	    root.getChildren().addAll(enterGame, logo);
+	    root.getChildren().addAll(logoBlack);
+	    root.getChildren().addAll(logoWhite);
+	    root.getChildren().addAll(titleblack);
+	    root.getChildren().addAll(titlewhite);
+	    root.getChildren().addAll(enterGame);
 	    root.getChildren().addAll(enterGameText);
 	    root.getChildren().addAll(playbutton, buttonBox2, shopTesting, gameOver);
 	    
@@ -1722,6 +1784,7 @@ public class Main extends Application {
 
 
 	}
+	
 	private void shop(Stage primaryStage) {
 		Image cursorImage = new Image("GUIAssets/cursor.png");
 		Cursor customCursor = Cursor.cursor(cursorImage.getUrl());
@@ -2234,6 +2297,94 @@ public class Main extends Application {
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		primaryStage.setOnCloseRequest(event -> mediaPlayer.stop());
+	}
+	
+	private void goldEarned(Stage primaryStage) {
+		AudioClip successSFX = new AudioClip(getClass().getResource("/SFX/goldEarnedScreenSuccessSFX.wav").toString());
+		successSFX.setVolume(0.05); // Volume level (0.0 to 1.0)
+		successSFX.play();
+
+		Image cursorImage = new Image("GUIAssets/cursor.png");
+		Cursor customCursor = Cursor.cursor(cursorImage.getUrl());
+		
+		ImageView toShopImage = new ImageView(new Image("shopAssets/itemForSaleFrame.png"));
+		ImageView goldIconLeft = new ImageView(new Image("shopAssets/goldIcon.png"));
+		ImageView goldIconRight = new ImageView(new Image("shopAssets/goldIcon.png"));
+
+		
+		Button ShopButton = new Button("Shop");
+
+		Text toShopText = new Text("Shop");
+		Text goldEarnedText = new Text("Gold Earned");
+//		Text goldEarnedVarText = new Text(gold Earned); // var
+
+//		Text goldEarnedVarText = new Text("Gold Earned \n " + ); // var
+	
+
+
+		goldEarnedText.setFill(Color.web("#FFEB80"));
+		goldEarnedText.setFont(DwarvenAxe);
+		toShopText.setFill(Color.web("#d5d5d5"));
+		toShopText.setFont(DwarvenAxe);
+
+		goldEarnedText.setLayoutX(900);
+		goldEarnedText.setLayoutY(300);
+		goldEarnedText.setScaleX(3);
+		goldEarnedText.setScaleY(3);
+		
+		toShopImage.setLayoutX(310);
+		toShopImage.setLayoutY(635);
+		toShopImage.setScaleX(.5);
+		toShopImage.setScaleY(.8);
+		toShopImage.setRotate(90);
+		toShopImage.setMouseTransparent(true);
+		
+		toShopText.setLayoutX(950);
+		toShopText.setLayoutY(970);
+		toShopText.setScaleX(3);
+		toShopText.setScaleY(3);
+		toShopText.setMouseTransparent(true);
+
+		ShopButton.setLayoutX(960); // Adjust X for play button
+		ShopButton.setLayoutY(950); // Adjust Y for play button
+		ShopButton.setScaleX(9);
+		ShopButton.setScaleY(5);
+		ShopButton.setOpacity(0);
+		ShopButton.setOnMouseEntered(e -> {toShopText.setFill(Color.web("#d10000"));});
+		ShopButton.setOnMouseExited(e -> {toShopText.setFill(Color.web("#d5d5d5"));});
+		ShopButton.setOnAction(e -> shop(primaryStage));
+	    
+		goldIconLeft.setLayoutX(1290);
+		goldIconLeft.setLayoutY(250);
+		goldIconLeft.setScaleX(-2);
+		goldIconLeft.setScaleY(2);
+		
+		
+		goldIconRight.setLayoutX(570);
+		goldIconRight.setLayoutY(250);
+		goldIconRight.setScaleX(2);
+		goldIconRight.setScaleY(2);
+		
+	    Image image = new Image("applicationImagesBackgrounds/goldEarnedBackground.png");
+	    // Define the background size and position
+	    BackgroundSize size = new BackgroundSize(1, 1, true, true, false, false);
+	    BackgroundImage backgroundImage = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT,
+	            BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, size);
+		
+		Pane root = new Pane();
+		root.getChildren().addAll(ShopButton); 
+		root.getChildren().addAll(toShopImage);
+		root.getChildren().addAll(toShopText, goldEarnedText, goldIconRight, goldIconLeft);
+
+	    root.setBackground(new Background(backgroundImage)); 
+		
+		root.setPadding(new Insets(20));
+		Scene scene = new Scene(root, 1920, 1080);
+		scene.setCursor(customCursor);
+		primaryStage.setTitle("Endless Mountain of Monsters");
+		primaryStage.setMaximized(true);
+		primaryStage.setScene(scene);
+		primaryStage.show();
 	}
 	
 	private void textTutorial(Stage primaryStage) {
