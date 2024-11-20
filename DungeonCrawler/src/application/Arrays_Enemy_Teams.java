@@ -1,5 +1,6 @@
 package application;
 
+import java.io.IOException;
 import java.util.Random;
 
 
@@ -35,7 +36,7 @@ public class Arrays_Enemy_Teams extends enemyTeam {
 		return this.teams[index];
 	}
 	
-public enemyTeam createTeams(int challengeRating) {
+public enemyTeam createTeams(int challengeRating) throws IOException {
 		
 		Random rand = new Random(); // Random for selection
 		enemyTeam teamComp = new enemyTeam(4, 4);
@@ -92,7 +93,7 @@ public enemyTeam createTeams(int challengeRating) {
 	}
 
 	
-	public Arrays_Enemy_Teams createSelection() {
+	public Arrays_Enemy_Teams createSelection() throws IOException {
 		
 		Arrays_Enemy_Teams enemyTeamArray = new Arrays_Enemy_Teams(4, 4, 15);
 		int i = 0;

@@ -97,7 +97,7 @@ public class Items {
 		
 		//increases one characters resistances by 10%
 		public void increaseResistances(Characters hero) {
-			hero.setPoisonResist(hero.getPoisonResist()+10);
+			hero.setBlightResist(hero.getBlightResist()+10);
 			hero.setBleedResist(hero.getBleedResist()+10);
 			hero.setBurnResist(hero.getBurnResist()+10);
 		}

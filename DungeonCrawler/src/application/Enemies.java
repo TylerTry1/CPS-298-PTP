@@ -1,10 +1,17 @@
 package application;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Optional; // For Optional Parameters
+
+import javax.imageio.ImageIO;
 
 public class Enemies extends entities {
 	
         String name;
+        double maxHealth;
         double health;
         static double[] damage = new double[1];
         static double[] placeholderDamage = new double[1];
@@ -16,9 +23,75 @@ public class Enemies extends entities {
         int size;
         int challenge; // For determine team comps (testing this)
         int speed;
+        Image idleSprite;
+        Image attackSprite;
+        double bleedResist;
+        double burnResist;
+        double blightResist;
+        double stunResist;
+        double moveResist;
+        double debuffResist;
+        double deathResist;
+        double healthBarAmount;
         boolean downed = false;
         int getChallenge() {
         	return challenge;
+        }
+        
+        void setBleedResist(double set) {
+        	bleedResist = set;
+        }
+        
+        double getBleedResist() {
+        	return bleedResist;
+        }
+        
+        void setBurnResist(double set) {
+        	burnResist = set;
+        }
+        
+        double getBurnResist() {
+        	return burnResist;
+        }
+        
+        void setBlightResist(double set) {
+        	blightResist = set;
+        }
+        
+        double getBlightResist() {
+        	return blightResist;
+        }
+        
+        void setStunResist(double set) {
+        	stunResist = set;
+        }
+        
+        double getStunResist() {
+        	return stunResist;
+        }
+        
+        void setMoveResist(double set) {
+        	moveResist = set;
+        }
+        
+        double getMoveResist() {
+        	return moveResist;
+        }
+        
+        void setDebuffResist(double set) {
+        	debuffResist = set;
+        }
+        
+        double getDebuffResist() {
+        	return debuffResist;
+        }
+        
+        void setDeathResist(double set) {
+        	deathResist = set;
+        }
+        
+        double getDeathResist() {
+        	return deathResist;
         }
         
         void setDowned(boolean down) {
@@ -66,11 +139,17 @@ public class Enemies extends entities {
 			return abilities;
 		}
 		
+        double setHealthBarAmount() {
+        	healthBarAmount = (this.maxHealth / this.health) * 100;
+        	return healthBarAmount;
+        }
+		
 
 	
 	public class goblinScout extends Enemies {
-		public goblinScout(Optional <Integer> pos) {
+		public goblinScout(Optional <Integer> pos) throws IOException {
 			name = "Goblin Scout";
+			// add max health
 			health = 24;
 			damage[0] = 7.0;
 			placeholderDamage[0] = 0;
@@ -82,6 +161,15 @@ public class Enemies extends entities {
 			size = 1;
 			challenge = 1;
 			speed = 5;
+			//File idleImage = new File("applicationEnemySpries/GoblinScout/Goblin_Scout_1_Idle.png");
+			//BufferedImage IdleImage = ImageIO.read(idleImage); 
+	        bleedResist = 10;
+	        burnResist = 12;
+	        blightResist = 14;
+	        stunResist = 10;
+	        moveResist = 5;
+	        debuffResist = 6;
+	        deathResist = 4;
 			abilities[0] = new Slice();
 			abilities[1] = new Recon();
 		}
@@ -143,6 +231,13 @@ public class Enemies extends entities {
 			size = 1;
 			challenge = 2;
 			speed = 4;
+	        bleedResist = 10;
+	        burnResist = 12;
+	        blightResist = 14;
+	        stunResist = 10;
+	        moveResist = 5;
+	        debuffResist = 6;
+	        deathResist = 4;
 			abilities[0] = new AxeSlash();
 			abilities[1] = new ShieldStance();
 		}
@@ -196,6 +291,13 @@ public class Enemies extends entities {
 			size = 1;
 			challenge = 1;
 			speed = 6;
+	        bleedResist = 10;
+	        burnResist = 12;
+	        blightResist = 14;
+	        stunResist = 10;
+	        moveResist = 5;
+	        debuffResist = 6;
+	        deathResist = 4;
 			abilities[0] = new VolleyShot();
 			abilities[1] = new Snipe();
 		}
@@ -250,6 +352,13 @@ public class Enemies extends entities {
 			size = 1;
 			challenge = 1;
 			speed = 6;
+	        bleedResist = 10;
+	        burnResist = 12;
+	        blightResist = 14;
+	        stunResist = 10;
+	        moveResist = 5;
+	        debuffResist = 6;
+	        deathResist = 4;
 			abilities[0] = new Rally();
 			abilities[1] = new StaffSlam();
 		}
@@ -305,6 +414,13 @@ public class Enemies extends entities {
 			size = 1;
 			challenge = 2;
 			speed = 6;
+	        bleedResist = 25;
+	        burnResist = 15;
+	        blightResist = 10;
+	        stunResist = 5;
+	        moveResist = 10;
+	        debuffResist = 6;
+	        deathResist = 4;
 			abilities[0] = new RushSlash();
 			abilities[1] = new VerticalSlash();
 		}
@@ -361,6 +477,13 @@ public class Enemies extends entities {
 			size = 1;
 			challenge = 2;
 			speed = 7;
+	        bleedResist = 25;
+	        burnResist = 15;
+	        blightResist = 10;
+	        stunResist = 5;
+	        moveResist = 10;
+	        debuffResist = 6;
+	        deathResist = 4;
 			abilities[0] = new BurstShot();
 			abilities[1] = new TakeAim();
 		}
@@ -430,7 +553,14 @@ public class Enemies extends entities {
 			position = pos.orElse(1);
 			size = 1;
 			challenge = 3;
-			speed = 5;
+			speed = 5;	        
+			bleedResist = 25;
+	        burnResist = 15;
+	        blightResist = 10;
+	        stunResist = 5;
+	        moveResist = 10;
+	        debuffResist = 6;
+	        deathResist = 4;
 			abilities[0] = new MaceSlam();
 			abilities[1] = new BuckleDown();
 		}
@@ -484,6 +614,13 @@ public class Enemies extends entities {
 			size = 1;
 			challenge = 2;
 			speed = 8;
+	        bleedResist = 10;
+	        burnResist = 15;
+	        blightResist = 20;
+	        stunResist = 5;
+	        moveResist = 5;
+	        debuffResist = 6;
+	        deathResist = 4;
 			abilities[0] = new SummonUndead();
 			abilities[1] = new DarkMagicBlast();
 		}
@@ -541,6 +678,14 @@ public class Enemies extends entities {
 			position = pos.orElse(1);
 			size = 1;
 			challenge = 1;
+			speed = 0;
+	        bleedResist = 0;
+	        burnResist = 0;
+	        blightResist = 0;
+	        stunResist = 0;
+	        moveResist = 0;
+	        debuffResist = 0;
+	        deathResist = 0;
 			abilities[0] = new Squelch();
 			abilities[1] = new Pulse();
 		}
@@ -594,6 +739,14 @@ public class Enemies extends entities {
 			position = pos.orElse(1);
 			size = 2;
 			challenge = 4;
+			speed = 5;
+	        bleedResist = 25;
+	        burnResist = 15;
+	        blightResist = 10;
+	        stunResist = 5;
+	        moveResist = 25;
+	        debuffResist = 6;
+	        deathResist = 10;
 			abilities[0] = new Shockwave();
 			abilities[1] = new GroundSlam();
 		}
@@ -650,6 +803,14 @@ public class Enemies extends entities {
 			position = pos.orElse(1);
 			size = 2;
 			challenge = 4;
+			speed = 5;
+	        bleedResist = 25;
+	        burnResist = 15;
+	        blightResist = 10;
+	        stunResist = 5;
+	        moveResist = 25;
+	        debuffResist = 6;
+	        deathResist = 10;
 			abilities[0] = new Sweep();
 			abilities[1] = new MaceCrush();
 		}
@@ -706,6 +867,14 @@ public class Enemies extends entities {
 			position = pos.orElse(1);
 			size = 1;
 			challenge = 2;
+			speed = 8;
+	        bleedResist = 25;
+	        burnResist = 5;
+	        blightResist = 10;
+	        stunResist = 5;
+	        moveResist = 10;
+	        debuffResist = 6;
+	        deathResist = 10;
 			abilities[0] = new Bite();
 			abilities[1] = new Sway();
 			
@@ -758,6 +927,14 @@ public class Enemies extends entities {
 			position = pos.orElse(1);
 			size = 1;
 			challenge = 3;
+			speed = 5;
+	        bleedResist = 25;
+	        burnResist = 10;
+	        blightResist = 10;
+	        stunResist = 5;
+	        moveResist = 10;
+	        debuffResist = 6;
+	        deathResist = 10;
 			abilities[0] = new ShoulderSlam();
 			abilities[1] = new SwordSweep();
 			
@@ -810,6 +987,14 @@ public class Enemies extends entities {
 			position = pos.orElse(1);
 			size = 2;
 			challenge = 4;
+			speed = 15;
+	        bleedResist = 25;
+	        burnResist = 15;
+	        blightResist = 10;
+	        stunResist = 10;
+	        moveResist = 25;
+	        debuffResist = 6;
+	        deathResist = 10;
 			abilities[0] = new Rush();
 			abilities[1] = new AxeSlash();
 		}
@@ -862,6 +1047,14 @@ public class Enemies extends entities {
 			position = pos.orElse(1);
 			size = 1;
 			challenge = 3;
+			speed = 12;
+	        bleedResist = 25;
+	        burnResist = 15;
+	        blightResist = 10;
+	        stunResist = 5;
+	        moveResist = 15;
+	        debuffResist = 6;
+	        deathResist = 10;
 			abilities[0] = new TuskSwipe();
 			abilities[1] = new Frenzy();
 		}

@@ -23,6 +23,7 @@ public class Alchemist extends Characters {
     }
 	// Acid Puddle: Creates a puddle that poisons enemies
     public void useAcidPuddle(List<Characters> enemies) {
+    	String moveName = "Acid Puddle";
         for (Characters enemy : enemies) {
             enemy.takeDamage(ACID_PUDDLE_DAMAGE); // Initial damage
             applyAcidDamage(enemy, ACID_PUDDLE_DURATION); // Apply damage over time

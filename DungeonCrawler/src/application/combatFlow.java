@@ -1,5 +1,6 @@
 package application;
 
+import java.io.IOException;
 import java.util.Random;
 
 import javafx.event.EventHandler;
@@ -30,6 +31,9 @@ public class combatFlow {
 	entities[] turnOrder = new entities[8];
 	int count;
 	
+	Characters getCurrent() {
+		return currentCharacter;
+	}
 	entities[] getTurnOrder() {
 		return turnOrder;
 	}
@@ -158,7 +162,7 @@ public class combatFlow {
 	}
 	*/
 	
-	public void createEnemyTeam() {
+	public void createEnemyTeam() throws IOException {
 		// Create current Enemy Team:
 		enemyTeamsArray = enemyTeamsArray.createSelection(); // Create array of teams to pull from
 		int teamSelect = rand.nextInt(15);
@@ -534,10 +538,12 @@ public class combatFlow {
 
 			entities current;
 			current = turnOrder[count];
+			//currentCharacter = (Characters) current;
 			
 			// Automated enemy turn processing
 			if (current instanceof Enemies) {
 				System.out.println(((Enemies) current).getName() + "'s Turn.");
+				
 				
 				if (((Enemies) current).getHealth() != 0.0)
 					processEnemyDamage(current);
@@ -551,6 +557,8 @@ public class combatFlow {
 			// Player turn, waits for button click
 			// Add skip turn/skill buttons, etc in here. 
 			else if (current instanceof Characters) {
+				
+				currentCharacter = (Characters) current;
 				
 				if (current instanceof Paladin) {
 					System.out.println(((Characters) current).getName() + "'s Turn.");

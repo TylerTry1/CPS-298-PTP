@@ -15,9 +15,15 @@ public class Characters extends entities {
         int dodge_chance; // leave this stat at 0 for all characters, need a 0 value in case we want to change it later.
         int position;
         int speed;
-        int poisonResist;
         int bleedResist;
         int burnResist;
+        int blightResist;
+        int stunResist;
+        int moveResist;
+        int debuffResist;
+        int deathResist;
+        double healthBarAmount;
+        
         boolean downed = false;
         
         void setDowned(boolean down) {
@@ -60,12 +66,12 @@ public class Characters extends entities {
         	damage = dam;
         }
         
-        void setPoisonResist(int set) {
-        	poisonResist = set;
+        void setBlightResist(int set) {
+        	blightResist = set;
         }
         
-        int getPoisonResist() {
-        	return poisonResist;
+        int getBlightResist() {
+        	return blightResist;
         }
         
         void setBleedResist(int set) {
@@ -115,6 +121,11 @@ public class Characters extends entities {
                 this.health = maxHealth; // Cap healing at max health
             }
             System.out.println(name + " healed for " + amount + " health. Current health: " + this.health);
+        }
+        
+        double setHealthBarAmount() {
+        	healthBarAmount = (this.maxHealth / this.health) * 100;
+        	return healthBarAmount;
         }
     //}
 

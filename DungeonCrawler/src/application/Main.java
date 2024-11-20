@@ -1,5 +1,6 @@
 package application;
 
+import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -59,6 +60,7 @@ public class Main extends Application {
 	String gameOver =  getClass().getResource("/Music/gameOver.mp3").toExternalForm();
 	Media mediaPath4 = new Media(gameOver);
 	int count = 0; // For use in combat
+	int round = 0;
 	int fightsWon = 0;
 	
 	Font KingArthurLegend = Font.loadFont(getClass().getResourceAsStream("/fonts/KingArthurLegend.ttf"), 40);
@@ -247,7 +249,12 @@ public class Main extends Application {
 	    play.setOnMouseEntered(e -> {enterGameText.setFill(Color.web("#d10000"));});
 	    play.setOnMouseExited(e -> {enterGameText.setFill(Color.web("#d5d5d5"));});
 	    play.setOnAction(e -> {
-	        battleScene(primaryStage);
+	        try {
+				battleScene(primaryStage);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 	        mediaPlayer.stop();
 	    });
 
@@ -361,8 +368,7 @@ public class Main extends Application {
 	}
 
 
-	private void battleScene(Stage primaryStage) {
-		
+	private void battleScene(Stage primaryStage) throws IOException {
 		
 		Image cursorImage = new Image("GUIAssets/cursor.png");
 		Cursor customCursor = Cursor.cursor(cursorImage.getUrl());
@@ -387,6 +393,24 @@ public class Main extends Application {
 		Button enemyPosition2 = new Button("enemyPosition2");
 		Button enemyPosition3 = new Button("enemyPosition3");
 		Button enemyPosition4 = new Button("enemyPosition4");
+		
+		//--------------------------------------------------------------------------------------------------------
+		// Combat assets
+		combatControl flow = new combatControl(enemyPosition1, enemyPosition2, enemyPosition3, enemyPosition4);
+		flow.createEnemyTeam();
+		flow.adjustSpeeds();
+		flow.determineTurnOrder();
+		entities[] tempTurnOrder = flow.getTurnOrder();
+		playerTeamArray tempPTeamArray = flow.getPlayerTeamArray();
+		Characters[] tempPTeam = tempPTeamArray.getTeam();
+		enemyTeam tempETeamArray = flow.getEnemyTeam();
+		Enemies[] tempETeam = tempETeamArray.getTeam();
+		count = 0;
+		round = 0;
+		boolean gameOver = false;
+		Timer timer = new Timer();
+		//--------------------------------------------------------------------------------------------------------
+		
 
 		ToggleGroup skillButtonGroup = new ToggleGroup();
 		RadioButton skillbutton1 = new RadioButton("skill 1");
@@ -414,13 +438,34 @@ public class Main extends Application {
 		Text enemyMoveResistanceNumberText = new Text("MOV");
 		Text enemyDebuffResistanceNumberText = new Text("DBFF");
 		Text enemyDeathResistanceNumberText = new Text("DTH");
-		Text enemyBleedResistanceNumber = new Text("0"); // var
-		Text enemyBlightResistanceNumber= new Text("0"); // var
-		Text enemyBurnResistanceNumber= new Text("0"); // var
-		Text enemyStunResistanceNumber= new Text("0"); // var
-		Text enemyMoveResistanceNumber= new Text("0"); // var
-		Text enemyDebuffResistanceNumber= new Text("0"); // var
-		Text enemyDeathResistanceNumber= new Text("0"); // var
+		Text enemy1BleedResistanceNumber = new Text(Double.toString(tempETeam[0].getBleedResist())); 
+		Text enemy1BlightResistanceNumber= new Text(Double.toString(tempETeam[0].getBlightResist())); 
+		Text enemy1BurnResistanceNumber= new Text(Double.toString(tempETeam[0].getBurnResist())); 
+		Text enemy1StunResistanceNumber= new Text(Double.toString(tempETeam[0].getStunResist())); 
+		Text enemy1MoveResistanceNumber= new Text(Double.toString(tempETeam[0].getMoveResist())); 
+		Text enemy1DebuffResistanceNumber= new Text(Double.toString(tempETeam[0].getDebuffResist())); 
+		Text enemy1DeathResistanceNumber= new Text(Double.toString(tempETeam[0].getDeathResist())); 
+		Text enemy2BleedResistanceNumber = new Text(Double.toString(tempETeam[1].getBleedResist())); 
+		Text enemy2BlightResistanceNumber= new Text(Double.toString(tempETeam[1].getBlightResist())); 
+		Text enemy2BurnResistanceNumber= new Text(Double.toString(tempETeam[1].getBurnResist())); 
+		Text enemy2StunResistanceNumber= new Text(Double.toString(tempETeam[1].getStunResist())); 
+		Text enemy2MoveResistanceNumber= new Text(Double.toString(tempETeam[1].getMoveResist())); 
+		Text enemy2DebuffResistanceNumber= new Text(Double.toString(tempETeam[1].getDebuffResist())); 
+		Text enemy2DeathResistanceNumber= new Text(Double.toString(tempETeam[1].getDeathResist())); 
+		Text enemy3BleedResistanceNumber = new Text(Double.toString(tempETeam[2].getBleedResist())); 
+		Text enemy3BlightResistanceNumber= new Text(Double.toString(tempETeam[2].getBlightResist())); 
+		Text enemy3BurnResistanceNumber= new Text(Double.toString(tempETeam[2].getBurnResist())); 
+		Text enemy3StunResistanceNumber= new Text(Double.toString(tempETeam[2].getStunResist())); 
+		Text enemy3MoveResistanceNumber= new Text(Double.toString(tempETeam[2].getMoveResist())); 
+		Text enemy3DebuffResistanceNumber= new Text(Double.toString(tempETeam[2].getDebuffResist())); 
+		Text enemy3DeathResistanceNumber= new Text(Double.toString(tempETeam[2].getDeathResist())); 
+		Text enemy4BleedResistanceNumber = new Text(Double.toString(tempETeam[3].getBleedResist())); 
+		Text enemy4BlightResistanceNumber= new Text(Double.toString(tempETeam[3].getBlightResist())); 
+		Text enemy4BurnResistanceNumber= new Text(Double.toString(tempETeam[3].getBurnResist())); 
+		Text enemy4StunResistanceNumber= new Text(Double.toString(tempETeam[3].getStunResist())); 
+		Text enemy4MoveResistanceNumber= new Text(Double.toString(tempETeam[3].getMoveResist())); 
+		Text enemy4DebuffResistanceNumber= new Text(Double.toString(tempETeam[3].getDebuffResist())); 
+		Text enemy4DeathResistanceNumber= new Text(Double.toString(tempETeam[3].getDeathResist())); 
 		Text heroHPPos4 = new Text ("heroHPPos4"); // var
 		Text heroHPPos3 = new Text ("heroHPPos3"); // var
 		Text heroHPPos2 = new Text ("heroHPPos2"); // var
@@ -429,7 +474,7 @@ public class Main extends Application {
 		Text enemyHPPos2 = new Text ("enemyHPPos2"); // var
 		Text enemyHPPos3 = new Text ("enemyHPPos3"); // var
 		Text enemyHPPos4 = new Text ("enemyHPPos4"); // var
-		Text roundNumberText = new Text ("Round" ); // var + roundCounter
+		Text roundNumberText = new Text ("0"); // var + roundCounter
 		
 		Text moveDescriptionText = new Text ("DMG:  CRIT:(critpercent)"); // var
 		Text moveNameText = new Text (moveName); // var
@@ -456,20 +501,63 @@ public class Main extends Application {
 		enemyDeathResistanceNumberText.setFill(Color.web("#8e0000"));
 		roundNumberText.setFont(KingArthurLegend);
 		roundNumberText.setFill(Color.web("#d5d5d5"));
-		enemyBleedResistanceNumber.setFont(DwarvenAxe);
-		enemyBleedResistanceNumber.setFill(Color.web("#d5d5d5"));
-		enemyBlightResistanceNumber.setFont(DwarvenAxe);
-		enemyBlightResistanceNumber.setFill(Color.web("#d5d5d5"));
-		enemyBurnResistanceNumber.setFont(DwarvenAxe);
-		enemyBurnResistanceNumber.setFill(Color.web("#d5d5d5"));
-		enemyStunResistanceNumber.setFont(DwarvenAxe);
-		enemyStunResistanceNumber.setFill(Color.web("#d5d5d5"));
-		enemyMoveResistanceNumber.setFont(DwarvenAxe);
-		enemyMoveResistanceNumber.setFill(Color.web("#d5d5d5"));
-		enemyDebuffResistanceNumber.setFont(DwarvenAxe);
-		enemyDebuffResistanceNumber.setFill(Color.web("#d5d5d5"));
-		enemyDeathResistanceNumber.setFont(DwarvenAxe);
-		enemyDeathResistanceNumber.setFill(Color.web("#d5d5d5"));
+		enemy1BleedResistanceNumber.setFont(DwarvenAxe);
+		enemy1BleedResistanceNumber.setFill(Color.web("#d5d5d5"));
+		enemy1BlightResistanceNumber.setFont(DwarvenAxe);
+		enemy1BlightResistanceNumber.setFill(Color.web("#d5d5d5"));
+		enemy1BurnResistanceNumber.setFont(DwarvenAxe);
+		enemy1BurnResistanceNumber.setFill(Color.web("#d5d5d5"));
+		enemy1StunResistanceNumber.setFont(DwarvenAxe);
+		enemy1StunResistanceNumber.setFill(Color.web("#d5d5d5"));
+		enemy1MoveResistanceNumber.setFont(DwarvenAxe);
+		enemy1MoveResistanceNumber.setFill(Color.web("#d5d5d5"));
+		enemy1DebuffResistanceNumber.setFont(DwarvenAxe);
+		enemy1DebuffResistanceNumber.setFill(Color.web("#d5d5d5"));
+		enemy1DeathResistanceNumber.setFont(DwarvenAxe);
+		enemy1DeathResistanceNumber.setFill(Color.web("#d5d5d5"));
+		enemy2BleedResistanceNumber.setFont(DwarvenAxe);
+		enemy2BleedResistanceNumber.setFill(Color.web("#d5d5d5"));
+		enemy2BlightResistanceNumber.setFont(DwarvenAxe);
+		enemy2BlightResistanceNumber.setFill(Color.web("#d5d5d5"));
+		enemy2BurnResistanceNumber.setFont(DwarvenAxe);
+		enemy2BurnResistanceNumber.setFill(Color.web("#d5d5d5"));
+		enemy2StunResistanceNumber.setFont(DwarvenAxe);
+		enemy2StunResistanceNumber.setFill(Color.web("#d5d5d5"));
+		enemy2MoveResistanceNumber.setFont(DwarvenAxe);
+		enemy2MoveResistanceNumber.setFill(Color.web("#d5d5d5"));
+		enemy2DebuffResistanceNumber.setFont(DwarvenAxe);
+		enemy2DebuffResistanceNumber.setFill(Color.web("#d5d5d5"));
+		enemy2DeathResistanceNumber.setFont(DwarvenAxe);
+		enemy2DeathResistanceNumber.setFill(Color.web("#d5d5d5"));
+		enemy3BleedResistanceNumber.setFont(DwarvenAxe);
+		enemy3BleedResistanceNumber.setFill(Color.web("#d5d5d5"));
+		enemy3BlightResistanceNumber.setFont(DwarvenAxe);
+		enemy3BlightResistanceNumber.setFill(Color.web("#d5d5d5"));
+		enemy3BurnResistanceNumber.setFont(DwarvenAxe);
+		enemy3BurnResistanceNumber.setFill(Color.web("#d5d5d5"));
+		enemy3StunResistanceNumber.setFont(DwarvenAxe);
+		enemy3StunResistanceNumber.setFill(Color.web("#d5d5d5"));
+		enemy3MoveResistanceNumber.setFont(DwarvenAxe);
+		enemy3MoveResistanceNumber.setFill(Color.web("#d5d5d5"));
+		enemy3DebuffResistanceNumber.setFont(DwarvenAxe);
+		enemy3DebuffResistanceNumber.setFill(Color.web("#d5d5d5"));
+		enemy3DeathResistanceNumber.setFont(DwarvenAxe);
+		enemy3DeathResistanceNumber.setFill(Color.web("#d5d5d5"));
+		enemy4BleedResistanceNumber.setFont(DwarvenAxe);
+		enemy4BleedResistanceNumber.setFill(Color.web("#d5d5d5"));
+		enemy4BlightResistanceNumber.setFont(DwarvenAxe);
+		enemy4BlightResistanceNumber.setFill(Color.web("#d5d5d5"));
+		enemy4BurnResistanceNumber.setFont(DwarvenAxe);
+		enemy4BurnResistanceNumber.setFill(Color.web("#d5d5d5"));
+		enemy4StunResistanceNumber.setFont(DwarvenAxe);
+		enemy4StunResistanceNumber.setFill(Color.web("#d5d5d5"));
+		enemy4MoveResistanceNumber.setFont(DwarvenAxe);
+		enemy4MoveResistanceNumber.setFill(Color.web("#d5d5d5"));
+		enemy4DebuffResistanceNumber.setFont(DwarvenAxe);
+		enemy4DebuffResistanceNumber.setFill(Color.web("#d5d5d5"));
+		enemy4DeathResistanceNumber.setFont(DwarvenAxe);
+		enemy4DeathResistanceNumber.setFill(Color.web("#d5d5d5"));
+		
 		heroHPPos4.setFont(DwarvenAxe);
 		heroHPPos4.setFill(Color.web("#bc1313"));
 		heroHPPos3.setFont(DwarvenAxe);
@@ -803,13 +891,34 @@ public class Main extends Application {
 		enemyMoveResistanceNumberText.setVisible(false);
 		enemyDebuffResistanceNumberText.setVisible(false);
 		enemyDeathResistanceNumberText.setVisible(false);
-		enemyBleedResistanceNumber.setVisible(false);
-		enemyBlightResistanceNumber.setVisible(false);
-		enemyBurnResistanceNumber.setVisible(false);
-		enemyStunResistanceNumber.setVisible(false);
-		enemyMoveResistanceNumber.setVisible(false);
-		enemyDebuffResistanceNumber.setVisible(false);
-		enemyDeathResistanceNumber.setVisible(false);
+		enemy1BleedResistanceNumber.setVisible(false);
+		enemy1BlightResistanceNumber.setVisible(false);
+		enemy1BurnResistanceNumber.setVisible(false);
+		enemy1StunResistanceNumber.setVisible(false);
+		enemy1MoveResistanceNumber.setVisible(false);
+		enemy1DebuffResistanceNumber.setVisible(false);
+		enemy1DeathResistanceNumber.setVisible(false);
+		enemy2BleedResistanceNumber.setVisible(false);
+		enemy2BlightResistanceNumber.setVisible(false);
+		enemy2BurnResistanceNumber.setVisible(false);
+		enemy2StunResistanceNumber.setVisible(false);
+		enemy2MoveResistanceNumber.setVisible(false);
+		enemy2DebuffResistanceNumber.setVisible(false);
+		enemy2DeathResistanceNumber.setVisible(false);
+		enemy3BleedResistanceNumber.setVisible(false);
+		enemy3BlightResistanceNumber.setVisible(false);
+		enemy3BurnResistanceNumber.setVisible(false);
+		enemy3StunResistanceNumber.setVisible(false);
+		enemy3MoveResistanceNumber.setVisible(false);
+		enemy3DebuffResistanceNumber.setVisible(false);
+		enemy3DeathResistanceNumber.setVisible(false);
+		enemy4BleedResistanceNumber.setVisible(false);
+		enemy4BlightResistanceNumber.setVisible(false);
+		enemy4BurnResistanceNumber.setVisible(false);
+		enemy4StunResistanceNumber.setVisible(false);
+		enemy4MoveResistanceNumber.setVisible(false);
+		enemy4DebuffResistanceNumber.setVisible(false);
+		enemy4DeathResistanceNumber.setVisible(false);
 		
 		enemyNameText.setVisible(false);
 		
@@ -967,13 +1076,13 @@ public class Main extends Application {
 		    enemyMoveResistanceNumberText.setVisible(true);
 		    enemyDebuffResistanceNumberText.setVisible(true);
 		    enemyDeathResistanceNumberText.setVisible(true);
-		    enemyBleedResistanceNumber.setVisible(true);
-		    enemyBlightResistanceNumber.setVisible(true);
-		    enemyBurnResistanceNumber.setVisible(true);
-		    enemyStunResistanceNumber.setVisible(true);
-		    enemyMoveResistanceNumber.setVisible(true);
-		    enemyDebuffResistanceNumber.setVisible(true);
-		    enemyDeathResistanceNumber.setVisible(true);
+		    enemy1BleedResistanceNumber.setVisible(true);
+		    enemy1BlightResistanceNumber.setVisible(true);
+		    enemy1BurnResistanceNumber.setVisible(true);
+		    enemy1StunResistanceNumber.setVisible(true);
+		    enemy1MoveResistanceNumber.setVisible(true);
+		    enemy1DebuffResistanceNumber.setVisible(true);
+		    enemy1DeathResistanceNumber.setVisible(true);
 		    enemySelectionIndicator1.setVisible(true);
 		    fadeInEnemySelectionIndicator1.play();
 		});
@@ -995,13 +1104,13 @@ public class Main extends Application {
 	        enemyMoveResistanceNumberText.setVisible(false);
 	        enemyDebuffResistanceNumberText.setVisible(false);
 	        enemyDeathResistanceNumberText.setVisible(false);
-	        enemyBleedResistanceNumber.setVisible(false);
-	        enemyBlightResistanceNumber.setVisible(false);
-	        enemyBurnResistanceNumber.setVisible(false);
-	        enemyStunResistanceNumber.setVisible(false);
-	        enemyMoveResistanceNumber.setVisible(false);
-	        enemyDebuffResistanceNumber.setVisible(false);
-	        enemyDeathResistanceNumber.setVisible(false);
+	        enemy1BleedResistanceNumber.setVisible(false);
+	        enemy1BlightResistanceNumber.setVisible(false);
+	        enemy1BurnResistanceNumber.setVisible(false);
+	        enemy1StunResistanceNumber.setVisible(false);
+	        enemy1MoveResistanceNumber.setVisible(false);
+	        enemy1DebuffResistanceNumber.setVisible(false);
+	        enemy1DeathResistanceNumber.setVisible(false);
 		    // After fade-out completes, set elements to invisible
 		    fadeOutEnemySelectionIndicator1.setOnFinished(event -> {
 		        enemySelectionIndicator1.setVisible(false);
@@ -1026,13 +1135,13 @@ public class Main extends Application {
 		    enemyMoveResistanceNumberText.setVisible(true);
 		    enemyDebuffResistanceNumberText.setVisible(true);
 		    enemyDeathResistanceNumberText.setVisible(true);
-		    enemyBleedResistanceNumber.setVisible(true);
-		    enemyBlightResistanceNumber.setVisible(true);
-		    enemyBurnResistanceNumber.setVisible(true);
-		    enemyStunResistanceNumber.setVisible(true);
-		    enemyMoveResistanceNumber.setVisible(true);
-		    enemyDebuffResistanceNumber.setVisible(true);
-		    enemyDeathResistanceNumber.setVisible(true);
+		    enemy2BleedResistanceNumber.setVisible(true);
+		    enemy2BlightResistanceNumber.setVisible(true);
+		    enemy2BurnResistanceNumber.setVisible(true);
+		    enemy2StunResistanceNumber.setVisible(true);
+		    enemy2MoveResistanceNumber.setVisible(true);
+		    enemy2DebuffResistanceNumber.setVisible(true);
+		    enemy2DeathResistanceNumber.setVisible(true);
 		    enemySelectionIndicator2.setVisible(true);
 		    fadeInEnemySelectionIndicator2.play();
 		});
@@ -1054,13 +1163,13 @@ public class Main extends Application {
 	        enemyMoveResistanceNumberText.setVisible(false);
 	        enemyDebuffResistanceNumberText.setVisible(false);
 	        enemyDeathResistanceNumberText.setVisible(false);
-	        enemyBleedResistanceNumber.setVisible(false);
-	        enemyBlightResistanceNumber.setVisible(false);
-	        enemyBurnResistanceNumber.setVisible(false);
-	        enemyStunResistanceNumber.setVisible(false);
-	        enemyMoveResistanceNumber.setVisible(false);
-	        enemyDebuffResistanceNumber.setVisible(false);
-	        enemyDeathResistanceNumber.setVisible(false);
+	        enemy2BleedResistanceNumber.setVisible(false);
+	        enemy2BlightResistanceNumber.setVisible(false);
+	        enemy2BurnResistanceNumber.setVisible(false);
+	        enemy2StunResistanceNumber.setVisible(false);
+	        enemy2MoveResistanceNumber.setVisible(false);
+	        enemy2DebuffResistanceNumber.setVisible(false);
+	        enemy2DeathResistanceNumber.setVisible(false);
 		    // After fade-out completes, set elements to invisible
 		    fadeOutEnemySelectionIndicator2.setOnFinished(event -> {
 		        enemySelectionIndicator2.setVisible(false);
@@ -1084,13 +1193,13 @@ public class Main extends Application {
 		    enemyMoveResistanceNumberText.setVisible(true);
 		    enemyDebuffResistanceNumberText.setVisible(true);
 		    enemyDeathResistanceNumberText.setVisible(true);
-		    enemyBleedResistanceNumber.setVisible(true);
-		    enemyBlightResistanceNumber.setVisible(true);
-		    enemyBurnResistanceNumber.setVisible(true);
-		    enemyStunResistanceNumber.setVisible(true);
-		    enemyMoveResistanceNumber.setVisible(true);
-		    enemyDebuffResistanceNumber.setVisible(true);
-		    enemyDeathResistanceNumber.setVisible(true);
+		    enemy3BleedResistanceNumber.setVisible(true);
+		    enemy3BlightResistanceNumber.setVisible(true);
+		    enemy3BurnResistanceNumber.setVisible(true);
+		    enemy3StunResistanceNumber.setVisible(true);
+		    enemy3MoveResistanceNumber.setVisible(true);
+		    enemy3DebuffResistanceNumber.setVisible(true);
+		    enemy3DeathResistanceNumber.setVisible(true);
 		    enemySelectionIndicator3.setVisible(true);
 		    fadeInEnemySelectionIndicator3.play();
 		});
@@ -1112,13 +1221,13 @@ public class Main extends Application {
 	        enemyMoveResistanceNumberText.setVisible(false);
 	        enemyDebuffResistanceNumberText.setVisible(false);
 	        enemyDeathResistanceNumberText.setVisible(false);
-	        enemyBleedResistanceNumber.setVisible(false);
-	        enemyBlightResistanceNumber.setVisible(false);
-	        enemyBurnResistanceNumber.setVisible(false);
-	        enemyStunResistanceNumber.setVisible(false);
-	        enemyMoveResistanceNumber.setVisible(false);
-	        enemyDebuffResistanceNumber.setVisible(false);
-	        enemyDeathResistanceNumber.setVisible(false);
+	        enemy3BleedResistanceNumber.setVisible(false);
+	        enemy3BlightResistanceNumber.setVisible(false);
+	        enemy3BurnResistanceNumber.setVisible(false);
+	        enemy3StunResistanceNumber.setVisible(false);
+	        enemy3MoveResistanceNumber.setVisible(false);
+	        enemy3DebuffResistanceNumber.setVisible(false);
+	        enemy3DeathResistanceNumber.setVisible(false);
 		    // After fade-out completes, set elements to invisible
 		    fadeOutEnemySelectionIndicator3.setOnFinished(event -> {
 		        enemySelectionIndicator3.setVisible(false);
@@ -1142,13 +1251,13 @@ public class Main extends Application {
 		    enemyMoveResistanceNumberText.setVisible(true);
 		    enemyDebuffResistanceNumberText.setVisible(true);
 		    enemyDeathResistanceNumberText.setVisible(true);
-		    enemyBleedResistanceNumber.setVisible(true);
-		    enemyBlightResistanceNumber.setVisible(true);
-		    enemyBurnResistanceNumber.setVisible(true);
-		    enemyStunResistanceNumber.setVisible(true);
-		    enemyMoveResistanceNumber.setVisible(true);
-		    enemyDebuffResistanceNumber.setVisible(true);
-		    enemyDeathResistanceNumber.setVisible(true);
+		    enemy4BleedResistanceNumber.setVisible(true);
+		    enemy4BlightResistanceNumber.setVisible(true);
+		    enemy4BurnResistanceNumber.setVisible(true);
+		    enemy4StunResistanceNumber.setVisible(true);
+		    enemy4MoveResistanceNumber.setVisible(true);
+		    enemy4DebuffResistanceNumber.setVisible(true);
+		    enemy4DeathResistanceNumber.setVisible(true);
 		    enemySelectionIndicator4.setVisible(true);
 		    fadeInEnemySelectionIndicator4.play();
 		});
@@ -1170,13 +1279,13 @@ public class Main extends Application {
 	        enemyMoveResistanceNumberText.setVisible(false);
 	        enemyDebuffResistanceNumberText.setVisible(false);
 	        enemyDeathResistanceNumberText.setVisible(false);
-	        enemyBleedResistanceNumber.setVisible(false);
-	        enemyBlightResistanceNumber.setVisible(false);
-	        enemyBurnResistanceNumber.setVisible(false);
-	        enemyStunResistanceNumber.setVisible(false);
-	        enemyMoveResistanceNumber.setVisible(false);
-	        enemyDebuffResistanceNumber.setVisible(false);
-	        enemyDeathResistanceNumber.setVisible(false);
+	        enemy4BleedResistanceNumber.setVisible(false);
+	        enemy4BlightResistanceNumber.setVisible(false);
+	        enemy4BurnResistanceNumber.setVisible(false);
+	        enemy4StunResistanceNumber.setVisible(false);
+	        enemy4MoveResistanceNumber.setVisible(false);
+	        enemy4DebuffResistanceNumber.setVisible(false);
+	        enemy4DeathResistanceNumber.setVisible(false);
 		    // After fade-out completes, set elements to invisible
 		    fadeOutEnemySelectionIndicator4.setOnFinished(event -> {
 		        enemySelectionIndicator4.setVisible(false);
@@ -1330,7 +1439,10 @@ public class Main extends Application {
 		root.getChildren().addAll(enemyTurnTicker1, enemyTurnTicker2, enemyTurnTicker3, enemyTurnTicker4);
 		root.getChildren().addAll(enemyBLDResistanceIcon, enemyBLGTResistanceIcon, enemyBURNResistanceIcon, enemySTNResistanceIcon, enemyMOVResistanceIcon, enemyDBFFResistanceIcon, enemyDTHResistanceIcon);
 		root.getChildren().addAll(enemyBleedResistanceNumberText, enemyBlightResistanceNumberText, enemyBurnResistanceNumberText, enemyStunResistanceNumberText, enemyMoveResistanceNumberText, enemyDebuffResistanceNumberText, enemyDeathResistanceNumberText);
-		root.getChildren().addAll(enemyBleedResistanceNumber,enemyBlightResistanceNumber,enemyBurnResistanceNumber,enemyStunResistanceNumber,enemyMoveResistanceNumber,enemyDebuffResistanceNumber, enemyDeathResistanceNumber);
+		root.getChildren().addAll(enemy1BleedResistanceNumber,enemy1BlightResistanceNumber,enemy1BurnResistanceNumber,enemy1StunResistanceNumber,enemy1MoveResistanceNumber,enemy1DebuffResistanceNumber, enemy1DeathResistanceNumber);
+		root.getChildren().addAll(enemy2BleedResistanceNumber,enemy2BlightResistanceNumber,enemy2BurnResistanceNumber,enemy2StunResistanceNumber,enemy2MoveResistanceNumber,enemy2DebuffResistanceNumber, enemy2DeathResistanceNumber);
+		root.getChildren().addAll(enemy3BleedResistanceNumber,enemy3BlightResistanceNumber,enemy3BurnResistanceNumber,enemy3StunResistanceNumber,enemy3MoveResistanceNumber,enemy3DebuffResistanceNumber, enemy3DeathResistanceNumber);
+		root.getChildren().addAll(enemy4BleedResistanceNumber,enemy4BlightResistanceNumber,enemy4BurnResistanceNumber,enemy4StunResistanceNumber,enemy4MoveResistanceNumber,enemy4DebuffResistanceNumber, enemy4DeathResistanceNumber);
 		root.getChildren().add(skillButtons); 
 		root.getChildren().add(passTurnButton); 
 		root.getChildren().addAll(skillbuttonimage1, skillbuttonimage2, skillbuttonimage3, skillbuttonimage4, skillbuttonimagepass); // , skillbuttonimagemove																				
@@ -1473,34 +1585,121 @@ public class Main extends Application {
 		enemyDeathResistanceNumberText.setScaleX(.65);
 		enemyDeathResistanceNumberText.setScaleY(.65); 
 		
-		enemyBleedResistanceNumber.setLayoutX(1418); // 77 spacing
-		enemyBleedResistanceNumber.setLayoutY(1020);
-		enemyBleedResistanceNumber.setScaleX(.75);
-		enemyBleedResistanceNumber.setScaleY(.75); 
-		enemyBlightResistanceNumber.setLayoutX(1495);
-		enemyBlightResistanceNumber.setLayoutY(1020); 
-		enemyBlightResistanceNumber.setScaleX(.75);
-		enemyBlightResistanceNumber.setScaleY(.75); 
-		enemyBurnResistanceNumber.setLayoutX(1572);
-		enemyBurnResistanceNumber.setLayoutY(1020); 
-		enemyBurnResistanceNumber.setScaleX(.75);
-		enemyBurnResistanceNumber.setScaleY(.75); 
-		enemyStunResistanceNumber.setLayoutX(1642);
-		enemyStunResistanceNumber.setLayoutY(1020); 
-		enemyStunResistanceNumber.setScaleX(.75);
-		enemyStunResistanceNumber.setScaleY(.75); 
-		enemyMoveResistanceNumber.setLayoutX(1719);
-		enemyMoveResistanceNumber.setLayoutY(1020); 
-		enemyMoveResistanceNumber.setScaleX(.75);
-		enemyMoveResistanceNumber.setScaleY(.75); 
-		enemyDebuffResistanceNumber.setLayoutX(1796);
-		enemyDebuffResistanceNumber.setLayoutY(1020); 
-		enemyDebuffResistanceNumber.setScaleX(.75);
-		enemyDebuffResistanceNumber.setScaleY(.75); 
-		enemyDeathResistanceNumber.setLayoutX(1873);
-		enemyDeathResistanceNumber.setLayoutY(1020); 
-		enemyDeathResistanceNumber.setScaleX(.75);
-		enemyDeathResistanceNumber.setScaleY(.75); 
+		enemy1BleedResistanceNumber.setLayoutX(1418); // 77 spacing
+		enemy1BleedResistanceNumber.setLayoutY(1020);
+		enemy1BleedResistanceNumber.setScaleX(.75);
+		enemy1BleedResistanceNumber.setScaleY(.75); 
+		enemy1BlightResistanceNumber.setLayoutX(1495);
+		enemy1BlightResistanceNumber.setLayoutY(1020); 
+		enemy1BlightResistanceNumber.setScaleX(.75);
+		enemy1BlightResistanceNumber.setScaleY(.75); 
+		enemy1BurnResistanceNumber.setLayoutX(1572);
+		enemy1BurnResistanceNumber.setLayoutY(1020); 
+		enemy1BurnResistanceNumber.setScaleX(.75);
+		enemy1BurnResistanceNumber.setScaleY(.75); 
+		enemy1StunResistanceNumber.setLayoutX(1642);
+		enemy1StunResistanceNumber.setLayoutY(1020); 
+		enemy1StunResistanceNumber.setScaleX(.75);
+		enemy1StunResistanceNumber.setScaleY(.75); 
+		enemy1MoveResistanceNumber.setLayoutX(1719);
+		enemy1MoveResistanceNumber.setLayoutY(1020); 
+		enemy1MoveResistanceNumber.setScaleX(.75);
+		enemy1MoveResistanceNumber.setScaleY(.75); 
+		enemy1DebuffResistanceNumber.setLayoutX(1796);
+		enemy1DebuffResistanceNumber.setLayoutY(1020); 
+		enemy1DebuffResistanceNumber.setScaleX(.75);
+		enemy1DebuffResistanceNumber.setScaleY(.75); 
+		enemy1DeathResistanceNumber.setLayoutX(1873);
+		enemy1DeathResistanceNumber.setLayoutY(1020); 
+		enemy1DeathResistanceNumber.setScaleX(.75);
+		enemy1DeathResistanceNumber.setScaleY(.75); 
+		
+		enemy2BleedResistanceNumber.setLayoutX(1418); // 77 spacing
+		enemy2BleedResistanceNumber.setLayoutY(1020);
+		enemy2BleedResistanceNumber.setScaleX(.75);
+		enemy2BleedResistanceNumber.setScaleY(.75); 
+		enemy2BlightResistanceNumber.setLayoutX(1495);
+		enemy2BlightResistanceNumber.setLayoutY(1020); 
+		enemy2BlightResistanceNumber.setScaleX(.75);
+		enemy2BlightResistanceNumber.setScaleY(.75); 
+		enemy2BurnResistanceNumber.setLayoutX(1572);
+		enemy2BurnResistanceNumber.setLayoutY(1020); 
+		enemy2BurnResistanceNumber.setScaleX(.75);
+		enemy2BurnResistanceNumber.setScaleY(.75); 
+		enemy2StunResistanceNumber.setLayoutX(1642);
+		enemy2StunResistanceNumber.setLayoutY(1020); 
+		enemy2StunResistanceNumber.setScaleX(.75);
+		enemy2StunResistanceNumber.setScaleY(.75); 
+		enemy2MoveResistanceNumber.setLayoutX(1719);
+		enemy2MoveResistanceNumber.setLayoutY(1020); 
+		enemy2MoveResistanceNumber.setScaleX(.75);
+		enemy2MoveResistanceNumber.setScaleY(.75); 
+		enemy2DebuffResistanceNumber.setLayoutX(1796);
+		enemy2DebuffResistanceNumber.setLayoutY(1020); 
+		enemy2DebuffResistanceNumber.setScaleX(.75);
+		enemy2DebuffResistanceNumber.setScaleY(.75); 
+		enemy2DeathResistanceNumber.setLayoutX(1873);
+		enemy2DeathResistanceNumber.setLayoutY(1020); 
+		enemy2DeathResistanceNumber.setScaleX(.75);
+		enemy2DeathResistanceNumber.setScaleY(.75); 
+		
+		enemy3BleedResistanceNumber.setLayoutX(1418); // 77 spacing
+		enemy3BleedResistanceNumber.setLayoutY(1020);
+		enemy3BleedResistanceNumber.setScaleX(.75);
+		enemy3BleedResistanceNumber.setScaleY(.75); 
+		enemy3BlightResistanceNumber.setLayoutX(1495);
+		enemy3BlightResistanceNumber.setLayoutY(1020); 
+		enemy3BlightResistanceNumber.setScaleX(.75);
+		enemy3BlightResistanceNumber.setScaleY(.75); 
+		enemy3BurnResistanceNumber.setLayoutX(1572);
+		enemy3BurnResistanceNumber.setLayoutY(1020); 
+		enemy3BurnResistanceNumber.setScaleX(.75);
+		enemy3BurnResistanceNumber.setScaleY(.75); 
+		enemy3StunResistanceNumber.setLayoutX(1642);
+		enemy3StunResistanceNumber.setLayoutY(1020); 
+		enemy3StunResistanceNumber.setScaleX(.75);
+		enemy3StunResistanceNumber.setScaleY(.75); 
+		enemy3MoveResistanceNumber.setLayoutX(1719);
+		enemy3MoveResistanceNumber.setLayoutY(1020); 
+		enemy3MoveResistanceNumber.setScaleX(.75);
+		enemy3MoveResistanceNumber.setScaleY(.75); 
+		enemy3DebuffResistanceNumber.setLayoutX(1796);
+		enemy3DebuffResistanceNumber.setLayoutY(1020); 
+		enemy3DebuffResistanceNumber.setScaleX(.75);
+		enemy3DebuffResistanceNumber.setScaleY(.75); 
+		enemy3DeathResistanceNumber.setLayoutX(1873);
+		enemy3DeathResistanceNumber.setLayoutY(1020); 
+		enemy3DeathResistanceNumber.setScaleX(.75);
+		enemy3DeathResistanceNumber.setScaleY(.75); 
+		
+		enemy4BleedResistanceNumber.setLayoutX(1418); // 77 spacing
+		enemy4BleedResistanceNumber.setLayoutY(1020);
+		enemy4BleedResistanceNumber.setScaleX(.75);
+		enemy4BleedResistanceNumber.setScaleY(.75); 
+		enemy4BlightResistanceNumber.setLayoutX(1495);
+		enemy4BlightResistanceNumber.setLayoutY(1020); 
+		enemy4BlightResistanceNumber.setScaleX(.75);
+		enemy4BlightResistanceNumber.setScaleY(.75); 
+		enemy4BurnResistanceNumber.setLayoutX(1572);
+		enemy4BurnResistanceNumber.setLayoutY(1020); 
+		enemy4BurnResistanceNumber.setScaleX(.75);
+		enemy4BurnResistanceNumber.setScaleY(.75); 
+		enemy4StunResistanceNumber.setLayoutX(1642);
+		enemy4StunResistanceNumber.setLayoutY(1020); 
+		enemy4StunResistanceNumber.setScaleX(.75);
+		enemy4StunResistanceNumber.setScaleY(.75); 
+		enemy4MoveResistanceNumber.setLayoutX(1719);
+		enemy4MoveResistanceNumber.setLayoutY(1020); 
+		enemy4MoveResistanceNumber.setScaleX(.75);
+		enemy4MoveResistanceNumber.setScaleY(.75); 
+		enemy4DebuffResistanceNumber.setLayoutX(1796);
+		enemy4DebuffResistanceNumber.setLayoutY(1020); 
+		enemy4DebuffResistanceNumber.setScaleX(.75);
+		enemy4DebuffResistanceNumber.setScaleY(.75); 
+		enemy4DeathResistanceNumber.setLayoutX(1873);
+		enemy4DeathResistanceNumber.setLayoutY(1020); 
+		enemy4DeathResistanceNumber.setScaleX(.75);
+		enemy4DeathResistanceNumber.setScaleY(.75); 
 		
 		
 		heroHPPos4.setLayoutX(92); 
@@ -1703,31 +1902,18 @@ public class Main extends Application {
 			mediaPlayer.stop(); // Stop the music when the stage is closed
 		});
 		
-		
-		combatControl flow = new combatControl(enemyPosition1, enemyPosition2, enemyPosition3, enemyPosition4);
-		flow.createEnemyTeam();
-		flow.adjustSpeeds();
-		flow.determineTurnOrder();
-		entities[] tempTurnOrder = flow.getTurnOrder();
-		playerTeamArray tempPTeamArray = flow.getPlayerTeamArray();
-		Characters[] tempPTeam = tempPTeamArray.getTeam();
-		enemyTeam tempETeamArray = flow.getEnemyTeam();
-		Enemies[] tempETeam = tempETeamArray.getTeam();
-		count = 0;
-		Timer timer = new Timer();
-		
 		// This task checks if either team is dead, and if not
 		// runs the primary combat control method.
 		TimerTask task = new TimerTask() {
-
+			
 			@Override
 			public void run() {
 				if (tempPTeamArray.checkGameOver() || tempETeamArray.checkGameOver()) {
+					
 					if(tempPTeamArray.checkGameOver()) {
 						System.out.println("Player Team Defeated. Game Over.");
 						timer.cancel();
 						timer.purge();
-						// Game over Screen?
 					}
 					else if (tempETeamArray.checkGameOver()) {
 						System.out.println("Enemy Team Defeated. Round Over.");
@@ -1741,17 +1927,49 @@ public class Main extends Application {
 				else {
 						
 					// Reset turn counter if order has been run through
-					if (count > 7)
+					if (count > 7) {
 						count = 0;
+						round++;
+					}
 					
 					count = flow.runCombat(count);
+					
+					// Health number updates:
+					heroHPPos1.setText(Double.toString(tempPTeam[0].getHealth()));
+					heroHPPos2.setText(Double.toString(tempPTeam[1].getHealth()));
+					heroHPPos3.setText(Double.toString(tempPTeam[2].getHealth()));
+					heroHPPos4.setText(Double.toString(tempPTeam[3].getHealth()));
+					enemyHPPos1.setText(Double.toString(tempETeam[0].getHealth()));
+					enemyHPPos2.setText(Double.toString(tempETeam[1].getHealth()));
+					enemyHPPos3.setText(Double.toString(tempETeam[2].getHealth()));
+					enemyHPPos4.setText(Double.toString(tempETeam[3].getHealth()));
+					
+					// Round number update:
+					roundNumberText.setText("Round " + String.valueOf(round));
+					
+					// Current Characters Info (Update to move info once skills are finished)
+					heroNameText.setText(flow.getCurrent().getName());
+					moveDescriptionText.setText("DMG: " + flow.getCurrent().getDamage() + " Crit %: " + flow.getCurrent().getCritChance());
 				}
 			}
+
 		};
 		
+		round = 1;
 		System.out.println("Starting Combat:");
-		timer.schedule(task, 2000, 5000);
+		timer.schedule(task, 0, 5000);
 		
+		// Figure out game over scene change still
+		if(tempPTeamArray.checkGameOver()) {
+			gameOver(primaryStage);
+			mediaPlayer.stop();
+		}
+		
+		/*
+		else if (tempETeamArray.checkGameOver()) {
+			
+		}
+		*/
 		
 		
 		// This will be what we implement and add animation stuff to 
@@ -1781,7 +1999,6 @@ public class Main extends Application {
 		fiveSecondsCombat.setCycleCount(Timeline.INDEFINITE); // Probably won't be indefinite, have to look into this
 		fiveSecondsCombat.play();
 		*/
-
 
 	}
 	
@@ -2186,7 +2403,14 @@ public class Main extends Application {
 		Text newRunText = new Text("New Journey");
 		Text gameOver = new Text("Game Over");
 		
-		play.setOnAction(e -> battleScene(primaryStage));
+		play.setOnAction(e -> {
+			try {
+				battleScene(primaryStage);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
 		exit.setOnAction(e -> homePage(primaryStage));
 
 		gameOver.setFill(Color.web("#d10000"));
@@ -2261,7 +2485,12 @@ public class Main extends Application {
 	    play.setOnMouseEntered(e -> {newRunText.setFill(Color.web("#d10000"));});
 	    play.setOnMouseExited(e -> {newRunText.setFill(Color.web("#d5d5d5"));});
 	    play.setOnAction(e -> {
-	        battleScene(primaryStage);
+	        try {
+				battleScene(primaryStage);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 	        mediaPlayer.stop();
 	    });
 	    
