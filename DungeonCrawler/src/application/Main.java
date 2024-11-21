@@ -395,6 +395,7 @@ public class Main extends Application {
 		Button enemyPosition2 = new Button("enemyPosition2");
 		Button enemyPosition3 = new Button("enemyPosition3");
 		Button enemyPosition4 = new Button("enemyPosition4");
+		Button passTurnButton = new Button("passTurnButton");
 		
 		//--------------------------------------------------------------------------------------------------------
 		// Combat assets
@@ -414,21 +415,61 @@ public class Main extends Application {
 		//--------------------------------------------------------------------------------------------------------
 		
 
-		ToggleGroup skillButtonGroup = new ToggleGroup();
-		RadioButton skillbutton1 = new RadioButton("skill 1");
-		skillbutton1.setToggleGroup(skillButtonGroup);
-		RadioButton skillbutton2 = new RadioButton("skill 2");
-		skillbutton2.setToggleGroup(skillButtonGroup);
-		RadioButton skillbutton3 = new RadioButton("skill 3");
-		skillbutton3.setToggleGroup(skillButtonGroup);
-		RadioButton skillbutton4 = new RadioButton("skill 4");
-		skillbutton4.setToggleGroup(skillButtonGroup);
-//		RadioButton movebutton = new RadioButton("move");
-//		movebutton.setToggleGroup(skillButtonGroup);
-		RadioButton passTurnButton = new RadioButton("pass turn");
-		passTurnButton.setToggleGroup(skillButtonGroup);
+		ToggleGroup skillButtonGroupPaladin = new ToggleGroup();
+		RadioButton skillbutton1Paladin = new RadioButton("skill 1");
+		skillbutton1Paladin.setToggleGroup(skillButtonGroupPaladin);
+		RadioButton skillbutton2Paladin = new RadioButton("skill 2");
+		skillbutton2Paladin.setToggleGroup(skillButtonGroupPaladin);
+		RadioButton skillbutton3Paladin = new RadioButton("skill 3");
+		skillbutton3Paladin.setToggleGroup(skillButtonGroupPaladin);
+		RadioButton skillbutton4Paladin = new RadioButton("skill 4");
+		skillbutton4Paladin.setToggleGroup(skillButtonGroupPaladin );
+		// RadioButton movebuttonPaladin = new RadioButton("move");
+		// movebuttonPaladin.setToggleGroup(skillButtonGroupPaladin);
+
+		
+		ToggleGroup skillButtonGroupAssassin = new ToggleGroup();
+		RadioButton skillbutton1Assassin = new RadioButton("skill 1");
+		skillbutton1Assassin.setToggleGroup(skillButtonGroupAssassin);
+		RadioButton skillbutton2Assassin = new RadioButton("skill 2");
+		skillbutton2Assassin.setToggleGroup(skillButtonGroupAssassin);
+		RadioButton skillbutton3Assassin = new RadioButton("skill 3");
+		skillbutton3Assassin.setToggleGroup(skillButtonGroupAssassin);
+		RadioButton skillbutton4Assassin = new RadioButton("skill 4");
+		skillbutton4Assassin.setToggleGroup(skillButtonGroupAssassin );
+		// RadioButton movebuttonAssassin = new RadioButton("move");
+		// movebuttonAssassin.setToggleGroup(skillButtonGroupAssassin);
+
+
+		ToggleGroup skillButtonGroupWizard = new ToggleGroup();
+		RadioButton skillbutton1Wizard = new RadioButton("skill 1");
+		skillbutton1Wizard.setToggleGroup(skillButtonGroupWizard);
+		RadioButton skillbutton2Wizard = new RadioButton("skill 2");
+		skillbutton2Wizard.setToggleGroup(skillButtonGroupWizard);
+		RadioButton skillbutton3Wizard = new RadioButton("skill 3");
+		skillbutton3Wizard.setToggleGroup(skillButtonGroupWizard);
+		RadioButton skillbutton4Wizard = new RadioButton("skill 4");
+		skillbutton4Wizard.setToggleGroup(skillButtonGroupWizard);
+		// RadioButton movebuttonWizard = new RadioButton("move");
+		// movebuttonWizard.setToggleGroup(skillButtonGroupWizard);
+
+
+		ToggleGroup skillButtonGroupAlchemist = new ToggleGroup();
+		RadioButton skillbutton1Alchemist = new RadioButton("skill 1");
+		skillbutton1Alchemist.setToggleGroup(skillButtonGroupAlchemist);
+		RadioButton skillbutton2Alchemist = new RadioButton("skill 2");
+		skillbutton2Alchemist.setToggleGroup(skillButtonGroupAlchemist);
+		RadioButton skillbutton3Alchemist = new RadioButton("skill 3");
+		skillbutton3Alchemist.setToggleGroup(skillButtonGroupAlchemist);
+		RadioButton skillbutton4Alchemist = new RadioButton("skill 4");
+		skillbutton4Alchemist.setToggleGroup(skillButtonGroupAlchemist);
+		// RadioButton movebuttonAlchemist = new RadioButton("move");
+		// movebuttonAlchemist.setToggleGroup(skillButtonGroupAlchemist);
+
+
+
 		 
-		Button menuBackButton = new Button ("Back");
+		Button menuBackButton = new Button ("Back"); 	
 		Button menuQuitButton = new Button ("Quit Game");
 		
 		Text heroNameText = new Text(heroName);
@@ -684,10 +725,26 @@ public class Main extends Application {
 		ImageView heroInPosition3 = new ImageView(new Image("applicationImagesPlayerSprites/Wizard_Idle.png"));
 		ImageView heroInPosition4 = new ImageView(new Image("applicationImagesPlayerSprites/Alchemist_Idle.png"));
 		
-		ImageView skillbuttonimage1 = new ImageView(new Image("abilityIconsPaladin/holy_rampart.png")); // var
-		ImageView skillbuttonimage2 = new ImageView(new Image("abilityIconsPaladin/divineSmite.png")); // var
-		ImageView skillbuttonimage3 = new ImageView(new Image("abilityIconsPaladin/auraOfCourage.png")); // var
-		ImageView skillbuttonimage4 = new ImageView(new Image("abilityIconsPaladin/shieldOfFaith.png")); // var
+		ImageView skillbuttonimage1Paladin = new ImageView(new Image("abilityIconsPaladin/holy_rampart.png")); 
+		ImageView skillbuttonimage2Paladin = new ImageView(new Image("abilityIconsPaladin/divineSmite.png")); 
+		ImageView skillbuttonimage3Paladin = new ImageView(new Image("abilityIconsPaladin/auraOfCourage.png"));
+		ImageView skillbuttonimage4Paladin = new ImageView(new Image("abilityIconsPaladin/shieldOfFaith.png"));
+		
+		ImageView skillbuttonimage1Assassin = new ImageView(new Image("abilityIconsAssassin/piercingStab.png")); 
+		ImageView skillbuttonimage2Assassin = new ImageView(new Image("abilityIconsAssassin/Backstab.png")); 
+		ImageView skillbuttonimage3Assassin = new ImageView(new Image("abilityIconsAssassin/daggerBarrage.png")); 
+		ImageView skillbuttonimage4Assassin = new ImageView(new Image("abilityIconsAssassin/poisonBlade.png")); 
+		
+		ImageView skillbuttonimage1Wizard = new ImageView(new Image("abilityIconsWizard/fireball.png")); 
+		ImageView skillbuttonimage2Wizard = new ImageView(new Image("abilityIconsWizard/magicMissile.png"));
+		ImageView skillbuttonimage3Wizard = new ImageView(new Image("abilityIconsWizard/frostBolt.png")); 
+		ImageView skillbuttonimage4Wizard = new ImageView(new Image("abilityIconsWizard/staffStrike.png"));
+		
+		ImageView skillbuttonimage1Alchemist = new ImageView(new Image("abilityIconsAlchemist/acidPuddle.png")); 
+		ImageView skillbuttonimage2Alchemist = new ImageView(new Image("abilityIconsAlchemist/explosiveFlask.png"));
+		ImageView skillbuttonimage3Alchemist = new ImageView(new Image("abilityIconsAlchemist/invigoration.png"));
+		ImageView skillbuttonimage4Alchemist = new ImageView(new Image("abilityIconsAlchemist/healing_elixer.png")); 
+		
 //		ImageView skillbuttonimagemove = new ImageView(new Image("GUIAssets/skillbuttonimagemove.png"));
 		ImageView skillbuttonimagepass = new ImageView(new Image("GUIAssets/skillbuttonimagepass.png"));
 		ImageView heroNameTextPlate = new ImageView(new Image("GUIAssets/nameplate.png"));
@@ -782,16 +839,28 @@ public class Main extends Application {
 		heroPositions.getChildren().addAll(heroPosition4, heroPosition3, heroPosition2, heroPosition1);
 		HBox enemyPositions = new HBox(50);
 		enemyPositions.getChildren().addAll(enemyPosition1, enemyPosition2, enemyPosition3, enemyPosition4);
-		HBox skillButtons = new HBox(10);
-		skillButtons.getChildren().addAll(skillbutton1, skillbutton2, skillbutton3, skillbutton4);// ,movebutton
-		HBox heroHealthBarRedRectangles = new HBox(105);
-		heroHealthBarRedRectangles.getChildren().addAll(heroHealthBarRedRectangle4,heroHealthBarRedRectangle3,heroHealthBarRedRectangle2,heroHealthBarRedRectangle1);
-		HBox heroHealthBarBlackRectangles = new HBox(105);
-		heroHealthBarBlackRectangles.getChildren().addAll(heroHealthBarBlackRectangle4,heroHealthBarBlackRectangle3,heroHealthBarBlackRectangle2,heroHealthBarBlackRectangle1);
-		HBox enemyHealthBarRedRectangles = new HBox(105);
-		enemyHealthBarRedRectangles.getChildren().addAll(enemyHealthBarRedRectangle1,enemyHealthBarRedRectangle2,enemyHealthBarRedRectangle3,enemyHealthBarRedRectangle4);
-		HBox enemyHealthBarBlackRectangles = new HBox(105);
-		enemyHealthBarBlackRectangles.getChildren().addAll(enemyHealthBarBlackRectangle1,enemyHealthBarBlackRectangle2,enemyHealthBarBlackRectangle3,enemyHealthBarBlackRectangle4);
+		HBox skillButtonsPaladin = new HBox(10);
+		skillButtonsPaladin.getChildren().addAll(skillbutton1Paladin, skillbutton2Paladin, skillbutton3Paladin, skillbutton4Paladin);// ,movebutton
+		
+		HBox skillButtonsAssassin = new HBox(10);
+		skillButtonsAssassin.getChildren().addAll(skillbutton1Assassin, skillbutton2Assassin, skillbutton3Assassin, skillbutton4Assassin);// ,movebutton
+		skillButtonsAssassin.setMouseTransparent(true);
+		HBox skillButtonsWizard = new HBox(10);
+		skillButtonsWizard.getChildren().addAll(skillbutton1Wizard, skillbutton2Wizard, skillbutton3Wizard, skillbutton4Wizard);// ,movebutton
+		skillButtonsWizard.setMouseTransparent(true);
+		HBox skillButtonsAlchemist = new HBox(10);
+		skillButtonsAlchemist.getChildren().addAll(skillbutton1Alchemist, skillbutton2Alchemist, skillbutton3Alchemist, skillbutton4Alchemist);// ,movebutton
+		skillButtonsAlchemist.setMouseTransparent(true);
+		
+		HBox skillButtonsImagesPaladin = new HBox(10);
+		skillButtonsImagesPaladin.getChildren().addAll(skillbuttonimage1Paladin, skillbuttonimage2Paladin, skillbuttonimage3Paladin, skillbuttonimage4Paladin);
+		HBox skillButtonsImagesAssassin = new HBox(10);
+		skillButtonsImagesAssassin.getChildren().addAll(skillbuttonimage1Assassin, skillbuttonimage2Assassin, skillbuttonimage3Assassin, skillbuttonimage4Assassin);
+		HBox skillButtonsImagesWizard = new HBox(10);
+		skillButtonsImagesWizard.getChildren().addAll(skillbuttonimage1Wizard, skillbuttonimage2Wizard, skillbuttonimage3Wizard, skillbuttonimage4Wizard);
+		HBox skillButtonsImagesAlchemist= new HBox(10);
+		skillButtonsImagesAlchemist.getChildren().addAll(skillbuttonimage1Alchemist, skillbuttonimage2Alchemist, skillbuttonimage3Alchemist, skillbuttonimage4Alchemist);
+		
 		// -------------------------------------------------------------
 		// Set the size of the images to match the button size
 		enemyInPosition1.setScaleX(.75);
@@ -810,16 +879,47 @@ public class Main extends Application {
 		heroInPosition3.setScaleY(.65);
 		heroInPosition4.setScaleX(.55);
 		heroInPosition4.setScaleY(.55);
-		skillbuttonimage1.setFitWidth(0.06 * 1920); // placeholder 16:9 aspect ratio
-		skillbuttonimage1.setFitHeight(0.09 * 1080);
-		skillbuttonimage2.setFitWidth(0.06 * 1920); // placeholder
-		skillbuttonimage2.setFitHeight(0.09 * 1080);
-		skillbuttonimage3.setFitWidth(0.06 * 1920); // placeholder
-		skillbuttonimage3.setFitHeight(0.09 * 1080);
-		skillbuttonimage4.setFitWidth(0.06 * 1920); // placeholder
-		skillbuttonimage4.setFitHeight(0.09 * 1080);
+		
+		
+		skillbuttonimage1Paladin.setFitWidth(0.06 * 1920); // placeholder 16:9 aspect ratio
+		skillbuttonimage1Paladin.setFitHeight(0.09 * 1080);
+		skillbuttonimage2Paladin.setFitWidth(0.06 * 1920); // placeholder
+		skillbuttonimage2Paladin.setFitHeight(0.09 * 1080);
+		skillbuttonimage3Paladin.setFitWidth(0.06 * 1920); // placeholder
+		skillbuttonimage3Paladin.setFitHeight(0.09 * 1080);
+		skillbuttonimage4Paladin.setFitWidth(0.06 * 1920); // placeholder
+		skillbuttonimage4Paladin.setFitHeight(0.09 * 1080);
 //		skillbuttonimagemove.setFitWidth(0.06 * 1920);
 //		skillbuttonimagemove.setFitHeight(0.051 * 1920);
+		
+		skillbuttonimage1Assassin.setFitWidth(0.06 * 1920); // placeholder 16:9 aspect ratio
+		skillbuttonimage1Assassin.setFitHeight(0.09 * 1080);
+		skillbuttonimage2Assassin.setFitWidth(0.06 * 1920); // placeholder
+		skillbuttonimage2Assassin.setFitHeight(0.09 * 1080);
+		skillbuttonimage3Assassin.setFitWidth(0.06 * 1920); // placeholder
+		skillbuttonimage3Assassin.setFitHeight(0.09 * 1080);
+		skillbuttonimage4Assassin.setFitWidth(0.06 * 1920); // placeholder
+		skillbuttonimage4Assassin.setFitHeight(0.09 * 1080);
+
+		skillbuttonimage1Wizard.setFitWidth(0.06 * 1920); // placeholder 16:9 aspect ratio
+		skillbuttonimage1Wizard.setFitHeight(0.09 * 1080);
+		skillbuttonimage2Wizard.setFitWidth(0.06 * 1920); // placeholder
+		skillbuttonimage2Wizard.setFitHeight(0.09 * 1080);
+		skillbuttonimage3Wizard.setFitWidth(0.06 * 1920); // placeholder
+		skillbuttonimage3Wizard.setFitHeight(0.09 * 1080);
+		skillbuttonimage4Wizard.setFitWidth(0.06 * 1920); // placeholder
+		skillbuttonimage4Wizard.setFitHeight(0.09 * 1080);
+		
+		skillbuttonimage1Alchemist.setFitWidth(0.06 * 1920); // placeholder 16:9 aspect ratio
+		skillbuttonimage1Alchemist.setFitHeight(0.09 * 1080);
+		skillbuttonimage2Alchemist.setFitWidth(0.06 * 1920); // placeholder
+		skillbuttonimage2Alchemist.setFitHeight(0.09 * 1080);
+		skillbuttonimage3Alchemist.setFitWidth(0.06 * 1920); // placeholder
+		skillbuttonimage3Alchemist.setFitHeight(0.09 * 1080);
+		skillbuttonimage4Alchemist.setFitWidth(0.06 * 1920); // placeholder
+		skillbuttonimage4Alchemist.setFitHeight(0.09 * 1080);
+		
+		
 		
 		skillButtonSelectedFrame1.setFitWidth(0.06 * 1920);
 		skillButtonSelectedFrame1.setFitHeight(0.09 * 1080);
@@ -857,10 +957,25 @@ public class Main extends Application {
 		heroInPosition2.setMouseTransparent(true);
 		heroInPosition3.setMouseTransparent(true);
 		heroInPosition4.setMouseTransparent(true);
-		skillbuttonimage1.setMouseTransparent(true);
-		skillbuttonimage2.setMouseTransparent(true);
-		skillbuttonimage3.setMouseTransparent(true);
-		skillbuttonimage4.setMouseTransparent(true);
+		
+		skillbuttonimage1Paladin.setMouseTransparent(true);
+		skillbuttonimage2Paladin.setMouseTransparent(true);
+		skillbuttonimage3Paladin.setMouseTransparent(true);
+		skillbuttonimage4Paladin.setMouseTransparent(true);
+		skillbuttonimage1Assassin.setMouseTransparent(true);
+		skillbuttonimage2Assassin.setMouseTransparent(true);
+		skillbuttonimage3Assassin.setMouseTransparent(true);
+		skillbuttonimage4Assassin.setMouseTransparent(true);
+		skillbuttonimage1Wizard.setMouseTransparent(true);
+		skillbuttonimage2Wizard.setMouseTransparent(true);
+		skillbuttonimage3Wizard.setMouseTransparent(true);
+		skillbuttonimage4Wizard.setMouseTransparent(true);
+		skillbuttonimage1Alchemist.setMouseTransparent(true);
+		skillbuttonimage2Alchemist.setMouseTransparent(true);
+		skillbuttonimage3Alchemist.setMouseTransparent(true);
+		skillbuttonimage4Alchemist.setMouseTransparent(true);
+		
+		
 		heroSelectionIndicator4.setMouseTransparent(true);
 		heroSelectionIndicator3.setMouseTransparent(true);
 		heroSelectionIndicator2.setMouseTransparent(true);
@@ -871,6 +986,7 @@ public class Main extends Application {
 		enemySelectionIndicator4.setMouseTransparent(true);
 //		skillbuttonimagemove.setMouseTransparent(true);
 		skillbuttonimagepass.setMouseTransparent(true);
+
 		menuBackButtonImage.setMouseTransparent(true);
 		menuQuitGameText.setMouseTransparent(true);
 		skillButtonSelectedFrame1.setMouseTransparent(true);
@@ -938,39 +1054,236 @@ public class Main extends Application {
 		enemyPosition3.setOpacity(0);
 		enemyPosition4.setOpacity(0);
 
-		skillbutton1.setOpacity(0);
-		skillbutton2.setOpacity(0);
-		skillbutton3.setOpacity(0);
-		skillbutton4.setOpacity(0);
+
 //		movebutton.setOpacity(0);
-		passTurnButton.setOpacity(0);
+		passTurnButton.setOpacity(00);
+		
+//		while (heroInPos1Turn = true){
+//
+//			//all other buttons and images cannot be clicked or seen.
+//			skillbuttonimage1Paladin.setOpacity(100); //image is visible
+//			skillbuttonimage2Paladin.setOpacity(100);
+//			skillbuttonimage3Paladin.setOpacity(100);
+//			skillbuttonimage4Paladin.setOpacity(100);
+//			skillbuttonimage1Assassin.setOpacity(0); // image is not visible
+//			skillbuttonimage2Assassin.setOpacity(0);
+//			skillbuttonimage3Assassin.setOpacity(0);
+//			skillbuttonimage4Assassin.setOpacity(0);
+//			skillbuttonimage1Wizard.setOpacity(0);
+//			skillbuttonimage2Wizard.setOpacity(0);
+//			skillbuttonimage3Wizard.setOpacity(0);
+//			skillbuttonimage4Wizard.setOpacity(0);
+//			skillbuttonimage1Alchemist.setOpacity(0);
+//			skillbuttonimage2Alchemist.setOpacity(0);
+//			skillbuttonimage3Alchemist.setOpacity(0);
+//			skillbuttonimage4Alchemist.setOpacity(0);
+//			skillbutton1Paladin.setMouseTransparent(false); //button is clickable
+//			skillbutton2Paladin.setMouseTransparent(false);
+//			skillbutton3Paladin.setMouseTransparent(false);
+//			skillbutton4Paladin.setMouseTransparent(false);
+//			skillbutton1Assassin.setMouseTransparent(true); //button is not clickable
+//			skillbutton2Assassin.setMouseTransparent(true); 
+//			skillbutton3Assassin.setMouseTransparent(true); 
+//			skillbutton4Assassin.setMouseTransparent(true); 
+//			skillbutton1Wizard.setMouseTransparent(true); 
+//			skillbutton2Wizard.setMouseTransparent(true); 
+//			skillbutton3Wizard.setMouseTransparent(true); 
+//			skillbutton4Wizard.setMouseTransparent(true); 
+//			skillbutton1Alchemist.setMouseTransparent(true); 
+//			skillbutton2Alchemist.setMouseTransparent(true); 
+//			skillbutton3Alchemist.setMouseTransparent(true); 
+//			skillbutton4Alchemist.setMouseTransparent(true); 
+//		}
+//		
+//		while (heroInPos2Turn = true){
+//
+//			//all other buttons and images cannot be clicked or seen.
+//			skillbuttonimage1Paladin.setOpacity(0); //image is visible
+//			skillbuttonimage2Paladin.setOpacity(0);
+//			skillbuttonimage3Paladin.setOpacity(0);
+//			skillbuttonimage4Paladin.setOpacity(0);
+//			skillbuttonimage1Assassin.setOpacity(100); // image is not visible
+//			skillbuttonimage2Assassin.setOpacity(100);
+//			skillbuttonimage3Assassin.setOpacity(100);
+//			skillbuttonimage4Assassin.setOpacity(100);
+//			skillbuttonimage1Wizard.setOpacity(0);
+//			skillbuttonimage2Wizard.setOpacity(0);
+//			skillbuttonimage3Wizard.setOpacity(0);
+//			skillbuttonimage4Wizard.setOpacity(0);
+//			skillbuttonimage1Alchemist.setOpacity(0);
+//			skillbuttonimage2Alchemist.setOpacity(0);
+//			skillbuttonimage3Alchemist.setOpacity(0);
+//			skillbuttonimage4Alchemist.setOpacity(0);
+//			skillbutton1Paladin.setMouseTransparent(true); //button is clickable
+//			skillbutton2Paladin.setMouseTransparent(true);
+//			skillbutton3Paladin.setMouseTransparent(true);
+//			skillbutton4Paladin.setMouseTransparent(true);
+//			skillbutton1Assassin.setMouseTransparent(false); //button is not clickable
+//			skillbutton2Assassin.setMouseTransparent(false); 
+//			skillbutton3Assassin.setMouseTransparent(false); 
+//			skillbutton4Assassin.setMouseTransparent(false); 
+//			skillbutton1Wizard.setMouseTransparent(true); 
+//			skillbutton2Wizard.setMouseTransparent(true); 
+//			skillbutton3Wizard.setMouseTransparent(true); 
+//			skillbutton4Wizard.setMouseTransparent(true); 
+//			skillbutton1Alchemist.setMouseTransparent(true); 
+//			skillbutton2Alchemist.setMouseTransparent(true); 
+//			skillbutton3Alchemist.setMouseTransparent(true); 
+//			skillbutton4Alchemist.setMouseTransparent(true); 
+//		}
+//		
+//		while (heroInPos3Turn = true){
+//
+//			//all other buttons and images cannot be clicked or seen.
+//			skillbuttonimage1Paladin.setOpacity(0); //image is visible
+//			skillbuttonimage2Paladin.setOpacity(0);
+//			skillbuttonimage3Paladin.setOpacity(0);
+//			skillbuttonimage4Paladin.setOpacity(0);
+//			skillbuttonimage1Assassin.setOpacity(0); // image is not visible
+//			skillbuttonimage2Assassin.setOpacity(0);
+//			skillbuttonimage3Assassin.setOpacity(0);
+//			skillbuttonimage4Assassin.setOpacity(0);
+//			skillbuttonimage1Wizard.setOpacity(100);
+//			skillbuttonimage2Wizard.setOpacity(100);
+//			skillbuttonimage3Wizard.setOpacity(100);
+//			skillbuttonimage4Wizard.setOpacity(100);
+//			skillbuttonimage1Alchemist.setOpacity(0);
+//			skillbuttonimage2Alchemist.setOpacity(0);
+//			skillbuttonimage3Alchemist.setOpacity(0);
+//			skillbuttonimage4Alchemist.setOpacity(0);
+//			skillbutton1Paladin.setMouseTransparent(true); //button is clickable
+//			skillbutton2Paladin.setMouseTransparent(true);
+//			skillbutton3Paladin.setMouseTransparent(true);
+//			skillbutton4Paladin.setMouseTransparent(true);
+//			skillbutton1Assassin.setMouseTransparent(true); //button is not clickable
+//			skillbutton2Assassin.setMouseTransparent(true); 
+//			skillbutton3Assassin.setMouseTransparent(true); 
+//			skillbutton4Assassin.setMouseTransparent(true); 
+//			skillbutton1Wizard.setMouseTransparent(false); 
+//			skillbutton2Wizard.setMouseTransparent(false); 
+//			skillbutton3Wizard.setMouseTransparent(false); 
+//			skillbutton4Wizard.setMouseTransparent(false); 
+//			skillbutton1Alchemist.setMouseTransparent(true); 
+//			skillbutton2Alchemist.setMouseTransparent(true); 
+//			skillbutton3Alchemist.setMouseTransparent(true); 
+//			skillbutton4Alchemist.setMouseTransparent(true); 
+//		}
+//		
+//		while (heroInPos4Turn = true){
+//
+//			//all other buttons and images cannot be clicked or seen.
+//			skillbuttonimage1Paladin.setOpacity(0); //image is visible
+//			skillbuttonimage2Paladin.setOpacity(0);
+//			skillbuttonimage3Paladin.setOpacity(0);
+//			skillbuttonimage4Paladin.setOpacity(0);
+//			skillbuttonimage1Assassin.setOpacity(0); // image is not visible
+//			skillbuttonimage2Assassin.setOpacity(0);
+//			skillbuttonimage3Assassin.setOpacity(0);
+//			skillbuttonimage4Assassin.setOpacity(0);
+//			skillbuttonimage1Wizard.setOpacity(0);
+//			skillbuttonimage2Wizard.setOpacity(0);
+//			skillbuttonimage3Wizard.setOpacity(0);
+//			skillbuttonimage4Wizard.setOpacity(0);
+//			skillbuttonimage1Alchemist.setOpacity(100);
+//			skillbuttonimage2Alchemist.setOpacity(100);
+//			skillbuttonimage3Alchemist.setOpacity(100);
+//			skillbuttonimage4Alchemist.setOpacity(100);
+//			skillbutton1Paladin.setMouseTransparent(true); //button is clickable
+//			skillbutton2Paladin.setMouseTransparent(true);
+//			skillbutton3Paladin.setMouseTransparent(true);
+//			skillbutton4Paladin.setMouseTransparent(true);
+//			skillbutton1Assassin.setMouseTransparent(true); //button is not clickable
+//			skillbutton2Assassin.setMouseTransparent(true); 
+//			skillbutton3Assassin.setMouseTransparent(true); 
+//			skillbutton4Assassin.setMouseTransparent(true); 
+//			skillbutton1Wizard.setMouseTransparent(true); 
+//			skillbutton2Wizard.setMouseTransparent(true); 
+//			skillbutton3Wizard.setMouseTransparent(true); 
+//			skillbutton4Wizard.setMouseTransparent(true); 
+//			skillbutton1Alchemist.setMouseTransparent(false); 
+//			skillbutton2Alchemist.setMouseTransparent(false); 
+//			skillbutton3Alchemist.setMouseTransparent(false); 
+//			skillbutton4Alchemist.setMouseTransparent(false); 
+//		}
+		
+		skillbutton1Paladin.setOpacity(0);
+		skillbutton2Paladin.setOpacity(0);
+		skillbutton3Paladin.setOpacity(0);
+		skillbutton4Paladin.setOpacity(0);
+		skillbutton1Assassin.setOpacity(0); // cant see the button
+		skillbutton2Assassin.setOpacity(0);
+		skillbutton3Assassin.setOpacity(0);
+		skillbutton4Assassin.setOpacity(0);
+		skillbutton1Wizard.setOpacity(0);
+		skillbutton2Wizard.setOpacity(0);
+		skillbutton3Wizard.setOpacity(0);
+		skillbutton4Wizard.setOpacity(0);
+		skillbutton1Alchemist.setOpacity(0);
+		skillbutton2Alchemist.setOpacity(0);
+		skillbutton3Alchemist.setOpacity(0);
+		skillbutton4Alchemist.setOpacity(0);
+		skillbutton1Paladin.setMouseTransparent(true); // cant click the button
+		skillbutton2Paladin.setMouseTransparent(true);
+		skillbutton3Paladin.setMouseTransparent(true);
+		skillbutton4Paladin.setMouseTransparent(true);
+		skillbutton1Assassin.setMouseTransparent(true); 
+		skillbutton2Assassin.setMouseTransparent(true);
+		skillbutton3Assassin.setMouseTransparent(true);
+		skillbutton4Assassin.setMouseTransparent(true);
+		skillbutton1Wizard.setMouseTransparent(true);
+		skillbutton2Wizard.setMouseTransparent(true);
+		skillbutton3Wizard.setMouseTransparent(true);
+		skillbutton4Wizard.setMouseTransparent(true);
+		skillbutton1Alchemist.setMouseTransparent(true);
+		skillbutton2Alchemist.setMouseTransparent(true);
+		skillbutton3Alchemist.setMouseTransparent(true);
+		skillbutton4Alchemist.setMouseTransparent(true);
+
+		
+		skillbuttonimage1Paladin.setOpacity(00);
+		skillbuttonimage2Paladin.setOpacity(00);
+		skillbuttonimage3Paladin.setOpacity(00);
+		skillbuttonimage4Paladin.setOpacity(00);
+		skillbuttonimage1Assassin.setOpacity(00);
+		skillbuttonimage2Assassin.setOpacity(00);
+		skillbuttonimage3Assassin.setOpacity(00);
+		skillbuttonimage4Assassin.setOpacity(00);
+		skillbuttonimage1Wizard.setOpacity(00);
+		skillbuttonimage2Wizard.setOpacity(00);
+		skillbuttonimage3Wizard.setOpacity(00);
+		skillbuttonimage4Wizard.setOpacity(00);
+		skillbuttonimage1Alchemist.setOpacity(00);
+		skillbuttonimage2Alchemist.setOpacity(00);
+		skillbuttonimage3Alchemist.setOpacity(00);
+		skillbuttonimage4Alchemist.setOpacity(00);
+		
+		skillbuttonimagepass.setOpacity(100);
 		
 		menuBackButton.setOpacity(0);
 		menuQuitButton.setOpacity(0);
 		// -------------------------------------------------------------
-		skillbutton1.setOnAction(e -> { // clicking on skill buttons makes the indicator visible, and disables visibility of all others.
-			// i was going to do fade transistions here, but it seems like it doesn't work on button clicks, but only button hovers?
+		skillbutton1Paladin.setOnAction(e -> { 
 			skillButtonSelectedFrame1.setVisible(true);
 			skillButtonSelectedFrame2.setVisible(false);
 			skillButtonSelectedFrame3.setVisible(false);
 			skillButtonSelectedFrame4.setVisible(false);
 //			skillButtonMoveSelectedFrame.setVisible(false);
 		});
-		skillbutton2.setOnAction(e -> {
+		skillbutton2Paladin.setOnAction(e -> {
 			skillButtonSelectedFrame1.setVisible(false);
 			skillButtonSelectedFrame2.setVisible(true);
 			skillButtonSelectedFrame3.setVisible(false);
 			skillButtonSelectedFrame4.setVisible(false);
 //			skillButtonMoveSelectedFrame.setVisible(false);
 		});
-		skillbutton3.setOnAction(e -> {
+		skillbutton3Paladin.setOnAction(e -> {
 			skillButtonSelectedFrame1.setVisible(false);
 			skillButtonSelectedFrame2.setVisible(false);
 			skillButtonSelectedFrame3.setVisible(true);
 			skillButtonSelectedFrame4.setVisible(false);
 //			skillButtonMoveSelectedFrame.setVisible(false);
 		});
-		skillbutton4.setOnAction(e -> {
+		skillbutton4Paladin.setOnAction(e -> {
 			skillButtonSelectedFrame1.setVisible(false);
 			skillButtonSelectedFrame2.setVisible(false);
 			skillButtonSelectedFrame3.setVisible(false);
@@ -984,6 +1297,99 @@ public class Main extends Application {
 //			skillButtonSelectedFrame4.setVisible(false);
 //			skillButtonMoveSelectedFrame.setVisible(true);
 //		});
+		passTurnButton.setOnAction(e -> {
+			skillButtonSelectedFrame1.setVisible(false);
+			skillButtonSelectedFrame2.setVisible(false);
+			skillButtonSelectedFrame3.setVisible(false);
+			skillButtonSelectedFrame4.setVisible(false);
+		});
+		skillbutton1Assassin.setOnAction(e -> { 
+			skillButtonSelectedFrame1.setVisible(true);
+			skillButtonSelectedFrame2.setVisible(false);
+			skillButtonSelectedFrame3.setVisible(false);
+			skillButtonSelectedFrame4.setVisible(false);
+//			skillButtonMoveSelectedFrame.setVisible(false);
+		});
+		skillbutton2Assassin.setOnAction(e -> {
+			skillButtonSelectedFrame1.setVisible(false);
+			skillButtonSelectedFrame2.setVisible(true);
+			skillButtonSelectedFrame3.setVisible(false);
+			skillButtonSelectedFrame4.setVisible(false);
+//			skillButtonMoveSelectedFrame.setVisible(false);
+		});
+		skillbutton3Assassin.setOnAction(e -> {
+			skillButtonSelectedFrame1.setVisible(false);
+			skillButtonSelectedFrame2.setVisible(false);
+			skillButtonSelectedFrame3.setVisible(true);
+			skillButtonSelectedFrame4.setVisible(false);
+//			skillButtonMoveSelectedFrame.setVisible(false);
+		});
+		skillbutton4Assassin.setOnAction(e -> {
+			skillButtonSelectedFrame1.setVisible(false);
+			skillButtonSelectedFrame2.setVisible(false);
+			skillButtonSelectedFrame3.setVisible(false);
+			skillButtonSelectedFrame4.setVisible(true);
+//			skillButtonMoveSelectedFrame.setVisible(false);
+		});
+		
+		skillbutton1Wizard.setOnAction(e -> { 
+			skillButtonSelectedFrame1.setVisible(true);
+			skillButtonSelectedFrame2.setVisible(false);
+			skillButtonSelectedFrame3.setVisible(false);
+			skillButtonSelectedFrame4.setVisible(false);
+//			skillButtonMoveSelectedFrame.setVisible(false);
+		});
+		skillbutton2Wizard.setOnAction(e -> {
+			skillButtonSelectedFrame1.setVisible(false);
+			skillButtonSelectedFrame2.setVisible(true);
+			skillButtonSelectedFrame3.setVisible(false);
+			skillButtonSelectedFrame4.setVisible(false);
+//			skillButtonMoveSelectedFrame.setVisible(false);
+		});
+		skillbutton3Wizard.setOnAction(e -> {
+			skillButtonSelectedFrame1.setVisible(false);
+			skillButtonSelectedFrame2.setVisible(false);
+			skillButtonSelectedFrame3.setVisible(true);
+			skillButtonSelectedFrame4.setVisible(false);
+//			skillButtonMoveSelectedFrame.setVisible(false);
+		});
+		skillbutton4Wizard.setOnAction(e -> {
+			skillButtonSelectedFrame1.setVisible(false);
+			skillButtonSelectedFrame2.setVisible(false);
+			skillButtonSelectedFrame3.setVisible(false);
+			skillButtonSelectedFrame4.setVisible(true);
+//			skillButtonMoveSelectedFrame.setVisible(false);
+		});
+		
+		skillbutton1Alchemist.setOnAction(e -> { 
+			skillButtonSelectedFrame1.setVisible(true);
+			skillButtonSelectedFrame2.setVisible(false);
+			skillButtonSelectedFrame3.setVisible(false);
+			skillButtonSelectedFrame4.setVisible(false);
+//			skillButtonMoveSelectedFrame.setVisible(false);
+		});
+		skillbutton2Alchemist.setOnAction(e -> {
+			skillButtonSelectedFrame1.setVisible(false);
+			skillButtonSelectedFrame2.setVisible(true);
+			skillButtonSelectedFrame3.setVisible(false);
+			skillButtonSelectedFrame4.setVisible(false);
+//			skillButtonMoveSelectedFrame.setVisible(false);
+		});
+		skillbutton3Alchemist.setOnAction(e -> {
+			skillButtonSelectedFrame1.setVisible(false);
+			skillButtonSelectedFrame2.setVisible(false);
+			skillButtonSelectedFrame3.setVisible(true);
+			skillButtonSelectedFrame4.setVisible(false);
+//			skillButtonMoveSelectedFrame.setVisible(false);
+		});
+		skillbutton4Alchemist.setOnAction(e -> {
+			skillButtonSelectedFrame1.setVisible(false);
+			skillButtonSelectedFrame2.setVisible(false);
+			skillButtonSelectedFrame3.setVisible(false);
+			skillButtonSelectedFrame4.setVisible(true);
+//			skillButtonMoveSelectedFrame.setVisible(false);
+		});
+		
 		// -------------------------------------------------------------
 		//make images dissapear or appear on button hover.
 		// none of this is correct. these need to be changed so that when a move is selected, it only shows visible on which enemies can be attacked.  // var
@@ -1454,9 +1860,17 @@ public class Main extends Application {
 		root.getChildren().addAll(enemy2BleedResistanceNumber,enemy2BlightResistanceNumber,enemy2BurnResistanceNumber,enemy2StunResistanceNumber,enemy2MoveResistanceNumber,enemy2DebuffResistanceNumber, enemy2DeathResistanceNumber);
 		root.getChildren().addAll(enemy3BleedResistanceNumber,enemy3BlightResistanceNumber,enemy3BurnResistanceNumber,enemy3StunResistanceNumber,enemy3MoveResistanceNumber,enemy3DebuffResistanceNumber, enemy3DeathResistanceNumber);
 		root.getChildren().addAll(enemy4BleedResistanceNumber,enemy4BlightResistanceNumber,enemy4BurnResistanceNumber,enemy4StunResistanceNumber,enemy4MoveResistanceNumber,enemy4DebuffResistanceNumber, enemy4DeathResistanceNumber);
-		root.getChildren().add(skillButtons); 
-		root.getChildren().add(passTurnButton); 
-		root.getChildren().addAll(skillbuttonimage1, skillbuttonimage2, skillbuttonimage3, skillbuttonimage4, skillbuttonimagepass); // , skillbuttonimagemove																				
+		root.getChildren().addAll(skillButtonsPaladin);
+		root.getChildren().add(skillButtonsAssassin);
+		root.getChildren().add(skillButtonsWizard);
+		root.getChildren().add(skillButtonsAlchemist);
+		root.getChildren().add(passTurnButton);
+		root.getChildren().addAll(skillButtonsImagesPaladin);
+		root.getChildren().addAll(skillButtonsImagesAssassin);																			
+		root.getChildren().addAll(skillButtonsImagesWizard);																			
+		root.getChildren().addAll(skillButtonsImagesAlchemist);			
+		root.getChildren().add(skillbuttonimagepass);
+
 		root.getChildren().addAll(skillButtonSelectedFrame1,skillButtonSelectedFrame2,skillButtonSelectedFrame3,skillButtonSelectedFrame4); // ,skillButtonMoveSelectedFrame
 		root.getChildren().addAll(heroNameTextPlate, enemyNameTextPlate);
 		root.getChildren().add(turnOrderBarLeftAndRight);
@@ -1464,15 +1878,15 @@ public class Main extends Application {
 		root.getChildren().add(roundNumberText);
 		root.getChildren().addAll(heroSelectionIndicator1, heroSelectionIndicator2, heroSelectionIndicator3,heroSelectionIndicator4); 
 		root.getChildren().addAll(enemySelectionIndicator1, enemySelectionIndicator2, enemySelectionIndicator3, enemySelectionIndicator4); // might need 4 of these.
-		root.getChildren().add(heroHealthBarBlackRectangles);
-		root.getChildren().add(heroHealthBarRedRectangles);
-		root.getChildren().add(enemyHealthBarBlackRectangles);
-		root.getChildren().add(enemyHealthBarRedRectangles);
+		root.getChildren().addAll(heroHealthBarBlackRectangle1, heroHealthBarBlackRectangle2, heroHealthBarBlackRectangle3, heroHealthBarBlackRectangle4);
+		root.getChildren().addAll(heroHealthBarRedRectangle1, heroHealthBarRedRectangle2, heroHealthBarRedRectangle3, heroHealthBarRedRectangle4);
+		root.getChildren().addAll(enemyHealthBarBlackRectangle1, enemyHealthBarBlackRectangle2, enemyHealthBarBlackRectangle3, enemyHealthBarBlackRectangle4);
+		root.getChildren().addAll(enemyHealthBarRedRectangle1, enemyHealthBarRedRectangle2, enemyHealthBarRedRectangle3, enemyHealthBarRedRectangle4);
 		root.getChildren().addAll(heroHPPos4,heroHPPos3,heroHPPos2,heroHPPos1);
 		root.getChildren().addAll(enemyHPPos4,enemyHPPos3,enemyHPPos2,enemyHPPos1);
 		root.getChildren().addAll(moveDescriptionText,moveNameText);
 		
-		root.setBackground(new Background(backgroundImagePayoff)); // set background image
+		root.setBackground(new Background(backgroundImagePayoff)); // set background image	
 		
 		combatMenu.getChildren().addAll(menuBackground);
 		combatMenu.getChildren().addAll(menuButtonFrame1);
@@ -1513,17 +1927,41 @@ public class Main extends Application {
 		turnOrderBarLeftAndRight.setLayoutY(0);
 		// -------------------------------------------------------------
 		//health bars
-		heroHealthBarRedRectangles.setLayoutX(155);
-		heroHealthBarRedRectangles.setLayoutY(600);
+		heroHealthBarRedRectangle1.setLayoutX(770); // 205 spacing
+		heroHealthBarRedRectangle1.setLayoutY(600);
+		heroHealthBarRedRectangle2.setLayoutX(565);
+		heroHealthBarRedRectangle2.setLayoutY(600);
+		heroHealthBarRedRectangle3.setLayoutX(360);
+		heroHealthBarRedRectangle3.setLayoutY(600);
+		heroHealthBarRedRectangle4.setLayoutX(155);
+		heroHealthBarRedRectangle4.setLayoutY(600);
 		
-		heroHealthBarBlackRectangles.setLayoutX(155);
-		heroHealthBarBlackRectangles.setLayoutY(600);
+		heroHealthBarBlackRectangle1.setLayoutX(770);
+		heroHealthBarBlackRectangle1.setLayoutY(600);
+		heroHealthBarBlackRectangle2.setLayoutX(565);
+		heroHealthBarBlackRectangle2.setLayoutY(600);
+		heroHealthBarBlackRectangle3.setLayoutX(360);
+		heroHealthBarBlackRectangle3.setLayoutY(600);
+		heroHealthBarBlackRectangle4.setLayoutX(155);
+		heroHealthBarBlackRectangle4.setLayoutY(600);
 
-		enemyHealthBarRedRectangles.setLayoutX(1055);
-		enemyHealthBarRedRectangles.setLayoutY(600);
-	
-		enemyHealthBarBlackRectangles.setLayoutX(1055);
-		enemyHealthBarBlackRectangles.setLayoutY(600);
+		enemyHealthBarRedRectangle1.setLayoutX(1055);
+		enemyHealthBarRedRectangle1.setLayoutY(600);
+		enemyHealthBarRedRectangle2.setLayoutX(1260);
+		enemyHealthBarRedRectangle2.setLayoutY(600);
+		enemyHealthBarRedRectangle3.setLayoutX(1465);
+		enemyHealthBarRedRectangle3.setLayoutY(600);
+		enemyHealthBarRedRectangle4.setLayoutX(1670);
+		enemyHealthBarRedRectangle4.setLayoutY(600);
+		
+		enemyHealthBarBlackRectangle1.setLayoutX(1055);
+		enemyHealthBarBlackRectangle1.setLayoutY(600);
+		enemyHealthBarBlackRectangle2.setLayoutX(1260);
+		enemyHealthBarBlackRectangle2.setLayoutY(600);
+		enemyHealthBarBlackRectangle3.setLayoutX(1465);
+		enemyHealthBarBlackRectangle3.setLayoutY(600);
+		enemyHealthBarBlackRectangle4.setLayoutX(1670);
+		enemyHealthBarBlackRectangle4.setLayoutY(600);
 		// -------------------------------------------------------------
 		moveDescriptionText.setLayoutX(25);
 		moveDescriptionText.setLayoutY(800);
@@ -1713,39 +2151,39 @@ public class Main extends Application {
 		enemy4DeathResistanceNumber.setScaleY(.75); 
 		
 		
-		heroHPPos4.setLayoutX(92); 
+		heroHPPos4.setLayoutX(180); //92
 		heroHPPos4.setLayoutY(650); 
 		heroHPPos4.setScaleX(.5); 
 		heroHPPos4.setScaleY(.5); 
 		
-		heroHPPos3.setLayoutX(297); // space 205
+		heroHPPos3.setLayoutX(385); // space 205
 		heroHPPos3.setLayoutY(650);
 		heroHPPos3.setScaleX(.5); 
 		heroHPPos3.setScaleY(.5); 
 		
-		heroHPPos2.setLayoutX(503); 
+		heroHPPos2.setLayoutX(590); 
 		heroHPPos2.setLayoutY(650); 
 		heroHPPos2.setScaleX(.5); 
 		heroHPPos2.setScaleY(.5); 
 		
-		heroHPPos1.setLayoutX(708); 
+		heroHPPos1.setLayoutX(805); 
 		heroHPPos1.setLayoutY(650);  
 		heroHPPos1.setScaleX(.5); 
 		heroHPPos1.setScaleY(.5); 
 		
-		enemyHPPos1.setLayoutX(975); 
+		enemyHPPos1.setLayoutX(1080); 
 		enemyHPPos1.setLayoutY(650);   
 		enemyHPPos1.setScaleX(.5); 
 		enemyHPPos1.setScaleY(.5); 
-		enemyHPPos2.setLayoutX(1180); 
+		enemyHPPos2.setLayoutX(1285); 
 		enemyHPPos2.setLayoutY(650);  
 		enemyHPPos2.setScaleX(.5); 
 		enemyHPPos2.setScaleY(.5); 
-		enemyHPPos3.setLayoutX(1385); 
+		enemyHPPos3.setLayoutX(1490); 
 		enemyHPPos3.setLayoutY(650);  
 		enemyHPPos3.setScaleX(.5); 
 		enemyHPPos3.setScaleY(.5); 
-		enemyHPPos4.setLayoutX(1590); 
+		enemyHPPos4.setLayoutX(1695); 
 		enemyHPPos4.setLayoutY(650); 
 		enemyHPPos4.setScaleX(.5); 
 		enemyHPPos4.setScaleY(.5); 
@@ -1789,20 +2227,67 @@ public class Main extends Application {
 		heroInPosition4.setLayoutY(210);
 		// -------------------------------------------------------------
 		
-		skillButtons.setLayoutX(696); // 585 sweet spot
-		skillButtons.setLayoutY(828);
+		skillButtonsPaladin.setLayoutX(696); // 585 sweet spot
+		skillButtonsPaladin.setLayoutY(828);
+		skillButtonsAssassin.setLayoutX(696); // 585 sweet spot
+		skillButtonsAssassin.setLayoutY(828);
+		skillButtonsWizard.setLayoutX(696); // 585 sweet spot
+		skillButtonsWizard.setLayoutY(828);
+		skillButtonsAlchemist.setLayoutX(696); // 585 sweet spot
+		skillButtonsAlchemist.setLayoutY(828);
 		
-		passTurnButton.setLayoutX(1077);
+		skillButtonsImagesPaladin.setLayoutX(696);
+		skillButtonsImagesPaladin.setLayoutY(828);
+		skillButtonsImagesPaladin.setMouseTransparent(true);
+		skillButtonsImagesAssassin.setLayoutX(696);
+		skillButtonsImagesAssassin.setLayoutY(828);
+		skillButtonsImagesAssassin.setMouseTransparent(true);
+		skillButtonsImagesWizard.setLayoutX(696);
+		skillButtonsImagesWizard.setLayoutY(828);
+		skillButtonsImagesWizard.setMouseTransparent(true);
+		skillButtonsImagesAlchemist.setLayoutX(696);
+		skillButtonsImagesAlchemist.setLayoutY(828);
+		skillButtonsImagesAlchemist.setMouseTransparent(true);
+		
+		passTurnButton.setLayoutX(1202);
 		passTurnButton.setLayoutY(828);
 		
-		skillbuttonimage1.setLayoutX(696);
-		skillbuttonimage1.setLayoutY(828);// 778 SWEET SPOT // 127 x multiple
-		skillbuttonimage2.setLayoutX(823);
-		skillbuttonimage2.setLayoutY(828);
-		skillbuttonimage3.setLayoutX(950);
-		skillbuttonimage3.setLayoutY(828);
-		skillbuttonimage4.setLayoutX(1077);
-		skillbuttonimage4.setLayoutY(828);
+		skillbuttonimage1Paladin.setLayoutX(696);
+		skillbuttonimage1Paladin.setLayoutY(828);// 778 SWEET SPOT // 127 x multiple
+		skillbuttonimage2Paladin.setLayoutX(823);
+		skillbuttonimage2Paladin.setLayoutY(828);
+		skillbuttonimage3Paladin.setLayoutX(950);
+		skillbuttonimage3Paladin.setLayoutY(828);
+		skillbuttonimage4Paladin.setLayoutX(1077);
+		skillbuttonimage4Paladin.setLayoutY(828);
+		
+		skillbuttonimage1Assassin.setLayoutX(696);
+		skillbuttonimage1Assassin.setLayoutY(828);// 778 SWEET SPOT // 127 x multiple
+		skillbuttonimage2Assassin.setLayoutX(823);
+		skillbuttonimage2Assassin.setLayoutY(828);
+		skillbuttonimage3Assassin.setLayoutX(950);
+		skillbuttonimage3Assassin.setLayoutY(828);
+		skillbuttonimage4Assassin.setLayoutX(1077);
+		skillbuttonimage4Assassin.setLayoutY(828);
+		
+		skillbuttonimage1Wizard.setLayoutX(696);
+		skillbuttonimage1Wizard.setLayoutY(828);// 778 SWEET SPOT // 127 x multiple
+		skillbuttonimage2Wizard.setLayoutX(823);
+		skillbuttonimage2Wizard.setLayoutY(828);
+		skillbuttonimage3Wizard.setLayoutX(950);
+		skillbuttonimage3Wizard.setLayoutY(828);
+		skillbuttonimage4Wizard.setLayoutX(1077);
+		skillbuttonimage4Wizard.setLayoutY(828);
+		
+		skillbuttonimage1Alchemist.setLayoutX(696);
+		skillbuttonimage1Alchemist.setLayoutY(828);// 778 SWEET SPOT // 127 x multiple
+		skillbuttonimage2Alchemist.setLayoutX(823);
+		skillbuttonimage2Alchemist.setLayoutY(828);
+		skillbuttonimage3Alchemist.setLayoutX(950);
+		skillbuttonimage3Alchemist.setLayoutY(828);
+		skillbuttonimage4Alchemist.setLayoutX(1077);
+		skillbuttonimage4Alchemist.setLayoutY(828);
+		
 //		skillbuttonimagemove.setLayoutX(1094);
 //		skillbuttonimagemove.setLayoutY(778);
 		skillbuttonimagepass.setLayoutX(1207); // 1227
@@ -1872,7 +2357,19 @@ public class Main extends Application {
 			((Button) button).prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.08));
 			((Button) button).prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.3));
 		});
-		skillButtons.getChildren().forEach(button -> {
+		skillButtonsPaladin.getChildren().forEach(button -> {
+		    ((RadioButton) button).prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.06));
+		    ((RadioButton) button).prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.09));
+		});
+		skillButtonsAssassin.getChildren().forEach(button -> {
+		    ((RadioButton) button).prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.06));
+		    ((RadioButton) button).prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.09));
+		});
+		skillButtonsWizard.getChildren().forEach(button -> {
+		    ((RadioButton) button).prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.06));
+		    ((RadioButton) button).prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.09));
+		});
+		skillButtonsAlchemist.getChildren().forEach(button -> {
 		    ((RadioButton) button).prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.06));
 		    ((RadioButton) button).prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.09));
 		});
