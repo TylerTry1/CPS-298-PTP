@@ -7,6 +7,7 @@ import java.util.TimerTask;
 import application.combatFlow.combatControl;
 import javafx.animation.FadeTransition;
 import javafx.animation.PauseTransition;
+import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
@@ -30,7 +31,6 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
@@ -77,6 +77,26 @@ public class Main extends Application {
 	}
 
 	private void initialization(Stage primaryStage) { // this scene is used specifically so that we can make our application full screen.
+
+        Rectangle transitionCoverEnter = new Rectangle(400, 20, Color.BLACK); // Black rectangle
+        Rectangle transitionCoverExit = new Rectangle(400, 20, Color.BLACK); // Black rectangle
+
+        TranslateTransition transition = new TranslateTransition(Duration.seconds(2), transitionCoverEnter);
+        transition.setToY(2500);  // Move the rectangle vertically down to y = 2000
+        transition.play();
+        
+        
+        transitionCoverEnter.setLayoutX(900);
+        transitionCoverEnter.setLayoutY(0);  // Set starting position off-screen at y = -100
+        transitionCoverEnter.setScaleX(10);
+        transitionCoverEnter.setScaleY(120);
+        
+        transitionCoverExit.setLayoutX(900);
+        transitionCoverExit.setLayoutY(0);  // Set starting position off-screen at y = -100
+        transitionCoverExit.setScaleX(10);
+        transitionCoverExit.setScaleY(120);
+
+
 	    Image cursorImage = new Image("GUIAssets/cursor.png");
 
 	    Cursor customCursor = Cursor.cursor(cursorImage.getUrl());
@@ -158,6 +178,7 @@ public class Main extends Application {
 	    root.getChildren().addAll(playbutton); // Add both button lists
 	    root.getChildren().addAll(enterGameText);
 	    
+	    root.getChildren().add(transitionCoverEnter);
 	    root.setBackground(new Background(backgroundImage));
 	    // Set button styles and sizes for both sets of buttons
 	    playbutton.getChildren().forEach(button -> {
@@ -520,6 +541,7 @@ public class Main extends Application {
 		Text roundNumberText = new Text ("0"); // var + roundCounter
 		
 		Text moveDescriptionText = new Text ("DMG:  CRIT:(critpercent)"); // var
+		Text moveDescriptionText2 = new Text ("moveDesc");
 		Text moveNameText = new Text (moveName); // var
 		
 		Text menuQuitGameText = new Text ("Quit Game");
@@ -619,6 +641,8 @@ public class Main extends Application {
 		enemyHPPos4.setFill(Color.web("#bc1313"));
 		moveDescriptionText.setFont(DwarvenAxe); 
 		moveDescriptionText.setFill(Color.web("#d5d5d5"));
+		moveDescriptionText2.setFont(DwarvenAxe);
+		moveDescriptionText2.setFill(Color.web("#d5d5d5"));
 		moveNameText.setFont(DwarvenAxe); 
 		moveNameText.setFill(Color.web("#d5d5d5"));
 		moveNameText.setTextAlignment(TextAlignment.CENTER);
@@ -1884,7 +1908,7 @@ public class Main extends Application {
 		root.getChildren().addAll(enemyHealthBarRedRectangle1, enemyHealthBarRedRectangle2, enemyHealthBarRedRectangle3, enemyHealthBarRedRectangle4);
 		root.getChildren().addAll(heroHPPos4,heroHPPos3,heroHPPos2,heroHPPos1);
 		root.getChildren().addAll(enemyHPPos4,enemyHPPos3,enemyHPPos2,enemyHPPos1);
-		root.getChildren().addAll(moveDescriptionText,moveNameText);
+		root.getChildren().addAll(moveDescriptionText,moveDescriptionText2,moveNameText);
 		
 		root.setBackground(new Background(backgroundImagePayoff)); // set background image	
 		
@@ -1965,7 +1989,8 @@ public class Main extends Application {
 		// -------------------------------------------------------------
 		moveDescriptionText.setLayoutX(25);
 		moveDescriptionText.setLayoutY(800);
-		
+		moveDescriptionText2.setLayoutX(25);
+		moveDescriptionText2.setLayoutY(840);
 		moveNameText.setLayoutX(900);
 		moveNameText.setLayoutY(800);
 		// -------------------------------------------------------------
