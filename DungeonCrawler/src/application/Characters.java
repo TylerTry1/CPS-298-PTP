@@ -124,7 +124,7 @@ public class Characters extends entities {
         }
         
         double setHealthBarAmount() {
-        	healthBarAmount = (this.maxHealth / this.health) * 100;
+        	healthBarAmount = (this.health / this.maxHealth) * 100;
         	return healthBarAmount;
         }
     //}

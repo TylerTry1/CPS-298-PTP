@@ -23,8 +23,8 @@ public class Enemies extends entities {
         int size;
         int challenge; // For determine team comps (testing this)
         int speed;
-        Image idleSprite;
-        Image attackSprite;
+        BufferedImage idleSprite;
+        BufferedImage attackSprite;
         double bleedResist;
         double burnResist;
         double blightResist;
@@ -122,6 +122,19 @@ public class Enemies extends entities {
         	speed += adjust;
         }
         
+        BufferedImage getIdleSprite () {
+        	return idleSprite;
+        }
+        
+        // Parameter Type made need changed, test later
+        void setIdleSprite(BufferedImage newSprite) {
+        	idleSprite = newSprite;
+        }
+        
+        BufferedImage getAttackSprite() {
+        	return attackSprite;
+        }
+        
         
 		static double[][] result = new double[2][4]; // Array to store the amount of damage that will be done, and the positions to damage.
 		static double[] targetPos = new double[4];
@@ -140,7 +153,7 @@ public class Enemies extends entities {
 		}
 		
         double setHealthBarAmount() {
-        	healthBarAmount = (this.maxHealth / this.health) * 100;
+        	healthBarAmount = (health / maxHealth) * 100;
         	return healthBarAmount;
         }
 		
@@ -149,7 +162,7 @@ public class Enemies extends entities {
 	public class goblinScout extends Enemies {
 		public goblinScout(Optional <Integer> pos) throws IOException {
 			name = "Goblin Scout";
-			// add max health
+			maxHealth = 24;
 			health = 24;
 			damage[0] = 7.0;
 			placeholderDamage[0] = 0;
@@ -161,8 +174,8 @@ public class Enemies extends entities {
 			size = 1;
 			challenge = 1;
 			speed = 5;
-			//File idleImage = new File("applicationEnemySpries/GoblinScout/Goblin_Scout_1_Idle.png");
-			//BufferedImage IdleImage = ImageIO.read(idleImage); 
+			idleSprite = ImageIO.read(getClass().getResource("/images/Goblin_Scout_1_Idle.png")); 
+			attackSprite = ImageIO.read(getClass().getResource("/images/Goblin_Scout_1_Attack.png"));
 	        bleedResist = 10;
 	        burnResist = 12;
 	        blightResist = 14;
@@ -218,8 +231,9 @@ public class Enemies extends entities {
 	}
 	
 	public class goblinAxeman extends Enemies {
-		public goblinAxeman(Optional <Integer> pos) {
+		public goblinAxeman(Optional <Integer> pos) throws IOException {
 			name = "Goblin Axeman";
+			maxHealth = 32;
 			health = 32;
 			damage[0] = 15.0;
 			placeholderDamage[0] = 0.0;
@@ -231,6 +245,8 @@ public class Enemies extends entities {
 			size = 1;
 			challenge = 2;
 			speed = 4;
+			idleSprite = ImageIO.read(getClass().getResource("/images/Goblin_axeman_1_Idle.png"));
+			attackSprite = ImageIO.read(getClass().getResource("/images/Goblin_axeman_1_Attack.png"));
 	        bleedResist = 10;
 	        burnResist = 12;
 	        blightResist = 14;
@@ -278,8 +294,9 @@ public class Enemies extends entities {
 	}
 	
 	public class goblinArcher extends Enemies {
-		public goblinArcher(Optional <Integer> pos) {
+		public goblinArcher(Optional <Integer> pos) throws IOException {
 			name = "Goblin Archer";
+			maxHealth = 28;
 			health = 28;
 			damage[0] = 10;
 			placeholderDamage[0] = 0;
@@ -291,6 +308,8 @@ public class Enemies extends entities {
 			size = 1;
 			challenge = 1;
 			speed = 6;
+			idleSprite = ImageIO.read(getClass().getResource("/images/Goblin_Archer_1_Idle.png"));
+			attackSprite = ImageIO.read(getClass().getResource("/images/Goblin_Archer_1_Attack.png"));
 	        bleedResist = 10;
 	        burnResist = 12;
 	        blightResist = 14;
@@ -339,8 +358,9 @@ public class Enemies extends entities {
 	}
 	
 	public class goblinShaman extends Enemies {
-		public goblinShaman(Optional <Integer> pos) {
+		public goblinShaman(Optional <Integer> pos) throws IOException {
 			name = "Goblin Shaman";
+			maxHealth = 20;
 			health = 20;
 			damage[0] = 4;
 			placeholderDamage[0] = 0;
@@ -352,6 +372,8 @@ public class Enemies extends entities {
 			size = 1;
 			challenge = 1;
 			speed = 6;
+			idleSprite = ImageIO.read(getClass().getResource("/images/Goblin_Shaman_1_Idle.png"));
+			attackSprite = ImageIO.read(getClass().getResource("/images/Goblin_Shaman_1_Attack.png"));
 	        bleedResist = 10;
 	        burnResist = 12;
 	        blightResist = 14;
@@ -401,8 +423,9 @@ public class Enemies extends entities {
 	}
 	
 	public class skeletonSwordsman extends Enemies {
-		public skeletonSwordsman(Optional <Integer> pos) {
+		public skeletonSwordsman(Optional <Integer> pos) throws IOException {
 			name = "Skeleton Swordsman";
+			maxHealth = 28;
 			health = 28;
 			damage[0] = 12;
 			placeholderDamage[0] = 0;
@@ -414,6 +437,8 @@ public class Enemies extends entities {
 			size = 1;
 			challenge = 2;
 			speed = 6;
+			idleSprite = ImageIO.read(getClass().getResource("/images/Skeleton_Swordman_Idle.png"));
+			attackSprite = ImageIO.read(getClass().getResource("/images/Skeleton_Swordman_Attack.png"));
 	        bleedResist = 25;
 	        burnResist = 15;
 	        blightResist = 10;
@@ -464,8 +489,9 @@ public class Enemies extends entities {
 	
 	
 	public class skeletonCrossbowman extends Enemies {
-		public skeletonCrossbowman(Optional <Integer> pos) {
+		public skeletonCrossbowman(Optional <Integer> pos) throws IOException {
 			name = "Skeleton Crossbowmen";
+			maxHealth = 25;
 			health = 25;
 			damage[0] = 10;
 			placeholderDamage[0] = 0;
@@ -477,6 +503,8 @@ public class Enemies extends entities {
 			size = 1;
 			challenge = 2;
 			speed = 7;
+			idleSprite = ImageIO.read(getClass().getResource("/images/Skeleton-Crossbowman_Idle.png"));
+			attackSprite = ImageIO.read(getClass().getResource("/images/Skeleton-Crossbowman_Attack.png"));
 	        bleedResist = 25;
 	        burnResist = 15;
 	        blightResist = 10;
@@ -541,8 +569,9 @@ public class Enemies extends entities {
 	}
 	
 	public class skeletonDefender extends Enemies {
-		public skeletonDefender(Optional <Integer> pos) {
+		public skeletonDefender(Optional <Integer> pos) throws IOException {
 			name = "Skeleton Defender";
+			maxHealth = 35;
 			health = 35;
 			damage[0] = 15;
 			placeholderDamage[0] = 0;
@@ -553,7 +582,9 @@ public class Enemies extends entities {
 			position = pos.orElse(1);
 			size = 1;
 			challenge = 3;
-			speed = 5;	        
+			speed = 5;	      
+			idleSprite = ImageIO.read(getClass().getResource("/images/Skeleton_Defender_Idle.png"));
+			attackSprite = ImageIO.read(getClass().getResource("/images/Skeleton_Defender_Attack.png"));
 			bleedResist = 25;
 	        burnResist = 15;
 	        blightResist = 10;
@@ -601,8 +632,9 @@ public class Enemies extends entities {
 	}
 	
 	public class necromancer extends Enemies {
-		public necromancer(Optional <Integer> pos) {
+		public necromancer(Optional <Integer> pos) throws IOException {
 			name = "Necromancer";
+			maxHealth = 25;
 			health = 25;
 			damage[0] = 12; 
 			placeholderDamage[0] = 0;
@@ -614,6 +646,8 @@ public class Enemies extends entities {
 			size = 1;
 			challenge = 2;
 			speed = 8;
+			idleSprite = ImageIO.read(getClass().getResource("/images/Necromancer_Idle.png"));
+			attackSprite = ImageIO.read(getClass().getResource("/images/Necromancer_Attack.png"));
 	        bleedResist = 10;
 	        burnResist = 15;
 	        blightResist = 20;
@@ -666,8 +700,9 @@ public class Enemies extends entities {
 	}
 	
 	public class bodyPile extends Enemies {
-		public bodyPile(Optional <Integer> pos) {
+		public bodyPile(Optional <Integer> pos) throws IOException {
 			name = "Body Pile";
+			maxHealth = 20;
 			health = 20;
 			damage[0] = 0;
 			placeholderDamage[0] = 0;
@@ -679,6 +714,8 @@ public class Enemies extends entities {
 			size = 1;
 			challenge = 1;
 			speed = 0;
+			idleSprite = ImageIO.read(getClass().getResource("/images/CorpsePile.png"));
+			attackSprite = ImageIO.read(getClass().getResource("/images/CorpsePile.png"));
 	        bleedResist = 0;
 	        burnResist = 0;
 	        blightResist = 0;
@@ -727,8 +764,9 @@ public class Enemies extends entities {
 	}
 	
 	public class giantPummeler extends Enemies {
-		public giantPummeler(Optional <Integer> pos) {
+		public giantPummeler(Optional <Integer> pos) throws IOException {
 			name = "Giant Pummeler";
+			maxHealth = 50;
 			health = 50;
 			damage[0] = 25;
 			placeholderDamage[0] = 0;
@@ -740,6 +778,8 @@ public class Enemies extends entities {
 			size = 2;
 			challenge = 4;
 			speed = 5;
+			idleSprite = ImageIO.read(getClass().getResource("/images/Giant_Pummeler_Idle.png"));
+			attackSprite = ImageIO.read(getClass().getResource("/images/Giant_Pummeler_Attack.png"));
 	        bleedResist = 25;
 	        burnResist = 15;
 	        blightResist = 10;
@@ -791,8 +831,9 @@ public class Enemies extends entities {
 	}
 	
 	public class giantSlammer extends Enemies {
-		public giantSlammer(Optional <Integer> pos) {
+		public giantSlammer(Optional <Integer> pos) throws IOException {
 			name = "Giant Slammer";
+			maxHealth = 60;
 			health = 60;
 			damage[0] = 30;
 			placeholderDamage[0] = 0;
@@ -804,6 +845,8 @@ public class Enemies extends entities {
 			size = 2;
 			challenge = 4;
 			speed = 5;
+			idleSprite = ImageIO.read(getClass().getResource("/images/Giant_Slammer_Idle.png"));
+			attackSprite = ImageIO.read(getClass().getResource("/images/Giant_Slammer_Attack.png"));
 	        bleedResist = 25;
 	        burnResist = 15;
 	        blightResist = 10;
@@ -855,8 +898,9 @@ public class Enemies extends entities {
 	}
 	
 	public class zombiePeasant extends Enemies {
-		public zombiePeasant(Optional <Integer> pos) {
+		public zombiePeasant(Optional <Integer> pos) throws IOException {
 			name = "Zombie Peasant";
+			maxHealth = 18;
 			health = 18;
 			damage[0] = 10;
 			placeholderDamage[0] = 0;
@@ -868,6 +912,8 @@ public class Enemies extends entities {
 			size = 1;
 			challenge = 2;
 			speed = 8;
+			idleSprite = ImageIO.read(getClass().getResource("/images/Zombie_Peasant_Idle.png"));
+			attackSprite = ImageIO.read(getClass().getResource("/images/Zombie_Peasant-Attack.png"));
 	        bleedResist = 25;
 	        burnResist = 5;
 	        blightResist = 10;
@@ -915,8 +961,9 @@ public class Enemies extends entities {
 	}
 	
 	public class zombieKnight extends Enemies {
-		public zombieKnight(Optional <Integer> pos) {
+		public zombieKnight(Optional <Integer> pos) throws IOException {
 			name = "Zombie Knight";
+			maxHealth = 35;
 			health = 35;
 			damage[0] = 25;
 			placeholderDamage[0] = 0;
@@ -928,6 +975,8 @@ public class Enemies extends entities {
 			size = 1;
 			challenge = 3;
 			speed = 5;
+			idleSprite = ImageIO.read(getClass().getResource("/images/Zombie_Knight_Idle.png"));
+			attackSprite = ImageIO.read(getClass().getResource("/images/Zombie_Knight_Attack.png"));
 	        bleedResist = 25;
 	        burnResist = 10;
 	        blightResist = 10;
@@ -975,8 +1024,9 @@ public class Enemies extends entities {
 	}
 	
 	public class minotaur extends Enemies {
-		public minotaur(Optional <Integer> pos) {
+		public minotaur(Optional <Integer> pos) throws IOException {
 			name = "Minotaur";
+			maxHealth = 65;
 			health = 65;
 			damage[0] = 30;
 			placeholderDamage[0] = 0;
@@ -988,6 +1038,8 @@ public class Enemies extends entities {
 			size = 2;
 			challenge = 4;
 			speed = 15;
+			idleSprite = ImageIO.read(getClass().getResource("/images/Minotaur_Idle.png"));
+			attackSprite = ImageIO.read(getClass().getResource("/images/Minotaur_Attack.png"));
 	        bleedResist = 25;
 	        burnResist = 15;
 	        blightResist = 10;
@@ -1035,8 +1087,9 @@ public class Enemies extends entities {
 	}
 	
 	public class boar extends Enemies {
-		public boar(Optional <Integer> pos) {
+		public boar(Optional <Integer> pos) throws IOException {
 			name = "Boar";
+			maxHealth = 40;
 			health = 40;
 			damage[0] = 18;
 			placeholderDamage[0] = 0;
@@ -1048,6 +1101,8 @@ public class Enemies extends entities {
 			size = 1;
 			challenge = 3;
 			speed = 12;
+			idleSprite = ImageIO.read(getClass().getResource("/images/Boar.png"));
+			attackSprite = ImageIO.read(getClass().getResource("/images/Boar.png"));
 	        bleedResist = 25;
 	        burnResist = 15;
 	        blightResist = 10;

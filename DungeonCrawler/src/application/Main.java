@@ -9,6 +9,7 @@ import javafx.animation.FadeTransition;
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Insets;
 import javafx.geometry.Side;
 import javafx.scene.Cursor;
@@ -29,6 +30,7 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
@@ -599,7 +601,8 @@ public class Main extends Application {
 	                CycleMethod.NO_CYCLE, // Cycle method
 	                new Stop(0, Color.BLACK), // Start color (top)
 	                new Stop(1, Color.rgb(50, 50, 50)) // End color (bottom, darker gray)
-	        );
+	    
+				);
 		BoxBlur blur = new BoxBlur(10, 10, 3);
 		Rectangle heroHealthBarRedRectangle4 = new Rectangle(100, 15); // Width, Height, Fill Color // var
 		Rectangle heroHealthBarRedRectangle3 = new Rectangle(100, 15); // var
@@ -667,10 +670,14 @@ public class Main extends Application {
 	    enemyHealthBarBlackRectangle4.setArcHeight(5);
 		// -------------------------------------------------------------
 		// Images for everything
-		ImageView enemyInPosition1 = new ImageView(new Image("applicationImagesEnemySprites/Goblin Axeman/Goblin_axeman_1_Idle.png")); // var
-		ImageView enemyInPosition2 = new ImageView(new Image("applicationImagesEnemySprites/Goblin Axeman/Goblin_axeman_1_Idle.png")); // var
-		ImageView enemyInPosition3 = new ImageView(new Image("applicationImagesEnemySprites/Goblin Archer/Goblin_Archer_1_Idle.png")); // var
-		ImageView enemyInPosition4 = new ImageView(new Image("applicationImagesEnemySprites/Goblin Shaman/Goblin_Shaman_1_Idle.png")); // var
+	    Image image1 = SwingFXUtils.toFXImage(tempETeam[0].getIdleSprite(), null);
+		ImageView enemyInPosition1 = new ImageView(image1); // var
+		Image image2 = SwingFXUtils.toFXImage(tempETeam[1].getIdleSprite(), null);
+		ImageView enemyInPosition2 = new ImageView(image2); // var
+		Image image3 = SwingFXUtils.toFXImage(tempETeam[2].getIdleSprite(), null);
+		ImageView enemyInPosition3 = new ImageView(image3); // var
+		Image image4 = SwingFXUtils.toFXImage(tempETeam[3].getIdleSprite(), null);
+		ImageView enemyInPosition4 = new ImageView(image4); // var
 		
 		ImageView heroInPosition1 = new ImageView(new Image("applicationImagesPlayerSprites/Paladin_Idle.png"));
 		ImageView heroInPosition2 = new ImageView(new Image("applicationImagesPlayerSprites/Assassin_Idle.png"));
@@ -1061,6 +1068,7 @@ public class Main extends Application {
 		//make images dissapear or appear on button hover.
 		enemyPosition1.setOnMouseEntered(e -> {
 		    // Show all elements and play fade-in animation
+			enemyNameText.setText(tempETeam[0].getName());
 			enemyNameText.setVisible(true);
 		    enemyBLDResistanceIcon.setVisible(true);
 		    enemyBLGTResistanceIcon.setVisible(true);
@@ -1121,6 +1129,7 @@ public class Main extends Application {
 
 		enemyPosition2.setOnMouseEntered(e -> {
 		    // Show all elements and play fade-in animation
+			enemyNameText.setText(tempETeam[1].getName());
 		    enemyBLDResistanceIcon.setVisible(true);
 		    enemyBLGTResistanceIcon.setVisible(true);
 		    enemyBURNResistanceIcon.setVisible(true);
@@ -1179,6 +1188,7 @@ public class Main extends Application {
 
 		enemyPosition3.setOnMouseEntered(e -> {
 		    // Show all elements and play fade-in animation
+			enemyNameText.setText(tempETeam[2].getName());
 		    enemyBLDResistanceIcon.setVisible(true);
 		    enemyBLGTResistanceIcon.setVisible(true);
 		    enemyBURNResistanceIcon.setVisible(true);
@@ -1237,6 +1247,7 @@ public class Main extends Application {
 
 		enemyPosition4.setOnMouseEntered(e -> {
 		    // Show all elements and play fade-in animation
+			enemyNameText.setText(tempETeam[3].getName());
 		    enemyBLDResistanceIcon.setVisible(true);
 		    enemyBLGTResistanceIcon.setVisible(true);
 		    enemyBURNResistanceIcon.setVisible(true);
@@ -1950,6 +1961,26 @@ public class Main extends Application {
 					// Current Characters Info (Update to move info once skills are finished)
 					heroNameText.setText(flow.getCurrent().getName());
 					moveDescriptionText.setText("DMG: " + flow.getCurrent().getDamage() + " Crit %: " + flow.getCurrent().getCritChance());
+					
+					// Hero Health Bars:
+					heroHealthBarRedRectangle4.setWidth(tempPTeam[3].setHealthBarAmount());
+					//heroHealthBarRedRectangle4.setX(0);
+					heroHealthBarRedRectangle3.setWidth(tempPTeam[2].setHealthBarAmount());
+					//heroHealthBarRedRectangle3.setX(204);
+					heroHealthBarRedRectangle2.setWidth(tempPTeam[1].setHealthBarAmount());
+					//heroHealthBarRedRectangle2.setX(409);
+					heroHealthBarRedRectangle1.setWidth(tempPTeam[0].setHealthBarAmount());
+					//heroHealthBarRedRectangle4.setX(614);
+					
+					// Enemy Health Bars:
+					enemyHealthBarRedRectangle4.setWidth(tempETeam[3].setHealthBarAmount());
+					//enemyHealthBarRedRectangle4.setX(0);
+					enemyHealthBarRedRectangle3.setWidth(tempETeam[2].setHealthBarAmount());
+					//enemyHealthBarRedRectangle3.setX(204);
+					enemyHealthBarRedRectangle2.setWidth(tempETeam[1].setHealthBarAmount());
+					//enemyHealthBarRedRectangle2.setX(409);
+					enemyHealthBarRedRectangle1.setWidth(tempETeam[0].setHealthBarAmount());
+					//enemyHealthBarRedRectangle1.setX(614);
 				}
 			}
 
