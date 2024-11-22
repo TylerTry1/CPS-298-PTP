@@ -78,15 +78,14 @@ public class Main extends Application {
 	}
 
 	private void initialization(Stage primaryStage) { // this scene is used specifically so that we can make our application full screen.
-		AudioClip sceneTransitionSFX = new AudioClip(getClass().getResource("/SFX/sceneTransition.wav").toString());
-		sceneTransitionSFX.setVolume(0.05); // Volume level (0.0 to 1.0)
+
         Rectangle transitionCoverEnter = new Rectangle(400, 20, Color.BLACK); // Black rectangle
         Rectangle transitionCoverExit = new Rectangle(400, 20, Color.BLACK); // Black rectangle
 
         TranslateTransition transitionEnter = new TranslateTransition(Duration.seconds(1.5), transitionCoverEnter);
         transitionEnter.setToY(2500);  
         transitionEnter.play();
-		sceneTransitionSFX.play();
+        AudioManager.playSceneTransition();
         TranslateTransition transitionExit = new TranslateTransition(Duration.seconds(1.5), transitionCoverExit);
         transitionExit.setToY(-1000);
 //        transitionExit.play();
@@ -122,7 +121,7 @@ public class Main extends Application {
 	    enterGameText.setFont(DwarvenAxe);
 	    enterGameText.setFill(Color.web("#d5d5d5"));
 	    play.setOnAction(e -> {
-	    	
+	        AudioManager.playButtonClick();
 	    	homePage(primaryStage);});
 //        FadeUtils.transitionBetweenStages(primaryStage, loadingStage, () -> homePage(primaryStage));});
 	    // VBox 1 for first set of buttons
@@ -205,8 +204,7 @@ public class Main extends Application {
 	}
 	
 	private void homePage(Stage primaryStage) {
-		AudioClip sceneTransitionSFX = new AudioClip(getClass().getResource("/SFX/sceneTransition.wav").toString());
-		sceneTransitionSFX.setVolume(0.05); // Volume level (0.0 to 1.0)
+
 		Rectangle transitionCoverExit = new Rectangle(400, 20, Color.BLACK); // Black rectangle
 		
 		TranslateTransition transitionExit = new TranslateTransition(Duration.seconds(1.5), transitionCoverExit);
@@ -221,7 +219,8 @@ public class Main extends Application {
 	    ImageView enterGame = new ImageView(new Image("shopAssets/itemForSaleFrame.png"));
 	    ImageView logoWhite = new ImageView(new Image("applicationImagesBackgrounds/endlessMountainLogoWhite.png"));
 	    ImageView logoBlack = new ImageView(new Image("applicationImagesBackgrounds/endlessMountainLogoBlack.png"));
-        
+	    ImageView quitFrame = new ImageView(new Image("shopAssets/itemForSaleFrame.png"));
+	    
 	    Cursor customCursor = Cursor.cursor(cursorImage.getUrl());
 
 	    Media media = new Media(menuMusic);
@@ -240,10 +239,12 @@ public class Main extends Application {
 	    Button shop = new Button("Shop");
 	    Button gameOver = new Button ("Game Over Sample");
 	    Button goldEarned = new Button ("Gold Earned Sample");
-	    
+		
+	    Text quitGameButtonText = new Text("Exit Game");
 	    Text enterGameText = new Text ("Begin New Journey");
 	    Text titlewhite = new Text ("ENDLESS MOUNTAIN \n   OF MONSTERS");
 	    Text titleblack = new Text ("ENDLESS MOUNTAIN \n   OF MONSTERS");
+	    
 	    
 	    titleblack.setFont(DwarvenAxe);
 	    titlewhite.setFont(DwarvenAxe);
@@ -251,6 +252,11 @@ public class Main extends Application {
 	    titleblack.setFill(Color.web("#000000"));
 	    enterGameText.setFont(DwarvenAxe);
 	    enterGameText.setFill(Color.web("#d5d5d5"));
+	    quitGameButtonText.setFont(DwarvenAxe);
+	    quitGameButtonText.setFill(Color.web("#d5d5d5"));
+	    
+	    quit.setOnMouseEntered(e -> {quitGameButtonText.setFill(Color.web("#d10000"));});
+	    quit.setOnMouseExited(e -> {quitGameButtonText.setFill(Color.web("#d5d5d5"));});
 	    
 	    titleblack.setLayoutX(865);
 	    titleblack.setLayoutY(650); 
@@ -291,6 +297,7 @@ public class Main extends Application {
 	    play.setOnMouseEntered(e -> {enterGameText.setFill(Color.web("#d10000"));});
 	    play.setOnMouseExited(e -> {enterGameText.setFill(Color.web("#d5d5d5"));});
 	    play.setOnAction(e -> {
+	        AudioManager.playButtonClick();
 			try {
 				battleScene(primaryStage);
 			} catch (IOException e1) {
@@ -300,7 +307,7 @@ public class Main extends Application {
 			mediaPlayer.stop();
 		});
 	    
-//			sceneTransitionSFX.play();
+//			AudioManager.playSceneTransition();
 //			transitionExit.play();
 //			transitionExit.setOnFinished(event -> {
 //				battleScene(primaryStage);
@@ -308,7 +315,7 @@ public class Main extends Application {
 //			});}); 
 
 //		tutorial.setOnAction(e -> {
-//			sceneTransitionSFX.play();
+//			AudioManager.playSceneTransition();
 //			transitionExit.play();
 //			transitionExit.setOnFinished(event -> {
 //				textTutorial(primaryStage);
@@ -317,7 +324,7 @@ public class Main extends Application {
 //		});
 //
 //		credits.setOnAction(e -> {
-//			sceneTransitionSFX.play();
+//			AudioManager.playSceneTransition();
 //			transitionExit.play();
 //			transitionExit.setOnFinished(event -> {
 //				credits(primaryStage);
@@ -325,7 +332,8 @@ public class Main extends Application {
 //			});
 //		});
 		quit.setOnAction(e -> {
-			sceneTransitionSFX.play();
+		    AudioManager.playButtonClick();
+			AudioManager.playSceneTransition();
 			transitionExit.play();
 			transitionExit.setOnFinished(event -> {
 				Platform.exit();
@@ -333,7 +341,8 @@ public class Main extends Application {
 			});
 		});
 		shop.setOnAction(e -> {
-			sceneTransitionSFX.play();
+			AudioManager.playButtonClick();
+			AudioManager.playSceneTransition();
 			transitionExit.play();
 			transitionExit.setOnFinished(event -> {
 				shop(primaryStage);
@@ -341,7 +350,8 @@ public class Main extends Application {
 			});
 		});
 		gameOver.setOnAction(e -> {
-			sceneTransitionSFX.play();
+			AudioManager.playButtonClick();
+			AudioManager.playSceneTransition();
 			transitionExit.play();
 			transitionExit.setOnFinished(event -> {
 				gameOver(primaryStage);
@@ -350,7 +360,8 @@ public class Main extends Application {
 		});
 
 		goldEarned.setOnAction(e -> {
-			sceneTransitionSFX.play();
+			AudioManager.playButtonClick();
+			AudioManager.playSceneTransition();
 			transitionExit.play();
 			transitionExit.setOnFinished(event -> {
 				goldEarned(primaryStage);
@@ -358,14 +369,14 @@ public class Main extends Application {
 			});
 		});
 //	    unlocks.setOnAction(e -> {
-//		sceneTransitionSFX.play();
+//		AudioManager.playSceneTransition();
 //        transitionExit.play();
 //    	transitionExit.setOnFinished(event -> {
 //        unlocks(primaryStage);
 //        mediaPlayer.stop();
 //   	});});
 //    stats.setOnAction(e -> {
-//			sceneTransitionSFX.play();
+//		AudioManager.playSceneTransition();
 //	        transitionExit.play();
 //	    	transitionExit.setOnFinished(event -> {
 //        stats(primaryStage);
@@ -413,11 +424,31 @@ public class Main extends Application {
 	    root.getChildren().addAll(titlewhite);
 	    root.getChildren().addAll(enterGame);
 	    root.getChildren().addAll(enterGameText);
+
+	    root.getChildren().add(quit);
+	    root.getChildren().add(quitFrame);
+	    root.getChildren().add(quitGameButtonText);
 	    root.getChildren().addAll(playbutton, buttonBox2, shopTesting, gameOver);
-	    
+
 	    root.getChildren().add(transitionCoverExit);
 	    root.setBackground(new Background(backgroundImage));
 	    
+	    quit.setLayoutX(100);
+	    quit.setLayoutY(1002);
+	    quit.setScaleX(3);
+	    quit.setScaleY(3.1);
+	    quit.setOpacity(0);
+	    quitFrame.setLayoutX(-450);
+	    quitFrame.setLayoutY(620);
+	    quitFrame.setScaleX(.3);
+	    quitFrame.setScaleY(.4);
+	    quitFrame.setRotate(90);
+	    quitFrame.setMouseTransparent(true);
+	    quitGameButtonText.setLayoutX(70);
+	    quitGameButtonText.setLayoutY(1030);
+	    quitGameButtonText.setScaleX(1.2);
+	    quitGameButtonText.setScaleY(1.2);
+	    quitGameButtonText.setMouseTransparent(true);
 
 	    // Set button styles and sizes for both sets of buttons
 	    playbutton.getChildren().forEach(button -> {
@@ -448,15 +479,14 @@ public class Main extends Application {
 
 
 	private void battleScene(Stage primaryStage) throws IOException {
-		AudioClip sceneTransitionSFX = new AudioClip(getClass().getResource("/SFX/sceneTransition.wav").toString());
-		sceneTransitionSFX.setVolume(0.05); // Volume level (0.0 to 1.0)
+
 		Rectangle transitionCoverEnter = new Rectangle(400, 20, Color.BLACK); // Black rectangle
 		Rectangle transitionCoverExit = new Rectangle(400, 20, Color.BLACK); // Black rectangle
 		
         TranslateTransition transitionEnter = new TranslateTransition(Duration.seconds(1.5), transitionCoverEnter);
         transitionEnter.setToY(2500);  
         transitionEnter.play();
-		sceneTransitionSFX.play();
+        AudioManager.playSceneTransition();
 		TranslateTransition transitionExit = new TranslateTransition(Duration.seconds(1.5), transitionCoverExit);
         transitionExit.setToY(-2500);
         
@@ -1405,6 +1435,7 @@ public class Main extends Application {
 		menuQuitButton.setOpacity(0);
 		// -------------------------------------------------------------
 		skillbutton1Paladin.setOnAction(e -> { 
+			AudioManager.playButtonClick();
 			skillButtonSelectedFrame1.setVisible(true);
 			skillButtonSelectedFrame2.setVisible(false);
 			skillButtonSelectedFrame3.setVisible(false);
@@ -1412,6 +1443,7 @@ public class Main extends Application {
 //			skillButtonMoveSelectedFrame.setVisible(false);
 		});
 		skillbutton2Paladin.setOnAction(e -> {
+			AudioManager.playButtonClick();
 			skillButtonSelectedFrame1.setVisible(false);
 			skillButtonSelectedFrame2.setVisible(true);
 			skillButtonSelectedFrame3.setVisible(false);
@@ -1419,6 +1451,7 @@ public class Main extends Application {
 //			skillButtonMoveSelectedFrame.setVisible(false);
 		});
 		skillbutton3Paladin.setOnAction(e -> {
+			AudioManager.playButtonClick();
 			skillButtonSelectedFrame1.setVisible(false);
 			skillButtonSelectedFrame2.setVisible(false);
 			skillButtonSelectedFrame3.setVisible(true);
@@ -1426,6 +1459,7 @@ public class Main extends Application {
 //			skillButtonMoveSelectedFrame.setVisible(false);
 		});
 		skillbutton4Paladin.setOnAction(e -> {
+			AudioManager.playButtonClick();
 			skillButtonSelectedFrame1.setVisible(false);
 			skillButtonSelectedFrame2.setVisible(false);
 			skillButtonSelectedFrame3.setVisible(false);
@@ -1433,6 +1467,7 @@ public class Main extends Application {
 //			skillButtonMoveSelectedFrame.setVisible(false);
 		});
 //		movebutton.setOnAction(e -> {
+		AudioManager.playButtonClick();
 //			skillButtonSelectedFrame1.setVisible(false);
 //			skillButtonSelectedFrame2.setVisible(false);
 //			skillButtonSelectedFrame3.setVisible(false);
@@ -1440,12 +1475,14 @@ public class Main extends Application {
 //			skillButtonMoveSelectedFrame.setVisible(true);
 //		});
 		passTurnButton.setOnAction(e -> {
+			AudioManager.playButtonClick();
 			skillButtonSelectedFrame1.setVisible(false);
 			skillButtonSelectedFrame2.setVisible(false);
 			skillButtonSelectedFrame3.setVisible(false);
 			skillButtonSelectedFrame4.setVisible(false);
 		});
 		skillbutton1Assassin.setOnAction(e -> { 
+			AudioManager.playButtonClick();
 			skillButtonSelectedFrame1.setVisible(true);
 			skillButtonSelectedFrame2.setVisible(false);
 			skillButtonSelectedFrame3.setVisible(false);
@@ -1453,6 +1490,7 @@ public class Main extends Application {
 //			skillButtonMoveSelectedFrame.setVisible(false);
 		});
 		skillbutton2Assassin.setOnAction(e -> {
+			AudioManager.playButtonClick();
 			skillButtonSelectedFrame1.setVisible(false);
 			skillButtonSelectedFrame2.setVisible(true);
 			skillButtonSelectedFrame3.setVisible(false);
@@ -1460,6 +1498,7 @@ public class Main extends Application {
 //			skillButtonMoveSelectedFrame.setVisible(false);
 		});
 		skillbutton3Assassin.setOnAction(e -> {
+			AudioManager.playButtonClick();
 			skillButtonSelectedFrame1.setVisible(false);
 			skillButtonSelectedFrame2.setVisible(false);
 			skillButtonSelectedFrame3.setVisible(true);
@@ -1467,6 +1506,7 @@ public class Main extends Application {
 //			skillButtonMoveSelectedFrame.setVisible(false);
 		});
 		skillbutton4Assassin.setOnAction(e -> {
+			AudioManager.playButtonClick();
 			skillButtonSelectedFrame1.setVisible(false);
 			skillButtonSelectedFrame2.setVisible(false);
 			skillButtonSelectedFrame3.setVisible(false);
@@ -1475,6 +1515,7 @@ public class Main extends Application {
 		});
 		
 		skillbutton1Wizard.setOnAction(e -> { 
+			AudioManager.playButtonClick();
 			skillButtonSelectedFrame1.setVisible(true);
 			skillButtonSelectedFrame2.setVisible(false);
 			skillButtonSelectedFrame3.setVisible(false);
@@ -1482,6 +1523,7 @@ public class Main extends Application {
 //			skillButtonMoveSelectedFrame.setVisible(false);
 		});
 		skillbutton2Wizard.setOnAction(e -> {
+			AudioManager.playButtonClick();
 			skillButtonSelectedFrame1.setVisible(false);
 			skillButtonSelectedFrame2.setVisible(true);
 			skillButtonSelectedFrame3.setVisible(false);
@@ -1489,6 +1531,7 @@ public class Main extends Application {
 //			skillButtonMoveSelectedFrame.setVisible(false);
 		});
 		skillbutton3Wizard.setOnAction(e -> {
+			AudioManager.playButtonClick();
 			skillButtonSelectedFrame1.setVisible(false);
 			skillButtonSelectedFrame2.setVisible(false);
 			skillButtonSelectedFrame3.setVisible(true);
@@ -1496,6 +1539,7 @@ public class Main extends Application {
 //			skillButtonMoveSelectedFrame.setVisible(false);
 		});
 		skillbutton4Wizard.setOnAction(e -> {
+			AudioManager.playButtonClick();
 			skillButtonSelectedFrame1.setVisible(false);
 			skillButtonSelectedFrame2.setVisible(false);
 			skillButtonSelectedFrame3.setVisible(false);
@@ -1504,6 +1548,7 @@ public class Main extends Application {
 		});
 		
 		skillbutton1Alchemist.setOnAction(e -> { 
+			AudioManager.playButtonClick();
 			skillButtonSelectedFrame1.setVisible(true);
 			skillButtonSelectedFrame2.setVisible(false);
 			skillButtonSelectedFrame3.setVisible(false);
@@ -1511,6 +1556,7 @@ public class Main extends Application {
 //			skillButtonMoveSelectedFrame.setVisible(false);
 		});
 		skillbutton2Alchemist.setOnAction(e -> {
+			AudioManager.playButtonClick();
 			skillButtonSelectedFrame1.setVisible(false);
 			skillButtonSelectedFrame2.setVisible(true);
 			skillButtonSelectedFrame3.setVisible(false);
@@ -1518,6 +1564,7 @@ public class Main extends Application {
 //			skillButtonMoveSelectedFrame.setVisible(false);
 		});
 		skillbutton3Alchemist.setOnAction(e -> {
+			AudioManager.playButtonClick();
 			skillButtonSelectedFrame1.setVisible(false);
 			skillButtonSelectedFrame2.setVisible(false);
 			skillButtonSelectedFrame3.setVisible(true);
@@ -1525,6 +1572,7 @@ public class Main extends Application {
 //			skillButtonMoveSelectedFrame.setVisible(false);
 		});
 		skillbutton4Alchemist.setOnAction(e -> {
+			AudioManager.playButtonClick();
 			skillButtonSelectedFrame1.setVisible(false);
 			skillButtonSelectedFrame2.setVisible(false);
 			skillButtonSelectedFrame3.setVisible(false);
@@ -2055,8 +2103,9 @@ public class Main extends Application {
         scaleDown.setToY(1.0);
         SequentialTransition fadeAndScaleDown = new SequentialTransition(scaleDown, fadeOut);
         SequentialTransition animation = new SequentialTransition(scaleUp, fadeAndScaleDown);
-        animation.play();
-
+        animation.play(); // makes the combat start popup play.
+       AudioManager.playcombatStartSFX();// plays the combatStart sound
+        
 	    
 	    combatStartImage.setLayoutX(865);
 	    combatStartImage.setLayoutY(150);
@@ -2547,13 +2596,14 @@ public class Main extends Application {
 		passTurnButton.prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.09));
 
 		menuBackButton.setOnAction(e -> {
+			AudioManager.playButtonClick();
 			fadeOutCombatMenu.playFromStart(); 
 			root.setEffect(null); // remove blur
 		});
 		menuQuitButton.setOnAction(e -> {
+			AudioManager.playButtonClick();
 			mediaPlayer.stop(); // Stop the music when the back button is pressed
-			sceneTransitionSFX.play();
-			transitionExit.play();
+			AudioManager.playSceneTransition();			transitionExit.play();
 			transitionExit.setOnFinished(event -> {
 			homePage(primaryStage);
 		});});
@@ -2702,16 +2752,13 @@ public class Main extends Application {
 	}
 	
 	private void shop(Stage primaryStage) {
-		AudioClip sceneTransitionSFX = new AudioClip(getClass().getResource("/SFX/sceneTransition.wav").toString());
-		sceneTransitionSFX.setVolume(0.05); // Volume level (0.0 to 1.0)
 		Rectangle transitionCoverEnter = new Rectangle(400, 20, Color.BLACK); // Black rectangle
 		Rectangle transitionCoverExit = new Rectangle(400, 20, Color.BLACK); // Black rectangle
 		
        TranslateTransition transitionEnter = new TranslateTransition(Duration.seconds(1.5), transitionCoverEnter);
        transitionEnter.setToY(2500); 
        transitionEnter.play();
-	   sceneTransitionSFX.play();
-	   TranslateTransition transitionExit = new TranslateTransition(Duration.seconds(1.5), transitionCoverExit);
+       AudioManager.playSceneTransition();	   TranslateTransition transitionExit = new TranslateTransition(Duration.seconds(1.5), transitionCoverExit);
        transitionExit.setToY(-2500);
       
        transitionCoverEnter.setLayoutX(900);
@@ -2850,24 +2897,28 @@ public class Main extends Application {
 		
 		charChoiceAlchemistButton.setOnAction(e -> { // clicking on skill buttons makes the indicator visible, and disables visibility of all others.
 			// i was going to do fade transistions here, but it seems like it doesn't work on button clicks, but only button hovers?
+			AudioManager.playButtonClick();
 			charSelectedAlchemist.setVisible(true);
 			charSelectedWizard.setVisible(false);
 			charSelectedAssassin.setVisible(false);
 			charSelectedPaladin.setVisible(false);
 		});
 		charChoiceWizardButton.setOnAction(e -> {
+			AudioManager.playButtonClick();
 			charSelectedAlchemist.setVisible(false);
 			charSelectedWizard.setVisible(true);
 			charSelectedAssassin.setVisible(false);
 			charSelectedPaladin.setVisible(false);
 		});
 		charChoiceAssassinButton.setOnAction(e -> {
+			AudioManager.playButtonClick();
 			charSelectedAlchemist.setVisible(false);
 			charSelectedWizard.setVisible(false);
 			charSelectedAssassin.setVisible(true);
 			charSelectedPaladin.setVisible(false);
 		});
 		charChoicePaladinButton.setOnAction(e -> {
+			AudioManager.playButtonClick();
 			charSelectedAlchemist.setVisible(false);
 			charSelectedWizard.setVisible(false);
 			charSelectedAssassin.setVisible(false);
@@ -2876,16 +2927,19 @@ public class Main extends Application {
 //--------------------------------------------------------------------------------
 
 			item1Button.setOnAction(e -> {
+				AudioManager.playButtonClick();
 				itemForSaleFrameArrow1.setVisible(true);
 				itemForSaleFrameArrow2.setVisible(false);
 				itemForSaleFrameArrow3.setVisible(false);
 			});
 			item2Button.setOnAction(e -> {
+				AudioManager.playButtonClick();
 				itemForSaleFrameArrow1.setVisible(false);
 				itemForSaleFrameArrow2.setVisible(true);
 				itemForSaleFrameArrow3.setVisible(false);
 			});
 			item3Button.setOnAction(e -> {
+				AudioManager.playButtonClick();
 				itemForSaleFrameArrow1.setVisible(false);
 				itemForSaleFrameArrow2.setVisible(false);
 				itemForSaleFrameArrow3.setVisible(true);
@@ -3110,7 +3164,8 @@ public class Main extends Application {
 		shopKeeper.setFitWidth(0.55 * 1920);
 		shopKeeper.setFitHeight(0.7 * 1080);
 		back.setOnAction(e -> {
-			sceneTransitionSFX.play();
+			AudioManager.playButtonClick();
+			AudioManager.playSceneTransition();
 			transitionExit.play();
 			transitionExit.setOnFinished(event -> {
 			mediaPlayer.stop(); // Stop the music when the back button is pressed
@@ -3129,15 +3184,14 @@ public class Main extends Application {
 	}
 	
 	private void gameOver(Stage primaryStage) {
-		AudioClip sceneTransitionSFX = new AudioClip(getClass().getResource("/SFX/sceneTransition.wav").toString());
-		sceneTransitionSFX.setVolume(0.05); // Volume level (0.0 to 1.0)
+
 		Rectangle transitionCoverEnter = new Rectangle(400, 20, Color.BLACK); // Black rectangle
 		Rectangle transitionCoverExit = new Rectangle(400, 20, Color.BLACK); // Black rectangle
 
 		TranslateTransition transitionEnter = new TranslateTransition(Duration.seconds(1.5), transitionCoverEnter);
 		transitionEnter.setToY(2500);
 		transitionEnter.play();
-		sceneTransitionSFX.play();
+		AudioManager.playSceneTransition();
 		TranslateTransition transitionExit = new TranslateTransition(Duration.seconds(1.5), transitionCoverExit);
 		transitionExit.setToY(-2500);
 
@@ -3171,6 +3225,7 @@ public class Main extends Application {
 		Text gameOver = new Text("Game Over");
 		
 		play.setOnAction(e -> {
+			AudioManager.playButtonClick();
 			try {
 				battleScene(primaryStage);
 			} catch (IOException e1) {
@@ -3252,6 +3307,7 @@ public class Main extends Application {
 	    play.setOnMouseEntered(e -> {newRunText.setFill(Color.web("#d10000"));});
 	    play.setOnMouseExited(e -> {newRunText.setFill(Color.web("#d5d5d5"));});
 	    play.setOnAction(e -> {
+	    	AudioManager.playButtonClick();
 	        try {
 				battleScene(primaryStage);
 			} catch (IOException e1) {
@@ -3264,7 +3320,7 @@ public class Main extends Application {
 	    exit.setOnMouseEntered(e -> {exitGameText.setFill(Color.web("#d10000"));});
 	    exit.setOnMouseExited(e -> {exitGameText.setFill(Color.web("#d5d5d5"));});
 	    exit.setOnAction(e -> {
-	    	sceneTransitionSFX.play();
+	    	AudioManager.playButtonClick();
 			transitionExit.play();
 			transitionExit.setOnFinished(event -> {
 	        homePage(primaryStage);
@@ -3303,15 +3359,14 @@ public class Main extends Application {
 	}
 	
 	private void goldEarned(Stage primaryStage) {
-		AudioClip sceneTransitionSFX = new AudioClip(getClass().getResource("/SFX/sceneTransition.wav").toString());
-		sceneTransitionSFX.setVolume(0.05); // Volume level (0.0 to 1.0)
+
 		Rectangle transitionCoverEnter = new Rectangle(400, 20, Color.BLACK); // Black rectangle
 		Rectangle transitionCoverExit = new Rectangle(400, 20, Color.BLACK); // Black rectangle
 		
        TranslateTransition transitionEnter = new TranslateTransition(Duration.seconds(1.5), transitionCoverEnter);
        transitionEnter.setToY(2500); 
        transitionEnter.play();
-		sceneTransitionSFX.play();
+       AudioManager.playSceneTransition();
 		TranslateTransition transitionExit = new TranslateTransition(Duration.seconds(1.5), transitionCoverExit);
        transitionExit.setToY(-2500);
       
@@ -3324,11 +3379,7 @@ public class Main extends Application {
        transitionCoverExit.setScaleX(10);
        transitionCoverExit.setScaleY(120);
 
-		
-		
-		AudioClip successSFX = new AudioClip(getClass().getResource("/SFX/goldEarnedScreenSuccessSFX.wav").toString());
-		successSFX.setVolume(0.05); // Volume level (0.0 to 1.0)
-		successSFX.play();
+        AudioManager.playsuccessSFX();
 
 		Image cursorImage = new Image("GUIAssets/cursor.png");
 		Cursor customCursor = Cursor.cursor(cursorImage.getUrl());
@@ -3385,7 +3436,8 @@ public class Main extends Application {
 		ShopButton.setOnMouseEntered(e -> {toShopText.setFill(Color.web("#d10000"));});
 		ShopButton.setOnMouseExited(e -> {toShopText.setFill(Color.web("#d5d5d5"));});
 		ShopButton.setOnAction(e -> {
-			sceneTransitionSFX.play();
+		    AudioManager.playButtonClick();
+			AudioManager.playSceneTransition();
 			transitionExit.play();
 			transitionExit.setOnFinished(event -> {
 				shop(primaryStage);
