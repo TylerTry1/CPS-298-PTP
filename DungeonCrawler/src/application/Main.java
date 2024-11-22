@@ -77,21 +77,25 @@ public class Main extends Application {
 	}
 
 	private void initialization(Stage primaryStage) { // this scene is used specifically so that we can make our application full screen.
-
+		AudioClip sceneTransitionSFX = new AudioClip(getClass().getResource("/SFX/sceneTransition.wav").toString());
+		sceneTransitionSFX.setVolume(0.05); // Volume level (0.0 to 1.0)
         Rectangle transitionCoverEnter = new Rectangle(400, 20, Color.BLACK); // Black rectangle
         Rectangle transitionCoverExit = new Rectangle(400, 20, Color.BLACK); // Black rectangle
 
-        TranslateTransition transition = new TranslateTransition(Duration.seconds(2), transitionCoverEnter);
-        transition.setToY(2500);  // Move the rectangle vertically down to y = 2000
-        transition.play();
-        
-        
+        TranslateTransition transitionEnter = new TranslateTransition(Duration.seconds(1.5), transitionCoverEnter);
+        transitionEnter.setToY(2500);  
+        transitionEnter.play();
+		sceneTransitionSFX.play();
+        TranslateTransition transitionExit = new TranslateTransition(Duration.seconds(1.5), transitionCoverExit);
+        transitionExit.setToY(-1000);
+//        transitionExit.play();
+
         transitionCoverEnter.setLayoutX(900);
         transitionCoverEnter.setLayoutY(0);  // Set starting position off-screen at y = -100
         transitionCoverEnter.setScaleX(10);
         transitionCoverEnter.setScaleY(120);
         
-        transitionCoverExit.setLayoutX(900);
+        transitionCoverExit.setLayoutX(00);
         transitionCoverExit.setLayoutY(0);  // Set starting position off-screen at y = -100
         transitionCoverExit.setScaleX(10);
         transitionCoverExit.setScaleY(120);
@@ -116,7 +120,9 @@ public class Main extends Application {
 	    
 	    enterGameText.setFont(DwarvenAxe);
 	    enterGameText.setFill(Color.web("#d5d5d5"));
-	    play.setOnAction(e -> {homePage(primaryStage);});
+	    play.setOnAction(e -> {
+	    	
+	    	homePage(primaryStage);});
 //        FadeUtils.transitionBetweenStages(primaryStage, loadingStage, () -> homePage(primaryStage));});
 	    // VBox 1 for first set of buttons
 	    VBox playbutton = new VBox(10);
@@ -179,6 +185,7 @@ public class Main extends Application {
 	    root.getChildren().addAll(enterGameText);
 	    
 	    root.getChildren().add(transitionCoverEnter);
+
 	    root.setBackground(new Background(backgroundImage));
 	    // Set button styles and sizes for both sets of buttons
 	    playbutton.getChildren().forEach(button -> {
@@ -197,12 +204,23 @@ public class Main extends Application {
 	}
 	
 	private void homePage(Stage primaryStage) {
+		AudioClip sceneTransitionSFX = new AudioClip(getClass().getResource("/SFX/sceneTransition.wav").toString());
+		sceneTransitionSFX.setVolume(0.05); // Volume level (0.0 to 1.0)
+		Rectangle transitionCoverExit = new Rectangle(400, 20, Color.BLACK); // Black rectangle
+		
+		TranslateTransition transitionExit = new TranslateTransition(Duration.seconds(1.5), transitionCoverExit);
+        transitionExit.setToY(-2500);
+        
+        transitionCoverExit.setLayoutX(00);
+        transitionCoverExit.setLayoutY(2500);  // Set starting position off-screen at y = -100
+        transitionCoverExit.setScaleX(10);
+        transitionCoverExit.setScaleY(120);
+        
 	    Image cursorImage = new Image("GUIAssets/cursor.png");
 	    ImageView enterGame = new ImageView(new Image("shopAssets/itemForSaleFrame.png"));
 	    ImageView logoWhite = new ImageView(new Image("applicationImagesBackgrounds/endlessMountainLogoWhite.png"));
 	    ImageView logoBlack = new ImageView(new Image("applicationImagesBackgrounds/endlessMountainLogoBlack.png"));
-	    
-	    
+        
 	    Cursor customCursor = Cursor.cursor(cursorImage.getUrl());
 
 	    Media media = new Media(menuMusic);
@@ -272,49 +290,86 @@ public class Main extends Application {
 	    play.setOnMouseEntered(e -> {enterGameText.setFill(Color.web("#d10000"));});
 	    play.setOnMouseExited(e -> {enterGameText.setFill(Color.web("#d5d5d5"));});
 	    play.setOnAction(e -> {
-	        try {
+			try {
 				battleScene(primaryStage);
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-	        mediaPlayer.stop();
-	    });
-
-	    tutorial.setOnAction(e -> {
-	        textTutorial(primaryStage);
-	        mediaPlayer.stop();
-	    });
-//	    unlocks.setOnAction(e -> {
-//	        unlocks(primaryStage);
-//	        mediaPlayer.stop();
-//	    });
-//	    stats.setOnAction(e -> {
-//	        stats(primaryStage);
-//	        mediaPlayer.stop();
-//	    });
-	    credits.setOnAction(e -> {
-	        credits(primaryStage);
-	        mediaPlayer.stop();
-	    });
-	    quit.setOnAction(e -> {
-	        Platform.exit();
-	        mediaPlayer.stop();
-	    });
-	    shop.setOnAction(e -> {
-	        shop(primaryStage);
-	        mediaPlayer.stop();
-	    });
-	    gameOver.setOnAction(e -> {
-	        gameOver(primaryStage);
-	        mediaPlayer.stop();
-	    });
-
-	    goldEarned.setOnAction(e -> {
-	    	goldEarned(primaryStage);
-	        mediaPlayer.stop();
-	    });
+			mediaPlayer.stop();
+		});
 	    
+//			sceneTransitionSFX.play();
+//			transitionExit.play();
+//			transitionExit.setOnFinished(event -> {
+//				battleScene(primaryStage);
+//				mediaPlayer.stop();
+//			});}); 
+
+		tutorial.setOnAction(e -> {
+			sceneTransitionSFX.play();
+			transitionExit.play();
+			transitionExit.setOnFinished(event -> {
+				textTutorial(primaryStage);
+				mediaPlayer.stop();
+			});
+		});
+
+		credits.setOnAction(e -> {
+			sceneTransitionSFX.play();
+			transitionExit.play();
+			transitionExit.setOnFinished(event -> {
+				credits(primaryStage);
+				mediaPlayer.stop();
+			});
+		});
+		quit.setOnAction(e -> {
+			sceneTransitionSFX.play();
+			transitionExit.play();
+			transitionExit.setOnFinished(event -> {
+				Platform.exit();
+				mediaPlayer.stop();
+			});
+		});
+		shop.setOnAction(e -> {
+			sceneTransitionSFX.play();
+			transitionExit.play();
+			transitionExit.setOnFinished(event -> {
+				shop(primaryStage);
+				mediaPlayer.stop();
+			});
+		});
+		gameOver.setOnAction(e -> {
+			sceneTransitionSFX.play();
+			transitionExit.play();
+			transitionExit.setOnFinished(event -> {
+				gameOver(primaryStage);
+				mediaPlayer.stop();
+			});
+		});
+
+		goldEarned.setOnAction(e -> {
+			sceneTransitionSFX.play();
+			transitionExit.play();
+			transitionExit.setOnFinished(event -> {
+				goldEarned(primaryStage);
+				mediaPlayer.stop();
+			});
+		});
+//	    unlocks.setOnAction(e -> {
+//		sceneTransitionSFX.play();
+//        transitionExit.play();
+//    	transitionExit.setOnFinished(event -> {
+//        unlocks(primaryStage);
+//        mediaPlayer.stop();
+//   	});});
+//    stats.setOnAction(e -> {
+//			sceneTransitionSFX.play();
+//	        transitionExit.play();
+//	    	transitionExit.setOnFinished(event -> {
+//        stats(primaryStage);
+//        mediaPlayer.stop();
+//    	});});
 	    // VBox 1 for first set of buttons
 	    VBox playbutton = new VBox(10);
 	    playbutton.getChildren().addAll(play);
@@ -359,7 +414,7 @@ public class Main extends Application {
 	    root.getChildren().addAll(enterGameText);
 	    root.getChildren().addAll(playbutton, buttonBox2, shopTesting, gameOver);
 	    
-	    
+	    root.getChildren().add(transitionCoverExit);
 	    root.setBackground(new Background(backgroundImage));
 	    
 
@@ -392,6 +447,34 @@ public class Main extends Application {
 
 
 	private void battleScene(Stage primaryStage) throws IOException {
+		AudioClip sceneTransitionSFX = new AudioClip(getClass().getResource("/SFX/sceneTransition.wav").toString());
+		sceneTransitionSFX.setVolume(0.05); // Volume level (0.0 to 1.0)
+		Rectangle transitionCoverEnter = new Rectangle(400, 20, Color.BLACK); // Black rectangle
+		Rectangle transitionCoverExit = new Rectangle(400, 20, Color.BLACK); // Black rectangle
+		
+        TranslateTransition transitionEnter = new TranslateTransition(Duration.seconds(1.5), transitionCoverEnter);
+        transitionEnter.setToY(2500);  
+        transitionEnter.play();
+		sceneTransitionSFX.play();
+		TranslateTransition transitionExit = new TranslateTransition(Duration.seconds(1.5), transitionCoverExit);
+        transitionExit.setToY(-2500);
+        
+        transitionCoverEnter.setLayoutX(900);
+        transitionCoverEnter.setLayoutY(0);  // Set starting position off-screen at y = -100
+        transitionCoverEnter.setScaleX(10);
+        transitionCoverEnter.setScaleY(120);
+        transitionCoverExit.setLayoutX(00);
+        transitionCoverExit.setLayoutY(2500);  // Set starting position off-screen at y = -100
+        transitionCoverExit.setScaleX(10);
+        transitionCoverExit.setScaleY(120);
+
+
+
+//		TranslateTransition transitionExit = new TranslateTransition(Duration.seconds(2), transitionCoverExit);
+//		transitionExit.setToX(-1000);
+//		transitionExit.play();
+//		transitionExit.setOnFinished(event -> {
+//		});
 		
 		Image cursorImage = new Image("GUIAssets/cursor.png");
 		Cursor customCursor = Cursor.cursor(cursorImage.getUrl());
@@ -1910,6 +1993,9 @@ public class Main extends Application {
 		root.getChildren().addAll(enemyHPPos4,enemyHPPos3,enemyHPPos2,enemyHPPos1);
 		root.getChildren().addAll(moveDescriptionText,moveDescriptionText2,moveNameText);
 		
+	    root.getChildren().add(transitionCoverEnter);
+	    root.getChildren().add(transitionCoverExit);
+		
 		root.setBackground(new Background(backgroundImagePayoff)); // set background image	
 		
 		combatMenu.getChildren().addAll(menuBackground);
@@ -1917,6 +2003,8 @@ public class Main extends Application {
 		combatMenu.getChildren().addAll(menuBackButton,menuQuitButton);
 		combatMenu.getChildren().add(menuQuitGameText);
 		combatMenu.getChildren().add(menuBackButtonImage);
+		
+	    combatMenu.getChildren().add(transitionCoverExit);
 		// -------------------------------------------------------------
 		// Manually position the HBoxes and back button
 		heroPositions.setLayoutX(125); // Position X for hero positions
@@ -1925,7 +2013,7 @@ public class Main extends Application {
 		enemyPositions.setLayoutX(1025); // Position X for enemy positions
 		enemyPositions.setLayoutY(250); // Position Y for enemy positions
 		
-		heroNameText.setLayoutX(-50); // hero's name
+		heroNameText.setLayoutX(0); // hero's name
 		heroNameText.setLayoutY(750);
 		heroNameText.setScaleX(.65);
 		heroNameText.setScaleY(.65);
@@ -2408,9 +2496,11 @@ public class Main extends Application {
 		});
 		menuQuitButton.setOnAction(e -> {
 			mediaPlayer.stop(); // Stop the music when the back button is pressed
-			
+			sceneTransitionSFX.play();
+			transitionExit.play();
+			transitionExit.setOnFinished(event -> {
 			homePage(primaryStage);
-		});
+		});});
 		primaryStage.setMaximized(true);
 		
 		Scene scene = new Scene(new StackPane(root, combatMenu), 1920, 1080);
@@ -2556,6 +2646,27 @@ public class Main extends Application {
 	}
 	
 	private void shop(Stage primaryStage) {
+		AudioClip sceneTransitionSFX = new AudioClip(getClass().getResource("/SFX/sceneTransition.wav").toString());
+		sceneTransitionSFX.setVolume(0.05); // Volume level (0.0 to 1.0)
+		Rectangle transitionCoverEnter = new Rectangle(400, 20, Color.BLACK); // Black rectangle
+		Rectangle transitionCoverExit = new Rectangle(400, 20, Color.BLACK); // Black rectangle
+		
+       TranslateTransition transitionEnter = new TranslateTransition(Duration.seconds(1.5), transitionCoverEnter);
+       transitionEnter.setToY(2500); 
+       transitionEnter.play();
+	   sceneTransitionSFX.play();
+	   TranslateTransition transitionExit = new TranslateTransition(Duration.seconds(1.5), transitionCoverExit);
+       transitionExit.setToY(-2500);
+      
+       transitionCoverEnter.setLayoutX(900);
+       transitionCoverEnter.setLayoutY(0);  // Set starting position off-screen at y = -100
+       transitionCoverEnter.setScaleX(10);
+       transitionCoverEnter.setScaleY(120);
+       transitionCoverExit.setLayoutX(00);
+       transitionCoverExit.setLayoutY(2500);  // Set starting position off-screen at y = -100
+       transitionCoverExit.setScaleX(10);
+       transitionCoverExit.setScaleY(120);
+
 		Image cursorImage = new Image("GUIAssets/cursor.png");
 		Cursor customCursor = Cursor.cursor(cursorImage.getUrl());
 		
@@ -2744,6 +2855,9 @@ public class Main extends Application {
 		root.getChildren().addAll(exitShopBanner);
 		root.getChildren().addAll(back);
 		root.getChildren().addAll(exitShopText);
+		
+	    root.getChildren().add(transitionCoverEnter);
+	    root.getChildren().add(transitionCoverExit);
 
 		root.setBackground(new Background(backgroundImagePayoff)); // set background image
 
@@ -2921,9 +3035,12 @@ public class Main extends Application {
 		shopKeeper.setFitWidth(0.55 * 1920);
 		shopKeeper.setFitHeight(0.7 * 1080);
 		back.setOnAction(e -> {
+			sceneTransitionSFX.play();
+			transitionExit.play();
+			transitionExit.setOnFinished(event -> {
 			mediaPlayer.stop(); // Stop the music when the back button is pressed
 			homePage(primaryStage);
-		});
+		});});
 
 		Scene scene = new Scene(root, 1920, 1080); // Create a scene with the Pane
 		
@@ -2937,6 +3054,28 @@ public class Main extends Application {
 	}
 	
 	private void gameOver(Stage primaryStage) {
+		AudioClip sceneTransitionSFX = new AudioClip(getClass().getResource("/SFX/sceneTransition.wav").toString());
+		sceneTransitionSFX.setVolume(0.05); // Volume level (0.0 to 1.0)
+		Rectangle transitionCoverEnter = new Rectangle(400, 20, Color.BLACK); // Black rectangle
+		Rectangle transitionCoverExit = new Rectangle(400, 20, Color.BLACK); // Black rectangle
+
+		TranslateTransition transitionEnter = new TranslateTransition(Duration.seconds(1.5), transitionCoverEnter);
+		transitionEnter.setToY(2500);
+		transitionEnter.play();
+		sceneTransitionSFX.play();
+		TranslateTransition transitionExit = new TranslateTransition(Duration.seconds(1.5), transitionCoverExit);
+		transitionExit.setToY(-2500);
+
+		transitionCoverEnter.setLayoutX(900);
+		transitionCoverEnter.setLayoutY(0); // Set starting position off-screen at y = -100
+		transitionCoverEnter.setScaleX(10);
+		transitionCoverEnter.setScaleY(120);
+		transitionCoverExit.setLayoutX(00);
+		transitionCoverExit.setLayoutY(2500); // Set starting position off-screen at y = -100
+		transitionCoverExit.setScaleX(10);
+		transitionCoverExit.setScaleY(120);
+		
+		
 		Media media = new Media(gameOver);
 		MediaPlayer mediaPlayer = new MediaPlayer(media);
 		mediaPlayer.setVolume(0.05); // Volume level (0.0 to 1.0) use 0.05
@@ -3050,9 +3189,12 @@ public class Main extends Application {
 	    exit.setOnMouseEntered(e -> {exitGameText.setFill(Color.web("#d10000"));});
 	    exit.setOnMouseExited(e -> {exitGameText.setFill(Color.web("#d5d5d5"));});
 	    exit.setOnAction(e -> {
+	    	sceneTransitionSFX.play();
+			transitionExit.play();
+			transitionExit.setOnFinished(event -> {
 	        homePage(primaryStage);
 	        mediaPlayer.stop();
-	    });
+			});});
 		
 		
 	    Image image = new Image("applicationImagesBackgrounds/gameOverBackground.png");
@@ -3067,6 +3209,10 @@ public class Main extends Application {
 		root.getChildren().addAll(enterGame, exitGame);
 		root.getChildren().addAll(exitGameText, newRunText, gameOver);
 
+		root.getChildren().add(transitionCoverEnter);
+		root.getChildren().add(transitionCoverExit);
+
+		
 	    root.setBackground(new Background(backgroundImage)); 
 		
 		root.setPadding(new Insets(20));
@@ -3082,6 +3228,29 @@ public class Main extends Application {
 	}
 	
 	private void goldEarned(Stage primaryStage) {
+		AudioClip sceneTransitionSFX = new AudioClip(getClass().getResource("/SFX/sceneTransition.wav").toString());
+		sceneTransitionSFX.setVolume(0.05); // Volume level (0.0 to 1.0)
+		Rectangle transitionCoverEnter = new Rectangle(400, 20, Color.BLACK); // Black rectangle
+		Rectangle transitionCoverExit = new Rectangle(400, 20, Color.BLACK); // Black rectangle
+		
+       TranslateTransition transitionEnter = new TranslateTransition(Duration.seconds(1.5), transitionCoverEnter);
+       transitionEnter.setToY(2500); 
+       transitionEnter.play();
+		sceneTransitionSFX.play();
+		TranslateTransition transitionExit = new TranslateTransition(Duration.seconds(1.5), transitionCoverExit);
+       transitionExit.setToY(-2500);
+      
+       transitionCoverEnter.setLayoutX(900);
+       transitionCoverEnter.setLayoutY(0);  // Set starting position off-screen at y = -100
+       transitionCoverEnter.setScaleX(10);
+       transitionCoverEnter.setScaleY(120);
+       transitionCoverExit.setLayoutX(00);
+       transitionCoverExit.setLayoutY(2500);  // Set starting position off-screen at y = -100
+       transitionCoverExit.setScaleX(10);
+       transitionCoverExit.setScaleY(120);
+
+		
+		
 		AudioClip successSFX = new AudioClip(getClass().getResource("/SFX/goldEarnedScreenSuccessSFX.wav").toString());
 		successSFX.setVolume(0.05); // Volume level (0.0 to 1.0)
 		successSFX.play();
@@ -3134,7 +3303,13 @@ public class Main extends Application {
 		ShopButton.setOpacity(0);
 		ShopButton.setOnMouseEntered(e -> {toShopText.setFill(Color.web("#d10000"));});
 		ShopButton.setOnMouseExited(e -> {toShopText.setFill(Color.web("#d5d5d5"));});
-		ShopButton.setOnAction(e -> shop(primaryStage));
+		ShopButton.setOnAction(e -> {
+			sceneTransitionSFX.play();
+			transitionExit.play();
+			transitionExit.setOnFinished(event -> {
+				shop(primaryStage);
+			});
+		});
 	    
 		goldIconLeft.setLayoutX(1290);
 		goldIconLeft.setLayoutY(250);
@@ -3158,6 +3333,9 @@ public class Main extends Application {
 		root.getChildren().addAll(toShopImage);
 		root.getChildren().addAll(toShopText, goldEarnedText, goldIconRight, goldIconLeft);
 
+	    root.getChildren().add(transitionCoverEnter);
+	    root.getChildren().add(transitionCoverExit);
+		
 	    root.setBackground(new Background(backgroundImage)); 
 		
 		root.setPadding(new Insets(20));
