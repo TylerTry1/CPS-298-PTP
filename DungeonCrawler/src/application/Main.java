@@ -2792,14 +2792,18 @@ public class Main extends Application {
 		ImageView purchaseConfirmationImage = new ImageView(new Image("shopAssets/itemForSaleFrame.png"));
 		
 		ImageView goldIcon = new ImageView(new Image("shopAssets/goldIcon.png"));
-		ImageView paladinPlayerIcon= new ImageView(new Image("applicationImagesHeroSprites/Paladin/paladinPlayerIcon.png"));
-		ImageView assassinPlayerIcon= new ImageView(new Image("applicationImagesHeroSprites/Assassin/assassinPlayerIcon.png"));
-		ImageView wizardPlayerIcon= new ImageView(new Image("applicationImagesHeroSprites/Wizard/wizardPlayerIcon.png"));
-		ImageView alchemistPlayerIcon= new ImageView(new Image("applicationImagesHeroSprites/Alchemist/alchemistPlayerIcon.png"));
+		ImageView paladinPlayerIcon= new ImageView(new Image("applicationImagesHeroSprites/Paladin/Paladin_Face.png"));
+		ImageView assassinPlayerIcon= new ImageView(new Image("applicationImagesHeroSprites/Assassin/Assassin_Face.png"));
+		ImageView wizardPlayerIcon= new ImageView(new Image("applicationImagesHeroSprites/Wizard/Wizzard_Face.png"));
+		ImageView alchemistPlayerIcon= new ImageView(new Image("applicationImagesHeroSprites/Alchemist/Alchimist_Face.png"));
 		ImageView charSelectedAlchemist = new ImageView(new Image("GUIAssets/skillButtonSelectedFrame.png"));
 		ImageView charSelectedWizard = new ImageView(new Image("GUIAssets/skillButtonSelectedFrame.png"));
 		ImageView charSelectedAssassin = new ImageView(new Image("GUIAssets/skillButtonSelectedFrame.png"));
 		ImageView charSelectedPaladin = new ImageView(new Image("GUIAssets/skillButtonSelectedFrame.png"));
+		
+		ImageView item1Unavailable = new ImageView(new Image("shopAssets/unavailableIcon.png"));
+		ImageView item2Unavailable = new ImageView(new Image("shopAssets/unavailableIcon.png"));
+		ImageView item3Unavailable = new ImageView(new Image("shopAssets/unavailableIcon.png"));
 		
 		Image backgroundImagesetup = new Image("shopAssets/shopBackground.png");
 		BackgroundSize size = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false); // background																									// image
@@ -2808,6 +2812,13 @@ public class Main extends Application {
 				BackgroundRepeat.NO_REPEAT, customPosition, size);
 		
 		Pane root = new Pane();
+		
+		item1Unavailable.setMouseTransparent(true);
+		item2Unavailable.setMouseTransparent(true);
+		item3Unavailable.setMouseTransparent(true);
+		item1Unavailable.setOpacity(0);
+		item2Unavailable.setOpacity(0);
+		item3Unavailable.setOpacity(0);
 		
 		purchaseConfirmationText.setMouseTransparent(true);
 		alchemistPlayerIcon.setMouseTransparent(true);
@@ -2825,11 +2836,11 @@ public class Main extends Application {
 		itemForSaleFrameArrow2.setVisible(false);
 		itemForSaleFrameArrow3.setVisible(false);
 		
-		charChoiceAlchemistButton.setOpacity(0);
-		charChoiceWizardButton.setOpacity(0);
-		charChoiceAssassinButton.setOpacity(0);
-		charChoicePaladinButton.setOpacity(0);
-		purchaseConfirmationButton.setOpacity(0);
+		charChoiceAlchemistButton.setOpacity(00);
+		charChoiceWizardButton.setOpacity(00);
+		charChoiceAssassinButton.setOpacity(00);
+		charChoicePaladinButton.setOpacity(00);
+		purchaseConfirmationButton.setOpacity(00);
 		item1Button.setOpacity(0);
 		item2Button.setOpacity(0);
 		item3Button.setOpacity(0);
@@ -2902,6 +2913,7 @@ public class Main extends Application {
 		root.getChildren().addAll(shopKeeper, purchaseConfirmationImage); 	
 		root.getChildren().addAll(itemForSaleFrame1, itemForSaleFrame2, itemForSaleFrame3, shopSeparatonBar1, shopSeparatonBar2, shopSeparatonBar3, goldIcon);
 		root.getChildren().addAll(itemForSaleFrameArrow1,itemForSaleFrameArrow2,itemForSaleFrameArrow3);
+		root.getChildren().addAll(item1Unavailable, item2Unavailable,item3Unavailable);
 		root.getChildren().addAll(item1Button, item2Button, item3Button, purchaseConfirmationButton);
 		root.getChildren().addAll(charChoiceAlchemistButton, charChoiceWizardButton, charChoiceAssassinButton, charChoicePaladinButton);
 		root.getChildren().addAll(paladinPlayerIcon,assassinPlayerIcon,wizardPlayerIcon,alchemistPlayerIcon);
@@ -2944,6 +2956,13 @@ public class Main extends Application {
 		itemForSaleFrameArrow3.setScaleX(1);
 		itemForSaleFrameArrow3.setScaleY(3);
 		itemForSaleFrameArrow3.setRotate(90);
+		
+		item1Unavailable.setLayoutX(1192);
+		item1Unavailable.setLayoutY(75);
+		item2Unavailable.setLayoutX(1448);
+		item2Unavailable.setLayoutY(75);
+		item3Unavailable.setLayoutX(1692);
+		item3Unavailable.setLayoutY(75);
 		
 		purchaseConfirmationButton.setLayoutX(1420);
 		purchaseConfirmationButton.setLayoutY(990);
@@ -3003,23 +3022,23 @@ public class Main extends Application {
 		charChoicePaladinButton.setScaleX(1.1);
 		charChoicePaladinButton.setScaleY(4.95);
 		// -------------------------------------------------------------
-		paladinPlayerIcon.setLayoutX(1785);
-		paladinPlayerIcon.setLayoutY(800);
-		assassinPlayerIcon.setLayoutX(1585);
-		assassinPlayerIcon.setLayoutY(800);
-		wizardPlayerIcon.setLayoutX(1385);
-		wizardPlayerIcon.setLayoutY(800);
-		alchemistPlayerIcon.setLayoutX(1185);
-		alchemistPlayerIcon.setLayoutY(800);
+		paladinPlayerIcon.setLayoutX(1500);
+		paladinPlayerIcon.setLayoutY(505);
+		assassinPlayerIcon.setLayoutX(1348);
+		assassinPlayerIcon.setLayoutY(563);
+		wizardPlayerIcon.setLayoutX(1008);
+		wizardPlayerIcon.setLayoutY(452);
+		alchemistPlayerIcon.setLayoutX(1027);
+		alchemistPlayerIcon.setLayoutY(635);
 		
-		paladinPlayerIcon.setScaleX(1.75);
-		paladinPlayerIcon.setScaleY(1.75);
-		assassinPlayerIcon.setScaleX(1.75);
-		assassinPlayerIcon.setScaleY(1.75);
-		wizardPlayerIcon.setScaleX(1.75);
-		wizardPlayerIcon.setScaleY(1.75);
-		alchemistPlayerIcon.setScaleX(1.75);
-		alchemistPlayerIcon.setScaleY(1.75);
+		paladinPlayerIcon.setScaleX(.2);
+		paladinPlayerIcon.setScaleY(.2);
+		assassinPlayerIcon.setScaleX(.24);
+		assassinPlayerIcon.setScaleY(.243);
+		wizardPlayerIcon.setScaleX(.155);
+		wizardPlayerIcon.setScaleY(.17);
+		alchemistPlayerIcon.setScaleX(.34);
+		alchemistPlayerIcon.setScaleY(.34);
 		
 		
 		exitShopBanner.setLayoutX(-440);
