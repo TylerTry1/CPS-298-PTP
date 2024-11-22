@@ -7,6 +7,8 @@ import java.util.TimerTask;
 import application.combatFlow.combatControl;
 import javafx.animation.FadeTransition;
 import javafx.animation.PauseTransition;
+import javafx.animation.ScaleTransition;
+import javafx.animation.SequentialTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -17,7 +19,6 @@ import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.effect.BoxBlur;
@@ -231,10 +232,10 @@ public class Main extends Application {
 
 	    // First set of buttons
 	    Button play = new Button("Begin New Journey");
-	    Button tutorial = new Button("Tutorial");
+//	    Button tutorial = new Button("Tutorial");
 //	    Button unlocks = new Button("Unlocks");
 //	    Button stats = new Button("Stats");
-	    Button credits = new Button("Credits");
+//	    Button credits = new Button("Credits");
 	    Button quit = new Button("Exit Game");
 	    Button shop = new Button("Shop");
 	    Button gameOver = new Button ("Game Over Sample");
@@ -306,23 +307,23 @@ public class Main extends Application {
 //				mediaPlayer.stop();
 //			});}); 
 
-		tutorial.setOnAction(e -> {
-			sceneTransitionSFX.play();
-			transitionExit.play();
-			transitionExit.setOnFinished(event -> {
-				textTutorial(primaryStage);
-				mediaPlayer.stop();
-			});
-		});
-
-		credits.setOnAction(e -> {
-			sceneTransitionSFX.play();
-			transitionExit.play();
-			transitionExit.setOnFinished(event -> {
-				credits(primaryStage);
-				mediaPlayer.stop();
-			});
-		});
+//		tutorial.setOnAction(e -> {
+//			sceneTransitionSFX.play();
+//			transitionExit.play();
+//			transitionExit.setOnFinished(event -> {
+//				textTutorial(primaryStage);
+//				mediaPlayer.stop();
+//			});
+//		});
+//
+//		credits.setOnAction(e -> {
+//			sceneTransitionSFX.play();
+//			transitionExit.play();
+//			transitionExit.setOnFinished(event -> {
+//				credits(primaryStage);
+//				mediaPlayer.stop();
+//			});
+//		});
 		quit.setOnAction(e -> {
 			sceneTransitionSFX.play();
 			transitionExit.play();
@@ -383,7 +384,7 @@ public class Main extends Application {
 
 	    // VBox 2 for second set of buttons
 	    VBox buttonBox2 = new VBox(10);
-	    buttonBox2.getChildren().addAll(tutorial, credits, quit); // unlocks, stats,
+	    buttonBox2.getChildren().addAll(quit); // unlocks, stats, tutorial, credits,
 	    buttonBox2.setSpacing(10);
 	    buttonBox2.setPadding(new Insets(20));
 	    buttonBox2.setLayoutX(7); // Adjust X for second VBox
@@ -888,6 +889,8 @@ public class Main extends Application {
 		ImageView enemyDBFFResistanceIcon = new ImageView(new Image("GUIAssets/DBFFResistance.png"));
 		ImageView enemyDTHResistanceIcon = new ImageView(new Image("GUIAssets/DTHResistance.png"));
 		
+		ImageView combatStartImage = new ImageView(new Image("GUIAssets/combatStartImage.png"));
+		
 		ImageView menuBackground = new ImageView(new Image("GUIAssets/menuBackground.png"));
 		ImageView menuBackButtonImage = new ImageView(new Image("GUIAssets/menuBackButtonImage.png"));
 		ImageView menuButtonFrame1 = new ImageView(new Image("GUIAssets/menuButtonFrame.png"));
@@ -1164,9 +1167,16 @@ public class Main extends Application {
 
 //		movebutton.setOpacity(0);
 		passTurnButton.setOpacity(00);
-		
+		//--------------------------------------------------------------------------------------
 //		while (heroInPos1Turn = true){
-//
+//		heroSelectionIndicator1.setVisible(true);
+//		fadeInHeroSelectionIndicator1.play();
+//		fadeOutHeroSelectionIndicator2.play();
+//		fadeOutHeroSelectionIndicator3.play();
+//		fadeOutHeroSelectionIndicator4.play();
+//		heroSelectionIndicator2.setVisible(false);
+//		heroSelectionIndicator3.setVisible(false);
+//		heroSelectionIndicator4.setVisible(false);
 //			//all other buttons and images cannot be clicked or seen.
 //			skillbuttonimage1Paladin.setOpacity(100); //image is visible
 //			skillbuttonimage2Paladin.setOpacity(100);
@@ -1203,7 +1213,14 @@ public class Main extends Application {
 //		}
 //		
 //		while (heroInPos2Turn = true){
-//
+//		heroSelectionIndicator2.setVisible(true);
+//		fadeInHeroSelectionIndicator2.play();
+//		fadeOutHeroSelectionIndicator1.play();
+//		fadeOutHeroSelectionIndicator3.play();
+//		fadeOutHeroSelectionIndicator4.play();
+//		heroSelectionIndicator1.setVisible(false);
+//		heroSelectionIndicator3.setVisible(false);
+//		heroSelectionIndicator4.setVisible(false);
 //			//all other buttons and images cannot be clicked or seen.
 //			skillbuttonimage1Paladin.setOpacity(0); //image is visible
 //			skillbuttonimage2Paladin.setOpacity(0);
@@ -1240,7 +1257,14 @@ public class Main extends Application {
 //		}
 //		
 //		while (heroInPos3Turn = true){
-//
+//		heroSelectionIndicator3.setVisible(true);
+//		fadeInHeroSelectionIndicator3.play();
+//		fadeOutHeroSelectionIndicator1.play();
+//		fadeOutHeroSelectionIndicator2.play();
+//		fadeOutHeroSelectionIndicator4.play();
+//		heroSelectionIndicator1.setVisible(false);
+//		heroSelectionIndicator2.setVisible(false);
+//		heroSelectionIndicator4.setVisible(false);
 //			//all other buttons and images cannot be clicked or seen.
 //			skillbuttonimage1Paladin.setOpacity(0); //image is visible
 //			skillbuttonimage2Paladin.setOpacity(0);
@@ -1277,7 +1301,14 @@ public class Main extends Application {
 //		}
 //		
 //		while (heroInPos4Turn = true){
-//
+//		heroSelectionIndicator4.setVisible(true);
+//		fadeInHeroSelectionIndicator4.play();
+//		fadeOutHeroSelectionIndicator1.play();
+//		fadeOutHeroSelectionIndicator2.play();
+//		fadeOutHeroSelectionIndicator3.play();
+//		heroSelectionIndicator1.setVisible(false);
+//		heroSelectionIndicator2.setVisible(false);
+//		heroSelectionIndicator3.setVisible(false);
 //			//all other buttons and images cannot be clicked or seen.
 //			skillbuttonimage1Paladin.setOpacity(0); //image is visible
 //			skillbuttonimage2Paladin.setOpacity(0);
@@ -1363,8 +1394,12 @@ public class Main extends Application {
 		skillbuttonimage2Alchemist.setOpacity(00);
 		skillbuttonimage3Alchemist.setOpacity(00);
 		skillbuttonimage4Alchemist.setOpacity(00);
-		
+		//--------------------------------------------------------------------------------------
+
 		skillbuttonimagepass.setOpacity(100);
+		moveDescriptionText2.setOpacity(0);
+		
+		
 		
 		menuBackButton.setOpacity(0);
 		menuQuitButton.setOpacity(0);
@@ -1500,38 +1535,38 @@ public class Main extends Application {
 		// -------------------------------------------------------------
 		//make images dissapear or appear on button hover.
 		// none of this is correct. these need to be changed so that when a move is selected, it only shows visible on which enemies can be attacked.  // var
-		heroPosition1.setOnMouseEntered(e -> {heroSelectionIndicator1.setVisible(true);
-		fadeInHeroSelectionIndicator1.play();
-		});
-		heroPosition1.setOnMouseExited(e -> {
-			fadeOutHeroSelectionIndicator1.play();
-		});
-		heroSelectionIndicator1.setVisible(false);
-		
-		heroPosition2.setOnMouseEntered(e -> {heroSelectionIndicator2.setVisible(true);
-		fadeInHeroSelectionIndicator2.play();
-		});
-		heroPosition2.setOnMouseExited(e -> {
-			fadeOutHeroSelectionIndicator2.play();
-		});
-		heroSelectionIndicator2.setVisible(false);
-
-		heroPosition3.setOnMouseEntered(e -> {heroSelectionIndicator3.setVisible(true);
-		fadeInHeroSelectionIndicator3.play();
-		});
-		heroPosition3.setOnMouseExited(e -> {
-			fadeOutHeroSelectionIndicator3.play();
-		});
-		heroSelectionIndicator3.setVisible(false);
-
-		heroPosition4.setOnMouseEntered(e -> {heroSelectionIndicator4.setVisible(true);
-		fadeInHeroSelectionIndicator4.play();
-		});
-		heroPosition4.setOnMouseExited(e -> {
-			fadeOutHeroSelectionIndicator4.play();
-		});
-		heroSelectionIndicator4.setVisible(false);
-		
+//		heroPosition1.setOnMouseEntered(e -> {heroSelectionIndicator1.setVisible(true);
+//		fadeInHeroSelectionIndicator1.play();
+//		});
+//		heroPosition1.setOnMouseExited(e -> {
+//			fadeOutHeroSelectionIndicator1.play();
+//		});
+//		heroSelectionIndicator1.setVisible(false);
+//		
+//		heroPosition2.setOnMouseEntered(e -> {heroSelectionIndicator2.setVisible(true);
+//		fadeInHeroSelectionIndicator2.play();
+//		});
+//		heroPosition2.setOnMouseExited(e -> {
+//			fadeOutHeroSelectionIndicator2.play();
+//		});
+//		heroSelectionIndicator2.setVisible(false);
+//
+//		heroPosition3.setOnMouseEntered(e -> {heroSelectionIndicator3.setVisible(true);
+//		fadeInHeroSelectionIndicator3.play();
+//		});
+//		heroPosition3.setOnMouseExited(e -> {
+//			fadeOutHeroSelectionIndicator3.play();
+//		});
+//		heroSelectionIndicator3.setVisible(false);
+//
+//		heroPosition4.setOnMouseEntered(e -> {heroSelectionIndicator4.setVisible(true);
+//		fadeInHeroSelectionIndicator4.play();
+//		});
+//		heroPosition4.setOnMouseExited(e -> {
+//			fadeOutHeroSelectionIndicator4.play();
+//		});
+//		heroSelectionIndicator4.setVisible(false);
+//		
 		
 		enemyPosition1.setOnMouseEntered(e -> {enemySelectionIndicator1.setVisible(true);
 		enemyNameText.setVisible(true);
@@ -1993,6 +2028,8 @@ public class Main extends Application {
 		root.getChildren().addAll(enemyHPPos4,enemyHPPos3,enemyHPPos2,enemyHPPos1);
 		root.getChildren().addAll(moveDescriptionText,moveDescriptionText2,moveNameText);
 		
+		root.getChildren().add(combatStartImage);
+		
 	    root.getChildren().add(transitionCoverEnter);
 	    root.getChildren().add(transitionCoverExit);
 		
@@ -2007,6 +2044,25 @@ public class Main extends Application {
 	    combatMenu.getChildren().add(transitionCoverExit);
 		// -------------------------------------------------------------
 		// Manually position the HBoxes and back button
+	    ScaleTransition scaleUp = new ScaleTransition(Duration.seconds(0.5), combatStartImage);
+        scaleUp.setToX(1.5);
+        scaleUp.setToY(1.5);
+        FadeTransition fadeOut = new FadeTransition(Duration.seconds(0.5), combatStartImage);
+        fadeOut.setFromValue(1.0);
+        fadeOut.setToValue(0.0);
+        ScaleTransition scaleDown = new ScaleTransition(Duration.seconds(1), combatStartImage);
+        scaleDown.setToX(1.0);
+        scaleDown.setToY(1.0);
+        SequentialTransition fadeAndScaleDown = new SequentialTransition(scaleDown, fadeOut);
+        SequentialTransition animation = new SequentialTransition(scaleUp, fadeAndScaleDown);
+        animation.play();
+
+	    
+	    combatStartImage.setLayoutX(865);
+	    combatStartImage.setLayoutY(150);
+	    combatStartImage.setScaleX(1.25);
+	    combatStartImage.setScaleY(1.25);
+	    
 		heroPositions.setLayoutX(125); // Position X for hero positions
 		heroPositions.setLayoutY(250); // Position Y for hero positions
 
@@ -3267,14 +3323,15 @@ public class Main extends Application {
 
 		Text toShopText = new Text("Shop");
 		Text goldEarnedText = new Text("Gold Earned");
-//		Text goldEarnedVarText = new Text(gold Earned); // var
+		Text goldEarnedVarText = new Text("goldEarnedVar"); // var
 
-//		Text goldEarnedVarText = new Text("Gold Earned \n " + ); // var
 	
 
 
 		goldEarnedText.setFill(Color.web("#FFEB80"));
 		goldEarnedText.setFont(DwarvenAxe);
+		goldEarnedVarText.setFill(Color.web("#FFEB80"));
+		goldEarnedVarText.setFont(DwarvenAxe);
 		toShopText.setFill(Color.web("#d5d5d5"));
 		toShopText.setFont(DwarvenAxe);
 
@@ -3282,6 +3339,11 @@ public class Main extends Application {
 		goldEarnedText.setLayoutY(300);
 		goldEarnedText.setScaleX(3);
 		goldEarnedText.setScaleY(3);
+		
+		goldEarnedVarText.setLayoutX(900);
+		goldEarnedVarText.setLayoutY(575);
+		goldEarnedVarText.setScaleX(4);
+		goldEarnedVarText.setScaleY(4);
 		
 		toShopImage.setLayoutX(310);
 		toShopImage.setLayoutY(635);
@@ -3331,7 +3393,7 @@ public class Main extends Application {
 		Pane root = new Pane();
 		root.getChildren().addAll(ShopButton); 
 		root.getChildren().addAll(toShopImage);
-		root.getChildren().addAll(toShopText, goldEarnedText, goldIconRight, goldIconLeft);
+		root.getChildren().addAll(toShopText, goldEarnedText, goldEarnedVarText, goldIconRight, goldIconLeft);
 
 	    root.getChildren().add(transitionCoverEnter);
 	    root.getChildren().add(transitionCoverExit);
@@ -3347,65 +3409,66 @@ public class Main extends Application {
 		primaryStage.show();
 	}
 	
-	private void textTutorial(Stage primaryStage) {
-		Image cursorImage = new Image("GUIAssets/cursor.png");
-		Cursor customCursor = Cursor.cursor(cursorImage.getUrl());
-		Button back = new Button("Back");
-		back.setOnAction(e -> homePage(primaryStage));
-
-		// Create a Label for displaying text
-		Label tutorialText = new Label("This is where we will explain how to play the game.");
-		tutorialText.setStyle("-fx-text-fill: white; -fx-font-size: 16px;"); // Set text color to white and font size
-
-		VBox root = new VBox(10);
-		root.getChildren().addAll(tutorialText, back); // Add the Label above the Back button
-		root.setSpacing(10);
-		root.setPadding(new Insets(20));
-
-		// Bind button size properties to scale with the window
-		root.getChildren().forEach(node -> {
-			if (node instanceof Button) {
-				((Button) node).prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.1));
-				((Button) node).prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.04));
-			}
-		});
-
-		root.setStyle("-fx-background-color: black;"); // Set background color to black
-		Scene scene = new Scene(root, 1920, 1080);
-		scene.setCursor(customCursor);
-
-		primaryStage.setScene(scene);
-	}
 	
-	private void credits(Stage primaryStage) {
-		Image cursorImage = new Image("GUIAssets/cursor.png");
-		Cursor customCursor = Cursor.cursor(cursorImage.getUrl());
-		Button back = new Button("Back");
-		back.setOnAction(e -> homePage(primaryStage));
-
-		// Create a Label for displaying text
-		Label tutorialText = new Label("CPS 298, Alex, Charlie, Killian, Tyler.");
-		tutorialText.setStyle("-fx-text-fill: white; -fx-font-size: 16px;"); // Set text color to white and font size
-
-		VBox root = new VBox(10);
-		root.getChildren().addAll(tutorialText, back); // Add the Label above the Back button
-		root.setSpacing(10);
-		root.setPadding(new Insets(20));
-
-		// Bind button size properties to scale with the window
-		root.getChildren().forEach(node -> {
-			if (node instanceof Button) {
-				((Button) node).prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.25));
-				((Button) node).prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.1));
-			}
-		});
-
-		root.setStyle("-fx-background-color: black;"); // Set background color to black
-		Scene scene = new Scene(root, 1920, 1080);
-		scene.setCursor(customCursor);
-
-		primaryStage.setScene(scene);
-	}
+//	private void textTutorial(Stage primaryStage) {
+//		Image cursorImage = new Image("GUIAssets/cursor.png");
+//		Cursor customCursor = Cursor.cursor(cursorImage.getUrl());
+//		Button back = new Button("Back");
+//		back.setOnAction(e -> homePage(primaryStage));
+//
+//		// Create a Label for displaying text
+//		Label tutorialText = new Label("This is where we will explain how to play the game.");
+//		tutorialText.setStyle("-fx-text-fill: white; -fx-font-size: 16px;"); // Set text color to white and font size
+//
+//		VBox root = new VBox(10);
+//		root.getChildren().addAll(tutorialText, back); // Add the Label above the Back button
+//		root.setSpacing(10);
+//		root.setPadding(new Insets(20));
+//
+//		// Bind button size properties to scale with the window
+//		root.getChildren().forEach(node -> {
+//			if (node instanceof Button) {
+//				((Button) node).prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.1));
+//				((Button) node).prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.04));
+//			}
+//		});
+//
+//		root.setStyle("-fx-background-color: black;"); // Set background color to black
+//		Scene scene = new Scene(root, 1920, 1080);
+//		scene.setCursor(customCursor);
+//
+//		primaryStage.setScene(scene);
+//	}
+//	
+//	private void credits(Stage primaryStage) {
+//		Image cursorImage = new Image("GUIAssets/cursor.png");
+//		Cursor customCursor = Cursor.cursor(cursorImage.getUrl());
+//		Button back = new Button("Back");
+//		back.setOnAction(e -> homePage(primaryStage));
+//
+//		// Create a Label for displaying text
+//		Label tutorialText = new Label("CPS 298, Alex, Charlie, Killian, Tyler.");
+//		tutorialText.setStyle("-fx-text-fill: white; -fx-font-size: 16px;"); // Set text color to white and font size
+//
+//		VBox root = new VBox(10);
+//		root.getChildren().addAll(tutorialText, back); // Add the Label above the Back button
+//		root.setSpacing(10);
+//		root.setPadding(new Insets(20));
+//
+//		// Bind button size properties to scale with the window
+//		root.getChildren().forEach(node -> {
+//			if (node instanceof Button) {
+//				((Button) node).prefWidthProperty().bind(primaryStage.widthProperty().multiply(0.25));
+//				((Button) node).prefHeightProperty().bind(primaryStage.heightProperty().multiply(0.1));
+//			}
+//		});
+//
+//		root.setStyle("-fx-background-color: black;"); // Set background color to black
+//		Scene scene = new Scene(root, 1920, 1080);
+//		scene.setCursor(customCursor);
+//
+//		primaryStage.setScene(scene);
+//	}
 	
 //	// putting this on the sideline, in case we decide we need a play options tab.
 //	private void playOptions(Stage primaryStage) {
