@@ -43,8 +43,11 @@ public class Alchemist extends Characters {
     	moveNameText.setText(moveName);
     	String description = "Heal one hero";
     	moveDescriptionText.setText(description);
+    	Heal heal = new Heal();
+    	double healAmount = heal.calculateHeal(target, target,	HEALING_ELIXIR_AMOUNT);
+    	heal.applyHeal(target, healAmount);
 
-        target.healSelf(HEALING_ELIXIR_AMOUNT);
+        heal.applyHeal(target, healAmount);
     }
 
     // Invigoration: Buff that increases the attack of the entire team
