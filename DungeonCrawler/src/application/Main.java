@@ -532,24 +532,6 @@ public class Main extends Application {
 		Button enemyPosition4 = new Button("enemyPosition4");
 		Button passTurnButton = new Button("passTurnButton");
 		
-		//--------------------------------------------------------------------------------------------------------
-		// Combat assets
-		combatControl flow = new combatControl(enemyPosition1, enemyPosition2, enemyPosition3, enemyPosition4);
-		flow.createEnemyTeam();
-		flow.adjustSpeeds();
-		flow.determineTurnOrder();
-		entities[] tempTurnOrder = flow.getTurnOrder();
-		playerTeamArray tempPTeamArray = flow.getPlayerTeamArray();
-		Characters[] tempPTeam = tempPTeamArray.getTeam();
-		enemyTeam tempETeamArray = flow.getEnemyTeam();
-		Enemies[] tempETeam = tempETeamArray.getTeam();
-		count = 0;
-		round = 0;
-		boolean gameOver = false;
-		Timer timer = new Timer();
-		//--------------------------------------------------------------------------------------------------------
-		
-
 		ToggleGroup skillButtonGroupPaladin = new ToggleGroup();
 		RadioButton skillbutton1Paladin = new RadioButton("skill 1");
 		skillbutton1Paladin.setToggleGroup(skillButtonGroupPaladin);
@@ -601,9 +583,123 @@ public class Main extends Application {
 		// RadioButton movebuttonAlchemist = new RadioButton("move");
 		// movebuttonAlchemist.setToggleGroup(skillButtonGroupAlchemist);
 
-
-
-		 
+		// Images for everything
+		ImageView heroInPosition1 = new ImageView(new Image("applicationImagesPlayerSprites/Paladin_Idle.png"));
+		ImageView heroInPosition2 = new ImageView(new Image("applicationImagesPlayerSprites/Assassin_Idle.png"));
+		ImageView heroInPosition3 = new ImageView(new Image("applicationImagesPlayerSprites/Wizard_Idle.png"));
+		ImageView heroInPosition4 = new ImageView(new Image("applicationImagesPlayerSprites/Alchemist_Idle.png"));
+		
+		ImageView skillbuttonimage1Paladin = new ImageView(new Image("abilityIconsPaladin/holy_rampart.png")); 
+		ImageView skillbuttonimage2Paladin = new ImageView(new Image("abilityIconsPaladin/divineSmite.png")); 
+		ImageView skillbuttonimage3Paladin = new ImageView(new Image("abilityIconsPaladin/auraOfCourage.png"));
+		ImageView skillbuttonimage4Paladin = new ImageView(new Image("abilityIconsPaladin/shieldOfFaith.png"));
+		
+		ImageView skillbuttonimage1Assassin = new ImageView(new Image("abilityIconsAssassin/piercingStab.png")); 
+		ImageView skillbuttonimage2Assassin = new ImageView(new Image("abilityIconsAssassin/Backstab.png")); 
+		ImageView skillbuttonimage3Assassin = new ImageView(new Image("abilityIconsAssassin/daggerBarrage.png")); 
+		ImageView skillbuttonimage4Assassin = new ImageView(new Image("abilityIconsAssassin/poisonBlade.png")); 
+		
+		ImageView skillbuttonimage1Wizard = new ImageView(new Image("abilityIconsWizard/fireball.png")); 
+		ImageView skillbuttonimage2Wizard = new ImageView(new Image("abilityIconsWizard/magicMissile.png"));
+		ImageView skillbuttonimage3Wizard = new ImageView(new Image("abilityIconsWizard/frostBolt.png")); 
+		ImageView skillbuttonimage4Wizard = new ImageView(new Image("abilityIconsWizard/staffStrike.png"));
+		
+		ImageView skillbuttonimage1Alchemist = new ImageView(new Image("abilityIconsAlchemist/acidPuddle.png")); 
+		ImageView skillbuttonimage2Alchemist = new ImageView(new Image("abilityIconsAlchemist/explosiveFlask.png"));
+		ImageView skillbuttonimage3Alchemist = new ImageView(new Image("abilityIconsAlchemist/invigoration.png"));
+		ImageView skillbuttonimage4Alchemist = new ImageView(new Image("abilityIconsAlchemist/healing_elixer.png")); 
+		
+//		ImageView skillbuttonimagemove = new ImageView(new Image("GUIAssets/skillbuttonimagemove.png"));
+		ImageView skillbuttonimagepass = new ImageView(new Image("GUIAssets/skillbuttonimagepass.png"));
+		ImageView heroNameTextPlate = new ImageView(new Image("GUIAssets/nameplate.png"));
+		ImageView enemyNameTextPlate = new ImageView(new Image("GUIAssets/nameplate.png"));
+		ImageView turnOrderBarLeftAndRight = new ImageView(new Image("GUIAssets/turnOrderBarLeftAndRight.png"));
+		ImageView heroSelectionIndicator4 = new ImageView(new Image("GUIAssets/CharacterSelectionIndicatorSize1.png"));
+		ImageView heroSelectionIndicator3 = new ImageView(new Image("GUIAssets/CharacterSelectionIndicatorSize1.png"));
+		ImageView heroSelectionIndicator2 = new ImageView(new Image("GUIAssets/CharacterSelectionIndicatorSize1.png"));
+		ImageView heroSelectionIndicator1 = new ImageView(new Image("GUIAssets/CharacterSelectionIndicatorSize1.png"));
+		ImageView enemySelectionIndicator1 = new ImageView(new Image("GUIAssets/enemySelectionIndicatorSize1.png"));
+		ImageView enemySelectionIndicator2 = new ImageView(new Image("GUIAssets/enemySelectionIndicatorSize1.png"));
+		ImageView enemySelectionIndicator3 = new ImageView(new Image("GUIAssets/enemySelectionIndicatorSize1.png"));
+		ImageView enemySelectionIndicator4 = new ImageView(new Image("GUIAssets/enemySelectionIndicatorSize1.png"));
+		
+		ImageView heroTurnTicker1 = new ImageView(new Image("GUIAssets/turnticker.png")); // var
+		ImageView heroTurnTicker2 = new ImageView(new Image("GUIAssets/turnticker.png")); // var
+		ImageView heroTurnTicker3 = new ImageView(new Image("GUIAssets/turnticker.png")); // var
+		ImageView heroTurnTicker4 = new ImageView(new Image("GUIAssets/turnticker.png")); // var
+		ImageView enemyTurnTicker1 = new ImageView(new Image("GUIAssets/turnticker.png")); // var
+		ImageView enemyTurnTicker2 = new ImageView(new Image("GUIAssets/turnticker.png")); // var
+		ImageView enemyTurnTicker3 = new ImageView(new Image("GUIAssets/turnticker.png")); // var
+		ImageView enemyTurnTicker4 = new ImageView(new Image("GUIAssets/turnticker.png")); // var
+		ImageView skillButtonSelectedFrame1 = new ImageView(new Image("GUIAssets/skillButtonSelectedFrame.png"));
+		ImageView skillButtonSelectedFrame2 = new ImageView(new Image("GUIAssets/skillButtonSelectedFrame.png"));
+		ImageView skillButtonSelectedFrame3 = new ImageView(new Image("GUIAssets/skillButtonSelectedFrame.png"));
+		ImageView skillButtonSelectedFrame4 = new ImageView(new Image("GUIAssets/skillButtonSelectedFrame.png"));
+//		ImageView skillButtonMoveSelectedFrame = new ImageView(new Image("GUIAssets/skillButtonSelectedFrame.png"));
+		
+		ImageView enemyBLDResistanceIcon = new ImageView(new Image("GUIAssets/BLDResistance.png"));
+		ImageView enemyBLGTResistanceIcon = new ImageView(new Image("GUIAssets/BLGTResistance.png"));
+		ImageView enemyBURNResistanceIcon = new ImageView(new Image("GUIAssets/BURNResistance.png"));
+		ImageView enemySTNResistanceIcon = new ImageView(new Image("GUIAssets/STNResistance.png"));
+		ImageView enemyMOVResistanceIcon = new ImageView(new Image("GUIAssets/MOVResistance.png"));
+		ImageView enemyDBFFResistanceIcon = new ImageView(new Image("GUIAssets/DBFFResistance.png"));
+		ImageView enemyDTHResistanceIcon = new ImageView(new Image("GUIAssets/DTHResistance.png"));
+		
+		ImageView combatStartImage = new ImageView(new Image("GUIAssets/combatStartImage.png"));
+		
+		ImageView menuBackground = new ImageView(new Image("GUIAssets/menuBackground.png"));
+		ImageView menuBackButtonImage = new ImageView(new Image("GUIAssets/menuBackButtonImage.png"));
+		ImageView menuButtonFrame1 = new ImageView(new Image("GUIAssets/menuButtonFrame.png"));
+		
+		ImageView enemyAttackingBloodStain  = new ImageView(new Image("GUIAssets/enemyAttackingBloodStain.png"));
+		ImageView heroAttackingBloodStain  = new ImageView(new Image("GUIAssets/heroAttackingBloodStain.png"));
+		
+//		Image backgroundImagesetup = new Image("combatBackgrounds/cryptsRoomWallDrain.png");  // var
+		Image backgroundImagesetup = new Image("combatBackgrounds/combatBackground1.png");  // var
+		BackgroundSize size = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false); // background image
+		BackgroundPosition customPosition = new BackgroundPosition(Side.LEFT, 0, true, Side.TOP, 0, true); // fit to top left
+		BackgroundImage backgroundImagePayoff = new BackgroundImage(backgroundImagesetup, BackgroundRepeat.NO_REPEAT,
+				BackgroundRepeat.NO_REPEAT, customPosition, size);
+		
+		
+		//--------------------------------------------------------------------------------------------------------
+		// Combat assets
+		combatControl flow = new combatControl(enemyPosition1, enemyPosition2, enemyPosition3, enemyPosition4,
+											skillbutton1Paladin, skillbutton2Paladin, skillbutton3Paladin, skillbutton4Paladin,
+											skillbutton1Assassin, skillbutton2Assassin, skillbutton3Assassin, skillbutton4Assassin,
+											skillbutton1Wizard, skillbutton2Wizard, skillbutton3Wizard, skillbutton4Wizard,
+											skillbutton1Alchemist, skillbutton2Alchemist, skillbutton3Alchemist, skillbutton4Alchemist,
+											skillbuttonimage1Paladin, skillbuttonimage2Paladin, skillbuttonimage3Paladin, skillbuttonimage4Paladin,
+											skillbuttonimage1Assassin, skillbuttonimage2Assassin, skillbuttonimage3Assassin, skillbuttonimage4Assassin,
+											skillbuttonimage1Wizard, skillbuttonimage2Wizard, skillbuttonimage3Wizard, skillbuttonimage4Wizard,
+											skillbuttonimage1Alchemist, skillbuttonimage2Alchemist, skillbuttonimage3Alchemist, skillbuttonimage4Alchemist,
+											heroTurnTicker1, heroTurnTicker2, heroTurnTicker3, heroTurnTicker4,
+											enemyTurnTicker1, enemyTurnTicker2, enemyTurnTicker3, enemyTurnTicker4,
+											heroSelectionIndicator4, heroSelectionIndicator3, heroSelectionIndicator2, heroSelectionIndicator1,
+											enemySelectionIndicator1, enemySelectionIndicator2, enemySelectionIndicator3, enemySelectionIndicator4);
+		flow.createEnemyTeam();
+		flow.adjustSpeeds();
+		flow.determineTurnOrder();
+		entities[] tempTurnOrder = flow.getTurnOrder();
+		playerTeamArray tempPTeamArray = flow.getPlayerTeamArray();
+		Characters[] tempPTeam = tempPTeamArray.getTeam();
+		enemyTeam tempETeamArray = flow.getEnemyTeam();
+		Enemies[] tempETeam = tempETeamArray.getTeam();
+		count = 0;
+		round = 0;
+		boolean gameOver = false;
+		Timer timer = new Timer();
+		//--------------------------------------------------------------------------------------------------------
+		
+	    Image image1 = SwingFXUtils.toFXImage(tempETeam[0].getIdleSprite(), null);
+		ImageView enemyInPosition1 = new ImageView(image1); // var
+		Image image2 = SwingFXUtils.toFXImage(tempETeam[1].getIdleSprite(), null);
+		ImageView enemyInPosition2 = new ImageView(image2); // var
+		Image image3 = SwingFXUtils.toFXImage(tempETeam[2].getIdleSprite(), null);
+		ImageView enemyInPosition3 = new ImageView(image3); // var
+		Image image4 = SwingFXUtils.toFXImage(tempETeam[3].getIdleSprite(), null);
+		ImageView enemyInPosition4 = new ImageView(image4); // var
+		
 		Button menuBackButton = new Button ("Back"); 	
 		Button menuQuitButton = new Button ("Quit Game");
 		
@@ -848,93 +944,7 @@ public class Main extends Application {
 	    enemyHealthBarBlackRectangle4.setArcWidth(5);
 	    enemyHealthBarBlackRectangle4.setArcHeight(5);
 		// -------------------------------------------------------------
-		// Images for everything
-	    Image image1 = SwingFXUtils.toFXImage(tempETeam[0].getIdleSprite(), null);
-		ImageView enemyInPosition1 = new ImageView(image1); // var
-		Image image2 = SwingFXUtils.toFXImage(tempETeam[1].getIdleSprite(), null);
-		ImageView enemyInPosition2 = new ImageView(image2); // var
-		Image image3 = SwingFXUtils.toFXImage(tempETeam[2].getIdleSprite(), null);
-		ImageView enemyInPosition3 = new ImageView(image3); // var
-		Image image4 = SwingFXUtils.toFXImage(tempETeam[3].getIdleSprite(), null);
-		ImageView enemyInPosition4 = new ImageView(image4); // var
-		
-		ImageView heroInPosition1 = new ImageView(new Image("applicationImagesPlayerSprites/Paladin_Idle.png"));
-		ImageView heroInPosition2 = new ImageView(new Image("applicationImagesPlayerSprites/Assassin_Idle.png"));
-		ImageView heroInPosition3 = new ImageView(new Image("applicationImagesPlayerSprites/Wizard_Idle.png"));
-		ImageView heroInPosition4 = new ImageView(new Image("applicationImagesPlayerSprites/Alchemist_Idle.png"));
-		
-		ImageView skillbuttonimage1Paladin = new ImageView(new Image("abilityIconsPaladin/holy_rampart.png")); 
-		ImageView skillbuttonimage2Paladin = new ImageView(new Image("abilityIconsPaladin/divineSmite.png")); 
-		ImageView skillbuttonimage3Paladin = new ImageView(new Image("abilityIconsPaladin/auraOfCourage.png"));
-		ImageView skillbuttonimage4Paladin = new ImageView(new Image("abilityIconsPaladin/shieldOfFaith.png"));
-		
-		ImageView skillbuttonimage1Assassin = new ImageView(new Image("abilityIconsAssassin/piercingStab.png")); 
-		ImageView skillbuttonimage2Assassin = new ImageView(new Image("abilityIconsAssassin/Backstab.png")); 
-		ImageView skillbuttonimage3Assassin = new ImageView(new Image("abilityIconsAssassin/daggerBarrage.png")); 
-		ImageView skillbuttonimage4Assassin = new ImageView(new Image("abilityIconsAssassin/poisonBlade.png")); 
-		
-		ImageView skillbuttonimage1Wizard = new ImageView(new Image("abilityIconsWizard/fireball.png")); 
-		ImageView skillbuttonimage2Wizard = new ImageView(new Image("abilityIconsWizard/magicMissile.png"));
-		ImageView skillbuttonimage3Wizard = new ImageView(new Image("abilityIconsWizard/frostBolt.png")); 
-		ImageView skillbuttonimage4Wizard = new ImageView(new Image("abilityIconsWizard/staffStrike.png"));
-		
-		ImageView skillbuttonimage1Alchemist = new ImageView(new Image("abilityIconsAlchemist/acidPuddle.png")); 
-		ImageView skillbuttonimage2Alchemist = new ImageView(new Image("abilityIconsAlchemist/explosiveFlask.png"));
-		ImageView skillbuttonimage3Alchemist = new ImageView(new Image("abilityIconsAlchemist/invigoration.png"));
-		ImageView skillbuttonimage4Alchemist = new ImageView(new Image("abilityIconsAlchemist/healing_elixer.png")); 
-		
-//		ImageView skillbuttonimagemove = new ImageView(new Image("GUIAssets/skillbuttonimagemove.png"));
-		ImageView skillbuttonimagepass = new ImageView(new Image("GUIAssets/skillbuttonimagepass.png"));
-		ImageView heroNameTextPlate = new ImageView(new Image("GUIAssets/nameplate.png"));
-		ImageView enemyNameTextPlate = new ImageView(new Image("GUIAssets/nameplate.png"));
-		ImageView turnOrderBarLeftAndRight = new ImageView(new Image("GUIAssets/turnOrderBarLeftAndRight.png"));
-		ImageView heroSelectionIndicator4 = new ImageView(new Image("GUIAssets/CharacterSelectionIndicatorSize1.png"));
-		ImageView heroSelectionIndicator3 = new ImageView(new Image("GUIAssets/CharacterSelectionIndicatorSize1.png"));
-		ImageView heroSelectionIndicator2 = new ImageView(new Image("GUIAssets/CharacterSelectionIndicatorSize1.png"));
-		ImageView heroSelectionIndicator1 = new ImageView(new Image("GUIAssets/CharacterSelectionIndicatorSize1.png"));
-		ImageView enemySelectionIndicator1 = new ImageView(new Image("GUIAssets/enemySelectionIndicatorSize1.png"));
-		ImageView enemySelectionIndicator2 = new ImageView(new Image("GUIAssets/enemySelectionIndicatorSize1.png"));
-		ImageView enemySelectionIndicator3 = new ImageView(new Image("GUIAssets/enemySelectionIndicatorSize1.png"));
-		ImageView enemySelectionIndicator4 = new ImageView(new Image("GUIAssets/enemySelectionIndicatorSize1.png"));
-		
-		ImageView heroTurnTicker1 = new ImageView(new Image("GUIAssets/turnticker.png")); // var
-		ImageView heroTurnTicker2 = new ImageView(new Image("GUIAssets/turnticker.png")); // var
-		ImageView heroTurnTicker3 = new ImageView(new Image("GUIAssets/turnticker.png")); // var
-		ImageView heroTurnTicker4 = new ImageView(new Image("GUIAssets/turnticker.png")); // var
-		ImageView enemyTurnTicker1 = new ImageView(new Image("GUIAssets/turnticker.png")); // var
-		ImageView enemyTurnTicker2 = new ImageView(new Image("GUIAssets/turnticker.png")); // var
-		ImageView enemyTurnTicker3 = new ImageView(new Image("GUIAssets/turnticker.png")); // var
-		ImageView enemyTurnTicker4 = new ImageView(new Image("GUIAssets/turnticker.png")); // var
-		ImageView skillButtonSelectedFrame1 = new ImageView(new Image("GUIAssets/skillButtonSelectedFrame.png"));
-		ImageView skillButtonSelectedFrame2 = new ImageView(new Image("GUIAssets/skillButtonSelectedFrame.png"));
-		ImageView skillButtonSelectedFrame3 = new ImageView(new Image("GUIAssets/skillButtonSelectedFrame.png"));
-		ImageView skillButtonSelectedFrame4 = new ImageView(new Image("GUIAssets/skillButtonSelectedFrame.png"));
-//		ImageView skillButtonMoveSelectedFrame = new ImageView(new Image("GUIAssets/skillButtonSelectedFrame.png"));
-		
-		ImageView enemyBLDResistanceIcon = new ImageView(new Image("GUIAssets/BLDResistance.png"));
-		ImageView enemyBLGTResistanceIcon = new ImageView(new Image("GUIAssets/BLGTResistance.png"));
-		ImageView enemyBURNResistanceIcon = new ImageView(new Image("GUIAssets/BURNResistance.png"));
-		ImageView enemySTNResistanceIcon = new ImageView(new Image("GUIAssets/STNResistance.png"));
-		ImageView enemyMOVResistanceIcon = new ImageView(new Image("GUIAssets/MOVResistance.png"));
-		ImageView enemyDBFFResistanceIcon = new ImageView(new Image("GUIAssets/DBFFResistance.png"));
-		ImageView enemyDTHResistanceIcon = new ImageView(new Image("GUIAssets/DTHResistance.png"));
-		
-		ImageView combatStartImage = new ImageView(new Image("GUIAssets/combatStartImage.png"));
-		
-		ImageView menuBackground = new ImageView(new Image("GUIAssets/menuBackground.png"));
-		ImageView menuBackButtonImage = new ImageView(new Image("GUIAssets/menuBackButtonImage.png"));
-		ImageView menuButtonFrame1 = new ImageView(new Image("GUIAssets/menuButtonFrame.png"));
-		
-		ImageView enemyAttackingBloodStain  = new ImageView(new Image("GUIAssets/enemyAttackingBloodStain.png"));
-		ImageView heroAttackingBloodStain  = new ImageView(new Image("GUIAssets/heroAttackingBloodStain.png"));
-		
-//		Image backgroundImagesetup = new Image("combatBackgrounds/cryptsRoomWallDrain.png");  // var
-		Image backgroundImagesetup = new Image("combatBackgrounds/combatBackground1.png");  // var
-		BackgroundSize size = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false); // background image
-		BackgroundPosition customPosition = new BackgroundPosition(Side.LEFT, 0, true, Side.TOP, 0, true); // fit to top left
-		BackgroundImage backgroundImagePayoff = new BackgroundImage(backgroundImagesetup, BackgroundRepeat.NO_REPEAT,
-				BackgroundRepeat.NO_REPEAT, customPosition, size);
-		
+
 		FadeTransition fadeInHeroHPPos1 = FadeUtils.createFade(heroHPPos1, 0, 1, 200);
 		FadeTransition fadeInHeroHPPos2 = FadeUtils.createFade(heroHPPos2, 0, 1, 200);
 		FadeTransition fadeInHeroHPPos3 = FadeUtils.createFade(heroHPPos3, 0, 1, 200);
@@ -2656,8 +2666,17 @@ public class Main extends Application {
 				else {
 						
 					// Reset turn counter if order has been run through
+					// Reset Turn Tickers
 					if (count > 7) {
 						count = 0;
+						heroTurnTicker1.setVisible(true);
+						heroTurnTicker2.setVisible(true);
+						heroTurnTicker3.setVisible(true);
+						heroTurnTicker4.setVisible(true);
+						enemyTurnTicker1.setVisible(true);
+						enemyTurnTicker2.setVisible(true);
+						enemyTurnTicker3.setVisible(true);
+						enemyTurnTicker4.setVisible(true);
 						round++;
 					}
 					
@@ -2682,27 +2701,28 @@ public class Main extends Application {
 					
 					// Hero Health Bars:
 					heroHealthBarRedRectangle4.setWidth(tempPTeam[3].setHealthBarAmount());
-					//heroHealthBarRedRectangle4.setX(0);
 					heroHealthBarRedRectangle3.setWidth(tempPTeam[2].setHealthBarAmount());
-					//heroHealthBarRedRectangle3.setX(204);
 					heroHealthBarRedRectangle2.setWidth(tempPTeam[1].setHealthBarAmount());
-					//heroHealthBarRedRectangle2.setX(409);
 					heroHealthBarRedRectangle1.setWidth(tempPTeam[0].setHealthBarAmount());
-					//heroHealthBarRedRectangle4.setX(614);
 					
 					// Enemy Health Bars:
 					enemyHealthBarRedRectangle4.setWidth(tempETeam[3].setHealthBarAmount());
-					//enemyHealthBarRedRectangle4.setX(0);
 					enemyHealthBarRedRectangle3.setWidth(tempETeam[2].setHealthBarAmount());
-					//enemyHealthBarRedRectangle3.setX(204);
 					enemyHealthBarRedRectangle2.setWidth(tempETeam[1].setHealthBarAmount());
-					//enemyHealthBarRedRectangle2.setX(409);
 					enemyHealthBarRedRectangle1.setWidth(tempETeam[0].setHealthBarAmount());
-					//enemyHealthBarRedRectangle1.setX(614);
 				}
 			}
 
 		};
+		
+		heroSelectionIndicator4.setVisible(false);
+		heroSelectionIndicator3.setVisible(false);
+		heroSelectionIndicator2.setVisible(false);
+		heroSelectionIndicator1.setVisible(false);
+		enemySelectionIndicator1.setVisible(false);
+		enemySelectionIndicator2.setVisible(false);
+		enemySelectionIndicator3.setVisible(false);
+		enemySelectionIndicator4.setVisible(false);
 		
 		round = 1;
 		System.out.println("Starting Combat:");
