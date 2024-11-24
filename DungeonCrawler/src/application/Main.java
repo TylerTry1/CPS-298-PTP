@@ -644,6 +644,7 @@ public class Main extends Application {
 		ImageView enemyMOVResistanceIcon = new ImageView(new Image("GUIAssets/MOVResistance.png"));
 		ImageView enemyDBFFResistanceIcon = new ImageView(new Image("GUIAssets/DBFFResistance.png"));
 		ImageView enemyDTHResistanceIcon = new ImageView(new Image("GUIAssets/DTHResistance.png"));
+		ImageView enemySpeedIcon = new ImageView(new Image("GUIAssets/speedStatImage.png"));
 		
 		ImageView combatStartImage = new ImageView(new Image("GUIAssets/combatStartImage.png"));
 		
@@ -895,6 +896,10 @@ public class Main extends Application {
 		Rectangle enemyHealthBarBlackRectangle2 = new Rectangle(100, 15);
 		Rectangle enemyHealthBarBlackRectangle3 = new Rectangle(100, 15);
 		Rectangle enemyHealthBarBlackRectangle4 = new Rectangle(100, 15);
+		
+		Rectangle bottomRightHPBarRedRectangle = new Rectangle(100, 15);
+		Rectangle bottomRightHPBarBlackRectangle = new Rectangle(100, 15);
+		
 		heroHealthBarRedRectangle4.setFill(redToBlackGradient);
 	    heroHealthBarRedRectangle4.setArcWidth(5);
 	    heroHealthBarRedRectangle4.setArcHeight(5);
@@ -943,6 +948,14 @@ public class Main extends Application {
 	    enemyHealthBarBlackRectangle4.setFill(whiteToBlackGradient);
 	    enemyHealthBarBlackRectangle4.setArcWidth(5);
 	    enemyHealthBarBlackRectangle4.setArcHeight(5);
+	    
+	    bottomRightHPBarRedRectangle.setFill(redToBlackGradient);
+	    bottomRightHPBarRedRectangle.setArcWidth(5);
+	    bottomRightHPBarRedRectangle.setArcHeight(5);
+	    bottomRightHPBarBlackRectangle.setFill(whiteToBlackGradient);
+	    bottomRightHPBarBlackRectangle.setArcWidth(5);
+	    bottomRightHPBarBlackRectangle.setArcHeight(5);
+	    
 		// -------------------------------------------------------------
 
 		FadeTransition fadeInHeroHPPos1 = FadeUtils.createFade(heroHPPos1, 0, 1, 200);
@@ -2082,6 +2095,9 @@ public class Main extends Application {
 		root.getChildren().addAll(heroHealthBarRedRectangle1, heroHealthBarRedRectangle2, heroHealthBarRedRectangle3, heroHealthBarRedRectangle4);
 		root.getChildren().addAll(enemyHealthBarBlackRectangle1, enemyHealthBarBlackRectangle2, enemyHealthBarBlackRectangle3, enemyHealthBarBlackRectangle4);
 		root.getChildren().addAll(enemyHealthBarRedRectangle1, enemyHealthBarRedRectangle2, enemyHealthBarRedRectangle3, enemyHealthBarRedRectangle4);
+//		root.getChildren().add(bottomRightHPBarBlackRectangle);
+//		root.getChildren().addAll(bottomRightHPBarRedRectangle, enemySpeedIcon);
+		
 		root.getChildren().addAll(heroHPPos4,heroHPPos3,heroHPPos2,heroHPPos1);
 		root.getChildren().addAll(enemyHPPos4,enemyHPPos3,enemyHPPos2,enemyHPPos1);
 		root.getChildren().addAll(moveDescriptionText,moveDescriptionText2,moveNameText);
@@ -2216,6 +2232,21 @@ public class Main extends Application {
 		enemyTurnTicker4.setLayoutY(595);
 		// -------------------------------------------------------------
 
+//		bottomRightHPBarRedRectangle.setLayoutX(1412); extra health bar in the bottom right of the screen. scrap for now, as we would need to 
+//		bottomRightHPBarRedRectangle.setLayoutY(952); 
+//		bottomRightHPBarRedRectangle.setScaleX(1);
+//		bottomRightHPBarRedRectangle.setScaleY(1);
+//		
+//		bottomRightHPBarBlackRectangle.setLayoutX(1412);
+//		bottomRightHPBarBlackRectangle.setLayoutY(952); 
+//		bottomRightHPBarBlackRectangle.setScaleX(1);
+//		bottomRightHPBarBlackRectangle.setScaleY(1);	
+
+//		enemySpeedIcon.setLayoutX(1412);
+//		enemySpeedIcon.setLayoutY(952); 
+//		enemySpeedIcon.setScaleX(1);
+//		enemySpeedIcon.setScaleY(1);
+		
 		enemyBLDResistanceIcon.setLayoutX(1412); // these 3 assets are weird, so need eyeball'd placements.
 		enemyBLDResistanceIcon.setLayoutY(952); 
 		enemyBLGTResistanceIcon.setLayoutX(1480); 
