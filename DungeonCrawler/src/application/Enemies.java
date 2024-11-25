@@ -24,8 +24,8 @@ public class Enemies extends entities {
         int challenge; // For determine team comps (testing this)
         int speed;
         int goldValue;
-        BufferedImage idleSprite;
-        BufferedImage attackSprite;
+        String idleSprite;
+        String attackSprite;
         double bleedResist;
         double burnResist;
         double blightResist;
@@ -123,16 +123,16 @@ public class Enemies extends entities {
         	speed += adjust;
         }
         
-        BufferedImage getIdleSprite () {
+        String getIdleSprite () {
         	return idleSprite;
         }
         
         // Parameter Type made need changed, test later
-        void setIdleSprite(BufferedImage newSprite) {
+        void setIdleSprite(String newSprite) {
         	idleSprite = newSprite;
         }
         
-        BufferedImage getAttackSprite() {
+        String getAttackSprite() {
         	return attackSprite;
         }
         
@@ -180,8 +180,8 @@ public class Enemies extends entities {
 			challenge = 1;
 			speed = 5;
 			goldValue = 50;
-			idleSprite = ImageIO.read(getClass().getResource("/images/Goblin_Scout_1_Idle.png")); 
-			attackSprite = ImageIO.read(getClass().getResource("/images/Goblin_Scout_1_Attack.png"));
+			idleSprite = "/images/Goblin_Scout_1_Idle.png"; 
+			attackSprite = "/images/Goblin_Scout_1_Attack.png";
 	        bleedResist = 10;
 	        burnResist = 12;
 	        blightResist = 14;
@@ -252,8 +252,8 @@ public class Enemies extends entities {
 			challenge = 2;
 			speed = 4;
 			goldValue = 60;
-			idleSprite = ImageIO.read(getClass().getResource("/images/Goblin_axeman_1_Idle.png"));
-			attackSprite = ImageIO.read(getClass().getResource("/images/Goblin_axeman_1_Attack.png"));
+			idleSprite = "/images/Goblin_axeman_1_Idle.png";
+			attackSprite = "/images/Goblin_axeman_1_Attack.png";
 	        bleedResist = 10;
 	        burnResist = 12;
 	        blightResist = 14;
@@ -316,8 +316,8 @@ public class Enemies extends entities {
 			challenge = 1;
 			speed = 6;
 			goldValue = 60;
-			idleSprite = ImageIO.read(getClass().getResource("/images/Goblin_Archer_1_Idle.png"));
-			attackSprite = ImageIO.read(getClass().getResource("/images/Goblin_Archer_1_Attack.png"));
+			idleSprite = "/images/Goblin_Archer_1_Idle.png";
+			attackSprite = "/images/Goblin_Archer_1_Attack.png";
 	        bleedResist = 10;
 	        burnResist = 12;
 	        blightResist = 14;
@@ -381,8 +381,8 @@ public class Enemies extends entities {
 			challenge = 1;
 			speed = 6;
 			goldValue = 60;
-			idleSprite = ImageIO.read(getClass().getResource("/images/Goblin_Shaman_1_Idle.png"));
-			attackSprite = ImageIO.read(getClass().getResource("/images/Goblin_Shaman_1_Attack.png"));
+			idleSprite = "/images/Goblin_Shaman_1_Idle.png";
+			attackSprite = "/images/Goblin_Shaman_1_Attack.png";
 	        bleedResist = 10;
 	        burnResist = 12;
 	        blightResist = 14;
@@ -447,8 +447,8 @@ public class Enemies extends entities {
 			challenge = 2;
 			speed = 6;
 			goldValue = 75;
-			idleSprite = ImageIO.read(getClass().getResource("/images/Skeleton_Swordman_Idle.png"));
-			attackSprite = ImageIO.read(getClass().getResource("/images/Skeleton_Swordman_Attack.png"));
+			idleSprite = "/images/Skeleton_Swordman_Idle.png";
+			attackSprite = "/images/Skeleton_Swordman_Attack.png";
 	        bleedResist = 25;
 	        burnResist = 15;
 	        blightResist = 10;
@@ -514,8 +514,8 @@ public class Enemies extends entities {
 			challenge = 2;
 			speed = 7;
 			goldValue = 75;
-			idleSprite = ImageIO.read(getClass().getResource("/images/Skeleton-Crossbowman_Idle.png"));
-			attackSprite = ImageIO.read(getClass().getResource("/images/Skeleton-Crossbowman_Attack.png"));
+			idleSprite = "/images/Skeleton-Crossbowman_Idle.png";
+			attackSprite = "/images/Skeleton-Crossbowman_Attack.png";
 	        bleedResist = 25;
 	        burnResist = 15;
 	        blightResist = 10;
@@ -595,8 +595,8 @@ public class Enemies extends entities {
 			challenge = 3;
 			speed = 5;	  
 			goldValue = 75;
-			idleSprite = ImageIO.read(getClass().getResource("/images/Skeleton_Defender_Idle.png"));
-			attackSprite = ImageIO.read(getClass().getResource("/images/Skeleton_Defender_Attack.png"));
+			idleSprite = "/images/Skeleton_Defender_Idle.png";
+			attackSprite = "/images/Skeleton_Defender_Attack.png";
 			bleedResist = 25;
 	        burnResist = 15;
 	        blightResist = 10;
@@ -659,8 +659,8 @@ public class Enemies extends entities {
 			challenge = 2;
 			speed = 8;
 			goldValue = 80;
-			idleSprite = ImageIO.read(getClass().getResource("/images/Necromancer_Idle.png"));
-			attackSprite = ImageIO.read(getClass().getResource("/images/Necromancer_Attack.png"));
+			idleSprite = "/images/Necromancer_Idle.png";
+			attackSprite = "/images/Necromancer_Attack.png";
 	        bleedResist = 10;
 	        burnResist = 15;
 	        blightResist = 20;
@@ -728,8 +728,8 @@ public class Enemies extends entities {
 			challenge = 1;
 			speed = 0;
 			goldValue = 40;
-			idleSprite = ImageIO.read(getClass().getResource("/images/CorpsePile.png"));
-			attackSprite = ImageIO.read(getClass().getResource("/images/CorpsePile.png"));
+			idleSprite = "/images/CorpsePile.png";
+			attackSprite = "/images/CorpsePile.png";
 	        bleedResist = 0;
 	        burnResist = 0;
 	        blightResist = 0;
@@ -793,8 +793,8 @@ public class Enemies extends entities {
 			challenge = 4;
 			speed = 5;
 			goldValue = 120;
-			idleSprite = ImageIO.read(getClass().getResource("/images/Giant_Pummeler_Idle.png"));
-			attackSprite = ImageIO.read(getClass().getResource("/images/Giant_Pummeler_Attack.png"));
+			idleSprite = "/images/Giant_Pummeler_Idle.png";
+			attackSprite = "/images/Giant_Pummeler_Attack.png";
 	        bleedResist = 25;
 	        burnResist = 15;
 	        blightResist = 10;
@@ -861,8 +861,8 @@ public class Enemies extends entities {
 			challenge = 4;
 			speed = 5;
 			goldValue = 135;
-			idleSprite = ImageIO.read(getClass().getResource("/images/Giant_Slammer_Idle.png"));
-			attackSprite = ImageIO.read(getClass().getResource("/images/Giant_Slammer_Attack.png"));
+			idleSprite = "/images/Giant_Slammer_Idle.png";
+			attackSprite = "/images/Giant_Slammer_Attack.png";
 	        bleedResist = 25;
 	        burnResist = 15;
 	        blightResist = 10;
@@ -929,8 +929,8 @@ public class Enemies extends entities {
 			challenge = 2;
 			speed = 8;
 			goldValue = 65;
-			idleSprite = ImageIO.read(getClass().getResource("/images/Zombie_Peasant_Idle.png"));
-			attackSprite = ImageIO.read(getClass().getResource("/images/Zombie_Peasant-Attack.png"));
+			idleSprite = "/images/Zombie_Peasant_Idle.png";
+			attackSprite = "/images/Zombie_Peasant-Attack.png";
 	        bleedResist = 25;
 	        burnResist = 5;
 	        blightResist = 10;
@@ -993,8 +993,8 @@ public class Enemies extends entities {
 			challenge = 3;
 			speed = 5;
 			goldValue = 85;
-			idleSprite = ImageIO.read(getClass().getResource("/images/Zombie_Knight_Idle.png"));
-			attackSprite = ImageIO.read(getClass().getResource("/images/Zombie_Knight_Attack.png"));
+			idleSprite = "/images/Zombie_Knight_Idle.png";
+			attackSprite = "/images/Zombie_Knight_Attack.png";
 	        bleedResist = 25;
 	        burnResist = 10;
 	        blightResist = 10;
@@ -1057,8 +1057,8 @@ public class Enemies extends entities {
 			challenge = 4;
 			speed = 15;
 			goldValue = 150;
-			idleSprite = ImageIO.read(getClass().getResource("/images/Minotaur_Idle.png"));
-			attackSprite = ImageIO.read(getClass().getResource("/images/Minotaur_Attack.png"));
+			idleSprite = "/images/Minotaur_Idle.png";
+			attackSprite = "/images/Minotaur_Attack.png";
 	        bleedResist = 25;
 	        burnResist = 15;
 	        blightResist = 10;
@@ -1121,8 +1121,8 @@ public class Enemies extends entities {
 			challenge = 3;
 			speed = 12;
 			goldValue = 100;
-			idleSprite = ImageIO.read(getClass().getResource("/images/Boar.png"));
-			attackSprite = ImageIO.read(getClass().getResource("/images/Boar.png"));
+			idleSprite = "/images/Boar.png";
+			attackSprite = "/images/Boar.png";
 	        bleedResist = 25;
 	        burnResist = 15;
 	        blightResist = 10;

@@ -511,8 +511,13 @@ public class Main extends Application {
 		Cursor customCursor = Cursor.cursor(cursorImage.getUrl());
 		
 		String heroName = "hero name Variable"; // this will be used for our hero's name to change. // var
+		Text heroNameText = new Text(heroName);
 		String enemyName = "enemy name Variable"; // var
 		String moveName = "moveName";
+		
+		Text moveDescriptionText = new Text ("DMG:  CRIT:(critpercent)"); // var
+		Text moveDescriptionText2 = new Text ("moveDesc");
+		Text moveNameText = new Text (moveName); // var
 		
 		// music player
 		Media media = new Media(combatMusic);
@@ -677,7 +682,8 @@ public class Main extends Application {
 											heroTurnTicker1, heroTurnTicker2, heroTurnTicker3, heroTurnTicker4,
 											enemyTurnTicker1, enemyTurnTicker2, enemyTurnTicker3, enemyTurnTicker4,
 											heroSelectionIndicator4, heroSelectionIndicator3, heroSelectionIndicator2, heroSelectionIndicator1,
-											enemySelectionIndicator1, enemySelectionIndicator2, enemySelectionIndicator3, enemySelectionIndicator4);
+											enemySelectionIndicator1, enemySelectionIndicator2, enemySelectionIndicator3, enemySelectionIndicator4,
+											heroNameText, moveDescriptionText);
 		flow.createEnemyTeam();
 		flow.adjustSpeeds();
 		flow.determineTurnOrder();
@@ -692,19 +698,18 @@ public class Main extends Application {
 		Timer timer = new Timer();
 		//--------------------------------------------------------------------------------------------------------
 		
-	    Image image1 = SwingFXUtils.toFXImage(tempETeam[0].getIdleSprite(), null);
-		ImageView enemyInPosition1 = new ImageView(image1); // var
-		Image image2 = SwingFXUtils.toFXImage(tempETeam[1].getIdleSprite(), null);
-		ImageView enemyInPosition2 = new ImageView(image2); // var
-		Image image3 = SwingFXUtils.toFXImage(tempETeam[2].getIdleSprite(), null);
-		ImageView enemyInPosition3 = new ImageView(image3); // var
-		Image image4 = SwingFXUtils.toFXImage(tempETeam[3].getIdleSprite(), null);
-		ImageView enemyInPosition4 = new ImageView(image4); // var
+	    String image1 = tempETeam[0].getIdleSprite();
+		ImageView enemyInPosition1 = new ImageView(new Image(image1)); 
+		String image2 = tempETeam[1].getIdleSprite();
+		ImageView enemyInPosition2 = new ImageView(new Image(image2)); 
+		String image3 = tempETeam[2].getIdleSprite();
+		ImageView enemyInPosition3 = new ImageView(new Image(image3)); 
+		String image4 = tempETeam[3].getIdleSprite();
+		ImageView enemyInPosition4 = new ImageView(new Image(image4));
 		
 		Button menuBackButton = new Button ("Back"); 	
 		Button menuQuitButton = new Button ("Quit Game");
 		
-		Text heroNameText = new Text(heroName);
 		Text enemyNameText = new Text(enemyName);
 		Text enemyBleedResistanceNumberText = new Text("BLD");
 		Text enemyBlightResistanceNumberText = new Text("BLGT");
@@ -751,9 +756,6 @@ public class Main extends Application {
 		Text enemyHPPos4 = new Text ("enemyHPPos4"); // var
 		Text roundNumberText = new Text ("0"); // var + roundCounter
 		
-		Text moveDescriptionText = new Text ("DMG:  CRIT:(critpercent)"); // var
-		Text moveDescriptionText2 = new Text ("moveDesc");
-		Text moveNameText = new Text (moveName); // var
 		
 		Text menuQuitGameText = new Text ("Quit Game");
 		
@@ -1413,22 +1415,22 @@ public class Main extends Application {
 		skillbutton2Alchemist.setOpacity(0);
 		skillbutton3Alchemist.setOpacity(0);
 		skillbutton4Alchemist.setOpacity(0);
-		skillbutton1Paladin.setMouseTransparent(true); // cant click the button
-		skillbutton2Paladin.setMouseTransparent(true);
-		skillbutton3Paladin.setMouseTransparent(true);
-		skillbutton4Paladin.setMouseTransparent(true);
-		skillbutton1Assassin.setMouseTransparent(true); 
-		skillbutton2Assassin.setMouseTransparent(true);
-		skillbutton3Assassin.setMouseTransparent(true);
-		skillbutton4Assassin.setMouseTransparent(true);
-		skillbutton1Wizard.setMouseTransparent(true);
-		skillbutton2Wizard.setMouseTransparent(true);
-		skillbutton3Wizard.setMouseTransparent(true);
-		skillbutton4Wizard.setMouseTransparent(true);
-		skillbutton1Alchemist.setMouseTransparent(true);
-		skillbutton2Alchemist.setMouseTransparent(true);
-		skillbutton3Alchemist.setMouseTransparent(true);
-		skillbutton4Alchemist.setMouseTransparent(true);
+//		skillbutton1Paladin.setMouseTransparent(true); // cant click the button
+//		skillbutton2Paladin.setMouseTransparent(true);
+//		skillbutton3Paladin.setMouseTransparent(true);
+//		skillbutton4Paladin.setMouseTransparent(true);
+//		skillbutton1Assassin.setMouseTransparent(true); 
+//		skillbutton2Assassin.setMouseTransparent(true);
+//		skillbutton3Assassin.setMouseTransparent(true);
+//		skillbutton4Assassin.setMouseTransparent(true);
+//		skillbutton1Wizard.setMouseTransparent(true);
+//		skillbutton2Wizard.setMouseTransparent(true);
+//		skillbutton3Wizard.setMouseTransparent(true);
+//		skillbutton4Wizard.setMouseTransparent(true);
+//		skillbutton1Alchemist.setMouseTransparent(true);
+//		skillbutton2Alchemist.setMouseTransparent(true);
+//		skillbutton3Alchemist.setMouseTransparent(true);
+//		skillbutton4Alchemist.setMouseTransparent(true);
 
 		
 		skillbuttonimage1Paladin.setOpacity(00);
@@ -2727,7 +2729,7 @@ public class Main extends Application {
 					roundNumberText.setText("Round " + String.valueOf(round));
 					
 					// Current Characters Info (Update to move info once skills are finished)
-					heroNameText.setText(flow.getCurrent().getName());
+					//heroNameText.setText(flow.getCurrent().getName());
 					moveDescriptionText.setText("DMG: " + flow.getCurrent().getDamage() + " Crit %: " + flow.getCurrent().getCritChance());
 					
 					// Hero Health Bars:
@@ -2757,13 +2759,25 @@ public class Main extends Application {
 		
 		round = 1;
 		System.out.println("Starting Combat:");
-		timer.schedule(task, 0, 5000);
+		timer.schedule(task, 0, 3000);
 		
-		// Figure out game over scene change still
-		if(tempPTeamArray.checkGameOver()) {
-			gameOver(primaryStage);
-			mediaPlayer.stop();
+		/*
+		while (!gameOver) {
+		
+			// Figure out game over scene change still
+			if(tempPTeamArray.checkGameOver()) {
+				gameOver = true;
+				gameOver(primaryStage);
+				mediaPlayer.stop();
+			}
+			
+			else if (tempETeamArray.checkGameOver()) {
+				gameOver = true;
+				goldEarned(primaryStage);
+				mediaPlayer.stop();
+			}
 		}
+		*/
 		
 		/*
 		else if (tempETeamArray.checkGameOver()) {

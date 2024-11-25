@@ -9,6 +9,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 
 public class combatFlow {
 
@@ -65,6 +66,8 @@ public class combatFlow {
 	ImageView enemySelectionIndicator2 = new ImageView();
 	ImageView enemySelectionIndicator3 = new ImageView();
 	ImageView enemySelectionIndicator4 = new ImageView();
+	Text heroNameText = new Text();
+	Text moveDescriptionText = new Text();
 	
 	int roundCounter = 0;
 	int max = 2;
@@ -111,7 +114,8 @@ public class combatFlow {
 							ImageView htt1, ImageView htt2, ImageView htt3, ImageView htt4,
 							ImageView ett1, ImageView ett2, ImageView ett3, ImageView ett4,
 							ImageView hsi4, ImageView hsi3, ImageView hsi2, ImageView hsi1,
-							ImageView esi1, ImageView esi2, ImageView esi3, ImageView esi4){ 
+							ImageView esi1, ImageView esi2, ImageView esi3, ImageView esi4,
+							Text hNT, Text mDT){ 
 			
 			enemyPosition1 = e1;										  					 
 			enemyPosition2 = e2;
@@ -165,6 +169,8 @@ public class combatFlow {
 			enemySelectionIndicator2 = esi2;
 			enemySelectionIndicator3 = esi3;
 			enemySelectionIndicator4 = esi4;
+			heroNameText = hNT;
+			moveDescriptionText = mDT;
 		}
 	
 	// Temp function for testing player input: 
@@ -705,6 +711,8 @@ public class combatFlow {
 				
 				if (current instanceof Paladin) {
 					System.out.println(((Characters) current).getName() + "'s Turn.");
+					heroNameText.setText(((Characters) current).getName());
+					moveDescriptionText.setText("DMG: " + ((Characters) current).getDamage() + " Crit %: " + ((Characters) current).getCritChance());
 					
 					if(((Characters)current).getHealth() == 0) {
 						System.out.println(((Characters) current).getName() + " is downed.");
@@ -743,6 +751,8 @@ public class combatFlow {
 				}
 				else if (current instanceof Assassin) {
 					System.out.println(((Characters) current).getName() + "'s Turn.");
+					heroNameText.setText(((Characters) current).getName());
+					moveDescriptionText.setText("DMG: " + ((Characters) current).getDamage() + " Crit %: " + ((Characters) current).getCritChance());
 					
 					if(((Characters)current).getHealth() == 0) {
 						System.out.println(((Characters) current).getName() + " is downed.");
@@ -782,6 +792,8 @@ public class combatFlow {
 					
 				else if (current instanceof Wizard) {
 					System.out.println(((Characters) current).getName() + "'s Turn.");
+					heroNameText.setText(((Characters) current).getName());
+					moveDescriptionText.setText("DMG: " + ((Characters) current).getDamage() + " Crit %: " + ((Characters) current).getCritChance());
 					
 					if(((Characters)current).getHealth() == 0) {
 						System.out.println(((Characters) current).getName() + " is downed.");
@@ -820,6 +832,8 @@ public class combatFlow {
 				}
 				else if (current instanceof Alchemist) {
 					System.out.println(((Characters) current).getName() + "'s Turn.");
+					heroNameText.setText(((Characters) current).getName());
+					moveDescriptionText.setText("DMG: " + ((Characters) current).getDamage() + " Crit %: " + ((Characters) current).getCritChance());
 					
 					if(((Characters)current).getHealth() == 0) {
 						System.out.println(((Characters) current).getName() + " is downed.");
