@@ -1,6 +1,9 @@
 package application;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -12,7 +15,6 @@ import javafx.animation.SequentialTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Insets;
 import javafx.geometry.Side;
 import javafx.scene.Cursor;
@@ -34,7 +36,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
@@ -75,6 +76,7 @@ public class Main extends Application {
 		initialization(primaryStage);
 //		shop(primaryStage);
 //		gameOver(primaryStage);
+//		test(primaryStage);
 	}
 
 	private void initialization(Stage primaryStage) { // this scene is used specifically so that we can make our application full screen.
@@ -1034,8 +1036,8 @@ public class Main extends Application {
 		enemyInPosition2.setScaleY(.85);
 		enemyInPosition3.setScaleX(.75);
 		enemyInPosition3.setScaleY(.85);
-		enemyInPosition4.setScaleX(1);	
-		enemyInPosition4.setScaleY(1.1);
+		enemyInPosition4.setScaleX(.75);	
+		enemyInPosition4.setScaleY(.85);
 		heroInPosition1.setScaleX(.55);
 		heroInPosition1.setScaleY(.65); 
 		heroInPosition2.setScaleX(.45);
@@ -2470,13 +2472,13 @@ public class Main extends Application {
 		// -------------------------------------------------------------
 		// Manually position the images on top of the buttons
 		enemyInPosition1.setLayoutX(875); // spacing of 205 in between each.
-		enemyInPosition1.setLayoutY(190);
+		enemyInPosition1.setLayoutY(130);
 		enemyInPosition2.setLayoutX(1080);
-		enemyInPosition2.setLayoutY(190);
+		enemyInPosition2.setLayoutY(130);
 		enemyInPosition3.setLayoutX(1235);
-		enemyInPosition3.setLayoutY(190);
+		enemyInPosition3.setLayoutY(130);
 		enemyInPosition4.setLayoutX(1460);
-		enemyInPosition4.setLayoutY(155);
+		enemyInPosition4.setLayoutY(130);
 		// -------------------------------------------------------------
 		heroInPosition1.setLayoutX(585); // spacing of 205 in between each.
 		heroInPosition1.setLayoutY(190);
@@ -3545,7 +3547,59 @@ public class Main extends Application {
 		primaryStage.show();
 	}
 	
-	
+	public void test(Stage primaryStage) {
+	    Pane root = new Pane();
+	    List<ImageView> imageViews = new ArrayList<>();
+
+	    // Hardcoded image paths
+	    String[] imagePaths = {
+	        "/images/Giant_Slammer_Idle.png",
+	        "/images/Goblin_axeman_1_Idle.png",
+	        "/images/Goblin_axeman_1_Attack.png"
+	    };
+
+	    // Set the "floor" position
+	    double floorY = 400;
+
+	    // Determine the tallest image
+	    double maxHeight = 0;
+
+	    for (String path : imagePaths) {
+	        try {
+	            URL resource = getClass().getResource(path);
+	            if (resource == null) {
+	                System.err.println("Image not found: " + path);
+	                continue; // Skip if not found
+	            }
+
+	            Image image = new Image(resource.toString());
+	            ImageView imageView = new ImageView(image);
+	            maxHeight = Math.max(maxHeight, image.getHeight());
+	            imageViews.add(imageView);
+	        } catch (Exception e) {
+	            System.err.println("Error loading image: " + path);
+	            e.printStackTrace();
+	        }
+	    }
+
+	    // Adjust images to align their feet
+	    double xPosition = 50; // Starting x position
+	    for (ImageView imageView : imageViews) {
+	        double offset = maxHeight - imageView.getImage().getHeight();
+	        imageView.setLayoutX(xPosition); // Arrange horizontally
+	        imageView.setLayoutY(floorY - imageView.getImage().getHeight() + offset);
+	        xPosition += imageView.getImage().getWidth() + 20; // Add spacing
+	        root.getChildren().add(imageView);
+	    }
+
+	    // Create the scene and display it
+	    Scene scene = new Scene(root, 800, 600);
+	    primaryStage.setTitle("Align Images by Feet");
+	    primaryStage.setScene(scene);
+	    primaryStage.show();
+	}
+
+
 //	private void textTutorial(Stage primaryStage) {
 //		Image cursorImage = new Image("GUIAssets/cursor.png");
 //		Cursor customCursor = Cursor.cursor(cursorImage.getUrl());
