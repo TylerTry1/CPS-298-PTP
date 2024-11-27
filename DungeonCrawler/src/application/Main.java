@@ -9,12 +9,16 @@ import java.util.TimerTask;
 
 import application.combatFlow.combatControl;
 import javafx.animation.FadeTransition;
+import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.SequentialTransition;
+import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Side;
 import javafx.scene.Cursor;
@@ -63,9 +67,15 @@ public class Main extends Application {
 	Media mediaPath3 = new Media(shopMusic);
 	String gameOver =  getClass().getResource("/Music/gameOver.mp3").toExternalForm();
 	Media mediaPath4 = new Media(gameOver);
+	//-----------------------------------------
+	// Combat Stuff
 	int count = 0; // For use in combat
 	int round = 0;
 	int fightsWon = 0;
+	int goldEarnedAmount = 0;
+	int playerGoldAmount = 0;
+	//-----------------------------------------
+	
 	
 	Font KingArthurLegend = Font.loadFont(getClass().getResourceAsStream("/fonts/KingArthurLegend.ttf"), 40);
 	Font Ubuntu = Font.loadFont(getClass().getResourceAsStream("/fonts/UbuntuRegular.ttf"), 40);
@@ -207,6 +217,10 @@ public class Main extends Application {
 	
 	private void homePage(Stage primaryStage) {
 
+		fightsWon = 0;
+		goldEarnedAmount = 0;
+		playerGoldAmount = 0;
+		
 		Rectangle transitionCoverExit = new Rectangle(400, 20, Color.BLACK); // Black rectangle
 		
 		TranslateTransition transitionExit = new TranslateTransition(Duration.seconds(1.5), transitionCoverExit);
@@ -707,7 +721,7 @@ public class Main extends Application {
 		Enemies[] tempETeam = tempETeamArray.getTeam();
 		count = 0;
 		round = 0;
-		boolean gameOver = false;
+		boolean gameOverBool = false;
 		Timer timer = new Timer();
 		//--------------------------------------------------------------------------------------------------------
 		
@@ -1041,14 +1055,14 @@ public class Main extends Application {
 		
 		// -------------------------------------------------------------
 		// Set the size of the images to match the button size
-		enemyInPosition1.setScaleX(.75);
-		enemyInPosition1.setScaleY(.85); 
-		enemyInPosition2.setScaleX(.75);
-		enemyInPosition2.setScaleY(.85);
-		enemyInPosition3.setScaleX(.75);
-		enemyInPosition3.setScaleY(.85);
-		enemyInPosition4.setScaleX(.75);	
-		enemyInPosition4.setScaleY(.85);
+		enemyInPosition1.setScaleX(.55);
+		enemyInPosition1.setScaleY(.65); 
+		enemyInPosition2.setScaleX(.55);
+		enemyInPosition2.setScaleY(.65);
+		enemyInPosition3.setScaleX(.55);
+		enemyInPosition3.setScaleY(.65);
+		enemyInPosition4.setScaleX(.55);	
+		enemyInPosition4.setScaleY(.65);
 		heroInPosition1.setScaleX(.55);
 		heroInPosition1.setScaleY(.65); 
 		heroInPosition2.setScaleX(.45);
@@ -2687,9 +2701,38 @@ public class Main extends Application {
 			mediaPlayer.stop(); // Stop the music when the stage is closed
 		});
 		
+		// This will be what we implement and add animation stuff to 
+		// when we get to that stage: 
+		
+		boolean tempSwitch = false;
+		
+		Timeline sceneSwitch = new Timeline(
+                			new KeyFrame(Duration.seconds(1), 
+                			new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+                //System.out.println("this is called every 5 seconds on UI thread");
+				if (tempPTeamArray.checkGameOver() ) {
+					gameOver(primaryStage);
+					mediaPlayer.stop();
+				}
+					
+				else if (tempETeamArray.checkGameOver()){
+					goldEarned(primaryStage);
+					mediaPlayer.stop();
+				}
+            }
+        }));
+		//fiveSecondsCombat.setCycleCount(Timeline.INDEFINITE); // Probably won't be indefinite, have to look into this
+		//fiveSecondsCombat.play();
+		
+		
 		// This task checks if either team is dead, and if not
 		// runs the primary combat control method.
 		TimerTask task = new TimerTask() {
+			
+			boolean tempGameOver = false;
 			
 			@Override
 			public void run() {
@@ -2697,12 +2740,23 @@ public class Main extends Application {
 					
 					if(tempPTeamArray.checkGameOver()) {
 						System.out.println("Player Team Defeated. Game Over.");
+						tempGameOver = true;
+						sceneSwitch.setCycleCount(1);
+						sceneSwitch.play();
 						timer.cancel();
 						timer.purge();
+						
 					}
 					else if (tempETeamArray.checkGameOver()) {
 						System.out.println("Enemy Team Defeated. Round Over.");
 						fightsWon++;
+						int tempGold = 0;
+						for (Enemies enemy : tempETeam) {
+							tempGold += enemy.getGoldValue();
+						}
+						goldEarnedAmount = tempGold;
+						sceneSwitch.setCycleCount(1);
+						sceneSwitch.play();
 						timer.cancel();
 						timer.purge();
 						// Shop Scene, continue to next round?
@@ -2774,58 +2828,6 @@ public class Main extends Application {
 		System.out.println("Starting Combat:");
 		timer.schedule(task, 0, 3000);
 		
-		/*
-		while (!gameOver) {
-		
-			// Figure out game over scene change still
-			if(tempPTeamArray.checkGameOver()) {
-				gameOver = true;
-				gameOver(primaryStage);
-				mediaPlayer.stop();
-			}
-			
-			else if (tempETeamArray.checkGameOver()) {
-				gameOver = true;
-				goldEarned(primaryStage);
-				mediaPlayer.stop();
-			}
-		}
-		*/
-		
-		/*
-		else if (tempETeamArray.checkGameOver()) {
-			
-		}
-		*/
-		
-		
-		// This will be what we implement and add animation stuff to 
-		// when we get to that stage: 
-		/*
-		Timeline fiveSecondsCombat = new Timeline(
-                			new KeyFrame(Duration.seconds(5), 
-                			new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent event) {
-                //System.out.println("this is called every 5 seconds on UI thread");
-				if (tempPTeamArray.checkGameOver() || tempETeamArray.checkGameOver()) {
-					System.out.println("Game Over.");
-				}
-					
-				else {
-						
-					// Reset turn counter if order has been run through
-					if (count > 7)
-						count = 0;
-					
-					count = flow.runCombat(count);
-				}
-            }
-        }));
-		fiveSecondsCombat.setCycleCount(Timeline.INDEFINITE); // Probably won't be indefinite, have to look into this
-		fiveSecondsCombat.play();
-		*/
 
 	}
 	
@@ -2864,7 +2866,7 @@ public class Main extends Application {
 		Text item1Price = new Text("1");
 		Text item2Price = new Text("2");
 		Text item3Price = new Text("3");
-		Text playerGold = new Text("playerGold");
+		Text playerGold = new Text("Current Gold: " + Integer.toString(playerGoldAmount));
 		Text purchaseConfirmationText = new Text("Buy (item) for (char) (-X Gold)");
 		Text exitShopText = new Text("exit shop");
 
@@ -3263,6 +3265,10 @@ public class Main extends Application {
 	
 	private void gameOver(Stage primaryStage) {
 
+		fightsWon = 0;
+		goldEarnedAmount = 0;
+		playerGoldAmount = 0;
+		
 		Rectangle transitionCoverEnter = new Rectangle(400, 20, Color.BLACK); // Black rectangle
 		Rectangle transitionCoverExit = new Rectangle(400, 20, Color.BLACK); // Black rectangle
 
@@ -3438,6 +3444,7 @@ public class Main extends Application {
 	
 	private void goldEarned(Stage primaryStage) {
 
+		playerGoldAmount += goldEarnedAmount;
 		Rectangle transitionCoverEnter = new Rectangle(400, 20, Color.BLACK); // Black rectangle
 		Rectangle transitionCoverExit = new Rectangle(400, 20, Color.BLACK); // Black rectangle
 		
@@ -3471,7 +3478,7 @@ public class Main extends Application {
 
 		Text toShopText = new Text("Shop");
 		Text goldEarnedText = new Text("Gold Earned");
-		Text goldEarnedVarText = new Text("goldEarnedVar"); // var
+		Text goldEarnedVarText = new Text(Integer.toString(goldEarnedAmount)); // var
 
 	
 

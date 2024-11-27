@@ -45,6 +45,7 @@ public class Shop {
 		pullList.add(smellingSalts);
 		pullList.add(strengtheningTonic);
 		pullList.add(wheatstone);
+		pullList.add(clinic);
 		
 		//will remove items = to the difference between the size and the amount wanted this ensures no duplicates
 		for(int i = 0; i < pullList.size() - ammount; i++) {

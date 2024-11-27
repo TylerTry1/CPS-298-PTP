@@ -169,7 +169,7 @@ public class Enemies extends entities {
 			name = "Goblin Scout";
 			maxHealth = 24;
 			health = 24;
-			damage[0] = 7.0;
+			damage[0] = 3.5;
 			placeholderDamage[0] = 0;
 			defense = 0;
 			accuracy = 0; 
@@ -241,7 +241,7 @@ public class Enemies extends entities {
 			name = "Goblin Axeman";
 			maxHealth = 32;
 			health = 32;
-			damage[0] = 15.0;
+			damage[0] = 7.5;
 			placeholderDamage[0] = 0.0;
 			defense = 0;
 			accuracy = 0;
@@ -305,7 +305,7 @@ public class Enemies extends entities {
 			name = "Goblin Archer";
 			maxHealth = 28;
 			health = 28;
-			damage[0] = 10;
+			damage[0] = 5;
 			placeholderDamage[0] = 0;
 			defense = 0;
 			accuracy = 0;
@@ -370,7 +370,7 @@ public class Enemies extends entities {
 			name = "Goblin Shaman";
 			maxHealth = 20;
 			health = 20;
-			damage[0] = 4;
+			damage[0] = 2;
 			placeholderDamage[0] = 0;
 			defense = 0;
 			accuracy = 0;
@@ -436,7 +436,7 @@ public class Enemies extends entities {
 			name = "Skeleton Swordsman";
 			maxHealth = 28;
 			health = 28;
-			damage[0] = 12;
+			damage[0] = 6;
 			placeholderDamage[0] = 0;
 			defense = 0;
 			accuracy = 0;
@@ -503,7 +503,7 @@ public class Enemies extends entities {
 			name = "Skeleton Crossbowmen";
 			maxHealth = 25;
 			health = 25;
-			damage[0] = 10;
+			damage[0] = 5;
 			placeholderDamage[0] = 0;
 			defense = 0;
 			accuracy = 0;
@@ -584,7 +584,7 @@ public class Enemies extends entities {
 			name = "Skeleton Defender";
 			maxHealth = 35;
 			health = 35;
-			damage[0] = 15;
+			damage[0] = 7.5;
 			placeholderDamage[0] = 0;
 			defense = 0;
 			accuracy = 0;
@@ -648,7 +648,7 @@ public class Enemies extends entities {
 			name = "Necromancer";
 			maxHealth = 25;
 			health = 25;
-			damage[0] = 12; 
+			damage[0] = 6; 
 			placeholderDamage[0] = 0;
 			defense = 0;
 			accuracy = 0;
@@ -782,7 +782,7 @@ public class Enemies extends entities {
 			name = "Giant Pummeler";
 			maxHealth = 50;
 			health = 50;
-			damage[0] = 25;
+			damage[0] = 12.5;
 			placeholderDamage[0] = 0;
 			defense = 0;
 			accuracy = 0;
@@ -850,7 +850,7 @@ public class Enemies extends entities {
 			name = "Giant Slammer";
 			maxHealth = 60;
 			health = 60;
-			damage[0] = 30;
+			damage[0] = 15;
 			placeholderDamage[0] = 0;
 			defense = 0;
 			accuracy = 0;
@@ -918,7 +918,7 @@ public class Enemies extends entities {
 			name = "Zombie Peasant";
 			maxHealth = 18;
 			health = 18;
-			damage[0] = 10;
+			damage[0] = 5;
 			placeholderDamage[0] = 0;
 			defense = 0;
 			accuracy = 0;
@@ -982,7 +982,7 @@ public class Enemies extends entities {
 			name = "Zombie Knight";
 			maxHealth = 35;
 			health = 35;
-			damage[0] = 25;
+			damage[0] = 12.5;
 			placeholderDamage[0] = 0;
 			defense = 0;
 			accuracy = 0;
@@ -1046,7 +1046,7 @@ public class Enemies extends entities {
 			name = "Minotaur";
 			maxHealth = 65;
 			health = 65;
-			damage[0] = 30;
+			damage[0] = 15;
 			placeholderDamage[0] = 0;
 			defense = 0;
 			accuracy = 0;
@@ -1110,7 +1110,7 @@ public class Enemies extends entities {
 			name = "Boar";
 			maxHealth = 40;
 			health = 40;
-			damage[0] = 18;
+			damage[0] = 9;
 			placeholderDamage[0] = 0;
 			defense = 0;
 			accuracy = 0;
