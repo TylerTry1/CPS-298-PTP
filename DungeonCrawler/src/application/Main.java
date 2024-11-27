@@ -241,7 +241,7 @@ public class Main extends Application {
 
 	    Media media = new Media(menuMusic);
 	    MediaPlayer mediaPlayer = new MediaPlayer(media);
-	    mediaPlayer.setVolume(0.00); // Volume level (0.0 to 1.0) use 0.05
+	    mediaPlayer.setVolume(0.05); // Volume level (0.0 to 1.0) use 0.05
 	    mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE); // Loop the music
 	    mediaPlayer.play(); // music player
 
@@ -538,7 +538,7 @@ public class Main extends Application {
 		// music player
 		Media media = new Media(combatMusic);
 		MediaPlayer mediaPlayer = new MediaPlayer(media);
-		mediaPlayer.setVolume(0.00); // Volume level (0.0 to 1.0) use 0.05
+		mediaPlayer.setVolume(0.05); // Volume level (0.0 to 1.0) use 0.05
 		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE); // Loop the music
 		mediaPlayer.play(); // music player
 
@@ -666,6 +666,11 @@ public class Main extends Application {
 		ImageView enemyDBFFResistanceIcon = new ImageView(new Image("GUIAssets/DBFFResistance.png"));
 		ImageView enemyDTHResistanceIcon = new ImageView(new Image("GUIAssets/DTHResistance.png"));
 		ImageView enemySpeedIcon = new ImageView(new Image("GUIAssets/speedStatImage.png"));
+		
+		ImageView deathblowEnemy1 = new ImageView(new Image("GUIAssets/deathblow.png"));
+		ImageView deathblowEnemy2 = new ImageView(new Image("GUIAssets/deathblow.png"));
+		ImageView deathblowEnemy3 = new ImageView(new Image("GUIAssets/deathblow.png"));
+		ImageView deathblowEnemy4 = new ImageView(new Image("GUIAssets/deathblow.png"));
 		
 		ImageView combatStartImage = new ImageView(new Image("GUIAssets/combatStartImage.png"));
 		
@@ -2130,6 +2135,7 @@ public class Main extends Application {
 		root.getChildren().addAll(heroHPPos4,heroHPPos3,heroHPPos2,heroHPPos1);
 		root.getChildren().addAll(enemyHPPos4,enemyHPPos3,enemyHPPos2,enemyHPPos1);
 		root.getChildren().addAll(moveDescriptionText,moveDescriptionText2,moveNameText);
+		root.getChildren().addAll(deathblowEnemy1,deathblowEnemy2,deathblowEnemy3,deathblowEnemy4);
 		
 		root.getChildren().add(combatStartImage);
 		
@@ -2171,7 +2177,7 @@ public class Main extends Application {
 		heroPositions.setLayoutY(250); // Position Y for hero positions
 
 		enemyPositions.setLayoutX(1025); // Position X for enemy positions
-		enemyPositions.setLayoutY(250); // Position Y for enemy positions
+		enemyPositions.setLayoutY(300); // Position Y for enemy positions
 		
 		heroNameText.setLayoutX(0); // hero's name
 		heroNameText.setLayoutY(750);
@@ -2200,40 +2206,40 @@ public class Main extends Application {
 		// -------------------------------------------------------------
 		//health bars
 		heroHealthBarRedRectangle1.setLayoutX(770); // 205 spacing
-		heroHealthBarRedRectangle1.setLayoutY(600);
+		heroHealthBarRedRectangle1.setLayoutY(680);
 		heroHealthBarRedRectangle2.setLayoutX(565);
-		heroHealthBarRedRectangle2.setLayoutY(600);
+		heroHealthBarRedRectangle2.setLayoutY(680);
 		heroHealthBarRedRectangle3.setLayoutX(360);
-		heroHealthBarRedRectangle3.setLayoutY(600);
+		heroHealthBarRedRectangle3.setLayoutY(680);
 		heroHealthBarRedRectangle4.setLayoutX(155);
-		heroHealthBarRedRectangle4.setLayoutY(600);
+		heroHealthBarRedRectangle4.setLayoutY(680);
 		
 		heroHealthBarBlackRectangle1.setLayoutX(770);
-		heroHealthBarBlackRectangle1.setLayoutY(600);
+		heroHealthBarBlackRectangle1.setLayoutY(680);
 		heroHealthBarBlackRectangle2.setLayoutX(565);
-		heroHealthBarBlackRectangle2.setLayoutY(600);
+		heroHealthBarBlackRectangle2.setLayoutY(680);
 		heroHealthBarBlackRectangle3.setLayoutX(360);
-		heroHealthBarBlackRectangle3.setLayoutY(600);
+		heroHealthBarBlackRectangle3.setLayoutY(680);
 		heroHealthBarBlackRectangle4.setLayoutX(155);
-		heroHealthBarBlackRectangle4.setLayoutY(600);
+		heroHealthBarBlackRectangle4.setLayoutY(680);
 
 		enemyHealthBarRedRectangle1.setLayoutX(1055);
-		enemyHealthBarRedRectangle1.setLayoutY(600);
+		enemyHealthBarRedRectangle1.setLayoutY(680);
 		enemyHealthBarRedRectangle2.setLayoutX(1260);
-		enemyHealthBarRedRectangle2.setLayoutY(600);
+		enemyHealthBarRedRectangle2.setLayoutY(680);
 		enemyHealthBarRedRectangle3.setLayoutX(1465);
-		enemyHealthBarRedRectangle3.setLayoutY(600);
+		enemyHealthBarRedRectangle3.setLayoutY(680);
 		enemyHealthBarRedRectangle4.setLayoutX(1670);
-		enemyHealthBarRedRectangle4.setLayoutY(600);
+		enemyHealthBarRedRectangle4.setLayoutY(680);
 		
 		enemyHealthBarBlackRectangle1.setLayoutX(1055);
-		enemyHealthBarBlackRectangle1.setLayoutY(600);
+		enemyHealthBarBlackRectangle1.setLayoutY(680);
 		enemyHealthBarBlackRectangle2.setLayoutX(1260);
-		enemyHealthBarBlackRectangle2.setLayoutY(600);
+		enemyHealthBarBlackRectangle2.setLayoutY(680);
 		enemyHealthBarBlackRectangle3.setLayoutX(1465);
-		enemyHealthBarBlackRectangle3.setLayoutY(600);
+		enemyHealthBarBlackRectangle3.setLayoutY(680);
 		enemyHealthBarBlackRectangle4.setLayoutX(1670);
-		enemyHealthBarBlackRectangle4.setLayoutY(600);
+		enemyHealthBarBlackRectangle4.setLayoutY(680);
 		// -------------------------------------------------------------
 		moveDescriptionText.setLayoutX(25);
 		moveDescriptionText.setLayoutY(800);
@@ -2243,22 +2249,22 @@ public class Main extends Application {
 		moveNameText.setLayoutY(800);
 		// -------------------------------------------------------------
 		heroTurnTicker1.setLayoutX(255);// 205 spacing
-		heroTurnTicker1.setLayoutY(595);
+		heroTurnTicker1.setLayoutY(675);
 		heroTurnTicker2.setLayoutX(460); 
-		heroTurnTicker2.setLayoutY(595);
+		heroTurnTicker2.setLayoutY(675);
 		heroTurnTicker3.setLayoutX(665);
-		heroTurnTicker3.setLayoutY(595);
+		heroTurnTicker3.setLayoutY(675);
 		heroTurnTicker4.setLayoutX(870);
-		heroTurnTicker4.setLayoutY(595);
+		heroTurnTicker4.setLayoutY(675);
 		// -------------------------------------------------------------
 		enemyTurnTicker1.setLayoutX(1155); // 205 spacing
-		enemyTurnTicker1.setLayoutY(595); 
+		enemyTurnTicker1.setLayoutY(675); 
 		enemyTurnTicker2.setLayoutX(1360);
-		enemyTurnTicker2.setLayoutY(595);
+		enemyTurnTicker2.setLayoutY(675);
 		enemyTurnTicker3.setLayoutX(1565);
-		enemyTurnTicker3.setLayoutY(595);
+		enemyTurnTicker3.setLayoutY(675);
 		enemyTurnTicker4.setLayoutX(1770);
-		enemyTurnTicker4.setLayoutY(595);
+		enemyTurnTicker4.setLayoutY(675);
 		// -------------------------------------------------------------
 
 //		bottomRightHPBarRedRectangle.setLayoutX(1412); extra health bar in the bottom right of the screen. scrap for now, as we would need to 
@@ -2440,79 +2446,79 @@ public class Main extends Application {
 		
 		
 		heroHPPos4.setLayoutX(180); //92
-		heroHPPos4.setLayoutY(650); 
+		heroHPPos4.setLayoutY(730); 
 		heroHPPos4.setScaleX(.5); 
 		heroHPPos4.setScaleY(.5); 
 		
 		heroHPPos3.setLayoutX(385); // space 205
-		heroHPPos3.setLayoutY(650);
+		heroHPPos3.setLayoutY(730);
 		heroHPPos3.setScaleX(.5); 
 		heroHPPos3.setScaleY(.5); 
 		
 		heroHPPos2.setLayoutX(590); 
-		heroHPPos2.setLayoutY(650); 
+		heroHPPos2.setLayoutY(730); 
 		heroHPPos2.setScaleX(.5); 
 		heroHPPos2.setScaleY(.5); 
 		
 		heroHPPos1.setLayoutX(805); 
-		heroHPPos1.setLayoutY(650);  
+		heroHPPos1.setLayoutY(730);  
 		heroHPPos1.setScaleX(.5); 
 		heroHPPos1.setScaleY(.5); 
 		
 		enemyHPPos1.setLayoutX(1080); 
-		enemyHPPos1.setLayoutY(650);   
+		enemyHPPos1.setLayoutY(730);   
 		enemyHPPos1.setScaleX(.5); 
 		enemyHPPos1.setScaleY(.5); 
 		enemyHPPos2.setLayoutX(1285); 
-		enemyHPPos2.setLayoutY(650);  
+		enemyHPPos2.setLayoutY(730);  
 		enemyHPPos2.setScaleX(.5); 
 		enemyHPPos2.setScaleY(.5); 
 		enemyHPPos3.setLayoutX(1490); 
-		enemyHPPos3.setLayoutY(650);  
+		enemyHPPos3.setLayoutY(730);  
 		enemyHPPos3.setScaleX(.5); 
 		enemyHPPos3.setScaleY(.5); 
 		enemyHPPos4.setLayoutX(1695); 
-		enemyHPPos4.setLayoutY(650); 
+		enemyHPPos4.setLayoutY(730); 
 		enemyHPPos4.setScaleX(.5); 
 		enemyHPPos4.setScaleY(.5); 
 		// -------------------------------------------------------------
 		heroSelectionIndicator1.setLayoutX(733);
-		heroSelectionIndicator1.setLayoutY(420);
+		heroSelectionIndicator1.setLayoutY(500);
 		heroSelectionIndicator2.setLayoutX(528);
-		heroSelectionIndicator2.setLayoutY(420);
+		heroSelectionIndicator2.setLayoutY(500);
 		heroSelectionIndicator3.setLayoutX(323);
-		heroSelectionIndicator3.setLayoutY(420);
+		heroSelectionIndicator3.setLayoutY(500);
 		heroSelectionIndicator4.setLayoutX(118);
-		heroSelectionIndicator4.setLayoutY(420);
+		heroSelectionIndicator4.setLayoutY(500);
 		// -------------------------------------------------------------
 		enemySelectionIndicator1.setLayoutX(1019); // spacing of 205 between each
-		enemySelectionIndicator1.setLayoutY(423);
+		enemySelectionIndicator1.setLayoutY(503);
 		enemySelectionIndicator2.setLayoutX(1224);
-		enemySelectionIndicator2.setLayoutY(423);
+		enemySelectionIndicator2.setLayoutY(503);
 		enemySelectionIndicator3.setLayoutX(1429);
-		enemySelectionIndicator3.setLayoutY(423);
+		enemySelectionIndicator3.setLayoutY(503);
 		enemySelectionIndicator4.setLayoutX(1634);
-		enemySelectionIndicator4.setLayoutY(423);
+		enemySelectionIndicator4.setLayoutY(503);
 		// -------------------------------------------------------------
 		// -------------------------------------------------------------
 		// Manually position the images on top of the buttons
 		enemyInPosition1.setLayoutX(875); // spacing of 205 in between each.
-		enemyInPosition1.setLayoutY(130);
+		enemyInPosition1.setLayoutY(260);
 		enemyInPosition2.setLayoutX(1080);
-		enemyInPosition2.setLayoutY(130);
+		enemyInPosition2.setLayoutY(260);
 		enemyInPosition3.setLayoutX(1235);
-		enemyInPosition3.setLayoutY(130);
+		enemyInPosition3.setLayoutY(260);
 		enemyInPosition4.setLayoutX(1460);
-		enemyInPosition4.setLayoutY(130);
+		enemyInPosition4.setLayoutY(260);
 		// -------------------------------------------------------------
 		heroInPosition1.setLayoutX(585); // spacing of 205 in between each.
-		heroInPosition1.setLayoutY(190);
+		heroInPosition1.setLayoutY(270);
 		heroInPosition2.setLayoutX(380);
-		heroInPosition2.setLayoutY(260);
+		heroInPosition2.setLayoutY(340);
 		heroInPosition3.setLayoutX(145);
-		heroInPosition3.setLayoutY(200);
+		heroInPosition3.setLayoutY(280);
 		heroInPosition4.setLayoutX(-50);
-		heroInPosition4.setLayoutY(210);
+		heroInPosition4.setLayoutY(290);
 		// -------------------------------------------------------------
 		
 		skillButtonsPaladin.setLayoutX(696); // 585 sweet spot
@@ -2604,6 +2610,41 @@ public class Main extends Application {
 		skillButtonSelectedFrame4.setScaleY(1.6);
 //		skillButtonMoveSelectedFrame.setScaleX(1.6);
 //		skillButtonMoveSelectedFrame.setScaleY(1.6);
+		// -------------------------------------------------------------
+		deathblowEnemy1.setLayoutX(960);
+		deathblowEnemy1.setLayoutY(330);
+		deathblowEnemy2.setLayoutX(1165);
+		deathblowEnemy2.setLayoutY(330);
+		deathblowEnemy3.setLayoutX(1370);
+		deathblowEnemy3.setLayoutY(330);
+		deathblowEnemy4.setLayoutX(1575);
+		deathblowEnemy4.setLayoutY(330);
+		
+		deathblowEnemy1.setScaleX(.75);
+		deathblowEnemy1.setScaleY(.75);
+		deathblowEnemy2.setScaleX(.75);
+		deathblowEnemy2.setScaleY(.75);
+		deathblowEnemy3.setScaleX(.75);
+		deathblowEnemy3.setScaleY(.75);
+		deathblowEnemy4.setScaleX(.75);
+		deathblowEnemy4.setScaleY(.75);
+		
+		deathblowEnemy1.setMouseTransparent(true);
+		deathblowEnemy2.setMouseTransparent(true);
+		deathblowEnemy3.setMouseTransparent(true);
+		deathblowEnemy4.setMouseTransparent(true);
+		deathblowEnemy1.setOpacity(0);
+		deathblowEnemy2.setOpacity(0);
+		deathblowEnemy3.setOpacity(0);
+		deathblowEnemy4.setOpacity(0);
+		
+		//testing deathblow animation
+//		enemyHealthBarRedRectangle1.setOnMouseEntered(e -> {
+//			deathblowEnemy1.setOpacity(100);
+//			FadeUtils.deathblow(deathblowEnemy1);
+//			AudioManager.playEnemyDeathSFX();
+//		});
+		
 		// -------------------------------------------------------------
 		menuBackground.setLayoutX(450);
 		menuBackground.setLayoutY(0);
@@ -2856,7 +2897,7 @@ public class Main extends Application {
 		// music player
 		Media media = new Media(shopMusic);
 		MediaPlayer mediaPlayer = new MediaPlayer(media);
-		mediaPlayer.setVolume(0.00); // Volume level (0.0 to 1.0), use 0.05
+		mediaPlayer.setVolume(0.05); // Volume level (0.0 to 1.0), use 0.05
 		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE); // Loop the music
 		mediaPlayer.play(); // music player
 
@@ -3234,8 +3275,8 @@ public class Main extends Application {
 		goldIcon.setLayoutY(900);
 		goldIcon.setScaleX(1.5);
 		goldIcon.setScaleY(1.5);
-		playerGold.setLayoutX(375);
-		playerGold.setLayoutY(965);
+		playerGold.setLayoutX(400);
+		playerGold.setLayoutY(975);
 		playerGold.setScaleX(2.25);
 		playerGold.setScaleY(2.25);
 		// -------------------------------------------------------------

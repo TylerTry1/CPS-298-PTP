@@ -1,6 +1,9 @@
 package application;
 
 import javafx.animation.FadeTransition;
+import javafx.animation.PauseTransition;
+import javafx.animation.ScaleTransition;
+import javafx.animation.SequentialTransition;
 import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -9,12 +12,47 @@ import javafx.util.Duration;
 
 public class FadeUtils {
 
+    // Existing fade transition utility method
     public static FadeTransition createFade(Node node, double fromValue, double toValue, int durationMillis) {
         FadeTransition fade = new FadeTransition(Duration.millis(durationMillis), node);
         fade.setFromValue(fromValue);
         fade.setToValue(toValue);
         return fade;
     }
+
+    // New method for custom animation (big -> shrink -> hold -> disappear)
+    public static void deathblow(Node node) {
+        // Step 1: Scale transition (big -> shrink)
+        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(100), node);
+        scaleTransition.setFromX(1.5); // Initial size
+        scaleTransition.setFromY(1.5);
+        scaleTransition.setToX(1.0); // End size
+        scaleTransition.setToY(1.0);
+
+        // Step 2: Pause transition (hold)
+        PauseTransition pauseTransition = new PauseTransition(Duration.millis(1000)); // Duration visible
+
+        // Step 3: Fade transition (disappear)
+        FadeTransition fadeTransition = new FadeTransition(Duration.millis(500), node); // Duration of fade-out
+        fadeTransition.setFromValue(1.0);
+        fadeTransition.setToValue(0.0);
+
+        // Combine all transitions
+        SequentialTransition sequentialTransition = new SequentialTransition(
+                scaleTransition,
+                pauseTransition,
+                fadeTransition
+        );
+
+        sequentialTransition.setOnFinished(event -> {
+            // Optionally remove the node or perform cleanup here
+            node.setVisible(false); // Example: Make the node invisible after animation
+        });
+
+        // Play the animation
+        sequentialTransition.play();
+    }
+
 
     // Method to handle transitions between multiple Stages with a loading effect
     public static void transitionBetweenStages(Stage currentStage, Stage loadingStage, Runnable nextStageMethod) {
