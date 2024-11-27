@@ -672,6 +672,11 @@ public class Main extends Application {
 		ImageView deathblowEnemy3 = new ImageView(new Image("GUIAssets/deathblow.png"));
 		ImageView deathblowEnemy4 = new ImageView(new Image("GUIAssets/deathblow.png"));
 		
+		ImageView DDCheckHero1 = new ImageView(new Image("GUIAssets/deathsDoorCheck.png"));
+		ImageView DDCheckHero2 = new ImageView(new Image("GUIAssets/deathsDoorCheck.png"));
+		ImageView DDCheckHero3 = new ImageView(new Image("GUIAssets/deathsDoorCheck.png"));
+		ImageView DDCheckHero4 = new ImageView(new Image("GUIAssets/deathsDoorCheck.png"));
+		
 		ImageView combatStartImage = new ImageView(new Image("GUIAssets/combatStartImage.png"));
 		
 		ImageView menuBackground = new ImageView(new Image("GUIAssets/menuBackground.png"));
@@ -2136,6 +2141,7 @@ public class Main extends Application {
 		root.getChildren().addAll(enemyHPPos4,enemyHPPos3,enemyHPPos2,enemyHPPos1);
 		root.getChildren().addAll(moveDescriptionText,moveDescriptionText2,moveNameText);
 		root.getChildren().addAll(deathblowEnemy1,deathblowEnemy2,deathblowEnemy3,deathblowEnemy4);
+		root.getChildren().addAll(DDCheckHero1,DDCheckHero2,DDCheckHero3,DDCheckHero4);
 		
 		root.getChildren().add(combatStartImage);
 		
@@ -2611,6 +2617,41 @@ public class Main extends Application {
 //		skillButtonMoveSelectedFrame.setScaleX(1.6);
 //		skillButtonMoveSelectedFrame.setScaleY(1.6);
 		// -------------------------------------------------------------
+		DDCheckHero1.setLayoutX(565);
+		DDCheckHero1.setLayoutY(270);
+		DDCheckHero2.setLayoutX(360);
+		DDCheckHero2.setLayoutY(270);
+		DDCheckHero3.setLayoutX(155);
+		DDCheckHero3.setLayoutY(270);
+		DDCheckHero4.setLayoutX(-50);
+		DDCheckHero4.setLayoutY(270);
+		
+		DDCheckHero1.setScaleX(.5);
+		DDCheckHero1.setScaleY(.5);
+		DDCheckHero2.setScaleX(.5);
+		DDCheckHero2.setScaleY(.5);
+		DDCheckHero3.setScaleX(.5);
+		DDCheckHero3.setScaleY(.5);
+		DDCheckHero4.setScaleX(.5);
+		DDCheckHero4.setScaleY(.5);
+		
+		DDCheckHero1.setMouseTransparent(true);
+		DDCheckHero2.setMouseTransparent(true);
+		DDCheckHero3.setMouseTransparent(true);
+		DDCheckHero4.setMouseTransparent(true);
+		DDCheckHero1.setOpacity(0);
+		DDCheckHero2.setOpacity(0);
+		DDCheckHero3.setOpacity(0);
+		DDCheckHero4.setOpacity(0);
+		
+		//DDcheck animation and sfx
+		heroHealthBarRedRectangle1.setOnMouseEntered(e -> {
+		    DDCheckHero1.setOpacity(0); // Reset opacity so it can play again
+		    SequentialTransition transition = FadeUtils.ddCheck(DDCheckHero1);
+		    transition.setOnFinished(event -> DDCheckHero1.setOpacity(0)); // Set opacity to 0 after animation
+		    AudioManager.playDeathsDoorSFX();
+		});
+		
 		deathblowEnemy1.setLayoutX(960);
 		deathblowEnemy1.setLayoutY(330);
 		deathblowEnemy2.setLayoutX(1165);
@@ -2638,12 +2679,15 @@ public class Main extends Application {
 		deathblowEnemy3.setOpacity(0);
 		deathblowEnemy4.setOpacity(0);
 		
-		//testing deathblow animation
-//		enemyHealthBarRedRectangle1.setOnMouseEntered(e -> {
-//			deathblowEnemy1.setOpacity(100);
-//			FadeUtils.deathblow(deathblowEnemy1);
-//			AudioManager.playEnemyDeathSFX();
-//		});
+		// deathblow animation and sfx
+		enemyHealthBarRedRectangle1.setOnMouseEntered(e -> {
+		    deathblowEnemy1.setOpacity(1.0); // Ensure the node is visible
+		    FadeUtils.deathblow(deathblowEnemy1); // Play the animation
+		    AudioManager.playEnemyDeathSFX(); // Play the sound effect
+		});
+
+
+
 		
 		// -------------------------------------------------------------
 		menuBackground.setLayoutX(450);

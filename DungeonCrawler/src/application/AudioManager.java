@@ -13,6 +13,9 @@ public class AudioManager {
     		 AudioManager.class.getResource("/SFX/goldEarnedScreenSuccessSFX.wav").toString());
     private static final AudioClip EnemyDeathSFX = new AudioClip(
    		 AudioManager.class.getResource("/SFX/enemyDeathSFX.wav").toString());
+    private static final AudioClip DeathsDoorSFX = new AudioClip(
+      		 AudioManager.class.getResource("/SFX/deathsDoorCheckSFX.wav").toString());
+    
     
     static {
         buttonClickSFX.setVolume(0.05); // Set default volume
@@ -20,6 +23,7 @@ public class AudioManager {
         combatStartSFX.setVolume(0.05);
         successSFX.setVolume(0.05);
         EnemyDeathSFX.setVolume(0.2);
+        DeathsDoorSFX.setVolume(0.2);
     }
 
     public static void playButtonClick() {
@@ -37,5 +41,8 @@ public class AudioManager {
     }
     public static void playEnemyDeathSFX() {
     	EnemyDeathSFX.play();
+    }
+    public static void playDeathsDoorSFX() {
+    	DeathsDoorSFX.play();
     }
 }

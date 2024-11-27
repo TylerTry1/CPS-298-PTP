@@ -1,6 +1,7 @@
 package application;
 
 import javafx.animation.FadeTransition;
+import javafx.animation.ParallelTransition;
 import javafx.animation.PauseTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.SequentialTransition;
@@ -21,6 +22,8 @@ public class FadeUtils {
     }
 
     // New method for custom animation (big -> shrink -> hold -> disappear)
+    
+    
     public static void deathblow(Node node) {
         // Step 1: Scale transition (big -> shrink)
         ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(100), node);
@@ -52,6 +55,7 @@ public class FadeUtils {
         // Play the animation
         sequentialTransition.play();
     }
+
 
 
     // Method to handle transitions between multiple Stages with a loading effect
@@ -92,4 +96,44 @@ public class FadeUtils {
 
         fadeOutLoading.play();
     }
+    public static SequentialTransition ddCheck(Node node) {
+        // Step 1: Scale and fade-in transition
+        ScaleTransition scaleInTransition = new ScaleTransition(Duration.millis(200), node);
+        scaleInTransition.setFromX(3.0); // Start at 3x scale
+        scaleInTransition.setFromY(3.0);
+        scaleInTransition.setToX(.6); // Scale down to 1x
+        scaleInTransition.setToY(.6);
+
+        FadeTransition fadeInTransition = new FadeTransition(Duration.millis(200), node);
+        fadeInTransition.setFromValue(0.0); // Fade in from invisible
+        fadeInTransition.setToValue(1.0); // Fully visible
+
+        ParallelTransition fadeAndScaleIn = new ParallelTransition(scaleInTransition, fadeInTransition);
+
+        // Step 2: Pause transition (hold)
+        PauseTransition holdTransition = new PauseTransition(Duration.millis(1500));
+
+        // Step 3: Fade-out transition
+        FadeTransition fadeOutTransition = new FadeTransition(Duration.millis(200), node);
+        fadeOutTransition.setFromValue(1.0); // Fully visible
+        fadeOutTransition.setToValue(0.0); // Fade out to invisible
+
+        // Combine all transitions
+        SequentialTransition sequentialTransition = new SequentialTransition(
+                fadeAndScaleIn,
+                holdTransition,
+                fadeOutTransition
+        );
+
+        sequentialTransition.setOnFinished(event -> {
+            // Reset node state if needed
+            node.setVisible(false); // Example: Hide the node after animation
+        });
+
+        // Play the animation
+        sequentialTransition.play();
+
+        return sequentialTransition; // Return the animation in case further actions are needed
+    }
+
 }
