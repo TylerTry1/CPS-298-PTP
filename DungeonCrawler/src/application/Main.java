@@ -83,7 +83,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 //		setupLoadingStage(primaryStage);
-		initialization(primaryStage);
+		initialization(primaryStage); // use this!!!
 //		shop(primaryStage);
 //		gameOver(primaryStage);
 //		test(primaryStage);
@@ -644,6 +644,15 @@ public class Main extends Application {
 		ImageView enemySelectionIndicator3 = new ImageView(new Image("GUIAssets/enemySelectionIndicatorSize1.png"));
 		ImageView enemySelectionIndicator4 = new ImageView(new Image("GUIAssets/enemySelectionIndicatorSize1.png"));
 		
+		ImageView AOEAttack1n2Indicator = new ImageView(new Image("GUIAssets/AOEAttackIndicator.png"));
+		ImageView AOEAttack2n3Indicator = new ImageView(new Image("GUIAssets/AOEAttackIndicator.png"));
+		ImageView AOEAttack3n4Indicator = new ImageView(new Image("GUIAssets/AOEAttackIndicator.png"));
+		
+		ImageView teamSkillSelectionIndicator1 = new ImageView(new Image("GUIAssets/friendlySelectionIndicator.png"));
+		ImageView teamSkillSelectionIndicator2 = new ImageView(new Image("GUIAssets/friendlySelectionIndicator.png"));
+		ImageView teamSkillSelectionIndicator3 = new ImageView(new Image("GUIAssets/friendlySelectionIndicator.png"));
+		ImageView teamSkillSelectionIndicator4 = new ImageView(new Image("GUIAssets/friendlySelectionIndicator.png"));
+		
 		ImageView heroTurnTicker1 = new ImageView(new Image("GUIAssets/turnticker.png")); // var
 		ImageView heroTurnTicker2 = new ImageView(new Image("GUIAssets/turnticker.png")); // var
 		ImageView heroTurnTicker3 = new ImageView(new Image("GUIAssets/turnticker.png")); // var
@@ -1033,6 +1042,22 @@ public class Main extends Application {
         FadeTransition fadeOutEnemySelectionIndicator3 = FadeUtils.createFade(enemySelectionIndicator3, 1, 0, 200);
         FadeTransition fadeOutEnemySelectionIndicator4 = FadeUtils.createFade(enemySelectionIndicator4, 1, 0, 200);
         
+        FadeTransition fadeInteamSkillSelectionIndicator1 = FadeUtils.createFade(teamSkillSelectionIndicator1, 0, 1, 200);
+        FadeTransition fadeInteamSkillSelectionIndicator2 = FadeUtils.createFade(teamSkillSelectionIndicator2, 0, 1, 200);
+        FadeTransition fadeInteamSkillSelectionIndicator3 = FadeUtils.createFade(teamSkillSelectionIndicator3, 0, 1, 200);
+        FadeTransition fadeInteamSkillSelectionIndicator4 = FadeUtils.createFade(teamSkillSelectionIndicator4, 0, 1, 200);
+        FadeTransition fadeOutteamSkillSelectionIndicator1 = FadeUtils.createFade(teamSkillSelectionIndicator1, 1, 0, 200);
+        FadeTransition fadeOutteamSkillSelectionIndicator2 = FadeUtils.createFade(teamSkillSelectionIndicator2, 1, 0, 200);
+        FadeTransition fadeOutteamSkillSelectionIndicator3 = FadeUtils.createFade(teamSkillSelectionIndicator3, 1, 0, 200);
+        FadeTransition fadeOutteamSkillSelectionIndicator4 = FadeUtils.createFade(teamSkillSelectionIndicator4, 1, 0, 200);
+        
+        FadeTransition fadeInAOEAttack1n2Indicator = FadeUtils.createFade(teamSkillSelectionIndicator1, 0, 1, 200);
+        FadeTransition fadeInAOEAttack2n3Indicator = FadeUtils.createFade(teamSkillSelectionIndicator1, 0, 1, 200);
+        FadeTransition fadeInAOEAttack3n4Indicator = FadeUtils.createFade(teamSkillSelectionIndicator1, 0, 1, 200);
+        FadeTransition fadeOutAOEAttack1n2Indicator = FadeUtils.createFade(teamSkillSelectionIndicator1, 1, 0, 200);
+        FadeTransition fadeOutAOEAttack2n3Indicator = FadeUtils.createFade(teamSkillSelectionIndicator1, 1, 0, 200);
+        FadeTransition fadeOutAOEAttack3n4Indicator = FadeUtils.createFade(teamSkillSelectionIndicator1, 1, 0, 200);
+        
         PauseTransition twoSecDelay = new PauseTransition(Duration.seconds(2));
         
 		HBox enemyResistances = new HBox(50);
@@ -1186,6 +1211,14 @@ public class Main extends Application {
 		enemySelectionIndicator2.setMouseTransparent(true);
 		enemySelectionIndicator3.setMouseTransparent(true);
 		enemySelectionIndicator4.setMouseTransparent(true);
+		teamSkillSelectionIndicator1.setMouseTransparent(true);
+		teamSkillSelectionIndicator2.setMouseTransparent(true);
+		teamSkillSelectionIndicator3.setMouseTransparent(true);
+		teamSkillSelectionIndicator4.setMouseTransparent(true);
+		AOEAttack1n2Indicator.setMouseTransparent(true);
+		AOEAttack2n3Indicator.setMouseTransparent(true);
+		AOEAttack3n4Indicator.setMouseTransparent(true);
+
 //		skillbuttonimagemove.setMouseTransparent(true);
 		skillbuttonimagepass.setMouseTransparent(true);
 
@@ -2130,6 +2163,8 @@ public class Main extends Application {
 		root.getChildren().add(roundNumberText);
 		root.getChildren().addAll(heroSelectionIndicator1, heroSelectionIndicator2, heroSelectionIndicator3,heroSelectionIndicator4); 
 		root.getChildren().addAll(enemySelectionIndicator1, enemySelectionIndicator2, enemySelectionIndicator3, enemySelectionIndicator4); // might need 4 of these.
+		root.getChildren().addAll(AOEAttack1n2Indicator,AOEAttack2n3Indicator,AOEAttack3n4Indicator);
+		root.getChildren().addAll(teamSkillSelectionIndicator1,teamSkillSelectionIndicator2,teamSkillSelectionIndicator3,teamSkillSelectionIndicator4);
 		root.getChildren().addAll(heroHealthBarBlackRectangle1, heroHealthBarBlackRectangle2, heroHealthBarBlackRectangle3, heroHealthBarBlackRectangle4);
 		root.getChildren().addAll(heroHealthBarRedRectangle1, heroHealthBarRedRectangle2, heroHealthBarRedRectangle3, heroHealthBarRedRectangle4);
 		root.getChildren().addAll(enemyHealthBarBlackRectangle1, enemyHealthBarBlackRectangle2, enemyHealthBarBlackRectangle3, enemyHealthBarBlackRectangle4);
@@ -2505,6 +2540,32 @@ public class Main extends Application {
 		enemySelectionIndicator3.setLayoutY(503);
 		enemySelectionIndicator4.setLayoutX(1634);
 		enemySelectionIndicator4.setLayoutY(503);
+		
+		AOEAttack1n2Indicator.setLayoutX(1177);
+		AOEAttack1n2Indicator.setLayoutY(645);
+		AOEAttack2n3Indicator.setLayoutX(1382);
+		AOEAttack2n3Indicator.setLayoutY(645);
+		AOEAttack3n4Indicator.setLayoutX(1587);
+		AOEAttack3n4Indicator.setLayoutY(645);
+		
+		AOEAttack1n2Indicator.setOpacity(100);
+		AOEAttack2n3Indicator.setOpacity(100);
+		AOEAttack3n4Indicator.setOpacity(100);
+		
+		teamSkillSelectionIndicator1.setLayoutX(733);
+		teamSkillSelectionIndicator1.setLayoutY(500);
+		teamSkillSelectionIndicator2.setLayoutX(528);
+		teamSkillSelectionIndicator2.setLayoutY(500);
+		teamSkillSelectionIndicator3.setLayoutX(323);
+		teamSkillSelectionIndicator3.setLayoutY(500);
+		teamSkillSelectionIndicator4.setLayoutX(118);
+		teamSkillSelectionIndicator4.setLayoutY(500);
+		
+		teamSkillSelectionIndicator1.setOpacity(0);
+		teamSkillSelectionIndicator2.setOpacity(0);
+		teamSkillSelectionIndicator3.setOpacity(0);
+		teamSkillSelectionIndicator4.setOpacity(0);
+
 		// -------------------------------------------------------------
 		// -------------------------------------------------------------
 		// Manually position the images on top of the buttons
@@ -2991,6 +3052,11 @@ public class Main extends Application {
 		ImageView itemForSaleFrame2 = new ImageView(new Image("shopAssets/itemForSaleFrame.png"));
 		ImageView itemForSaleFrame3 = new ImageView(new Image("shopAssets/itemForSaleFrame.png"));
 		
+		ImageView itemForSale1 = new ImageView(new Image("shopAssets/ItemImage.png"));
+		ImageView itemForSale2 = new ImageView(new Image("shopAssets/ItemImage.png"));
+		ImageView itemForSale3 = new ImageView(new Image("shopAssets/ItemImage.png"));
+
+		
 		ImageView itemForSaleFrameArrow1 = new ImageView(new Image("shopAssets/selectionArrow.png"));
 		ImageView itemForSaleFrameArrow2 = new ImageView(new Image("shopAssets/selectionArrow.png"));
 		ImageView itemForSaleFrameArrow3 = new ImageView(new Image("shopAssets/selectionArrow.png"));
@@ -3031,6 +3097,10 @@ public class Main extends Application {
 		item1Unavailable.setOpacity(0);
 		item2Unavailable.setOpacity(0);
 		item3Unavailable.setOpacity(0);
+		
+		itemForSale1.setMouseTransparent(true);
+		itemForSale2.setMouseTransparent(true);
+		itemForSale3.setMouseTransparent(true);
 		
 		purchaseConfirmationText.setMouseTransparent(true);
 		alchemistPlayerIcon.setMouseTransparent(true);
@@ -3132,6 +3202,7 @@ public class Main extends Application {
 		root.getChildren().addAll(shopKeeper, purchaseConfirmationImage); 	
 		root.getChildren().addAll(itemForSaleFrame1, itemForSaleFrame2, itemForSaleFrame3, shopSeparatonBar1, shopSeparatonBar2, shopSeparatonBar3, goldIcon);
 		root.getChildren().addAll(itemForSaleFrameArrow1,itemForSaleFrameArrow2,itemForSaleFrameArrow3);
+		root.getChildren().addAll(itemForSale1,itemForSale2,itemForSale3);
 		root.getChildren().addAll(item1Unavailable, item2Unavailable,item3Unavailable);
 		root.getChildren().addAll(item1Button, item2Button, item3Button, purchaseConfirmationButton);
 		root.getChildren().addAll(charChoiceAlchemistButton, charChoiceWizardButton, charChoiceAssassinButton, charChoicePaladinButton);
@@ -3175,6 +3246,24 @@ public class Main extends Application {
 		itemForSaleFrameArrow3.setScaleX(1);
 		itemForSaleFrameArrow3.setScaleY(3);
 		itemForSaleFrameArrow3.setRotate(90);
+		
+//------------------------------------------------------------------------
+		itemForSale1.setLayoutX(1218); // 250 spacing
+		itemForSale1.setLayoutY(92);
+		itemForSale1.setScaleX(1.8);
+		itemForSale1.setScaleY(1.65);
+		
+		itemForSale2.setLayoutX(1468);
+		itemForSale2.setLayoutY(92);
+		itemForSale2.setScaleX(1.8);
+		itemForSale2.setScaleY(1.65);
+		
+		itemForSale3.setLayoutX(1718);
+		itemForSale3.setLayoutY(92);
+		itemForSale3.setScaleX(1.8);
+		itemForSale3.setScaleY(1.65);
+		
+//------------------------------------------------------------------------
 		
 		item1Unavailable.setLayoutX(1192);
 		item1Unavailable.setLayoutY(75);
