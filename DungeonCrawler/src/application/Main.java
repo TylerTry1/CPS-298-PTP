@@ -663,7 +663,18 @@ public class Main extends Application {
 		ImageView heroAttackingBloodStain  = new ImageView(new Image("GUIAssets/heroAttackingBloodStain.png"));
 		
 //		Image backgroundImagesetup = new Image("combatBackgrounds/cryptsRoomWallDrain.png");  // var
-		Image backgroundImagesetup = new Image("combatBackgrounds/combatBackground1.png");  // var
+		
+		String[] backgroundPaths = {
+			    "/combatBackgrounds/combatBackground1.png",
+			    "/combatBackgrounds/combatBackground2.png",
+			    "/combatBackgrounds/combatBackground3.png",
+			    "/combatBackgrounds/combatBackground4.png",
+			    "/combatBackgrounds/combatBackground5.png",
+			    "/combatBackgrounds/combatBackground6.png"
+			};
+		int randomIndex = (int) (Math.random() * backgroundPaths.length);
+		Image backgroundImagesetup = new Image(getClass().getResource(backgroundPaths[randomIndex]).toString());
+		
 		BackgroundSize size = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false); // background image
 		BackgroundPosition customPosition = new BackgroundPosition(Side.LEFT, 0, true, Side.TOP, 0, true); // fit to top left
 		BackgroundImage backgroundImagePayoff = new BackgroundImage(backgroundImagesetup, BackgroundRepeat.NO_REPEAT,
