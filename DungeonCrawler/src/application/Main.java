@@ -676,6 +676,20 @@ public class Main extends Application {
 		ImageView enemyDTHResistanceIcon = new ImageView(new Image("GUIAssets/DTHResistance.png"));
 		ImageView enemySpeedIcon = new ImageView(new Image("GUIAssets/speedStatImage.png"));
 		
+		ImageView BLDIconEnemy1 = new ImageView(new Image("GUIAssets/BLDResistance.png"));
+		ImageView BLGTIconEnemy1 = new ImageView(new Image("GUIAssets/BLGTResistance.png"));
+		ImageView BURNIconEnemy1 = new ImageView(new Image("GUIAssets/BURNResistance.png"));
+		ImageView BLDIconEnemy2 = new ImageView(new Image("GUIAssets/BLDResistance.png"));
+		ImageView BLGTIconEnemy2 = new ImageView(new Image("GUIAssets/BLGTResistance.png"));
+		ImageView BURNIconEnemy2 = new ImageView(new Image("GUIAssets/BURNResistance.png"));
+		ImageView BLDIconEnemy3 = new ImageView(new Image("GUIAssets/BLDResistance.png"));
+		ImageView BLGTIconEnemy3 = new ImageView(new Image("GUIAssets/BLGTResistance.png"));
+		ImageView BURNIconEnemy3 = new ImageView(new Image("GUIAssets/BURNResistance.png"));
+		ImageView BLDIconEnemy4 = new ImageView(new Image("GUIAssets/BLDResistance.png"));
+		ImageView BLGTIconEnemy4 = new ImageView(new Image("GUIAssets/BLGTResistance.png"));
+		ImageView BURNIconEnemy4 = new ImageView(new Image("GUIAssets/BURNResistance.png"));
+		
+		
 		ImageView deathblowEnemy1 = new ImageView(new Image("GUIAssets/deathblow.png"));
 		ImageView deathblowEnemy2 = new ImageView(new Image("GUIAssets/deathblow.png"));
 		ImageView deathblowEnemy3 = new ImageView(new Image("GUIAssets/deathblow.png"));
@@ -1068,6 +1082,7 @@ public class Main extends Application {
 		enemyPositions.getChildren().addAll(enemyPosition1, enemyPosition2, enemyPosition3, enemyPosition4);
 		HBox skillButtonsPaladin = new HBox(10);
 		skillButtonsPaladin.getChildren().addAll(skillbutton1Paladin, skillbutton2Paladin, skillbutton3Paladin, skillbutton4Paladin);// ,movebutton
+		
 		
 		HBox skillButtonsAssassin = new HBox(10);
 		skillButtonsAssassin.getChildren().addAll(skillbutton1Assassin, skillbutton2Assassin, skillbutton3Assassin, skillbutton4Assassin);// ,movebutton
@@ -2169,6 +2184,7 @@ public class Main extends Application {
 		root.getChildren().addAll(heroHealthBarRedRectangle1, heroHealthBarRedRectangle2, heroHealthBarRedRectangle3, heroHealthBarRedRectangle4);
 		root.getChildren().addAll(enemyHealthBarBlackRectangle1, enemyHealthBarBlackRectangle2, enemyHealthBarBlackRectangle3, enemyHealthBarBlackRectangle4);
 		root.getChildren().addAll(enemyHealthBarRedRectangle1, enemyHealthBarRedRectangle2, enemyHealthBarRedRectangle3, enemyHealthBarRedRectangle4);
+		root.getChildren().addAll(BLDIconEnemy1,BLDIconEnemy2,BLDIconEnemy3,BLDIconEnemy4,BLGTIconEnemy1,BLGTIconEnemy2,BLGTIconEnemy3, BLGTIconEnemy4,BURNIconEnemy1,BURNIconEnemy2,BURNIconEnemy3,BURNIconEnemy4);
 //		root.getChildren().add(bottomRightHPBarBlackRectangle);
 //		root.getChildren().addAll(bottomRightHPBarRedRectangle, enemySpeedIcon);
 		
@@ -2218,7 +2234,7 @@ public class Main extends Application {
 		heroPositions.setLayoutY(250); // Position Y for hero positions
 
 		enemyPositions.setLayoutX(1025); // Position X for enemy positions
-		enemyPositions.setLayoutY(300); // Position Y for enemy positions
+		enemyPositions.setLayoutY(340); // Position Y for enemy positions
 		
 		heroNameText.setLayoutX(0); // hero's name
 		heroNameText.setLayoutY(750);
@@ -2281,6 +2297,71 @@ public class Main extends Application {
 		enemyHealthBarBlackRectangle3.setLayoutY(680);
 		enemyHealthBarBlackRectangle4.setLayoutX(1670);
 		enemyHealthBarBlackRectangle4.setLayoutY(680);
+		// -------------------------------------------------------------
+
+		BLDIconEnemy1.setLayoutX(1035);// 205 spacing
+		BLDIconEnemy1.setLayoutY(680);
+		BLDIconEnemy1.setScaleX(.4);
+		BLDIconEnemy1.setScaleY(.4);
+		BURNIconEnemy1.setLayoutX(1075);
+		BURNIconEnemy1.setLayoutY(680);
+		BURNIconEnemy1.setScaleX(.4);
+		BURNIconEnemy1.setScaleY(.4);
+		BLGTIconEnemy1.setLayoutX(1115);
+		BLGTIconEnemy1.setLayoutY(682);
+		BLGTIconEnemy1.setScaleX(.4);
+		BLGTIconEnemy1.setScaleY(.4);
+		BLDIconEnemy1.setOpacity(0);
+		BURNIconEnemy1.setOpacity(0);
+		BLGTIconEnemy1.setOpacity(0);
+		
+		BLDIconEnemy2.setLayoutX(1240);
+		BLDIconEnemy2.setLayoutY(680);
+		BLDIconEnemy2.setScaleX(.4);
+		BLDIconEnemy2.setScaleY(.4);
+		BURNIconEnemy2.setLayoutX(1280);
+		BURNIconEnemy2.setLayoutY(680);
+		BURNIconEnemy2.setScaleX(.4);
+		BURNIconEnemy2.setScaleY(.4);
+		BLGTIconEnemy2.setLayoutX(1320);
+		BLGTIconEnemy2.setLayoutY(682);
+		BLGTIconEnemy2.setScaleX(.4);
+		BLGTIconEnemy2.setScaleY(.4);
+		BLDIconEnemy2.setOpacity(0);
+		BURNIconEnemy2.setOpacity(0);
+		BLGTIconEnemy2.setOpacity(0);
+		
+		BLDIconEnemy3.setLayoutX(1445);
+		BLDIconEnemy3.setLayoutY(680);
+		BLDIconEnemy3.setScaleX(.4);
+		BLDIconEnemy3.setScaleY(.4);
+		BURNIconEnemy3.setLayoutX(1485);
+		BURNIconEnemy3.setLayoutY(680);
+		BURNIconEnemy3.setScaleX(.4);
+		BURNIconEnemy3.setScaleY(.4);
+		BLGTIconEnemy3.setLayoutX(1525);
+		BLGTIconEnemy3.setLayoutY(682);
+		BLGTIconEnemy3.setScaleX(.4);
+		BLGTIconEnemy3.setScaleY(.4);
+		BLDIconEnemy3.setOpacity(0);
+		BURNIconEnemy3.setOpacity(0);
+		BLGTIconEnemy3.setOpacity(0);
+		
+		BLDIconEnemy4.setLayoutX(1650);
+		BLDIconEnemy4.setLayoutY(680);
+		BLDIconEnemy4.setScaleX(.4);
+		BLDIconEnemy4.setScaleY(.4);
+		BURNIconEnemy4.setLayoutX(1690);
+		BURNIconEnemy4.setLayoutY(680);
+		BURNIconEnemy4.setScaleX(.4);
+		BURNIconEnemy4.setScaleY(.4);
+		BLGTIconEnemy4.setLayoutX(1730);
+		BLGTIconEnemy4.setLayoutY(682);
+		BLGTIconEnemy4.setScaleX(.4);
+		BLGTIconEnemy4.setScaleY(.4);
+		BLDIconEnemy4.setOpacity(0);
+		BURNIconEnemy4.setOpacity(0);
+		BLGTIconEnemy4.setOpacity(0);
 		// -------------------------------------------------------------
 		moveDescriptionText.setLayoutX(25);
 		moveDescriptionText.setLayoutY(800);
@@ -2548,9 +2629,9 @@ public class Main extends Application {
 		AOEAttack3n4Indicator.setLayoutX(1587);
 		AOEAttack3n4Indicator.setLayoutY(645);
 		
-		AOEAttack1n2Indicator.setOpacity(100);
-		AOEAttack2n3Indicator.setOpacity(100);
-		AOEAttack3n4Indicator.setOpacity(100);
+		AOEAttack1n2Indicator.setOpacity(0);
+		AOEAttack2n3Indicator.setOpacity(0);
+		AOEAttack3n4Indicator.setOpacity(0);
 		
 		teamSkillSelectionIndicator1.setLayoutX(733);
 		teamSkillSelectionIndicator1.setLayoutY(500);
@@ -2705,13 +2786,13 @@ public class Main extends Application {
 		DDCheckHero3.setOpacity(0);
 		DDCheckHero4.setOpacity(0);
 		
-		//DDcheck animation and sfx
-		heroHealthBarRedRectangle1.setOnMouseEntered(e -> {
-		    DDCheckHero1.setOpacity(0); // Reset opacity so it can play again
-		    SequentialTransition transition = FadeUtils.ddCheck(DDCheckHero1);
-		    transition.setOnFinished(event -> DDCheckHero1.setOpacity(0)); // Set opacity to 0 after animation
-		    AudioManager.playDeathsDoorSFX();
-		});
+//		//DDcheck animation and sfx
+//		heroHealthBarRedRectangle1.setOnMouseEntered(e -> {
+//		    DDCheckHero1.setOpacity(0); // Reset opacity so it can play again
+//		    SequentialTransition transition = FadeUtils.ddCheck(DDCheckHero1);
+//		    transition.setOnFinished(event -> DDCheckHero1.setOpacity(0)); // Set opacity to 0 after animation
+//		    AudioManager.playDeathsDoorSFX();
+//		});
 		
 		deathblowEnemy1.setLayoutX(960);
 		deathblowEnemy1.setLayoutY(330);
@@ -2740,12 +2821,12 @@ public class Main extends Application {
 		deathblowEnemy3.setOpacity(0);
 		deathblowEnemy4.setOpacity(0);
 		
-		// deathblow animation and sfx
-		enemyHealthBarRedRectangle1.setOnMouseEntered(e -> {
-		    deathblowEnemy1.setOpacity(1.0); // Ensure the node is visible
-		    FadeUtils.deathblow(deathblowEnemy1); // Play the animation
-		    AudioManager.playEnemyDeathSFX(); // Play the sound effect
-		});
+//		// deathblow animation and sfx
+//		enemyHealthBarRedRectangle1.setOnMouseEntered(e -> {
+//		    deathblowEnemy1.setOpacity(1.0); // Ensure the node is visible
+//		    FadeUtils.deathblow(deathblowEnemy1); // Play the animation
+//		    AudioManager.playEnemyDeathSFX(); // Play the sound effect
+//		});
 
 
 
