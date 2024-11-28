@@ -13,6 +13,10 @@ public class Alchemist extends Characters {
     private static final int EXPLOSIVE_FLASK_DAMAGE = 5; // Damage from explosive flask
 	Alchemist() {
         name = "Reynauld";
+        idleSprite = "applicationImagesPlayerSprites/Alchemist_Idle.png";
+        attackSprite = "applicationImagesPlayerSprites/Alchemist_Attack.png";
+        kneelingSprite = "applicationImagesHeroSprites/Alchemist/Alchemist_Kneeling.png";
+        activeSprite = "applicationImagesPlayerSprites/Alchemist_Idle.png";
         maxHealth = 54;
         health = 54;
         damage = 18;

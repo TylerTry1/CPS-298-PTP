@@ -36,51 +36,58 @@ public class Arrays_Enemy_Teams extends enemyTeam {
 		return this.teams[index];
 	}
 	
+public Enemies[] createEnemies() throws IOException {
+	
+	// Create Instances of Enemies
+	goblinScout gS = new goblinScout(java.util.Optional.empty());
+	goblinAxeman gA = new goblinAxeman(java.util.Optional.empty());
+	goblinArcher gAr = new goblinArcher(java.util.Optional.empty());
+	goblinShaman gSh = new goblinShaman(java.util.Optional.empty());
+	skeletonSwordsman sSw = new skeletonSwordsman(java.util.Optional.empty());
+	skeletonCrossbowman sCb = new skeletonCrossbowman(java.util.Optional.empty());
+	skeletonDefender sD = new skeletonDefender(java.util.Optional.empty());
+	necromancer N = new necromancer(java.util.Optional.empty());
+	bodyPile bP = new bodyPile(java.util.Optional.empty());
+	giantPummeler gPu = new giantPummeler(java.util.Optional.empty());
+	giantSlammer gSl = new giantSlammer(java.util.Optional.empty());
+	zombiePeasant zP = new zombiePeasant(java.util.Optional.empty());
+	zombieKnight zK = new zombieKnight(java.util.Optional.empty());
+	minotaur M = new minotaur(java.util.Optional.empty());
+	boar B = new boar(java.util.Optional.empty());
+
+	// Array to store them in and pull from
+	Enemies[] enemies = new Enemies[15]; // We can change the size as/if we make more enemies
+
+	// Put Them In the Array
+	enemies[0] = gS;
+	enemies[1] = gA;
+	enemies[2] = gAr;
+	enemies[3] = gSh;
+	enemies[4] = sSw;
+	enemies[5] = sCb;
+	enemies[6] = sD;
+	enemies[7] = N;
+	enemies[8] = bP;
+	enemies[9] = gPu;
+	enemies[10] = gSl;
+	enemies[11] = zP;
+	enemies[12] = zK;
+	enemies[13] = M;
+	enemies[14] = B;
+	
+	return enemies;
+	
+}
+	
 public enemyTeam createTeams(int challengeRating) throws IOException {
 		
 		Random rand = new Random(); // Random for selection
 		enemyTeam teamComp = new enemyTeam(4, 4);
 		
-		// Create Instances of Enemies
-		goblinScout gS = new goblinScout(java.util.Optional.empty());
-		goblinAxeman gA = new goblinAxeman(java.util.Optional.empty());
-		goblinArcher gAr = new goblinArcher(java.util.Optional.empty());
-		goblinShaman gSh = new goblinShaman(java.util.Optional.empty());
-		skeletonSwordsman sSw = new skeletonSwordsman(java.util.Optional.empty());
-		skeletonCrossbowman sCb = new skeletonCrossbowman(java.util.Optional.empty());
-		skeletonDefender sD = new skeletonDefender(java.util.Optional.empty());
-		necromancer N = new necromancer(java.util.Optional.empty());
-		bodyPile bP = new bodyPile(java.util.Optional.empty());
-		giantPummeler gPu = new giantPummeler(java.util.Optional.empty());
-		giantSlammer gSl = new giantSlammer(java.util.Optional.empty());
-		zombiePeasant zP = new zombiePeasant(java.util.Optional.empty());
-		zombieKnight zK = new zombieKnight(java.util.Optional.empty());
-		minotaur M = new minotaur(java.util.Optional.empty());
-		boar B = new boar(java.util.Optional.empty());
-	
-		// Array to store them in and pull from
-		Enemies[] enemies = new Enemies[15]; // We can change the size as/if we make more enemies
-	
-		// Put Them In the Array
-		enemies[0] = gS;
-		enemies[1] = gA;
-		enemies[2] = gAr;
-		enemies[3] = gSh;
-		enemies[4] = sSw;
-		enemies[5] = sCb;
-		enemies[6] = sD;
-		enemies[7] = N;
-		enemies[8] = bP;
-		enemies[9] = gPu;
-		enemies[10] = gSl;
-		enemies[11] = zP;
-		enemies[12] = zK;
-		enemies[13] = M;
-		enemies[14] = B;
-		
 		
 		int nextIndex = 0; // Counter to Check if the positions are full
-		while (/*teamComp.getTotalChallenge() < challengeRating &&   Can uncomment this to customize difficulty*/ teamComp.getPosFull(3) && nextIndex < 4) { // Check if teams challenge level exceeds 
+		while (/*teamComp.getTotalChallenge() < challengeRating &&   Can uncomment this to customize difficulty*/ teamComp.getPosFull(3) && nextIndex < 4) { // Check if teams challenge level exceeds
+			Enemies[] enemies = createEnemies();
 			int rand1 = rand.nextInt(15);												  				    // current max or team is full
 			Enemies tempEnemy = enemies[rand1];
 			

@@ -13,6 +13,10 @@ public class Wizard extends Characters {
 
     public Wizard() {
         name = "Merlin"; // Wizard name
+        idleSprite = "applicationImagesPlayerSprites/Wizard_Idle.png";
+        attackSprite = "applicationImagesPlayerSprites/Wizard_Attack.png";
+        kneelingSprite = "applicationImagesHeroSprites/Wizard/Wizzard_Kneeling.png";
+        activeSprite = "applicationImagesPlayerSprites/Wizard_Idle.png";
         maxHealth = 30;
         health = 30;
         damage = 4; // Base damage

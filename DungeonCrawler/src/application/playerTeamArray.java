@@ -13,8 +13,8 @@ public class playerTeamArray {
 	void addToArray() {
 		playerTeam[0] = paladin;
 		playerTeam[1] = assassin;
-		playerTeam[2] = alchemist;
-		playerTeam[3] = wizard;
+		playerTeam[2] = wizard;
+		playerTeam[3] = alchemist;
 	}
 	
 	public playerTeamArray(int size) {

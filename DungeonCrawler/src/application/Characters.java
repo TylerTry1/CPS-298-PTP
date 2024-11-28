@@ -6,6 +6,10 @@ public class Characters extends entities {
 
     //public class characterStats {
         String name;
+        String idleSprite;
+        String attackSprite;
+        String kneelingSprite;
+        String activeSprite; // Need an active so that data doesn't get overwritten since the same character instance get carried between combat
         double maxHealth;
         double health;
         double damage;
@@ -126,6 +130,38 @@ public class Characters extends entities {
         double setHealthBarAmount() {
         	healthBarAmount = (this.health / this.maxHealth) * 100;
         	return healthBarAmount;
+        }
+        
+        void setIdleSprite(String set) {
+        	idleSprite = set;
+        }
+        
+        String getIdleSprite() {
+        	return idleSprite;
+        }
+        
+        void setAttackSprite(String set) {
+        	attackSprite = set;
+        }
+        
+        String getAttackSprite() {
+        	return attackSprite;
+        }
+        
+        void setKneelingSprite(String set) {
+        	kneelingSprite = set;
+        }
+        
+        String getKneelingSprite() {
+        	return kneelingSprite;
+        }
+        
+        void setActiveSprite(String set) {
+        	activeSprite = set;
+        }
+        
+        String getActiveSprite() {
+        	return activeSprite;
         }
     //}
 

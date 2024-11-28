@@ -3,6 +3,9 @@ package application;
 import java.io.IOException;
 import java.util.Random;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
@@ -10,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 
 public class combatFlow {
 
@@ -18,6 +22,7 @@ public class combatFlow {
 	Button enemyPosition2 = new Button("enemyPosition2");
 	Button enemyPosition3 = new Button("enemyPosition3");
 	Button enemyPosition4 = new Button("enemyPosition4");
+	Button passTurnButton = new Button("passTurnButton");
 	RadioButton skillButtonP1 = new RadioButton("skill 1");
 	RadioButton skillButtonP2 = new RadioButton("skill 2");
 	RadioButton skillButtonP3 = new RadioButton("skill 3");
@@ -50,6 +55,7 @@ public class combatFlow {
 	ImageView skillButtonImageA22 = new ImageView();
 	ImageView skillButtonImageA23 = new ImageView();
 	ImageView skillButtonImageA24 = new ImageView();
+	ImageView skillbuttonimagepass = new ImageView();
 	ImageView heroTurnTicker1 = new ImageView(); // var
 	ImageView heroTurnTicker2 = new ImageView(); // var
 	ImageView heroTurnTicker3 = new ImageView(); // var
@@ -66,9 +72,26 @@ public class combatFlow {
 	ImageView enemySelectionIndicator2 = new ImageView();
 	ImageView enemySelectionIndicator3 = new ImageView();
 	ImageView enemySelectionIndicator4 = new ImageView();
+	ImageView skillButtonSelectedFrame1 = new ImageView();
+	ImageView skillButtonSelectedFrame2 = new ImageView();
+	ImageView skillButtonSelectedFrame3 = new ImageView();
+	ImageView skillButtonSelectedFrame4 = new ImageView();
+	ImageView deathblowEnemy1 = new ImageView();
+	ImageView deathblowEnemy2 = new ImageView();
+	ImageView deathblowEnemy3 = new ImageView();
+	ImageView deathblowEnemy4 = new ImageView();
+	ImageView enemyInPosition1 = new ImageView();
+	ImageView enemyInPosition2 = new ImageView();
+	ImageView enemyInPosition3 = new ImageView();
+	ImageView enemyInPosition4 = new ImageView();
+	ImageView heroInPosition1 = new ImageView();
+	ImageView heroInPosition2 = new ImageView();
+	ImageView heroInPosition3 = new ImageView();
+	ImageView heroInPosition4 = new ImageView();
 	Text heroNameText = new Text();
 	Text moveDescriptionText = new Text();
 	
+	Image corpseSprite = new Image("/images/CorpsePile.png");
 	int roundCounter = 0;
 	int max = 2;
 	int min = -2;
@@ -78,8 +101,10 @@ public class combatFlow {
 	boolean teamDead = false;
 	boolean buttonClicked = false;
 	playerTeamArray playerTeam = new playerTeamArray(4);
+	Characters[] tempTeam = playerTeam.getTeam();
 	Characters currentCharacter = new Characters();
 	enemyTeam enemyTeam = new enemyTeam(4, 4);
+	Enemies[] tempEnemyTeam = enemyTeam.getTeam();
 	Enemies currentEnemy = new Enemies();
 	Arrays_Enemy_Teams enemyTeamsArray = new Arrays_Enemy_Teams(4, 4, 15);
 	entities[] temp3 = new entities[8]; // Extra Array for sorting. Should be big enough, increase size if necessary.
@@ -97,9 +122,27 @@ public class combatFlow {
 		return playerTeam;
 	}
 	
+	void setPlayerTeamarray(playerTeamArray set) {
+		playerTeam = set;
+	}
+	
+	Characters[] getTempTeam() {
+		return tempTeam;
+	}
+	
+	void setTempTeam(Characters[] set) {
+		tempTeam = set;
+	}
+	
+	void resetTempTeam() {
+		playerTeam = new playerTeamArray(4);
+		tempTeam = playerTeam.getTeam();
+	}
+	
 	enemyTeam getEnemyTeam() {
 		return enemyTeam;
 	}
+
 	
 	static public class combatControl extends combatFlow {	
 		public combatControl(Button e1, Button e2, Button e3, Button e4,
@@ -115,7 +158,12 @@ public class combatFlow {
 							ImageView ett1, ImageView ett2, ImageView ett3, ImageView ett4,
 							ImageView hsi4, ImageView hsi3, ImageView hsi2, ImageView hsi1,
 							ImageView esi1, ImageView esi2, ImageView esi3, ImageView esi4,
-							Text hNT, Text mDT){ 
+							Text hNT, Text mDT,
+							ImageView sbsf1, ImageView sbsf2, ImageView sbsf3, ImageView sbsf4,
+							ImageView dbe1, ImageView dbe2, ImageView dbe3, ImageView dbe4,
+							ImageView eip1, ImageView eip2, ImageView eip3, ImageView eip4,
+							ImageView hip1, ImageView hip2, ImageView hip3, ImageView hip4,
+							Characters[] tt, Button ptb, ImageView sbip){ 
 			
 			enemyPosition1 = e1;										  					 
 			enemyPosition2 = e2;
@@ -137,6 +185,7 @@ public class combatFlow {
 			skillButtonA22 = a22;
 			skillButtonA23 = a23;
 			skillButtonA24 = a24;
+			passTurnButton = ptb;
 			skillButtonImageP1 = ip1;
 			skillButtonImageP2 = ip2;
 			skillButtonImageP3 = ip3;
@@ -153,6 +202,7 @@ public class combatFlow {
 			skillButtonImageA22 = ia22;
 			skillButtonImageA23 = ia23;
 			skillButtonImageA24 = ia24;
+			skillbuttonimagepass = sbip;
 			heroTurnTicker1 = htt4;
 			heroTurnTicker2 = htt3;
 			heroTurnTicker3 = htt2;
@@ -171,25 +221,55 @@ public class combatFlow {
 			enemySelectionIndicator4 = esi4;
 			heroNameText = hNT;
 			moveDescriptionText = mDT;
+			skillButtonSelectedFrame1 = sbsf1;
+			skillButtonSelectedFrame2 = sbsf2;
+			skillButtonSelectedFrame3 = sbsf3;
+			skillButtonSelectedFrame4 = sbsf4;
+			deathblowEnemy1 = dbe1;
+			deathblowEnemy2 = dbe2;
+			deathblowEnemy3 = dbe3;
+			deathblowEnemy4 = dbe4;
+			enemyInPosition1 = eip1;
+			enemyInPosition2 = eip2;
+			enemyInPosition3 = eip3;
+			enemyInPosition4 = eip4;
+			heroInPosition1 = hip1;
+			heroInPosition2 = hip2;
+			heroInPosition3 = hip3;
+			heroInPosition4 = hip4;
+			tempTeam = tt;
 		}
 	
 	// Temp function for testing player input: 
 	void tempPlayerChoice(Characters current, int choice, int tempCount) {
 		
 		currentDamage = current.getDamage();
-		Enemies[] tempEnemyTeam = enemyTeam.getTeam();
+		tempEnemyTeam = enemyTeam.getTeam();
 		boolean downed = false;
+		int defyPercent = 0;
 		
 		switch(choice) {
 		case 1:
-			currentEnemy = (Enemies) tempEnemyTeam[0];
+			currentEnemy = tempEnemyTeam[0];
 			if (currentEnemy.getHealth() != 0) {
 				tempHealth = currentEnemy.getHealth();
 				tempHealth -= currentDamage;
 				if (tempHealth <= 0) {
-					tempHealth = 0;
-					downed = true;
-					currentEnemy.setDowned(downed);
+					defyPercent = rand.nextInt(101 - 1) + 1; // Random from 1 to 100
+					if (currentEnemy.getDefy() >= defyPercent) {
+						tempHealth = 1;
+						if (currentEnemy.getDefy() != 0) // If Death Defy is not 0, reduce by 10
+							currentEnemy.setDefy(currentEnemy.getDefy() - 10);
+					}
+					else {
+						tempHealth = 0;
+						downed = true;
+						deathblowEnemy1.setOpacity(1.0); // Ensure the node is visible
+						FadeUtils.deathblow(deathblowEnemy1); // Play the animation
+						AudioManager.playEnemyDeathSFX(); // Play the sound effect
+						tempEnemyTeam[0].setIdleSprite("/images/CorpsePile.png");
+						currentEnemy.setDowned(downed);
+					}
 				}
 				currentEnemy.setHealth(tempHealth);
 				tempEnemyTeam[0] = currentEnemy;
@@ -203,14 +283,26 @@ public class combatFlow {
 			break;
 		
 		case 2:
-			currentEnemy = (Enemies) tempEnemyTeam[1];
+			currentEnemy = tempEnemyTeam[1];
 			if (currentEnemy.getHealth() != 0) {
 				tempHealth = currentEnemy.getHealth();
 				tempHealth -= currentDamage;
 				if (tempHealth <= 0) {
-					tempHealth = 0;
-					downed = true;
-					currentEnemy.setDowned(downed);
+					defyPercent = rand.nextInt(101 - 1) + 1; // Random from 1 to 100
+					if (currentEnemy.getDefy() >= defyPercent) {
+						tempHealth = 1;
+						if (currentEnemy.getDefy() != 0) // If Death Defy is not 0, reduce by 10
+							currentEnemy.setDefy(currentEnemy.getDefy() - 10);
+					}
+					else {
+						tempHealth = 0;
+						downed = true;
+						deathblowEnemy2.setOpacity(1.0); // Ensure the node is visible
+						FadeUtils.deathblow(deathblowEnemy2); // Play the animation
+						AudioManager.playEnemyDeathSFX(); // Play the sound effect
+						tempEnemyTeam[1].setIdleSprite("/images/CorpsePile.png");
+						currentEnemy.setDowned(downed);
+					}
 				}
 				currentEnemy.setHealth(tempHealth);
 				tempEnemyTeam[1] = currentEnemy;
@@ -224,14 +316,26 @@ public class combatFlow {
 			break;
 		
 		case 3:
-			currentEnemy = (Enemies) tempEnemyTeam[2];
+			currentEnemy = tempEnemyTeam[2];
 			if (currentEnemy.getHealth() != 0) {
 				tempHealth = currentEnemy.getHealth();
 				tempHealth -= currentDamage;
 				if (tempHealth <= 0) {
-					tempHealth = 0;
-					downed = true;
-					currentEnemy.setDowned(downed);
+					defyPercent = rand.nextInt(101 - 1) + 1; // Random from 1 to 100
+					if (currentEnemy.getDefy() >= defyPercent) {
+						tempHealth = 1;
+						if (currentEnemy.getDefy() != 0) // If Death Defy is not 0, reduce by 10
+							currentEnemy.setDefy(currentEnemy.getDefy() - 10);
+					}
+					else {
+						tempHealth = 0;
+						downed = true;
+						deathblowEnemy3.setOpacity(1.0); // Ensure the node is visible
+						FadeUtils.deathblow(deathblowEnemy3); // Play the animation
+						AudioManager.playEnemyDeathSFX(); // Play the sound effect
+						tempEnemyTeam[2].setIdleSprite("/images/CorpsePile.png");
+						currentEnemy.setDowned(downed);
+					}
 				}
 				currentEnemy.setHealth(tempHealth);
 				tempEnemyTeam[2] = currentEnemy;
@@ -245,14 +349,26 @@ public class combatFlow {
 			break;
 		
 		case 4:
-			currentEnemy = (Enemies) tempEnemyTeam[3];
+			currentEnemy = tempEnemyTeam[3];
 			if (currentEnemy.getHealth() != 0) {
 				tempHealth = currentEnemy.getHealth();
 				tempHealth -= currentDamage;
 				if (tempHealth <= 0) {
-					tempHealth = 0;
-					downed = true;
-					currentEnemy.setDowned(downed);
+					defyPercent = rand.nextInt(101 - 1) + 1; // Random from 1 to 100
+					if (currentEnemy.getDefy() >= defyPercent) {
+						tempHealth = 1;
+						if (currentEnemy.getDefy() != 0) // If Death Defy is not 0, reduce by 10
+							currentEnemy.setDefy(currentEnemy.getDefy() - 10);
+					}
+					else {
+						tempHealth = 0;
+						downed = true;
+						deathblowEnemy4.setOpacity(1.0); // Ensure the node is visible
+						FadeUtils.deathblow(deathblowEnemy4); // Play the animation
+						AudioManager.playEnemyDeathSFX(); // Play the sound effect
+						tempEnemyTeam[3].setIdleSprite("/images/CorpsePile.png");
+						currentEnemy.setDowned(downed);
+					}
 				}
 				currentEnemy.setHealth(tempHealth);
 				tempEnemyTeam[3] = currentEnemy;
@@ -504,7 +620,7 @@ public class combatFlow {
 		double tempHealth;
 		double[] positionsToDamage;
 		boolean downed = false;
-		Characters[] tempTeam = playerTeam.getTeam();
+		tempTeam = playerTeam.getTeam();
 		
 		int count = 1;
 		Enemies activeEnemy = (Enemies) current;
@@ -531,6 +647,7 @@ public class combatFlow {
 							 if (tempHealth <= 0) {
 								 tempHealth = 0;
 								 downed = true;
+								 currentCharacter.setActiveSprite(currentCharacter.getKneelingSprite());
 								 currentCharacter.setDowned(downed); // Adjust character sprite when we can.
 							 }
 							 currentCharacter.setHealth(tempHealth); // Reinitialize character health
@@ -551,6 +668,7 @@ public class combatFlow {
 							 if (tempHealth <= 0) {
 								 tempHealth = 0;
 								 downed = true;
+								 currentCharacter.setActiveSprite(currentCharacter.getKneelingSprite());
 								 currentCharacter.setDowned(downed); // Adjust character sprite when we can.
 							 }
 							 currentCharacter.setHealth(tempHealth); // Reinitialize character health
@@ -571,6 +689,7 @@ public class combatFlow {
 							 if (tempHealth <= 0) {
 								 tempHealth = 0;
 								 downed = true;
+								 currentCharacter.setActiveSprite(currentCharacter.getKneelingSprite());
 								 currentCharacter.setDowned(downed); // Adjust character sprite when we can.
 							 }
 							 currentCharacter.setHealth(tempHealth); // Reinitialize character health
@@ -591,6 +710,7 @@ public class combatFlow {
 							 if (tempHealth <= 0) {
 								 tempHealth = 0;
 								 downed = true;
+								 currentCharacter.setActiveSprite(currentCharacter.getKneelingSprite());
 								 currentCharacter.setDowned(downed); // Adjust character sprite when we can.
 							 }
 							 currentCharacter.setHealth(tempHealth); // Reinitialize character health
@@ -640,6 +760,11 @@ public class combatFlow {
         	  buttonClicked = true;
         	  return;
           }  
+          if(event.getSource()==passTurnButton) {
+        	  count++;
+        	  buttonClicked = true;
+        	  return;
+          }
           event.consume();  
        }  
           
@@ -726,26 +851,37 @@ public class combatFlow {
 							skillButtonImageP2.setOpacity(100);
 							skillButtonImageP3.setOpacity(100);
 							skillButtonImageP4.setOpacity(100);
+							skillbuttonimagepass.setOpacity(100);
 							skillButtonP1.setMouseTransparent(false); //button is clickable
 							skillButtonP2.setMouseTransparent(false);
 							skillButtonP3.setMouseTransparent(false);
 							skillButtonP4.setMouseTransparent(false);
+							passTurnButton.setMouseTransparent(false);
 							heroSelectionIndicator1.setVisible(true);
 							enemyPosition1.setOnMouseClicked(handler);
 							enemyPosition2.setOnMouseClicked(handler);
 							enemyPosition3.setOnMouseClicked(handler);
 							enemyPosition4.setOnMouseClicked(handler);
+							passTurnButton.setOnMouseClicked(handler);
 						}
 						skillButtonImageP1.setOpacity(0); 
 						skillButtonImageP2.setOpacity(0);
 						skillButtonImageP3.setOpacity(0);
 						skillButtonImageP4.setOpacity(0);
+						skillbuttonimagepass.setOpacity(0);
 						skillButtonP1.setMouseTransparent(true); 
 						skillButtonP2.setMouseTransparent(true);
 						skillButtonP3.setMouseTransparent(true);
 						skillButtonP4.setMouseTransparent(true);
+						passTurnButton.setMouseTransparent(true);
+						skillButtonSelectedFrame1.setVisible(false);
+						skillButtonSelectedFrame2.setVisible(false);
+						skillButtonSelectedFrame3.setVisible(false);
+						skillButtonSelectedFrame4.setVisible(false);
 						heroTurnTicker1.setVisible(false);
 						heroSelectionIndicator1.setVisible(false);
+						heroNameText.setText("");
+						moveDescriptionText.setText("");
 					}
 					return count;
 				}
@@ -766,26 +902,37 @@ public class combatFlow {
 							skillButtonImageA12.setOpacity(100);
 							skillButtonImageA13.setOpacity(100);
 							skillButtonImageA14.setOpacity(100);
+							skillbuttonimagepass.setOpacity(100);
 							skillButtonA11.setMouseTransparent(false); //button is clickable
 							skillButtonA12.setMouseTransparent(false);
 							skillButtonA13.setMouseTransparent(false);
 							skillButtonA14.setMouseTransparent(false);
+							passTurnButton.setMouseTransparent(false);
 							heroSelectionIndicator2.setVisible(true);
 							enemyPosition1.setOnMouseClicked(handler);
 							enemyPosition2.setOnMouseClicked(handler);
 							enemyPosition3.setOnMouseClicked(handler);
 							enemyPosition4.setOnMouseClicked(handler);
+							passTurnButton.setOnMouseClicked(handler);
 						}
 						skillButtonImageA11.setOpacity(0);
 						skillButtonImageA12.setOpacity(0);
 						skillButtonImageA13.setOpacity(0);
 						skillButtonImageA14.setOpacity(0);
+						skillbuttonimagepass.setOpacity(0);
 						skillButtonA11.setMouseTransparent(true);
 						skillButtonA12.setMouseTransparent(true);
 						skillButtonA13.setMouseTransparent(true);
 						skillButtonA14.setMouseTransparent(true);
+						passTurnButton.setMouseTransparent(true);
+						skillButtonSelectedFrame1.setVisible(false);
+						skillButtonSelectedFrame2.setVisible(false);
+						skillButtonSelectedFrame3.setVisible(false);
+						skillButtonSelectedFrame4.setVisible(false);
 						heroTurnTicker2.setVisible(false);
 						heroSelectionIndicator2.setVisible(false);
+						heroNameText.setText("");
+						moveDescriptionText.setText("");
 					}
 					return count;
 				}
@@ -807,26 +954,37 @@ public class combatFlow {
 							skillButtonImageW2.setOpacity(100);
 							skillButtonImageW3.setOpacity(100);
 							skillButtonImageW4.setOpacity(100);
+							skillbuttonimagepass.setOpacity(100);
 							skillButtonW1.setMouseTransparent(false); //button is clickable
 							skillButtonW2.setMouseTransparent(false);
 							skillButtonW3.setMouseTransparent(false);
 							skillButtonW4.setMouseTransparent(false);
+							passTurnButton.setMouseTransparent(false);
 							heroSelectionIndicator3.setVisible(true);
 							enemyPosition1.setOnMouseClicked(handler);
 							enemyPosition2.setOnMouseClicked(handler);
 							enemyPosition3.setOnMouseClicked(handler);
 							enemyPosition4.setOnMouseClicked(handler);
+							passTurnButton.setOnMouseClicked(handler);
 						}
 						skillButtonImageW1.setOpacity(0); //image is visible
 						skillButtonImageW2.setOpacity(0);
 						skillButtonImageW3.setOpacity(0);
 						skillButtonImageW4.setOpacity(0);
+						skillbuttonimagepass.setOpacity(0);
 						skillButtonW1.setMouseTransparent(true); //button is clickable
 						skillButtonW2.setMouseTransparent(true);
 						skillButtonW3.setMouseTransparent(true);
 						skillButtonW4.setMouseTransparent(true);
+						passTurnButton.setMouseTransparent(true);
+						skillButtonSelectedFrame1.setVisible(false);
+						skillButtonSelectedFrame2.setVisible(false);
+						skillButtonSelectedFrame3.setVisible(false);
+						skillButtonSelectedFrame4.setVisible(false);
 						heroTurnTicker3.setVisible(false);
 						heroSelectionIndicator3.setVisible(false);
+						heroNameText.setText("");
+						moveDescriptionText.setText("");
 					}
 					return count;
 				}
@@ -847,26 +1005,37 @@ public class combatFlow {
 							skillButtonImageA22.setOpacity(100);
 							skillButtonImageA23.setOpacity(100);
 							skillButtonImageA24.setOpacity(100);
+							skillbuttonimagepass.setOpacity(100);
 							skillButtonA21.setMouseTransparent(false); //button is clickable
 							skillButtonA22.setMouseTransparent(false);
 							skillButtonA23.setMouseTransparent(false);
 							skillButtonA24.setMouseTransparent(false);
+							passTurnButton.setMouseTransparent(false);
 							heroSelectionIndicator4.setVisible(true);
 							enemyPosition1.setOnMouseClicked(handler);
 							enemyPosition2.setOnMouseClicked(handler);
 							enemyPosition3.setOnMouseClicked(handler);
 							enemyPosition4.setOnMouseClicked(handler);
+							passTurnButton.setOnMouseClicked(handler);
 						}
 						skillButtonImageA21.setOpacity(0);
 						skillButtonImageA22.setOpacity(0);
 						skillButtonImageA23.setOpacity(0);
 						skillButtonImageA24.setOpacity(0);
+						skillbuttonimagepass.setOpacity(0);
 						skillButtonA21.setMouseTransparent(true);
 						skillButtonA22.setMouseTransparent(true);
 						skillButtonA23.setMouseTransparent(true);
 						skillButtonA24.setMouseTransparent(true);
+						passTurnButton.setMouseTransparent(true);
+						skillButtonSelectedFrame1.setVisible(false);
+						skillButtonSelectedFrame2.setVisible(false);
+						skillButtonSelectedFrame3.setVisible(false);
+						skillButtonSelectedFrame4.setVisible(false);
 						heroTurnTicker4.setVisible(false);
 						heroSelectionIndicator4.setVisible(false);
+						heroNameText.setText("");
+						moveDescriptionText.setText("");
 					}
 					return count;
 				}

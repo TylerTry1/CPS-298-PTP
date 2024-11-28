@@ -24,6 +24,7 @@ public class Enemies extends entities {
         int challenge; // For determine team comps (testing this)
         int speed;
         int goldValue;
+        int defyChance;
         String idleSprite;
         String attackSprite;
         double bleedResist;
@@ -161,7 +162,14 @@ public class Enemies extends entities {
         	healthBarAmount = (health / maxHealth) * 100;
         	return healthBarAmount;
         }
+        
+        void setDefy(int set) {
+        	defyChance = set;
+        }
 		
+        int getDefy() {
+        	return defyChance;
+        }
 
 	
 	public class goblinScout extends Enemies {
@@ -180,6 +188,7 @@ public class Enemies extends entities {
 			challenge = 1;
 			speed = 5;
 			goldValue = 50;
+			defyChance = 50;
 			idleSprite = "/images/Goblin_Scout_1_Idle.png"; 
 			attackSprite = "/images/Goblin_Scout_1_Attack.png";
 	        bleedResist = 10;
@@ -252,6 +261,7 @@ public class Enemies extends entities {
 			challenge = 2;
 			speed = 4;
 			goldValue = 60;
+			defyChance = 50;
 			idleSprite = "/images/Goblin_axeman_1_Idle.png";
 			attackSprite = "/images/Goblin_axeman_1_Attack.png";
 	        bleedResist = 10;
@@ -316,6 +326,7 @@ public class Enemies extends entities {
 			challenge = 1;
 			speed = 6;
 			goldValue = 60;
+			defyChance = 50;
 			idleSprite = "/images/Goblin_Archer_1_Idle.png";
 			attackSprite = "/images/Goblin_Archer_1_Attack.png";
 	        bleedResist = 10;
@@ -381,6 +392,7 @@ public class Enemies extends entities {
 			challenge = 1;
 			speed = 6;
 			goldValue = 60;
+			defyChance = 50;
 			idleSprite = "/images/Goblin_Shaman_1_Idle.png";
 			attackSprite = "/images/Goblin_Shaman_1_Attack.png";
 	        bleedResist = 10;
@@ -447,6 +459,7 @@ public class Enemies extends entities {
 			challenge = 2;
 			speed = 6;
 			goldValue = 75;
+			defyChance = 50;
 			idleSprite = "/images/Skeleton_Swordman_Idle.png";
 			attackSprite = "/images/Skeleton_Swordman_Attack.png";
 	        bleedResist = 25;
@@ -514,6 +527,7 @@ public class Enemies extends entities {
 			challenge = 2;
 			speed = 7;
 			goldValue = 75;
+			defyChance = 50;
 			idleSprite = "/images/Skeleton-Crossbowman_Idle.png";
 			attackSprite = "/images/Skeleton-Crossbowman_Attack.png";
 	        bleedResist = 25;
@@ -595,6 +609,7 @@ public class Enemies extends entities {
 			challenge = 3;
 			speed = 5;	  
 			goldValue = 75;
+			defyChance = 50;
 			idleSprite = "/images/Skeleton_Defender_Idle.png";
 			attackSprite = "/images/Skeleton_Defender_Attack.png";
 			bleedResist = 25;
@@ -659,6 +674,7 @@ public class Enemies extends entities {
 			challenge = 2;
 			speed = 8;
 			goldValue = 80;
+			defyChance = 50;
 			idleSprite = "/images/Necromancer_Idle.png";
 			attackSprite = "/images/Necromancer_Attack.png";
 	        bleedResist = 10;
@@ -728,6 +744,7 @@ public class Enemies extends entities {
 			challenge = 1;
 			speed = 0;
 			goldValue = 40;
+			defyChance = 50;
 			idleSprite = "/images/CorpsePile.png";
 			attackSprite = "/images/CorpsePile.png";
 	        bleedResist = 0;
@@ -793,6 +810,7 @@ public class Enemies extends entities {
 			challenge = 4;
 			speed = 5;
 			goldValue = 120;
+			defyChance = 50;
 			idleSprite = "/images/Giant_Pummeler_Idle.png";
 			attackSprite = "/images/Giant_Pummeler_Attack.png";
 	        bleedResist = 25;
@@ -861,6 +879,7 @@ public class Enemies extends entities {
 			challenge = 4;
 			speed = 5;
 			goldValue = 135;
+			defyChance = 50;
 			idleSprite = "/images/Giant_Slammer_Idle.png";
 			attackSprite = "/images/Giant_Slammer_Attack.png";
 	        bleedResist = 25;
@@ -929,6 +948,7 @@ public class Enemies extends entities {
 			challenge = 2;
 			speed = 8;
 			goldValue = 65;
+			defyChance = 50;
 			idleSprite = "/images/Zombie_Peasant_Idle.png";
 			attackSprite = "/images/Zombie_Peasant-Attack.png";
 	        bleedResist = 25;
@@ -993,6 +1013,7 @@ public class Enemies extends entities {
 			challenge = 3;
 			speed = 5;
 			goldValue = 85;
+			defyChance = 50;
 			idleSprite = "/images/Zombie_Knight_Idle.png";
 			attackSprite = "/images/Zombie_Knight_Attack.png";
 	        bleedResist = 25;
@@ -1057,6 +1078,7 @@ public class Enemies extends entities {
 			challenge = 4;
 			speed = 15;
 			goldValue = 150;
+			defyChance = 50;
 			idleSprite = "/images/Minotaur_Idle.png";
 			attackSprite = "/images/Minotaur_Attack.png";
 	        bleedResist = 25;
@@ -1121,6 +1143,7 @@ public class Enemies extends entities {
 			challenge = 3;
 			speed = 12;
 			goldValue = 100;
+			defyChance = 50;
 			idleSprite = "/images/Boar.png";
 			attackSprite = "/images/Boar.png";
 	        bleedResist = 25;

@@ -14,6 +14,10 @@ public class Paladin extends Characters {
 
     Paladin() {
         name = "Dismas"; // Paladin name
+        idleSprite = "applicationImagesPlayerSprites/Paladin_Idle.png";
+        attackSprite = "applicationImagesPlayerSprites/Paladin_Attack.png";
+        kneelingSprite = "applicationImagesHeroSprites/Paladin/Paladin_Kneeling.png";
+        activeSprite = "applicationImagesPlayerSprites/Paladin_Idle.png";
         maxHealth = 33;
         health = 33;
         damage = 4; 

@@ -69,11 +69,12 @@ public class Main extends Application {
 	Media mediaPath4 = new Media(gameOver);
 	//-----------------------------------------
 	// Combat Stuff
-	int count = 0; // For use in combat
+	int count = 0; 
 	int round = 0;
 	int fightsWon = 0;
 	int goldEarnedAmount = 0;
 	int playerGoldAmount = 0;
+	combatFlow initialFlow = new combatFlow(); // This is basically for storing the player team between combats
 	//-----------------------------------------
 	
 	
@@ -605,10 +606,18 @@ public class Main extends Application {
 		// movebuttonAlchemist.setToggleGroup(skillButtonGroupAlchemist);
 
 		// Images for everything
-		ImageView heroInPosition1 = new ImageView(new Image("applicationImagesPlayerSprites/Paladin_Idle.png"));
-		ImageView heroInPosition2 = new ImageView(new Image("applicationImagesPlayerSprites/Assassin_Idle.png"));
-		ImageView heroInPosition3 = new ImageView(new Image("applicationImagesPlayerSprites/Wizard_Idle.png"));
-		ImageView heroInPosition4 = new ImageView(new Image("applicationImagesPlayerSprites/Alchemist_Idle.png"));
+		
+		// Hero Declarations for parametering in combatControl
+		ImageView heroInPosition1 = new ImageView();
+		ImageView heroInPosition2 = new ImageView();
+		ImageView heroInPosition3 = new ImageView();
+		ImageView heroInPosition4 = new ImageView();
+		
+		// Enemy Declarations for parametering in combatControl
+		ImageView enemyInPosition1 = new ImageView();
+		ImageView enemyInPosition2 = new ImageView();
+		ImageView enemyInPosition3 = new ImageView();
+		ImageView enemyInPosition4 = new ImageView();
 		
 		ImageView skillbuttonimage1Paladin = new ImageView(new Image("abilityIconsPaladin/holy_rampart.png")); 
 		ImageView skillbuttonimage2Paladin = new ImageView(new Image("abilityIconsPaladin/divineSmite.png")); 
@@ -730,6 +739,7 @@ public class Main extends Application {
 		
 		//--------------------------------------------------------------------------------------------------------
 		// Combat assets
+		Characters[] tempTeam = initialFlow.getTempTeam();
 		combatControl flow = new combatControl(enemyPosition1, enemyPosition2, enemyPosition3, enemyPosition4,
 											skillbutton1Paladin, skillbutton2Paladin, skillbutton3Paladin, skillbutton4Paladin,
 											skillbutton1Assassin, skillbutton2Assassin, skillbutton3Assassin, skillbutton4Assassin,
@@ -743,29 +753,42 @@ public class Main extends Application {
 											enemyTurnTicker1, enemyTurnTicker2, enemyTurnTicker3, enemyTurnTicker4,
 											heroSelectionIndicator4, heroSelectionIndicator3, heroSelectionIndicator2, heroSelectionIndicator1,
 											enemySelectionIndicator1, enemySelectionIndicator2, enemySelectionIndicator3, enemySelectionIndicator4,
-											heroNameText, moveDescriptionText);
+											heroNameText, moveDescriptionText,
+											skillButtonSelectedFrame1, skillButtonSelectedFrame2, skillButtonSelectedFrame3, skillButtonSelectedFrame4,
+											deathblowEnemy1, deathblowEnemy2, deathblowEnemy3, deathblowEnemy4,
+											enemyInPosition1, enemyInPosition2, enemyInPosition3, enemyInPosition4,
+											heroInPosition1, heroInPosition2, heroInPosition3, heroInPosition4,
+											tempTeam, passTurnButton, skillbuttonimagepass);
 		flow.createEnemyTeam();
 		flow.adjustSpeeds();
 		flow.determineTurnOrder();
-		entities[] tempTurnOrder = flow.getTurnOrder();
 		playerTeamArray tempPTeamArray = flow.getPlayerTeamArray();
 		Characters[] tempPTeam = tempPTeamArray.getTeam();
 		enemyTeam tempETeamArray = flow.getEnemyTeam();
 		Enemies[] tempETeam = tempETeamArray.getTeam();
 		count = 0;
 		round = 0;
-		boolean gameOverBool = false;
 		Timer timer = new Timer();
 		//--------------------------------------------------------------------------------------------------------
 		
 	    String image1 = tempETeam[0].getIdleSprite();
-		ImageView enemyInPosition1 = new ImageView(new Image(image1)); 
+		enemyInPosition1 = new ImageView(new Image(image1)); 
 		String image2 = tempETeam[1].getIdleSprite();
-		ImageView enemyInPosition2 = new ImageView(new Image(image2)); 
+		enemyInPosition2 = new ImageView(new Image(image2)); 
 		String image3 = tempETeam[2].getIdleSprite();
-		ImageView enemyInPosition3 = new ImageView(new Image(image3)); 
+		enemyInPosition3 = new ImageView(new Image(image3)); 
 		String image4 = tempETeam[3].getIdleSprite();
-		ImageView enemyInPosition4 = new ImageView(new Image(image4));
+		enemyInPosition4 = new ImageView(new Image(image4));
+		
+		String heroImage1 = tempPTeam[0].getIdleSprite();
+		heroInPosition1 = new ImageView(new Image(heroImage1));
+		String heroImage2 = tempPTeam[1].getIdleSprite();
+		heroInPosition2 = new ImageView(new Image(heroImage2));
+		String heroImage3 = tempPTeam[2].getIdleSprite();
+		heroInPosition3 = new ImageView(new Image(heroImage3));
+		String heroImage4 = tempPTeam[3].getIdleSprite();
+		heroInPosition4 = new ImageView(new Image(heroImage4));
+		
 		
 		Button menuBackButton = new Button ("Back"); 	
 		Button menuQuitButton = new Button ("Quit Game");
@@ -1500,6 +1523,7 @@ public class Main extends Application {
 		skillbutton2Alchemist.setOpacity(0);
 		skillbutton3Alchemist.setOpacity(0);
 		skillbutton4Alchemist.setOpacity(0);
+		//passTurnButton.setOpacity(0);
 //		skillbutton1Paladin.setMouseTransparent(true); // cant click the button
 //		skillbutton2Paladin.setMouseTransparent(true);
 //		skillbutton3Paladin.setMouseTransparent(true);
@@ -1536,7 +1560,7 @@ public class Main extends Application {
 		skillbuttonimage4Alchemist.setOpacity(00);
 		//--------------------------------------------------------------------------------------
 
-		skillbuttonimagepass.setOpacity(100);
+		skillbuttonimagepass.setOpacity(0);
 		moveDescriptionText2.setOpacity(0);
 		
 		
@@ -2951,23 +2975,31 @@ public class Main extends Application {
 				}
             }
         }));
-		//fiveSecondsCombat.setCycleCount(Timeline.INDEFINITE); // Probably won't be indefinite, have to look into this
-		//fiveSecondsCombat.play();
 		
+		// Array For Updating Enemy Sprites When Downed
+		ImageView[] enemyImages = new ImageView[4];
+		enemyImages[0] = enemyInPosition1;
+		enemyImages[1] = enemyInPosition2;
+		enemyImages[2] = enemyInPosition3;
+		enemyImages[3] = enemyInPosition4;
+		
+		// Array For Updating Hero Sprites When Downed
+		ImageView[] heroImages = new ImageView[4];
+		heroImages[0] = heroInPosition1;
+		heroImages[1] = heroInPosition2;
+		heroImages[2] = heroInPosition3;
+		heroImages[3] = heroInPosition4;
 		
 		// This task checks if either team is dead, and if not
 		// runs the primary combat control method.
 		TimerTask task = new TimerTask() {
-			
-			boolean tempGameOver = false;
-			
+
 			@Override
 			public void run() {
 				if (tempPTeamArray.checkGameOver() || tempETeamArray.checkGameOver()) {
 					
 					if(tempPTeamArray.checkGameOver()) {
 						System.out.println("Player Team Defeated. Game Over.");
-						tempGameOver = true;
 						sceneSwitch.setCycleCount(1);
 						sceneSwitch.play();
 						timer.cancel();
@@ -2976,6 +3008,7 @@ public class Main extends Application {
 					}
 					else if (tempETeamArray.checkGameOver()) {
 						System.out.println("Enemy Team Defeated. Round Over.");
+						initialFlow.setTempTeam(flow.getTempTeam()); // Store current player team in initialFlow for retrieval at the start of next combat
 						fightsWon++;
 						int tempGold = 0;
 						for (Enemies enemy : tempETeam) {
@@ -3007,7 +3040,19 @@ public class Main extends Application {
 						round++;
 					}
 					
+					heroNameText.setText("");
+					moveDescriptionText.setText("");
 					count = flow.runCombat(count);
+					
+					
+					
+					// Update All Sprites in case anyone was downed:
+					for (int i = 0; i < enemyImages.length - 1; i++ ) {
+						enemyImages[i].setImage(new Image(tempETeam[i].getIdleSprite()));
+					}
+					for (int i = 0; i < heroImages.length - 1; i++) {
+						heroImages[i].setImage(new Image(tempPTeam[i].getActiveSprite()));
+					}
 					
 					// Health number updates:
 					heroHPPos1.setText(Double.toString(tempPTeam[0].getHealth()));
@@ -3024,7 +3069,7 @@ public class Main extends Application {
 					
 					// Current Characters Info (Update to move info once skills are finished)
 					//heroNameText.setText(flow.getCurrent().getName());
-					moveDescriptionText.setText("DMG: " + flow.getCurrent().getDamage() + " Crit %: " + flow.getCurrent().getCritChance());
+					//moveDescriptionText.setText("DMG: " + flow.getCurrent().getDamage() + " Crit %: " + flow.getCurrent().getCritChance());
 					
 					// Hero Health Bars:
 					heroHealthBarRedRectangle4.setWidth(tempPTeam[3].setHealthBarAmount());
@@ -3059,6 +3104,8 @@ public class Main extends Application {
 	}
 	
 	private void shop(Stage primaryStage) {
+		
+		Characters[] shopTeam = initialFlow.getTempTeam(); // Temporary Team for shop items to be applied to
 		Rectangle transitionCoverEnter = new Rectangle(400, 20, Color.BLACK); // Black rectangle
 		Rectangle transitionCoverExit = new Rectangle(400, 20, Color.BLACK); // Black rectangle
 		
@@ -3499,6 +3546,7 @@ public class Main extends Application {
 		shopKeeper.setFitWidth(0.55 * 1920);
 		shopKeeper.setFitHeight(0.7 * 1080);
 		back.setOnAction(e -> {
+			initialFlow.setTempTeam(shopTeam); // Reapply temp shop team to initalFlow for storage
 			AudioManager.playButtonClick();
 			AudioManager.playSceneTransition();
 			transitionExit.play();
@@ -3520,6 +3568,7 @@ public class Main extends Application {
 	
 	private void gameOver(Stage primaryStage) {
 
+		initialFlow.resetTempTeam();
 		fightsWon = 0;
 		goldEarnedAmount = 0;
 		playerGoldAmount = 0;

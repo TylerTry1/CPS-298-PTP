@@ -16,6 +16,10 @@ public class Assassin extends Characters {
     
 	Assassin() {
 		name = "Damian";
+		idleSprite = "applicationImagesPlayerSprites/Assassin_Idle.png";
+		attackSprite = "applicationImagesPlayerSprites/Assassin_Attack.png";
+		kneelingSprite = "applicationImagesHeroSprites/Assassin/Assassin_Kneeling.png";
+		activeSprite = "applicationImagesPlayerSprites/Assassin_Idle.png";
 		maxHealth = 72;
 		health = 72;
 		damage = 10;
