@@ -3140,9 +3140,9 @@ public class Main extends Application {
 		// Create buttons for everything
 		Button back = new Button("Back");
 		Text itemDescriptions = new Text("Item Descriptions will go here");
-		Text item1Price = new Text("1");
-		Text item2Price = new Text("2");
-		Text item3Price = new Text("3");
+		Text item1Price = new Text(randItems.get(0).getItemPrice());
+		Text item2Price = new Text(randItems.get(1).getItemPrice());
+		Text item3Price = new Text(randItems.get(2).getItemPrice());
 		Text playerGold = new Text("Current Gold: " + Integer.toString(playerGoldAmount));
 		Text purchaseConfirmationText = new Text("Buy (item) for (char) (-X Gold)");
 		Text exitShopText = new Text("exit shop");
@@ -3183,9 +3183,9 @@ public class Main extends Application {
 		ImageView itemForSaleFrame2 = new ImageView(new Image("shopAssets/itemForSaleFrame.png"));
 		ImageView itemForSaleFrame3 = new ImageView(new Image("shopAssets/itemForSaleFrame.png"));
 		
-		ImageView itemForSale1 = new ImageView(new Image("shopAssets/ItemImage.png"));
-		ImageView itemForSale2 = new ImageView(new Image("shopAssets/ItemImage.png"));
-		ImageView itemForSale3 = new ImageView(new Image("shopAssets/ItemImage.png"));
+		ImageView itemForSale1 = new ImageView(new Image(randItems.get(0).getImageLocation()));
+		ImageView itemForSale2 = new ImageView(new Image(randItems.get(1).getImageLocation()));
+		ImageView itemForSale3 = new ImageView(new Image(randItems.get(2).getImageLocation()));
 
 		
 		ImageView itemForSaleFrameArrow1 = new ImageView(new Image("shopAssets/selectionArrow.png"));

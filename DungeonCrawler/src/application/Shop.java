@@ -8,7 +8,7 @@ import application.Items.FortifyingSupplements;
 import application.Items.RabbitsFoot;
 import application.Items.SmellingSalts;
 import application.Items.StrengtheningTonic;
-import application.Items.Wheatstone;
+import application.Items.Whetstone;
 
 public class Shop {
 	Clinic clinic;
@@ -16,7 +16,7 @@ public class Shop {
 	RabbitsFoot rabbitsFoot;
 	SmellingSalts smellingSalts;
 	StrengtheningTonic strengtheningTonic;
-	Wheatstone wheatstone;
+	Whetstone whetstone;
 	
 	
 	//all items in a array to pull at random
@@ -44,7 +44,7 @@ public class Shop {
 		pullList.add(rabbitsFoot);
 		pullList.add(smellingSalts);
 		pullList.add(strengtheningTonic);
-		pullList.add(wheatstone);
+		pullList.add(whetstone);
 		pullList.add(clinic);
 		
 		//will remove items = to the difference between the size and the amount wanted this ensures no duplicates

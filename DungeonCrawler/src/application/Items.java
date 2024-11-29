@@ -5,6 +5,7 @@ public class Items {
 	private String name;
 	private String itemDescription;
 	private String itemToolTip;
+	private String imageLocation;
 	private int itemPrice;
 	
 	//getters
@@ -25,9 +26,15 @@ public class Items {
 	}
 	
 	
+	public String getImageLocation() {
+		return imageLocation;
+	}
+
+
 	public class Clinic extends Items {
 		Clinic() {
 	        name = "Clinic";
+	        imageLocation = "shopAssets/clinic.png";
 	        itemDescription = "heals the entire team to full HP";
 	        itemToolTip = "a little help impeccably timed.";
 	        itemPrice = 400;
@@ -42,9 +49,10 @@ public class Items {
 		}
 	}
 	
-	public class Wheatstone extends Items {
-		Wheatstone() {
-	        name = "Wheatstone";
+	public class Whetstone extends Items {
+		Whetstone() {
+	        name = "Whetstone";
+	        imageLocation = "shopAssets/whetstone.png";
 	        itemDescription = "increases character’s damage by 1.1x";
 	        itemToolTip = "sharpened to a razor’s edge.";
 	        itemPrice = 700;
@@ -59,6 +67,7 @@ public class Items {
 	public class SmellingSalts extends Items {
 		SmellingSalts() {
 	        name = "Smelling Salts";
+	        imageLocation = "shopAssets/smellingSalts.png";
 	        itemDescription = "increases character’s speed by 1";
 	        itemToolTip = "null";
 	        itemPrice = 600;
@@ -73,6 +82,7 @@ public class Items {
 	public class StrengtheningTonic extends Items {
 		StrengtheningTonic() {
 	        name = "Strengthening Tonic";
+	        imageLocation = "shopAssets/strengtheningTonic.png";
 	        itemDescription = "increases character’s max hp by 1.1x";
 	        itemToolTip = "null";
 	        itemPrice = 600;
@@ -90,6 +100,7 @@ public class Items {
 	public class FortifyingSupplements extends Items {
 		FortifyingSupplements() {
 	        name = "Fortifying Supplements";
+	        imageLocation = "shopAssets/fortifyingSupplements.png";
 	        itemDescription = "increases character’s total BLD/PSN/BRN etc res’ by +10%";
 	        itemToolTip = "null";
 	        itemPrice = 400;
@@ -106,6 +117,7 @@ public class Items {
 	public class RabbitsFoot extends Items {
 		RabbitsFoot() {
 	        name = "Rabbit’s Foot";
+	        imageLocation = "shopAssets/rabbitsFoot.png";
 	        itemDescription = "increases character’s cit chance by +5%.";
 	        itemToolTip = "null";
 	        itemPrice = 500;
