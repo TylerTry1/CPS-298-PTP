@@ -3109,6 +3109,9 @@ public class Main extends Application {
 		Rectangle transitionCoverEnter = new Rectangle(400, 20, Color.BLACK); // Black rectangle
 		Rectangle transitionCoverExit = new Rectangle(400, 20, Color.BLACK); // Black rectangle
 		
+		Shop shop = new Shop(); //creates shop object
+		ArrayList<Items> randItems = shop.getRandomItems(3); //uses shop object to run a function to get 3 random items than assign that to randItems
+		
        TranslateTransition transitionEnter = new TranslateTransition(Duration.seconds(1.5), transitionCoverEnter);
        transitionEnter.setToY(2500); 
        transitionEnter.play();
