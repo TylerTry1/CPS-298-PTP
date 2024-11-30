@@ -223,6 +223,7 @@ public class Main extends Application {
 		fightsWon = 0;
 		goldEarnedAmount = 0;
 		playerGoldAmount = 0;
+		initialFlow.resetPlayerTeamArray();
 		
 		Rectangle transitionCoverExit = new Rectangle(400, 20, Color.BLACK); // Black rectangle
 		
@@ -742,7 +743,7 @@ public class Main extends Application {
 		
 		//--------------------------------------------------------------------------------------------------------
 		// Combat assets
-		Characters[] tempTeam = initialFlow.getTempTeam();
+		playerTeamArray tempTeam = initialFlow.getPlayerTeamArray();
 		combatControl flow = new combatControl(enemyPosition1, enemyPosition2, enemyPosition3, enemyPosition4,
 											skillbutton1Paladin, skillbutton2Paladin, skillbutton3Paladin, skillbutton4Paladin,
 											skillbutton1Assassin, skillbutton2Assassin, skillbutton3Assassin, skillbutton4Assassin,
@@ -3011,7 +3012,7 @@ public class Main extends Application {
 					}
 					else if (tempETeamArray.checkGameOver()) {
 						System.out.println("Enemy Team Defeated. Round Over.");
-						initialFlow.setTempTeam(flow.getTempTeam()); // Store current player team in initialFlow for retrieval at the start of next combat
+						initialFlow.setPlayerTeamArray(flow.getPlayerTeamArray()); // Store current player team in initialFlow for retrieval at the start of next combat
 						fightsWon++;
 						int tempGold = 0;
 						for (Enemies enemy : tempETeam) {
@@ -3050,10 +3051,10 @@ public class Main extends Application {
 					
 					
 					// Update All Sprites in case anyone was downed:
-					for (int i = 0; i < enemyImages.length - 1; i++ ) {
+					for (int i = 0; i < enemyImages.length; i++ ) {
 						enemyImages[i].setImage(new Image(tempETeam[i].getIdleSprite()));
 					}
-					for (int i = 0; i < heroImages.length - 1; i++) {
+					for (int i = 0; i < heroImages.length; i++) {
 						heroImages[i].setImage(new Image(tempPTeam[i].getActiveSprite()));
 					}
 					
@@ -3108,12 +3109,12 @@ public class Main extends Application {
 	
 	private void shop(Stage primaryStage) {
 		
-		Characters[] shopTeam = initialFlow.getTempTeam(); // Temporary Team for shop items to be applied to
+		Characters[] shopTeam = initialFlow.getPlayerTeamArray().getTeam(); // Temporary Team for shop items to be applied to
 		Rectangle transitionCoverEnter = new Rectangle(400, 20, Color.BLACK); // Black rectangle
 		Rectangle transitionCoverExit = new Rectangle(400, 20, Color.BLACK); // Black rectangle
 		
 		Shop shop = new Shop(); //creates shop object
-		ArrayList<Items> randItems = shop.getRandomItems(3); //uses shop object to run a function to get 3 random items than assign that to randItems
+		ArrayList<Items> randItems = shop.getRandomItems(1); //uses shop object to run a function to get 3 random items than assign that to randItems
 		
        TranslateTransition transitionEnter = new TranslateTransition(Duration.seconds(1.5), transitionCoverEnter);
        transitionEnter.setToY(2500); 
@@ -3143,9 +3144,9 @@ public class Main extends Application {
 		// Create buttons for everything
 		Button back = new Button("Back");
 		Text itemDescriptions = new Text("Item Descriptions will go here");
-		Text item1Price = new Text(randItems.get(0).getItemPrice());
-		Text item2Price = new Text(randItems.get(1).getItemPrice());
-		Text item3Price = new Text(randItems.get(2).getItemPrice());
+		Text item1Price = new Text(Integer.toString(randItems.get(0).getItemPrice()));
+		Text item2Price = new Text(Integer.toString(randItems.get(1).getItemPrice()));
+		Text item3Price = new Text(Integer.toString(randItems.get(2).getItemPrice()));
 		Text playerGold = new Text("Current Gold: " + Integer.toString(playerGoldAmount));
 		Text purchaseConfirmationText = new Text("Buy (item) for (char) (-X Gold)");
 		Text exitShopText = new Text("exit shop");
@@ -3185,6 +3186,14 @@ public class Main extends Application {
 		ImageView itemForSaleFrame1 = new ImageView(new Image("shopAssets/itemForSaleFrame.png"));
 		ImageView itemForSaleFrame2 = new ImageView(new Image("shopAssets/itemForSaleFrame.png"));
 		ImageView itemForSaleFrame3 = new ImageView(new Image("shopAssets/itemForSaleFrame.png"));
+		
+		System.out.println(randItems.isEmpty());
+		System.out.println("Item 1 Name: " + randItems.get(0).getName());
+		System.out.println("Item 1 URL: " + randItems.get(0).getImageLocation());
+		System.out.println("Item 2 Name: " + randItems.get(1).getName());
+		System.out.println("Item 2 URL: " + randItems.get(1).getImageLocation());
+		System.out.println("Item 3 Name: " + randItems.get(2).getName());
+		System.out.println("Item 3 URL: " + randItems.get(2).getImageLocation());
 		
 		ImageView itemForSale1 = new ImageView(new Image(randItems.get(0).getImageLocation()));
 		ImageView itemForSale2 = new ImageView(new Image(randItems.get(1).getImageLocation()));
@@ -3552,13 +3561,19 @@ public class Main extends Application {
 		shopKeeper.setFitWidth(0.55 * 1920);
 		shopKeeper.setFitHeight(0.7 * 1080);
 		back.setOnAction(e -> {
-			initialFlow.setTempTeam(shopTeam); // Reapply temp shop team to initalFlow for storage
+			playerTeamArray shopTeamArray = new playerTeamArray(shopTeam);
+			initialFlow.setPlayerTeamArray(shopTeamArray); // Reapply temp shop team to initalFlow for storage
 			AudioManager.playButtonClick();
 			AudioManager.playSceneTransition();
 			transitionExit.play();
 			transitionExit.setOnFinished(event -> {
 			mediaPlayer.stop(); // Stop the music when the back button is pressed
-			homePage(primaryStage);
+			try {
+				battleScene(primaryStage);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		});});
 
 		Scene scene = new Scene(root, 1920, 1080); // Create a scene with the Pane
@@ -3574,7 +3589,7 @@ public class Main extends Application {
 	
 	private void gameOver(Stage primaryStage) {
 
-		initialFlow.resetTempTeam();
+		initialFlow.resetPlayerTeamArray();
 		fightsWon = 0;
 		goldEarnedAmount = 0;
 		playerGoldAmount = 0;

@@ -11,12 +11,13 @@ import application.Items.StrengtheningTonic;
 import application.Items.Whetstone;
 
 public class Shop {
-	Clinic clinic;
-	FortifyingSupplements fortifyingSupplements;
-	RabbitsFoot rabbitsFoot;
-	SmellingSalts smellingSalts;
-	StrengtheningTonic strengtheningTonic;
-	Whetstone whetstone;
+	Items items = new Items();
+	Items.Clinic clinic = new Items.Clinic();
+	Items.FortifyingSupplements fortifyingSupplements = new Items.FortifyingSupplements();
+	Items.RabbitsFoot rabbitsFoot = new Items.RabbitsFoot();
+	Items.SmellingSalts smellingSalts = new Items.SmellingSalts();
+	Items.StrengtheningTonic strengtheningTonic = new Items.StrengtheningTonic();
+	Items.Whetstone whetstone = new Items.Whetstone();
 	
 	
 	//all items in a array to pull at random
@@ -38,7 +39,7 @@ public class Shop {
 	//pullList.add(wheatstone);
 	
 	
-	ArrayList<Items> getRandomItems(int ammount) {
+	ArrayList<Items> getRandomItems(int amount) {
 		ArrayList<Items> pullList = new ArrayList<Items>();
 		pullList.add(fortifyingSupplements);
 		pullList.add(rabbitsFoot);
@@ -47,11 +48,16 @@ public class Shop {
 		pullList.add(whetstone);
 		pullList.add(clinic);
 		
+		ArrayList<Items> tempPullList = new ArrayList<Items>();
+		
+		int tempSize = pullList.size() - amount;
 		//will remove items = to the difference between the size and the amount wanted this ensures no duplicates
-		for(int i = 0; i < pullList.size() - ammount; i++) {
+		for(int i = 0; i < tempSize; i++) {
 			Collections.shuffle(pullList);
-			pullList.remove(0);
+			Items item = pullList.remove(0);
+			tempPullList.add(item);
 		}
-		return pullList;
+		
+		return tempPullList;
 	}
 }

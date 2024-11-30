@@ -104,6 +104,7 @@ public class combatFlow {
 	boolean buttonClicked = false;
 	playerTeamArray playerTeam = new playerTeamArray(4);
 	Characters[] tempTeam = playerTeam.getTeam();
+	Characters[] tempTeam2;
 	Characters currentCharacter = new Characters();
 	enemyTeam enemyTeam = new enemyTeam(4, 4);
 	Enemies[] tempEnemyTeam = enemyTeam.getTeam();
@@ -124,8 +125,12 @@ public class combatFlow {
 		return playerTeam;
 	}
 	
-	void setPlayerTeamarray(playerTeamArray set) {
+	void setPlayerTeamArray(playerTeamArray set) {
 		playerTeam = set;
+	}
+	
+	void resetPlayerTeamArray() {
+		playerTeam = new playerTeamArray(4);
 	}
 	
 	Characters[] getTempTeam() {
@@ -165,7 +170,7 @@ public class combatFlow {
 							ImageView dbe1, ImageView dbe2, ImageView dbe3, ImageView dbe4,
 							ImageView eip1, ImageView eip2, ImageView eip3, ImageView eip4,
 							ImageView hip1, ImageView hip2, ImageView hip3, ImageView hip4,
-							Characters[] tt, Button ptb, ImageView sbip){ 
+							playerTeamArray pt, Button ptb, ImageView sbip){ 
 			
 			enemyPosition1 = e1;										  					 
 			enemyPosition2 = e2;
@@ -199,7 +204,7 @@ public class combatFlow {
 			skillButtonImageW1 = iw1;
 			skillButtonImageW2 = iw2;
 			skillButtonImageW3 = iw3;
-			skillButtonImageW3 = iw4;
+			skillButtonImageW4 = iw4;
 			skillButtonImageA21 = ia21;
 			skillButtonImageA22 = ia22;
 			skillButtonImageA23 = ia23;
@@ -239,7 +244,7 @@ public class combatFlow {
 			heroInPosition2 = hip2;
 			heroInPosition3 = hip3;
 			heroInPosition4 = hip4;
-			tempTeam = tt;
+			playerTeam = pt;
 		}
 	
 	// Temp function for testing player input: 
@@ -850,6 +855,7 @@ public class combatFlow {
 				}
 				
 				count++;
+				//playerTeam.setTeam(tempTeam);
 				return count;
 			}
 			
@@ -923,6 +929,7 @@ public class combatFlow {
 						heroNameText.setText("");
 						moveDescriptionText.setText("");
 					}
+					//playerTeam.setTeam(tempTeam);
 					return count;
 				}
 				else if (current instanceof Assassin) {
@@ -992,6 +999,7 @@ public class combatFlow {
 						heroNameText.setText("");
 						moveDescriptionText.setText("");
 					}
+					//playerTeam.setTeam(tempTeam);
 					return count;
 				}
 					
@@ -1058,6 +1066,7 @@ public class combatFlow {
 						heroNameText.setText("");
 						moveDescriptionText.setText("");
 					}
+					//playerTeam.setTeam(tempTeam);
 					return count;
 				}
 				else if (current instanceof Alchemist) {
@@ -1123,6 +1132,7 @@ public class combatFlow {
 						heroNameText.setText("");
 						moveDescriptionText.setText("");
 					}
+					//playerTeam.setTeam(tempTeam);
 					return count;
 				}
 			}
@@ -1130,10 +1140,12 @@ public class combatFlow {
 			
 			else {
 				System.out.println("Round Over.");
+				//playerTeam.setTeam(tempTeam);
 				return count;
 			}
 			
 			// Throwaway return statement to avoid compile errors
+			//playerTeam.setTeam(tempTeam);
 			return count;
 			
 	}

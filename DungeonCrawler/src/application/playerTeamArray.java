@@ -9,6 +9,16 @@ public class playerTeamArray {
 	
 	Characters[] playerTeam;
 	
+	public playerTeamArray(Alchemist al, Assassin as, Paladin pal, Wizard wiz) {
+		alchemist = al;
+		assassin = as;
+		paladin = pal;
+		wizard = wiz;
+	}
+	
+	public playerTeamArray(Characters[] team) {
+		playerTeam = team;
+	}
 	
 	void addToArray() {
 		playerTeam[0] = paladin;
@@ -18,7 +28,7 @@ public class playerTeamArray {
 	}
 	
 	public playerTeamArray(int size) {
-		this.playerTeam = new Characters[4];
+		this.playerTeam = new Characters[size];
 		addToArray();
 	}
 	

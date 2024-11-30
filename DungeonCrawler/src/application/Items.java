@@ -2,11 +2,11 @@ package application;
 
 
 public class Items {
-	private String name;
-	private String itemDescription;
-	private String itemToolTip;
-	private String imageLocation;
-	private int itemPrice;
+	private static String name;
+	private static String itemDescription;
+	private static String itemToolTip;
+	private static String imageLocation;
+	private static int itemPrice;
 	
 	//getters
 	public String getName() {
@@ -31,7 +31,7 @@ public class Items {
 	}
 
 
-	public class Clinic extends Items {
+	public static class Clinic extends Items {
 		Clinic() {
 	        name = "Clinic";
 	        imageLocation = "shopAssets/clinic.png";
@@ -49,7 +49,7 @@ public class Items {
 		}
 	}
 	
-	public class Whetstone extends Items {
+	public static class Whetstone extends Items {
 		Whetstone() {
 	        name = "Whetstone";
 	        imageLocation = "shopAssets/whetstone.png";
@@ -64,7 +64,7 @@ public class Items {
 		}
 	}
 	
-	public class SmellingSalts extends Items {
+	public static class SmellingSalts extends Items {
 		SmellingSalts() {
 	        name = "Smelling Salts";
 	        imageLocation = "shopAssets/smellingSalts.png";
@@ -79,7 +79,7 @@ public class Items {
 		}
 	}
 	
-	public class StrengtheningTonic extends Items {
+	public static class StrengtheningTonic extends Items {
 		StrengtheningTonic() {
 	        name = "Strengthening Tonic";
 	        imageLocation = "shopAssets/strengtheningTonic.png";
@@ -97,7 +97,7 @@ public class Items {
 		}
 	}
 	
-	public class FortifyingSupplements extends Items {
+	public static class FortifyingSupplements extends Items {
 		FortifyingSupplements() {
 	        name = "Fortifying Supplements";
 	        imageLocation = "shopAssets/fortifyingSupplements.png";
@@ -114,10 +114,10 @@ public class Items {
 		}
 	}
 	
-	public class RabbitsFoot extends Items {
+	public static class RabbitsFoot extends Items {
 		RabbitsFoot() {
 	        name = "Rabbit’s Foot";
-	        imageLocation = "shopAssets/rabbitsFoot.png";
+	        imageLocation = "shopAssets/rabbitFoot.png";
 	        itemDescription = "increases character’s cit chance by +5%.";
 	        itemToolTip = "null";
 	        itemPrice = 500;
