@@ -3,7 +3,9 @@ package application;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -542,7 +544,7 @@ public class Main extends Application {
 		mediaPlayer.setVolume(0.05); // Volume level (0.0 to 1.0) use 0.05
 		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE); // Loop the music
 		mediaPlayer.play(); // music player
-
+	
 		// Create buttons for everything
 		Button heroPosition4 = new Button("heroPosition4");
 		Button heroPosition3 = new Button("heroPosition3");
@@ -555,26 +557,27 @@ public class Main extends Application {
 		Button passTurnButton = new Button("passTurnButton");
 		
 		ToggleGroup skillButtonGroupPaladin = new ToggleGroup();
-		RadioButton skillbutton1Paladin = new RadioButton("skill 1");
+		RadioButton skillbutton1Paladin = new RadioButton("Shield of Faith");
 		skillbutton1Paladin.setToggleGroup(skillButtonGroupPaladin);
-		RadioButton skillbutton2Paladin = new RadioButton("skill 2");
+		RadioButton skillbutton2Paladin = new RadioButton("Divine Smite");
 		skillbutton2Paladin.setToggleGroup(skillButtonGroupPaladin);
-		RadioButton skillbutton3Paladin = new RadioButton("skill 3");
+		RadioButton skillbutton3Paladin = new RadioButton("Aura of Courage");
 		skillbutton3Paladin.setToggleGroup(skillButtonGroupPaladin);
-		RadioButton skillbutton4Paladin = new RadioButton("skill 4");
+		RadioButton skillbutton4Paladin = new RadioButton("Holy Rampart");
 		skillbutton4Paladin.setToggleGroup(skillButtonGroupPaladin );
+		
 		// RadioButton movebuttonPaladin = new RadioButton("move");
 		// movebuttonPaladin.setToggleGroup(skillButtonGroupPaladin);
 
 		
 		ToggleGroup skillButtonGroupAssassin = new ToggleGroup();
-		RadioButton skillbutton1Assassin = new RadioButton("skill 1");
+		RadioButton skillbutton1Assassin = new RadioButton("Shadow Strike");
 		skillbutton1Assassin.setToggleGroup(skillButtonGroupAssassin);
-		RadioButton skillbutton2Assassin = new RadioButton("skill 2");
+		RadioButton skillbutton2Assassin = new RadioButton("Poisoned Blade");
 		skillbutton2Assassin.setToggleGroup(skillButtonGroupAssassin);
-		RadioButton skillbutton3Assassin = new RadioButton("skill 3");
+		RadioButton skillbutton3Assassin = new RadioButton("Backstab");
 		skillbutton3Assassin.setToggleGroup(skillButtonGroupAssassin);
-		RadioButton skillbutton4Assassin = new RadioButton("skill 4");
+		RadioButton skillbutton4Assassin = new RadioButton("Dagger Barrage");
 		skillbutton4Assassin.setToggleGroup(skillButtonGroupAssassin );
 		// RadioButton movebuttonAssassin = new RadioButton("move");
 		// movebuttonAssassin.setToggleGroup(skillButtonGroupAssassin);
@@ -937,8 +940,8 @@ public class Main extends Application {
 		enemyHPPos4.setFill(Color.web("#bc1313"));
 		moveDescriptionText.setFont(DwarvenAxe); 
 		moveDescriptionText.setFill(Color.web("#d5d5d5"));
-		moveDescriptionText2.setFont(DwarvenAxe);
-		moveDescriptionText2.setFill(Color.web("#d5d5d5"));
+//		moveDescriptionText2.setFont(DwarvenAxe);
+//		moveDescriptionText2.setFill(Color.web("#d5d5d5"));
 		moveNameText.setFont(DwarvenAxe); 
 		moveNameText.setFill(Color.web("#d5d5d5"));
 		moveNameText.setTextAlignment(TextAlignment.CENTER);
@@ -1561,7 +1564,7 @@ public class Main extends Application {
 		//--------------------------------------------------------------------------------------
 
 		skillbuttonimagepass.setOpacity(0);
-		moveDescriptionText2.setOpacity(0);
+//		moveDescriptionText2.setOpacity(0);
 		
 		
 		

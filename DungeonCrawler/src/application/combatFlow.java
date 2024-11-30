@@ -1,6 +1,8 @@
 package application;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import javafx.animation.KeyFrame;
@@ -770,8 +772,31 @@ public class combatFlow {
           
     };
 	
-	public int runCombat(int c) {
+    public int runCombat(int c) {
 		// Play Loop
+		Map<String, String> skillDescriptions = new HashMap<>();
+		skillDescriptions.put("Shield of Faith", "A shield that protects an ally from harm.");
+		skillDescriptions.put("Divine Smite", "A powerful strike that channels divine energy.");
+		skillDescriptions.put("Aura of Courage", "An aura that grants immunity to fear.");
+		skillDescriptions.put("Holy Rampart", "Creates a defensive barrier that protects allies.");
+
+		// Assassin Skills
+		skillDescriptions.put("Shadow Strike", "A high-damage attack from the shadows.");
+		skillDescriptions.put("Poisoned Blade", "Applies poison to the enemy, causing damage over time.");
+		skillDescriptions.put("Smoke Bomb", "Creates smoke to disorient enemies, reducing their accuracy.");
+		skillDescriptions.put("Silent Step", "Increases movement speed and grants the ability to avoid enemy detection.");
+
+		// Wizard Skills
+		skillDescriptions.put("Fireball", "A powerful fire spell that causes explosive damage.");
+		skillDescriptions.put("Ice Shield", "A defensive shield made of ice that reduces incoming damage.");
+		skillDescriptions.put("Teleport", "Teleports to a target location, avoiding damage.");
+		skillDescriptions.put("Arcane Blast", "A burst of magical energy that damages all enemies in range.");
+
+		// Alchemist Skills
+		skillDescriptions.put("Healing Potion", "Restores health to the target.");
+		skillDescriptions.put("Bomb Toss", "Throws a bomb that deals explosive damage to enemies.");
+		skillDescriptions.put("Acid Spray", "Sprays acid that damages and lowers enemy defense.");
+		skillDescriptions.put("Cloak of Invisibility", "Makes the user invisible for a short period.");
 			
 			teamDead = playerTeam.checkGameOver();
 			teamDead = enemyTeam.checkGameOver(); // Check initially for player and enemy health errors.
@@ -835,6 +860,7 @@ public class combatFlow {
 				currentCharacter = (Characters) current;
 				
 				if (current instanceof Paladin) {
+					
 					System.out.println(((Characters) current).getName() + "'s Turn.");
 					heroNameText.setText(((Characters) current).getName());
 					moveDescriptionText.setText("DMG: " + ((Characters) current).getDamage() + " Crit %: " + ((Characters) current).getCritChance());
@@ -863,7 +889,21 @@ public class combatFlow {
 							enemyPosition3.setOnMouseClicked(handler);
 							enemyPosition4.setOnMouseClicked(handler);
 							passTurnButton.setOnMouseClicked(handler);
-						}
+							
+							skillButtonP1.setOnMouseClicked(event -> {
+				                moveDescriptionText.setText("Skill: Shield of Faith\n" + skillDescriptions.get("Shield of Faith"));
+				            });
+				            skillButtonP2.setOnMouseClicked(event -> {
+				                moveDescriptionText.setText("Skill: Divine Smite\n" + skillDescriptions.get("Divine Smite"));
+				            });
+				            skillButtonP3.setOnMouseClicked(event -> {
+				                moveDescriptionText.setText("Skill: Aura of Courage\n" + skillDescriptions.get("Aura of Courage"));
+				            });
+				            skillButtonP4.setOnMouseClicked(event -> {
+				                moveDescriptionText.setText("Skill: Holy Rampart\n" + skillDescriptions.get("Holy Rampart"));
+				            });
+				        }
+							
 						skillButtonImageP1.setOpacity(0); 
 						skillButtonImageP2.setOpacity(0);
 						skillButtonImageP3.setOpacity(0);
@@ -886,6 +926,9 @@ public class combatFlow {
 					return count;
 				}
 				else if (current instanceof Assassin) {
+					
+					
+					
 					System.out.println(((Characters) current).getName() + "'s Turn.");
 					heroNameText.setText(((Characters) current).getName());
 					moveDescriptionText.setText("DMG: " + ((Characters) current).getDamage() + " Crit %: " + ((Characters) current).getCritChance());
@@ -897,6 +940,7 @@ public class combatFlow {
 					}
 					else {
 						while (!buttonClicked) {
+							
 							//all other buttons and images cannot be clicked or seen.
 							skillButtonImageA11.setOpacity(100); //image is visible
 							skillButtonImageA12.setOpacity(100);
@@ -914,6 +958,20 @@ public class combatFlow {
 							enemyPosition3.setOnMouseClicked(handler);
 							enemyPosition4.setOnMouseClicked(handler);
 							passTurnButton.setOnMouseClicked(handler);
+							
+							skillButtonA11.setOnMouseClicked(event -> {
+							    moveDescriptionText.setText("Skill: Shadow Strike\n" + skillDescriptions.get("Shadow Strike"));
+							});
+							skillButtonA12.setOnMouseClicked(event -> {
+							    moveDescriptionText.setText("Skill: Poisoned Blade\n" + skillDescriptions.get("Poisoned Blade"));
+							});
+							skillButtonA13.setOnMouseClicked(event -> {
+							    moveDescriptionText.setText("Skill: Smoke Bomb\n" + skillDescriptions.get("Smoke Bomb"));
+							});
+							skillButtonA14.setOnMouseClicked(event -> {
+							    moveDescriptionText.setText("Skill: Silent Step\n" + skillDescriptions.get("Silent Step"));
+							});
+							
 						}
 						skillButtonImageA11.setOpacity(0);
 						skillButtonImageA12.setOpacity(0);
@@ -938,6 +996,7 @@ public class combatFlow {
 				}
 					
 				else if (current instanceof Wizard) {
+					
 					System.out.println(((Characters) current).getName() + "'s Turn.");
 					heroNameText.setText(((Characters) current).getName());
 					moveDescriptionText.setText("DMG: " + ((Characters) current).getDamage() + " Crit %: " + ((Characters) current).getCritChance());
@@ -966,6 +1025,19 @@ public class combatFlow {
 							enemyPosition3.setOnMouseClicked(handler);
 							enemyPosition4.setOnMouseClicked(handler);
 							passTurnButton.setOnMouseClicked(handler);
+							
+							skillButtonW1.setOnMouseClicked(event -> {
+							    moveDescriptionText.setText("Skill: Fireball\n" + skillDescriptions.get("Fireball"));
+							});
+							skillButtonW2.setOnMouseClicked(event -> {
+							    moveDescriptionText.setText("Skill: Ice Shield\n" + skillDescriptions.get("Ice Shield"));
+							});
+							skillButtonW3.setOnMouseClicked(event -> {
+							    moveDescriptionText.setText("Skill: Teleport\n" + skillDescriptions.get("Teleport"));
+							});
+							skillButtonW4.setOnMouseClicked(event -> {
+							    moveDescriptionText.setText("Skill: Arcane Blast\n" + skillDescriptions.get("Arcane Blast"));
+							});
 						}
 						skillButtonImageW1.setOpacity(0); //image is visible
 						skillButtonImageW2.setOpacity(0);
@@ -989,6 +1061,7 @@ public class combatFlow {
 					return count;
 				}
 				else if (current instanceof Alchemist) {
+					
 					System.out.println(((Characters) current).getName() + "'s Turn.");
 					heroNameText.setText(((Characters) current).getName());
 					moveDescriptionText.setText("DMG: " + ((Characters) current).getDamage() + " Crit %: " + ((Characters) current).getCritChance());
@@ -1017,6 +1090,19 @@ public class combatFlow {
 							enemyPosition3.setOnMouseClicked(handler);
 							enemyPosition4.setOnMouseClicked(handler);
 							passTurnButton.setOnMouseClicked(handler);
+							
+							skillButtonA21.setOnMouseClicked(event -> {
+							    moveDescriptionText.setText("Skill: Healing Potion\n" + skillDescriptions.get("Healing Potion"));
+							});
+							skillButtonA22.setOnMouseClicked(event -> {
+							    moveDescriptionText.setText("Skill: Bomb Toss\n" + skillDescriptions.get("Bomb Toss"));
+							});
+							skillButtonA23.setOnMouseClicked(event -> {
+							    moveDescriptionText.setText("Skill: Acid Spray\n" + skillDescriptions.get("Acid Spray"));
+							});
+							skillButtonA24.setOnMouseClicked(event -> {
+							    moveDescriptionText.setText("Skill: Cloak of Invisibility\n" + skillDescriptions.get("Cloak of Invisibility"));
+							});
 						}
 						skillButtonImageA21.setOpacity(0);
 						skillButtonImageA22.setOpacity(0);
