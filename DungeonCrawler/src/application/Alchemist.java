@@ -17,8 +17,8 @@ public class Alchemist extends Characters {
         attackSprite = "applicationImagesPlayerSprites/Alchemist_Attack.png";
         kneelingSprite = "applicationImagesHeroSprites/Alchemist/Alchemist_Kneeling.png";
         activeSprite = "applicationImagesPlayerSprites/Alchemist_Idle.png";
-        maxHealth = 54;
-        health = 54;
+        maxHealth = 33;
+        health = 33;
         damage = 18;
         defense = 0;
         accuracy = 70;

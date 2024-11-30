@@ -5,6 +5,7 @@ import javafx.animation.ParallelTransition;
 import javafx.animation.PauseTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.SequentialTransition;
+import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -23,6 +24,26 @@ public class FadeUtils {
 
     // New method for custom animation (big -> shrink -> hold -> disappear)
     
+    public static void bloodstain(Node node) {
+        // Step 1: Ensure the node is visible and fully opaque
+        node.setOpacity(1.0);
+
+        // Step 2: Fade-out transition (disappear over 3 seconds)
+        FadeTransition fadeTransition = new FadeTransition(Duration.millis(3000), node);
+        fadeTransition.setFromValue(1.0); // Fully visible
+        fadeTransition.setToValue(0.0); // Fully transparent
+
+        // Combine into a sequential transition
+        SequentialTransition sequentialTransition = new SequentialTransition(fadeTransition);
+
+        // Optionally remove or reset the node after the animation
+        sequentialTransition.setOnFinished(event -> node.setVisible(false));
+
+        // Play the animation
+        sequentialTransition.play();
+    }
+
+
     
     public static void deathblow(Node node) {
         // Step 1: Scale transition (big -> shrink)
@@ -135,5 +156,36 @@ public class FadeUtils {
 
         return sequentialTransition; // Return the animation in case further actions are needed
     }
+    public static void popNumber(Node node) {
+        // Reset the node's visibility and state
+        node.setVisible(true); // Make it visible if hidden
+        node.setOpacity(1.0); // Reset opacity
+        node.setTranslateY(0); // Reset Y position
+
+        // Translate animation (move vertically)
+        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(2), node);
+        translateTransition.setByY(-150); // Move up 150 pixels
+
+        // Fade-out animation
+        FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1.5), node);
+        fadeTransition.setFromValue(1.0); // Fully visible
+        fadeTransition.setToValue(0.0); // Fully transparent
+
+        // Combine animations
+        ParallelTransition parallelTransition = new ParallelTransition(
+            translateTransition,
+            fadeTransition
+        );
+
+        // Optionally add cleanup or other actions after animation
+        parallelTransition.setOnFinished(event -> {
+            node.setOpacity(0.0); // Reset opacity for reuse
+        });
+
+        // Play the animation
+        parallelTransition.play();
+    }
+
+
 
 }

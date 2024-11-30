@@ -3,9 +3,7 @@ package application;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -536,7 +534,7 @@ public class Main extends Application {
 		String moveName = "moveName";
 		
 		Text moveDescriptionText = new Text ("DMG:  CRIT:(critpercent)"); // var
-		Text moveDescriptionText2 = new Text ("moveDesc");
+		Text moveDescriptionText2 = new Text ("");
 		Text moveNameText = new Text (moveName); // var
 		
 		// music player
@@ -833,18 +831,103 @@ public class Main extends Application {
 		Text enemy4MoveResistanceNumber= new Text(Double.toString(tempETeam[3].getMoveResist())); 
 		Text enemy4DebuffResistanceNumber= new Text(Double.toString(tempETeam[3].getDebuffResist())); 
 		Text enemy4DeathResistanceNumber= new Text(Double.toString(tempETeam[3].getDeathResist())); 
-		Text heroHPPos4 = new Text ("heroHPPos4"); // var
-		Text heroHPPos3 = new Text ("heroHPPos3"); // var
-		Text heroHPPos2 = new Text ("heroHPPos2"); // var
-		Text heroHPPos1 = new Text ("heroHPPos1"); // var
-		Text enemyHPPos1 = new Text ("enemyHPPos1"); // var
-		Text enemyHPPos2 = new Text ("enemyHPPos2"); // var
-		Text enemyHPPos3 = new Text ("enemyHPPos3"); // var
-		Text enemyHPPos4 = new Text ("enemyHPPos4"); // var
+		Text heroHPPos4 = new Text (""); 
+		Text heroHPPos3 = new Text (""); 
+		Text heroHPPos2 = new Text (""); 
+		Text heroHPPos1 = new Text (""); 
+		Text enemyHPPos1 = new Text (""); 
+		Text enemyHPPos2 = new Text (""); 
+		Text enemyHPPos3 = new Text (""); 
+		Text enemyHPPos4 = new Text (""); 
 		Text roundNumberText = new Text ("0"); // var + roundCounter
 		
+		Text damageTakenNumberHero4 = new Text ("0");
+		Text damageTakenNumberHero3 = new Text ("0");
+		Text damageTakenNumberHero2 = new Text ("0");
+		Text damageTakenNumberHero1 = new Text ("0");
+		Text healNumberHero4 = new Text ("0"); 
+		Text healNumberHero3 = new Text ("0"); 
+		Text healNumberHero2 = new Text ("0"); 
+		Text healNumberHero1 = new Text ("0"); 
+		
+		Text damageTakenNumberEnemy4 = new Text ("0"); 
+		Text damageTakenNumberEnemy3 = new Text ("0"); 
+		Text damageTakenNumberEnemy2 = new Text ("0"); 
+		Text damageTakenNumberEnemy1 = new Text ("0"); 
+		Text healNumberEnemy4 = new Text ("0"); 
+		Text healNumberEnemy3 = new Text ("0"); 
+		Text healNumberEnemy2 = new Text ("0"); 
+		Text healNumberEnemy1 = new Text ("0"); 
 		
 		Text menuQuitGameText = new Text ("Quit Game");
+		//---------------------------------------------------------------------------
+		damageTakenNumberHero4.setFont(DwarvenAxe);
+		damageTakenNumberHero4.setFill(Color.web("#bc1313"));
+		damageTakenNumberHero4.setStroke(Color.BLACK);  // Outline color
+		damageTakenNumberHero4.setStrokeWidth(1.5);
+		damageTakenNumberHero3.setFont(DwarvenAxe);
+		damageTakenNumberHero3.setFill(Color.web("#bc1313"));
+		damageTakenNumberHero3.setStroke(Color.BLACK);  // Outline color
+		damageTakenNumberHero3.setStrokeWidth(1.5);
+		damageTakenNumberHero2.setFont(DwarvenAxe);
+		damageTakenNumberHero2.setFill(Color.web("#bc1313"));
+		damageTakenNumberHero2.setStroke(Color.BLACK);  // Outline color
+		damageTakenNumberHero2.setStrokeWidth(1.5);
+		damageTakenNumberHero1.setFont(DwarvenAxe);
+		damageTakenNumberHero1.setFill(Color.web("#bc1313"));
+		damageTakenNumberHero1.setStroke(Color.BLACK);  // Outline color
+		damageTakenNumberHero1.setStrokeWidth(1.5);
+		
+		damageTakenNumberEnemy1.setFont(DwarvenAxe);
+		damageTakenNumberEnemy1.setFill(Color.web("#bc1313"));
+		damageTakenNumberEnemy1.setStroke(Color.BLACK);  // Outline color
+		damageTakenNumberEnemy1.setStrokeWidth(1.5);
+		damageTakenNumberEnemy2.setFont(DwarvenAxe);
+		damageTakenNumberEnemy2.setFill(Color.web("#bc1313"));
+		damageTakenNumberEnemy2.setStroke(Color.BLACK);  // Outline color
+		damageTakenNumberEnemy2.setStrokeWidth(1.5);
+		damageTakenNumberEnemy3.setFont(DwarvenAxe);
+		damageTakenNumberEnemy3.setFill(Color.web("#bc1313"));
+		damageTakenNumberEnemy3.setStroke(Color.BLACK);  // Outline color
+		damageTakenNumberEnemy3.setStrokeWidth(1.5);
+		damageTakenNumberEnemy4.setFont(DwarvenAxe);
+		damageTakenNumberEnemy4.setFill(Color.web("#bc1313"));
+		damageTakenNumberEnemy4.setStroke(Color.BLACK);  // Outline color
+		damageTakenNumberEnemy4.setStrokeWidth(1.5);
+		
+		healNumberHero4.setFont(DwarvenAxe);
+		healNumberHero4.setFill(Color.web("#58f769"));
+		healNumberHero4.setStroke(Color.web("#006624"));  // Outline color
+		healNumberHero4.setStrokeWidth(1.5);
+		healNumberHero3.setFont(DwarvenAxe);
+		healNumberHero3.setFill(Color.web("#58f769"));
+		healNumberHero3.setStroke(Color.web("#006624"));  // Outline color
+		healNumberHero3.setStrokeWidth(1.5);
+		healNumberHero2.setFont(DwarvenAxe);
+		healNumberHero2.setFill(Color.web("#58f769"));
+		healNumberHero2.setStroke(Color.web("#006624"));  // Outline color
+		healNumberHero2.setStrokeWidth(1.5);
+		healNumberHero1.setFont(DwarvenAxe);
+		healNumberHero1.setFill(Color.web("#58f769"));
+		healNumberHero1.setStroke(Color.web("#006624"));  // Outline color
+		healNumberHero1.setStrokeWidth(1.5);
+		
+		healNumberEnemy4.setFont(DwarvenAxe);
+		healNumberEnemy4.setFill(Color.web("#58f769"));
+		healNumberEnemy4.setStroke(Color.web("#006624"));  // Outline color
+		healNumberEnemy4.setStrokeWidth(1.5);		
+		healNumberEnemy3.setFont(DwarvenAxe);
+		healNumberEnemy3.setFill(Color.web("#58f769"));
+		healNumberEnemy3.setStroke(Color.web("#006624"));  // Outline color
+		healNumberEnemy3.setStrokeWidth(1.5);		
+		healNumberEnemy2.setFont(DwarvenAxe);
+		healNumberEnemy2.setFill(Color.web("#58f769"));
+		healNumberEnemy2.setStroke(Color.web("#006624"));  // Outline color
+		healNumberEnemy2.setStrokeWidth(1.5);
+		healNumberEnemy1.setFont(DwarvenAxe);
+		healNumberEnemy1.setFill(Color.web("#58f769"));
+		healNumberEnemy1.setStroke(Color.web("#006624"));  // Outline color
+		healNumberEnemy1.setStrokeWidth(1.5);
 		
 		heroNameText.setFont(KingArthurLegend);
 		heroNameText.setFill(Color.web("#FFEB80"));
@@ -1227,6 +1310,10 @@ public class Main extends Application {
 		heroInPosition3.setMouseTransparent(true);
 		heroInPosition4.setMouseTransparent(true);
 		
+		enemyAttackingBloodStain.setMouseTransparent(true);
+		heroAttackingBloodStain.setMouseTransparent(true);
+
+		
 		skillbuttonimage1Paladin.setMouseTransparent(true);
 		skillbuttonimage2Paladin.setMouseTransparent(true);
 		skillbuttonimage3Paladin.setMouseTransparent(true);
@@ -1331,185 +1418,19 @@ public class Main extends Application {
 		enemyPosition3.setOpacity(0);
 		enemyPosition4.setOpacity(0);
 
+		enemyAttackingBloodStain.setOpacity(0); // Ensure correct range
+		heroAttackingBloodStain.setOpacity(0);  // Ensure correct range
+
+//			heroAttackingBloodStain.setOpacity(1.0); // Ensure the node is visible
+//		    FadeUtils.bloodstain(heroAttackingBloodStain); // Play the animation
+//		    
+//		    enemyAttackingBloodStain.setOpacity(1.0); // Ensure the node is visible
+//		    FadeUtils.bloodstain(enemyAttackingBloodStain); // Play the animation
 
 //		movebutton.setOpacity(0);
 		passTurnButton.setOpacity(00);
 		//--------------------------------------------------------------------------------------
-//		while (heroInPos1Turn = true){
-//		heroSelectionIndicator1.setVisible(true);
-//		fadeInHeroSelectionIndicator1.play();
-//		fadeOutHeroSelectionIndicator2.play();
-//		fadeOutHeroSelectionIndicator3.play();
-//		fadeOutHeroSelectionIndicator4.play();
-//		heroSelectionIndicator2.setVisible(false);
-//		heroSelectionIndicator3.setVisible(false);
-//		heroSelectionIndicator4.setVisible(false);
-//			//all other buttons and images cannot be clicked or seen.
-//			skillbuttonimage1Paladin.setOpacity(100); //image is visible
-//			skillbuttonimage2Paladin.setOpacity(100);
-//			skillbuttonimage3Paladin.setOpacity(100);
-//			skillbuttonimage4Paladin.setOpacity(100);
-//			skillbuttonimage1Assassin.setOpacity(0); // image is not visible
-//			skillbuttonimage2Assassin.setOpacity(0);
-//			skillbuttonimage3Assassin.setOpacity(0);
-//			skillbuttonimage4Assassin.setOpacity(0);
-//			skillbuttonimage1Wizard.setOpacity(0);
-//			skillbuttonimage2Wizard.setOpacity(0);
-//			skillbuttonimage3Wizard.setOpacity(0);
-//			skillbuttonimage4Wizard.setOpacity(0);
-//			skillbuttonimage1Alchemist.setOpacity(0);
-//			skillbuttonimage2Alchemist.setOpacity(0);
-//			skillbuttonimage3Alchemist.setOpacity(0);
-//			skillbuttonimage4Alchemist.setOpacity(0);
-//			skillbutton1Paladin.setMouseTransparent(false); //button is clickable
-//			skillbutton2Paladin.setMouseTransparent(false);
-//			skillbutton3Paladin.setMouseTransparent(false);
-//			skillbutton4Paladin.setMouseTransparent(false);
-//			skillbutton1Assassin.setMouseTransparent(true); //button is not clickable
-//			skillbutton2Assassin.setMouseTransparent(true); 
-//			skillbutton3Assassin.setMouseTransparent(true); 
-//			skillbutton4Assassin.setMouseTransparent(true); 
-//			skillbutton1Wizard.setMouseTransparent(true); 
-//			skillbutton2Wizard.setMouseTransparent(true); 
-//			skillbutton3Wizard.setMouseTransparent(true); 
-//			skillbutton4Wizard.setMouseTransparent(true); 
-//			skillbutton1Alchemist.setMouseTransparent(true); 
-//			skillbutton2Alchemist.setMouseTransparent(true); 
-//			skillbutton3Alchemist.setMouseTransparent(true); 
-//			skillbutton4Alchemist.setMouseTransparent(true); 
-//		}
-//		
-//		while (heroInPos2Turn = true){
-//		heroSelectionIndicator2.setVisible(true);
-//		fadeInHeroSelectionIndicator2.play();
-//		fadeOutHeroSelectionIndicator1.play();
-//		fadeOutHeroSelectionIndicator3.play();
-//		fadeOutHeroSelectionIndicator4.play();
-//		heroSelectionIndicator1.setVisible(false);
-//		heroSelectionIndicator3.setVisible(false);
-//		heroSelectionIndicator4.setVisible(false);
-//			//all other buttons and images cannot be clicked or seen.
-//			skillbuttonimage1Paladin.setOpacity(0); //image is visible
-//			skillbuttonimage2Paladin.setOpacity(0);
-//			skillbuttonimage3Paladin.setOpacity(0);
-//			skillbuttonimage4Paladin.setOpacity(0);
-//			skillbuttonimage1Assassin.setOpacity(100); // image is not visible
-//			skillbuttonimage2Assassin.setOpacity(100);
-//			skillbuttonimage3Assassin.setOpacity(100);
-//			skillbuttonimage4Assassin.setOpacity(100);
-//			skillbuttonimage1Wizard.setOpacity(0);
-//			skillbuttonimage2Wizard.setOpacity(0);
-//			skillbuttonimage3Wizard.setOpacity(0);
-//			skillbuttonimage4Wizard.setOpacity(0);
-//			skillbuttonimage1Alchemist.setOpacity(0);
-//			skillbuttonimage2Alchemist.setOpacity(0);
-//			skillbuttonimage3Alchemist.setOpacity(0);
-//			skillbuttonimage4Alchemist.setOpacity(0);
-//			skillbutton1Paladin.setMouseTransparent(true); //button is clickable
-//			skillbutton2Paladin.setMouseTransparent(true);
-//			skillbutton3Paladin.setMouseTransparent(true);
-//			skillbutton4Paladin.setMouseTransparent(true);
-//			skillbutton1Assassin.setMouseTransparent(false); //button is not clickable
-//			skillbutton2Assassin.setMouseTransparent(false); 
-//			skillbutton3Assassin.setMouseTransparent(false); 
-//			skillbutton4Assassin.setMouseTransparent(false); 
-//			skillbutton1Wizard.setMouseTransparent(true); 
-//			skillbutton2Wizard.setMouseTransparent(true); 
-//			skillbutton3Wizard.setMouseTransparent(true); 
-//			skillbutton4Wizard.setMouseTransparent(true); 
-//			skillbutton1Alchemist.setMouseTransparent(true); 
-//			skillbutton2Alchemist.setMouseTransparent(true); 
-//			skillbutton3Alchemist.setMouseTransparent(true); 
-//			skillbutton4Alchemist.setMouseTransparent(true); 
-//		}
-//		
-//		while (heroInPos3Turn = true){
-//		heroSelectionIndicator3.setVisible(true);
-//		fadeInHeroSelectionIndicator3.play();
-//		fadeOutHeroSelectionIndicator1.play();
-//		fadeOutHeroSelectionIndicator2.play();
-//		fadeOutHeroSelectionIndicator4.play();
-//		heroSelectionIndicator1.setVisible(false);
-//		heroSelectionIndicator2.setVisible(false);
-//		heroSelectionIndicator4.setVisible(false);
-//			//all other buttons and images cannot be clicked or seen.
-//			skillbuttonimage1Paladin.setOpacity(0); //image is visible
-//			skillbuttonimage2Paladin.setOpacity(0);
-//			skillbuttonimage3Paladin.setOpacity(0);
-//			skillbuttonimage4Paladin.setOpacity(0);
-//			skillbuttonimage1Assassin.setOpacity(0); // image is not visible
-//			skillbuttonimage2Assassin.setOpacity(0);
-//			skillbuttonimage3Assassin.setOpacity(0);
-//			skillbuttonimage4Assassin.setOpacity(0);
-//			skillbuttonimage1Wizard.setOpacity(100);
-//			skillbuttonimage2Wizard.setOpacity(100);
-//			skillbuttonimage3Wizard.setOpacity(100);
-//			skillbuttonimage4Wizard.setOpacity(100);
-//			skillbuttonimage1Alchemist.setOpacity(0);
-//			skillbuttonimage2Alchemist.setOpacity(0);
-//			skillbuttonimage3Alchemist.setOpacity(0);
-//			skillbuttonimage4Alchemist.setOpacity(0);
-//			skillbutton1Paladin.setMouseTransparent(true); //button is clickable
-//			skillbutton2Paladin.setMouseTransparent(true);
-//			skillbutton3Paladin.setMouseTransparent(true);
-//			skillbutton4Paladin.setMouseTransparent(true);
-//			skillbutton1Assassin.setMouseTransparent(true); //button is not clickable
-//			skillbutton2Assassin.setMouseTransparent(true); 
-//			skillbutton3Assassin.setMouseTransparent(true); 
-//			skillbutton4Assassin.setMouseTransparent(true); 
-//			skillbutton1Wizard.setMouseTransparent(false); 
-//			skillbutton2Wizard.setMouseTransparent(false); 
-//			skillbutton3Wizard.setMouseTransparent(false); 
-//			skillbutton4Wizard.setMouseTransparent(false); 
-//			skillbutton1Alchemist.setMouseTransparent(true); 
-//			skillbutton2Alchemist.setMouseTransparent(true); 
-//			skillbutton3Alchemist.setMouseTransparent(true); 
-//			skillbutton4Alchemist.setMouseTransparent(true); 
-//		}
-//		
-//		while (heroInPos4Turn = true){
-//		heroSelectionIndicator4.setVisible(true);
-//		fadeInHeroSelectionIndicator4.play();
-//		fadeOutHeroSelectionIndicator1.play();
-//		fadeOutHeroSelectionIndicator2.play();
-//		fadeOutHeroSelectionIndicator3.play();
-//		heroSelectionIndicator1.setVisible(false);
-//		heroSelectionIndicator2.setVisible(false);
-//		heroSelectionIndicator3.setVisible(false);
-//			//all other buttons and images cannot be clicked or seen.
-//			skillbuttonimage1Paladin.setOpacity(0); //image is visible
-//			skillbuttonimage2Paladin.setOpacity(0);
-//			skillbuttonimage3Paladin.setOpacity(0);
-//			skillbuttonimage4Paladin.setOpacity(0);
-//			skillbuttonimage1Assassin.setOpacity(0); // image is not visible
-//			skillbuttonimage2Assassin.setOpacity(0);
-//			skillbuttonimage3Assassin.setOpacity(0);
-//			skillbuttonimage4Assassin.setOpacity(0);
-//			skillbuttonimage1Wizard.setOpacity(0);
-//			skillbuttonimage2Wizard.setOpacity(0);
-//			skillbuttonimage3Wizard.setOpacity(0);
-//			skillbuttonimage4Wizard.setOpacity(0);
-//			skillbuttonimage1Alchemist.setOpacity(100);
-//			skillbuttonimage2Alchemist.setOpacity(100);
-//			skillbuttonimage3Alchemist.setOpacity(100);
-//			skillbuttonimage4Alchemist.setOpacity(100);
-//			skillbutton1Paladin.setMouseTransparent(true); //button is clickable
-//			skillbutton2Paladin.setMouseTransparent(true);
-//			skillbutton3Paladin.setMouseTransparent(true);
-//			skillbutton4Paladin.setMouseTransparent(true);
-//			skillbutton1Assassin.setMouseTransparent(true); //button is not clickable
-//			skillbutton2Assassin.setMouseTransparent(true); 
-//			skillbutton3Assassin.setMouseTransparent(true); 
-//			skillbutton4Assassin.setMouseTransparent(true); 
-//			skillbutton1Wizard.setMouseTransparent(true); 
-//			skillbutton2Wizard.setMouseTransparent(true); 
-//			skillbutton3Wizard.setMouseTransparent(true); 
-//			skillbutton4Wizard.setMouseTransparent(true); 
-//			skillbutton1Alchemist.setMouseTransparent(false); 
-//			skillbutton2Alchemist.setMouseTransparent(false); 
-//			skillbutton3Alchemist.setMouseTransparent(false); 
-//			skillbutton4Alchemist.setMouseTransparent(false); 
-//		}
+
 		
 		skillbutton1Paladin.setOpacity(0);
 		skillbutton2Paladin.setOpacity(0);
@@ -1527,24 +1448,6 @@ public class Main extends Application {
 		skillbutton2Alchemist.setOpacity(0);
 		skillbutton3Alchemist.setOpacity(0);
 		skillbutton4Alchemist.setOpacity(0);
-		//passTurnButton.setOpacity(0);
-//		skillbutton1Paladin.setMouseTransparent(true); // cant click the button
-//		skillbutton2Paladin.setMouseTransparent(true);
-//		skillbutton3Paladin.setMouseTransparent(true);
-//		skillbutton4Paladin.setMouseTransparent(true);
-//		skillbutton1Assassin.setMouseTransparent(true); 
-//		skillbutton2Assassin.setMouseTransparent(true);
-//		skillbutton3Assassin.setMouseTransparent(true);
-//		skillbutton4Assassin.setMouseTransparent(true);
-//		skillbutton1Wizard.setMouseTransparent(true);
-//		skillbutton2Wizard.setMouseTransparent(true);
-//		skillbutton3Wizard.setMouseTransparent(true);
-//		skillbutton4Wizard.setMouseTransparent(true);
-//		skillbutton1Alchemist.setMouseTransparent(true);
-//		skillbutton2Alchemist.setMouseTransparent(true);
-//		skillbutton3Alchemist.setMouseTransparent(true);
-//		skillbutton4Alchemist.setMouseTransparent(true);
-
 		
 		skillbuttonimage1Paladin.setOpacity(00);
 		skillbuttonimage2Paladin.setOpacity(00);
@@ -1719,40 +1622,7 @@ public class Main extends Application {
 		});
 		
 		// -------------------------------------------------------------
-		//make images dissapear or appear on button hover.
-		// none of this is correct. these need to be changed so that when a move is selected, it only shows visible on which enemies can be attacked.  // var
-//		heroPosition1.setOnMouseEntered(e -> {heroSelectionIndicator1.setVisible(true);
-//		fadeInHeroSelectionIndicator1.play();
-//		});
-//		heroPosition1.setOnMouseExited(e -> {
-//			fadeOutHeroSelectionIndicator1.play();
-//		});
-//		heroSelectionIndicator1.setVisible(false);
-//		
-//		heroPosition2.setOnMouseEntered(e -> {heroSelectionIndicator2.setVisible(true);
-//		fadeInHeroSelectionIndicator2.play();
-//		});
-//		heroPosition2.setOnMouseExited(e -> {
-//			fadeOutHeroSelectionIndicator2.play();
-//		});
-//		heroSelectionIndicator2.setVisible(false);
-//
-//		heroPosition3.setOnMouseEntered(e -> {heroSelectionIndicator3.setVisible(true);
-//		fadeInHeroSelectionIndicator3.play();
-//		});
-//		heroPosition3.setOnMouseExited(e -> {
-//			fadeOutHeroSelectionIndicator3.play();
-//		});
-//		heroSelectionIndicator3.setVisible(false);
-//
-//		heroPosition4.setOnMouseEntered(e -> {heroSelectionIndicator4.setVisible(true);
-//		fadeInHeroSelectionIndicator4.play();
-//		});
-//		heroPosition4.setOnMouseExited(e -> {
-//			fadeOutHeroSelectionIndicator4.play();
-//		});
-//		heroSelectionIndicator4.setVisible(false);
-//		
+
 		
 		enemyPosition1.setOnMouseEntered(e -> {enemySelectionIndicator1.setVisible(true);
 		enemyNameText.setVisible(true);
@@ -2117,43 +1987,7 @@ public class Main extends Application {
 
 		// Create a Pane for free positioning
 		Pane root = new Pane();
-		
-		Pane heroAttackSplashScreen = new Pane();
-		Pane enemyAttackSplashScreen = new Pane();
-		
 		Pane combatMenu = new Pane();
-		
-		
-		heroAttackSplashScreen.setStyle("-fx-background-color: rgba(0, 0, 0, 0.3);"); // semi-transparent black
-		heroAttackSplashScreen.setVisible(false); // initially hidden
-		FadeTransition fadeInheroAttackSplashScreen = new FadeTransition(Duration.millis(100), heroAttackSplashScreen);
-		fadeInheroAttackSplashScreen.setFromValue(0);
-		fadeInheroAttackSplashScreen.setToValue(1);
-		twoSecDelay.play();
-		FadeTransition fadeOutheroAttackSplashScreen = new FadeTransition(Duration.millis(100), heroAttackSplashScreen);
-		fadeOutheroAttackSplashScreen.setFromValue(1);
-		fadeOutheroAttackSplashScreen.setToValue(0);
-		fadeOutheroAttackSplashScreen.setOnFinished(e -> heroAttackSplashScreen.setVisible(false)); // Hide after fading out
-		
-		enemyAttackSplashScreen.getChildren().addAll(heroAttackingBloodStain);
-//		enemyAttackSplashScreen.getChildren().addAll(charAttacking, charDefending); // var
-
-		// -------------------------------------------------------------
-
-		
-		enemyAttackSplashScreen.setStyle("-fx-background-color: rgba(0, 0, 0, 0.3);"); // semi-transparent black
-		enemyAttackSplashScreen.setVisible(false); // initially hidden
-		FadeTransition fadeInenemyAttackSplashScreen = new FadeTransition(Duration.millis(100), enemyAttackSplashScreen);
-		fadeInenemyAttackSplashScreen.setFromValue(0);
-		fadeInenemyAttackSplashScreen.setToValue(1);
-		twoSecDelay.play();
-		FadeTransition fadeOutenemyAttackSplashScreen = new FadeTransition(Duration.millis(100), enemyAttackSplashScreen);
-		fadeOutenemyAttackSplashScreen.setFromValue(1);
-		fadeOutenemyAttackSplashScreen.setToValue(0);
-		fadeOutenemyAttackSplashScreen.setOnFinished(e -> enemyAttackSplashScreen.setVisible(false)); // Hide after fading out
-		
-		enemyAttackSplashScreen.getChildren().addAll(enemyAttackingBloodStain);
-//		enemyAttackSplashScreen.getChildren().addAll(charAttacking, charDefending); // var
 		
 		// -------------------------------------------------------------
 		
@@ -2180,6 +2014,7 @@ public class Main extends Application {
         
 		// Add buttons, images
 		root.getChildren().addAll(darkenGroup);
+		root.getChildren().addAll(enemyAttackingBloodStain, heroAttackingBloodStain);
 		root.getChildren().addAll(heroTurnTicker1, heroTurnTicker2, heroTurnTicker3, heroTurnTicker4);
 		root.getChildren().addAll(enemyTurnTicker1, enemyTurnTicker2, enemyTurnTicker3, enemyTurnTicker4);
 		root.getChildren().addAll(enemyBLDResistanceIcon, enemyBLGTResistanceIcon, enemyBURNResistanceIcon, enemySTNResistanceIcon, enemyMOVResistanceIcon, enemyDBFFResistanceIcon, enemyDTHResistanceIcon);
@@ -2215,10 +2050,14 @@ public class Main extends Application {
 		root.getChildren().addAll(BLDIconEnemy1,BLDIconEnemy2,BLDIconEnemy3,BLDIconEnemy4,BLGTIconEnemy1,BLGTIconEnemy2,BLGTIconEnemy3, BLGTIconEnemy4,BURNIconEnemy1,BURNIconEnemy2,BURNIconEnemy3,BURNIconEnemy4);
 //		root.getChildren().add(bottomRightHPBarBlackRectangle);
 //		root.getChildren().addAll(bottomRightHPBarRedRectangle, enemySpeedIcon);
+		root.getChildren().addAll(damageTakenNumberHero4,damageTakenNumberHero3,damageTakenNumberHero2,
+				damageTakenNumberHero1,healNumberHero4,healNumberHero3,healNumberHero2,healNumberHero1,
+				damageTakenNumberEnemy4,damageTakenNumberEnemy3,damageTakenNumberEnemy2,damageTakenNumberEnemy1,
+				healNumberEnemy4,healNumberEnemy3,healNumberEnemy2,healNumberEnemy1);
 		
 		root.getChildren().addAll(heroHPPos4,heroHPPos3,heroHPPos2,heroHPPos1);
 		root.getChildren().addAll(enemyHPPos4,enemyHPPos3,enemyHPPos2,enemyHPPos1);
-		root.getChildren().addAll(moveDescriptionText,moveDescriptionText2,moveNameText);
+		root.getChildren().addAll(moveDescriptionText,moveDescriptionText2);
 		root.getChildren().addAll(deathblowEnemy1,deathblowEnemy2,deathblowEnemy3,deathblowEnemy4);
 		root.getChildren().addAll(DDCheckHero1,DDCheckHero2,DDCheckHero3,DDCheckHero4);
 		
@@ -2431,6 +2270,97 @@ public class Main extends Application {
 //		enemySpeedIcon.setLayoutY(952); 
 //		enemySpeedIcon.setScaleX(1);
 //		enemySpeedIcon.setScaleY(1);
+		// -------------------------------------------------------------
+		
+		damageTakenNumberHero4.setLayoutX(200);
+		damageTakenNumberHero4.setLayoutY(350);
+		damageTakenNumberHero4.setScaleX(2);
+		damageTakenNumberHero4.setScaleY(2);
+		damageTakenNumberHero3.setLayoutX(405);
+		damageTakenNumberHero3.setLayoutY(350);
+		damageTakenNumberHero3.setScaleX(2);
+		damageTakenNumberHero3.setScaleY(2);
+		damageTakenNumberHero2.setLayoutX(610);
+		damageTakenNumberHero2.setLayoutY(350);
+		damageTakenNumberHero2.setScaleX(2);
+		damageTakenNumberHero2.setScaleY(2);
+		damageTakenNumberHero1.setLayoutX(815);
+		damageTakenNumberHero1.setLayoutY(350);
+		damageTakenNumberHero1.setScaleX(2);
+		damageTakenNumberHero1.setScaleY(2);
+		healNumberHero4.setLayoutX(200);
+		healNumberHero4.setLayoutY(350);
+		healNumberHero4.setScaleX(2);
+		healNumberHero4.setScaleY(2);
+		healNumberHero3.setLayoutX(405);
+		healNumberHero3.setLayoutY(350);
+		healNumberHero3.setScaleX(2);
+		healNumberHero3.setScaleY(2);
+		healNumberHero2.setLayoutX(610);
+		healNumberHero2.setLayoutY(350);
+		healNumberHero2.setScaleX(2);
+		healNumberHero2.setScaleY(2);
+		healNumberHero1.setLayoutX(815);
+		healNumberHero1.setLayoutY(350);
+		healNumberHero1.setScaleX(2);
+		healNumberHero1.setScaleY(2);
+		
+		damageTakenNumberEnemy4.setLayoutX(1715);
+		damageTakenNumberEnemy4.setLayoutY(350);
+		damageTakenNumberEnemy4.setScaleX(2);
+		damageTakenNumberEnemy4.setScaleY(2);
+		damageTakenNumberEnemy3.setLayoutX(1510);
+		damageTakenNumberEnemy3.setLayoutY(350);
+		damageTakenNumberEnemy3.setScaleX(2);
+		damageTakenNumberEnemy3.setScaleY(2);
+		damageTakenNumberEnemy2.setLayoutX(1305);
+		damageTakenNumberEnemy2.setLayoutY(350);
+		damageTakenNumberEnemy2.setScaleX(2);
+		damageTakenNumberEnemy2.setScaleY(2);
+		damageTakenNumberEnemy1.setLayoutX(1100);
+		damageTakenNumberEnemy1.setLayoutY(350);
+		damageTakenNumberEnemy1.setScaleX(2);
+		damageTakenNumberEnemy1.setScaleY(2);
+		healNumberEnemy4.setLayoutX(1100);
+		healNumberEnemy4.setLayoutY(350);
+		healNumberEnemy4.setScaleX(2);
+		healNumberEnemy4.setScaleY(2);
+		healNumberEnemy3.setLayoutX(1305);
+		healNumberEnemy3.setLayoutY(350);
+		healNumberEnemy3.setScaleX(2);
+		healNumberEnemy3.setScaleY(2);
+		healNumberEnemy2.setLayoutX(1510);
+		healNumberEnemy2.setLayoutY(350);
+		healNumberEnemy2.setScaleX(2);
+		healNumberEnemy2.setScaleY(2);
+		healNumberEnemy1.setLayoutX(1715);
+		healNumberEnemy1.setLayoutY(350);
+		healNumberEnemy1.setScaleX(2);
+		healNumberEnemy1.setScaleY(2);
+		
+		damageTakenNumberHero4.setOpacity(0);
+		damageTakenNumberHero3.setOpacity(0);
+		damageTakenNumberHero2.setOpacity(0);
+		damageTakenNumberHero1.setOpacity(0);
+		healNumberHero4.setOpacity(0);
+		healNumberHero3.setOpacity(0);
+		healNumberHero2.setOpacity(0);
+		healNumberHero1.setOpacity(0);
+
+		damageTakenNumberEnemy4.setOpacity(0);
+		damageTakenNumberEnemy3.setOpacity(0);
+		damageTakenNumberEnemy2.setOpacity(0);
+		damageTakenNumberEnemy1.setOpacity(0);
+		healNumberEnemy4.setOpacity(0);
+		healNumberEnemy3.setOpacity(0);
+		healNumberEnemy2.setOpacity(0);
+		healNumberEnemy1.setOpacity(0);
+		
+		
+		FadeUtils.popNumber(damageTakenNumberEnemy1);
+
+		
+		// -------------------------------------------------------------
 		
 		enemyBLDResistanceIcon.setLayoutX(1412); // these 3 assets are weird, so need eyeball'd placements.
 		enemyBLDResistanceIcon.setLayoutY(952); 
@@ -2596,39 +2526,39 @@ public class Main extends Application {
 		
 		
 		heroHPPos4.setLayoutX(180); //92
-		heroHPPos4.setLayoutY(730); 
+		heroHPPos4.setLayoutY(715); 
 		heroHPPos4.setScaleX(.5); 
 		heroHPPos4.setScaleY(.5); 
 		
 		heroHPPos3.setLayoutX(385); // space 205
-		heroHPPos3.setLayoutY(730);
+		heroHPPos3.setLayoutY(715);
 		heroHPPos3.setScaleX(.5); 
 		heroHPPos3.setScaleY(.5); 
 		
 		heroHPPos2.setLayoutX(590); 
-		heroHPPos2.setLayoutY(730); 
+		heroHPPos2.setLayoutY(715); 
 		heroHPPos2.setScaleX(.5); 
 		heroHPPos2.setScaleY(.5); 
 		
-		heroHPPos1.setLayoutX(805); 
-		heroHPPos1.setLayoutY(730);  
+		heroHPPos1.setLayoutX(795); 
+		heroHPPos1.setLayoutY(715);  
 		heroHPPos1.setScaleX(.5); 
 		heroHPPos1.setScaleY(.5); 
 		
 		enemyHPPos1.setLayoutX(1080); 
-		enemyHPPos1.setLayoutY(730);   
+		enemyHPPos1.setLayoutY(715);   
 		enemyHPPos1.setScaleX(.5); 
 		enemyHPPos1.setScaleY(.5); 
 		enemyHPPos2.setLayoutX(1285); 
-		enemyHPPos2.setLayoutY(730);  
+		enemyHPPos2.setLayoutY(715);  
 		enemyHPPos2.setScaleX(.5); 
 		enemyHPPos2.setScaleY(.5); 
 		enemyHPPos3.setLayoutX(1490); 
-		enemyHPPos3.setLayoutY(730);  
+		enemyHPPos3.setLayoutY(715);  
 		enemyHPPos3.setScaleX(.5); 
 		enemyHPPos3.setScaleY(.5); 
 		enemyHPPos4.setLayoutX(1695); 
-		enemyHPPos4.setLayoutY(730); 
+		enemyHPPos4.setLayoutY(715); 
 		enemyHPPos4.setScaleX(.5); 
 		enemyHPPos4.setScaleY(.5); 
 		// -------------------------------------------------------------
@@ -2849,12 +2779,7 @@ public class Main extends Application {
 		deathblowEnemy3.setOpacity(0);
 		deathblowEnemy4.setOpacity(0);
 		
-//		// deathblow animation and sfx
-//		enemyHealthBarRedRectangle1.setOnMouseEntered(e -> {
-//		    deathblowEnemy1.setOpacity(1.0); // Ensure the node is visible
-//		    FadeUtils.deathblow(deathblowEnemy1); // Play the animation
-//		    AudioManager.playEnemyDeathSFX(); // Play the sound effect
-//		});
+
 
 
 

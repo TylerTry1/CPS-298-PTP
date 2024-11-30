@@ -18,9 +18,9 @@ public class Paladin extends Characters {
         attackSprite = "applicationImagesPlayerSprites/Paladin_Attack.png";
         kneelingSprite = "applicationImagesHeroSprites/Paladin/Paladin_Kneeling.png";
         activeSprite = "applicationImagesPlayerSprites/Paladin_Idle.png";
-        maxHealth = 33;
-        health = 33;
-        damage = 4; 
+        maxHealth = 72;
+        health = 72;
+        damage = 10; 
         defense = 0;
         accuracy = 100;
         crit_chance = 32;

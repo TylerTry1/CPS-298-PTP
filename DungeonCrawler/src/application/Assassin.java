@@ -20,8 +20,8 @@ public class Assassin extends Characters {
 		attackSprite = "applicationImagesPlayerSprites/Assassin_Attack.png";
 		kneelingSprite = "applicationImagesHeroSprites/Assassin/Assassin_Kneeling.png";
 		activeSprite = "applicationImagesPlayerSprites/Assassin_Idle.png";
-		maxHealth = 72;
-		health = 72;
+		maxHealth = 50;
+		health = 45;
 		damage = 10;
 		defense = 0;
 		accuracy = 85;
