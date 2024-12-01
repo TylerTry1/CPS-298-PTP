@@ -1,6 +1,7 @@
 package application;
 
 import java.util.List;
+import java.util.Random;
 
 import javafx.scene.text.Text;
 
@@ -19,7 +20,7 @@ public class Alchemist extends Characters {
         activeSprite = "applicationImagesPlayerSprites/Alchemist_Idle.png";
         maxHealth = 33;
         health = 33;
-        damage = 18;
+        damage = 5;
         defense = 0;
         accuracy = 70;
         crit_chance = 14;

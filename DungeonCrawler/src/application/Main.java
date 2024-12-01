@@ -564,6 +564,8 @@ public class Main extends Application {
 		skillbutton3Paladin.setToggleGroup(skillButtonGroupPaladin);
 		RadioButton skillbutton4Paladin = new RadioButton("Holy Rampart");
 		skillbutton4Paladin.setToggleGroup(skillButtonGroupPaladin );
+	        
+		
 		
 		// RadioButton movebuttonPaladin = new RadioButton("move");
 		// movebuttonPaladin.setToggleGroup(skillButtonGroupPaladin);
@@ -583,26 +585,26 @@ public class Main extends Application {
 
 
 		ToggleGroup skillButtonGroupWizard = new ToggleGroup();
-		RadioButton skillbutton1Wizard = new RadioButton("skill 1");
+		RadioButton skillbutton1Wizard = new RadioButton("Fireball");
 		skillbutton1Wizard.setToggleGroup(skillButtonGroupWizard);
-		RadioButton skillbutton2Wizard = new RadioButton("skill 2");
+		RadioButton skillbutton2Wizard = new RadioButton("Magic Missile");
 		skillbutton2Wizard.setToggleGroup(skillButtonGroupWizard);
-		RadioButton skillbutton3Wizard = new RadioButton("skill 3");
+		RadioButton skillbutton3Wizard = new RadioButton("Frost Bolt");
 		skillbutton3Wizard.setToggleGroup(skillButtonGroupWizard);
-		RadioButton skillbutton4Wizard = new RadioButton("skill 4");
+		RadioButton skillbutton4Wizard = new RadioButton("Staff Strike");
 		skillbutton4Wizard.setToggleGroup(skillButtonGroupWizard);
 		// RadioButton movebuttonWizard = new RadioButton("move");
 		// movebuttonWizard.setToggleGroup(skillButtonGroupWizard);
 
 
 		ToggleGroup skillButtonGroupAlchemist = new ToggleGroup();
-		RadioButton skillbutton1Alchemist = new RadioButton("skill 1");
+		RadioButton skillbutton1Alchemist = new RadioButton("Acid Puddle");
 		skillbutton1Alchemist.setToggleGroup(skillButtonGroupAlchemist);
-		RadioButton skillbutton2Alchemist = new RadioButton("skill 2");
+		RadioButton skillbutton2Alchemist = new RadioButton("Healing Elixir");
 		skillbutton2Alchemist.setToggleGroup(skillButtonGroupAlchemist);
-		RadioButton skillbutton3Alchemist = new RadioButton("skill 3");
+		RadioButton skillbutton3Alchemist = new RadioButton("Invigoration");
 		skillbutton3Alchemist.setToggleGroup(skillButtonGroupAlchemist);
-		RadioButton skillbutton4Alchemist = new RadioButton("skill 4");
+		RadioButton skillbutton4Alchemist = new RadioButton("Explosive Flask");
 		skillbutton4Alchemist.setToggleGroup(skillButtonGroupAlchemist);
 		// RadioButton movebuttonAlchemist = new RadioButton("move");
 		// movebuttonAlchemist.setToggleGroup(skillButtonGroupAlchemist);
@@ -755,7 +757,7 @@ public class Main extends Application {
 											enemyTurnTicker1, enemyTurnTicker2, enemyTurnTicker3, enemyTurnTicker4,
 											heroSelectionIndicator4, heroSelectionIndicator3, heroSelectionIndicator2, heroSelectionIndicator1,
 											enemySelectionIndicator1, enemySelectionIndicator2, enemySelectionIndicator3, enemySelectionIndicator4,
-											heroNameText, moveDescriptionText,
+											heroNameText, moveDescriptionText, moveDescriptionText2,
 											skillButtonSelectedFrame1, skillButtonSelectedFrame2, skillButtonSelectedFrame3, skillButtonSelectedFrame4,
 											deathblowEnemy1, deathblowEnemy2, deathblowEnemy3, deathblowEnemy4,
 											enemyInPosition1, enemyInPosition2, enemyInPosition3, enemyInPosition4,
@@ -1024,8 +1026,8 @@ public class Main extends Application {
 		enemyHPPos4.setFill(Color.web("#bc1313"));
 		moveDescriptionText.setFont(DwarvenAxe); 
 		moveDescriptionText.setFill(Color.web("#d5d5d5"));
-//		moveDescriptionText2.setFont(DwarvenAxe);
-//		moveDescriptionText2.setFill(Color.web("#d5d5d5"));
+		moveDescriptionText2.setFont(DwarvenAxe);
+		moveDescriptionText2.setFill(Color.web("#d5d5d5"));
 		moveNameText.setFont(DwarvenAxe); 
 		moveNameText.setFill(Color.web("#d5d5d5"));
 		moveNameText.setTextAlignment(TextAlignment.CENTER);
@@ -3039,7 +3041,7 @@ public class Main extends Application {
 		Rectangle transitionCoverExit = new Rectangle(400, 20, Color.BLACK); // Black rectangle
 		
 		Shop shop = new Shop(); //creates shop object
-		ArrayList<Items> randItems = shop.getRandomItems(1); //uses shop object to run a function to get 3 random items than assign that to randItems
+		ArrayList<Items> randItems = shop.getRandomItems(3); //uses shop object to run a function to get 3 random items than assign that to randItems
 		
        TranslateTransition transitionEnter = new TranslateTransition(Duration.seconds(1.5), transitionCoverEnter);
        transitionEnter.setToY(2500); 

@@ -11,7 +11,7 @@ public class Paladin extends Characters {
 
     private boolean isAuraActive = false; // Track if Aura of Courage is active
     private int auraTurnsRemaining = 0;
-
+    
     Paladin() {
         name = "Dismas"; // Paladin name
         idleSprite = "applicationImagesPlayerSprites/Paladin_Idle.png";
