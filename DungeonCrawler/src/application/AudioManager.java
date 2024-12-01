@@ -217,6 +217,7 @@ public class AudioManager {
     public static void playsuccessSFX() {successSFX.play();}
     public static void playEnemyDeathSFX() {EnemyDeathSFX.play();}
     public static void playDeathsDoorSFX() {DeathsDoorSFX.play();}
+    
     public static void playnewRoundSFX() {newRoundSFX.play();}
     
     public static void playAlchemistAcidPuddle() {alchemistAcidPuddle.play();}
