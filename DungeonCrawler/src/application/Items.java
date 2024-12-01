@@ -2,11 +2,11 @@ package application;
 
 
 public class Items {
-	private static String name;
-	private static String itemDescription;
-	private static String itemToolTip;
-	private static String imageLocation;
-	private static int itemPrice;
+	private String name;
+	private String itemDescription;
+	private String itemToolTip;
+	private String imageLocation;
+	private int itemPrice;
 	
 	//getters
 	public String getName() {
@@ -30,14 +30,18 @@ public class Items {
 		return imageLocation;
 	}
 
+	public Items(String name, String imageLocation, String itemToolTip, String itemDescription, int itemPrice) {
+		this.name = name;
+		this.itemDescription = itemDescription;
+		this.itemToolTip = itemToolTip;
+		this.imageLocation = imageLocation;
+		this.itemPrice = itemPrice;
+		
+	}
 
-	public static class Clinic extends Items {
+	public class Clinic extends Items {
 		Clinic() {
-	        name = "Clinic";
-	        imageLocation = "shopAssets/clinic.png";
-	        itemDescription = "heals the entire team to full HP";
-	        itemToolTip = "a little help impeccably timed.";
-	        itemPrice = 400;
+	        super("Clinic", "shopAssets/clinic.png", "heals the entire team to full HP", "a little help impeccably timed.", 400);
 	    }
 		
 		//fully restores heros to max health
@@ -49,13 +53,9 @@ public class Items {
 		}
 	}
 	
-	public static class Whetstone extends Items {
+	public class Whetstone extends Items {
 		Whetstone() {
-	        name = "Whetstone";
-	        imageLocation = "shopAssets/whetstone.png";
-	        itemDescription = "increases character’s damage by 1.1x";
-	        itemToolTip = "sharpened to a razor’s edge.";
-	        itemPrice = 700;
+	        super("Whetstone", "shopAssets/whetstone.png", "increases character’s damage by 1.1x", "sharpened to a razor’s edge.", 700 );
 	    }
 		
 		//increases one characters damage by 1.1x
@@ -64,13 +64,9 @@ public class Items {
 		}
 	}
 	
-	public static class SmellingSalts extends Items {
+	public class SmellingSalts extends Items {
 		SmellingSalts() {
-	        name = "Smelling Salts";
-	        imageLocation = "shopAssets/smellingSalts.png";
-	        itemDescription = "increases character’s speed by 1";
-	        itemToolTip = "null";
-	        itemPrice = 600;
+	        super("Smelling Salts", "shopAssets/smellingSalts.png", "increases character’s speed by 1", "null",  600);
 	    }
 		
 		//increases one characters speed by 1
@@ -79,13 +75,9 @@ public class Items {
 		}
 	}
 	
-	public static class StrengtheningTonic extends Items {
+	public class StrengtheningTonic extends Items {
 		StrengtheningTonic() {
-	        name = "Strengthening Tonic";
-	        imageLocation = "shopAssets/strengtheningTonic.png";
-	        itemDescription = "increases character’s max hp by 1.1x";
-	        itemToolTip = "null";
-	        itemPrice = 600;
+	        super("Strengthening Tonic", "shopAssets/strengtheningTonic.png", "increases character’s max hp by 1.1x", "null", 600);
 	    }
 		
 		//increases one characters health by 1.1x
@@ -97,13 +89,9 @@ public class Items {
 		}
 	}
 	
-	public static class FortifyingSupplements extends Items {
+	public class FortifyingSupplements extends Items {
 		FortifyingSupplements() {
-	        name = "Fortifying Supplements";
-	        imageLocation = "shopAssets/fortifyingSupplements.png";
-	        itemDescription = "increases character’s total BLD/PSN/BRN etc res’ by +10%";
-	        itemToolTip = "null";
-	        itemPrice = 400;
+	        super("Fortifying Supplements", "shopAssets/fortifyingSupplements.png", "increases character’s total BLD/PSN/BRN etc res’ by +10%", "null", 400);
 	    }
 		
 		//increases one characters resistances by 10%
@@ -114,13 +102,9 @@ public class Items {
 		}
 	}
 	
-	public static class RabbitsFoot extends Items {
+	public class RabbitsFoot extends Items {
 		RabbitsFoot() {
-	        name = "Rabbit’s Foot";
-	        imageLocation = "shopAssets/rabbitFoot.png";
-	        itemDescription = "increases character’s cit chance by +5%.";
-	        itemToolTip = "null";
-	        itemPrice = 500;
+	        super("Rabbit’s Foot", "shopAssets/rabbitFoot.png", "increases character’s cit chance by +5%.", "null", 500);
 	    }
 		
 		//increases one characters crit chance by 5%

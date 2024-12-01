@@ -11,13 +11,13 @@ import application.Items.StrengtheningTonic;
 import application.Items.Whetstone;
 
 public class Shop {
-	Items items = new Items();
-	Items.Clinic clinic = new Items.Clinic();
-	Items.FortifyingSupplements fortifyingSupplements = new Items.FortifyingSupplements();
-	Items.RabbitsFoot rabbitsFoot = new Items.RabbitsFoot();
-	Items.SmellingSalts smellingSalts = new Items.SmellingSalts();
-	Items.StrengtheningTonic strengtheningTonic = new Items.StrengtheningTonic();
-	Items.Whetstone whetstone = new Items.Whetstone();
+	Items items = new Items("1", "2", "3", "4", 1);
+	Items.Clinic clinic = items.new Clinic();
+	Items.FortifyingSupplements fortifyingSupplements = items.new FortifyingSupplements();
+	Items.RabbitsFoot rabbitsFoot = items.new RabbitsFoot();
+	Items.SmellingSalts smellingSalts = items.new SmellingSalts();
+	Items.StrengtheningTonic strengtheningTonic = items.new StrengtheningTonic();
+	Items.Whetstone whetstone = items.new Whetstone();
 	
 	
 	//all items in a array to pull at random
@@ -38,18 +38,30 @@ public class Shop {
 	//pullList.add(strengtheningTonic);
 	//pullList.add(wheatstone);
 	
+	public ArrayList<Items> createShopList() {
+
+		ArrayList<Items> tempList = new ArrayList<Items>();
+		
+		tempList.add(fortifyingSupplements);
+		tempList.add(rabbitsFoot);
+		tempList.add(smellingSalts);
+		tempList.add(strengtheningTonic);
+		tempList.add(whetstone);
+		tempList.add(clinic);
+		
+		
+		return tempList;
+	}
+	
 	
 	ArrayList<Items> getRandomItems(int amount) {
-		ArrayList<Items> pullList = new ArrayList<Items>();
-		pullList.add(fortifyingSupplements);
-		pullList.add(rabbitsFoot);
-		pullList.add(smellingSalts);
-		pullList.add(strengtheningTonic);
-		pullList.add(whetstone);
-		pullList.add(clinic);
+		ArrayList<Items> pullList = createShopList();
 		
 		ArrayList<Items> tempPullList = new ArrayList<Items>();
 		
+		for (Items item : pullList) {
+			System.out.println(item.getName());
+		}
 		int tempSize = pullList.size() - amount;
 		//will remove items = to the difference between the size and the amount wanted this ensures no duplicates
 		for(int i = 0; i < tempSize; i++) {
