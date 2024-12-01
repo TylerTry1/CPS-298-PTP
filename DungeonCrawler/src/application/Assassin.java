@@ -15,7 +15,7 @@ public class Assassin extends Characters {
     private int poisonTurnsRemaining = 0;
     
 	Assassin() {
-		name = "Damian";
+		name = "Assassin";
 		idleSprite = "applicationImagesPlayerSprites/Assassin_Idle.png";
 		attackSprite = "applicationImagesPlayerSprites/Assassin_Attack.png";
 		kneelingSprite = "applicationImagesHeroSprites/Assassin/Assassin_Kneeling.png";

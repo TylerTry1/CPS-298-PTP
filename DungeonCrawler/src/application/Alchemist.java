@@ -13,7 +13,7 @@ public class Alchemist extends Characters {
     private static final int INVIGORATION_BOOST_MAX = 2; // Maximum attack boost
     private static final int EXPLOSIVE_FLASK_DAMAGE = 5; // Damage from explosive flask
 	Alchemist() {
-        name = "Reynauld";
+        name = "Alchemist";
         idleSprite = "applicationImagesPlayerSprites/Alchemist_Idle.png";
         attackSprite = "applicationImagesPlayerSprites/Alchemist_Attack.png";
         kneelingSprite = "applicationImagesHeroSprites/Alchemist/Alchemist_Kneeling.png";

@@ -12,7 +12,7 @@ public class Wizard extends Characters {
     private static final int STAFF_STRIKE_DAMAGE = 3; // Small damage for Staff Strike
 
     public Wizard() {
-        name = "Merlin"; // Wizard name
+        name = "Wizard"; // Wizard name
         idleSprite = "applicationImagesPlayerSprites/Wizard_Idle.png";
         attackSprite = "applicationImagesPlayerSprites/Wizard_Attack.png";
         kneelingSprite = "applicationImagesHeroSprites/Wizard/Wizzard_Kneeling.png";

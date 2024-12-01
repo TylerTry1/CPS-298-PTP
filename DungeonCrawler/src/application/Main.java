@@ -1,9 +1,9 @@
 package application;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -91,10 +91,10 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 //		setupLoadingStage(primaryStage);
-		initialization(primaryStage); // use this!!!
+//		initialization(primaryStage); // use this!!!
 //		shop(primaryStage);
 //		gameOver(primaryStage);
-//		test(primaryStage);
+		test(primaryStage);
 	}
 
 	private void initialization(Stage primaryStage) { // this scene is used specifically so that we can make our application full screen.
@@ -1199,10 +1199,9 @@ public class Main extends Application {
 		heroPositions.getChildren().addAll(heroPosition4, heroPosition3, heroPosition2, heroPosition1);
 		HBox enemyPositions = new HBox(50);
 		enemyPositions.getChildren().addAll(enemyPosition1, enemyPosition2, enemyPosition3, enemyPosition4);
+		
 		HBox skillButtonsPaladin = new HBox(10);
 		skillButtonsPaladin.getChildren().addAll(skillbutton1Paladin, skillbutton2Paladin, skillbutton3Paladin, skillbutton4Paladin);// ,movebutton
-		
-		
 		HBox skillButtonsAssassin = new HBox(10);
 		skillButtonsAssassin.getChildren().addAll(skillbutton1Assassin, skillbutton2Assassin, skillbutton3Assassin, skillbutton4Assassin);// ,movebutton
 		skillButtonsAssassin.setMouseTransparent(true);
@@ -1995,8 +1994,15 @@ public class Main extends Application {
 		// -------------------------------------------------------------
 
 		// Create a Pane for free positioning
+		StackPane skills = new StackPane();
 		Pane root = new Pane();
 		Pane combatMenu = new Pane();
+//		 	skill1.setOnAction(e -> handleButtonClick(stackPane, skill1, skill2, skill3, skill4));
+//	        skill2.setOnAction(e -> handleButtonClick(stackPane, skill2, skill1, skill3, skill4));
+//	        skill3.setOnAction(e -> handleButtonClick(stackPane, skill3, skill1, skill2, skill4));
+//	        skill4.setOnAction(e -> handleButtonClick(stackPane, skill4, skill1, skill2, skill3));
+		// -------------------------------------------------------------
+		skills.getChildren().addAll(skillButtonsWizard, skillButtonsAlchemist, skillButtonsPaladin, skillButtonsAssassin); // last in order is on top
 		
 		// -------------------------------------------------------------
 		
@@ -2032,10 +2038,10 @@ public class Main extends Application {
 		root.getChildren().addAll(enemy2BleedResistanceNumber,enemy2BlightResistanceNumber,enemy2BurnResistanceNumber,enemy2StunResistanceNumber,enemy2MoveResistanceNumber,enemy2DebuffResistanceNumber, enemy2DeathResistanceNumber);
 		root.getChildren().addAll(enemy3BleedResistanceNumber,enemy3BlightResistanceNumber,enemy3BurnResistanceNumber,enemy3StunResistanceNumber,enemy3MoveResistanceNumber,enemy3DebuffResistanceNumber, enemy3DeathResistanceNumber);
 		root.getChildren().addAll(enemy4BleedResistanceNumber,enemy4BlightResistanceNumber,enemy4BurnResistanceNumber,enemy4StunResistanceNumber,enemy4MoveResistanceNumber,enemy4DebuffResistanceNumber, enemy4DeathResistanceNumber);
-		root.getChildren().addAll(skillButtonsPaladin);
-		root.getChildren().add(skillButtonsAssassin);
-		root.getChildren().add(skillButtonsWizard);
-		root.getChildren().add(skillButtonsAlchemist);
+//		root.getChildren().addAll(skillButtonsPaladin);
+//		root.getChildren().add(skillButtonsAssassin);
+//		root.getChildren().add(skillButtonsWizard);
+//		root.getChildren().add(skillButtonsAlchemist);
 		root.getChildren().add(passTurnButton);
 		root.getChildren().addAll(skillButtonsImagesPaladin);
 		root.getChildren().addAll(skillButtonsImagesAssassin);																			
@@ -2868,7 +2874,7 @@ public class Main extends Application {
 		});});
 		primaryStage.setMaximized(true);
 		
-		Scene scene = new Scene(new StackPane(root, combatMenu), 1920, 1080);
+		Scene scene = new Scene(new StackPane(root, skills, combatMenu), 1920, 1080);
 		scene.setOnKeyPressed(event -> {
 			if (event.getCode() == KeyCode.ESCAPE) {
 				 if (combatMenu.isVisible()) {
@@ -3924,56 +3930,106 @@ public class Main extends Application {
 	}
 	
 	public void test(Stage primaryStage) {
-	    Pane root = new Pane();
-	    List<ImageView> imageViews = new ArrayList<>();
+        StackPane stackPane = new StackPane();
 
-	    // Hardcoded image paths
-	    String[] imagePaths = {
-	        "/images/Giant_Slammer_Idle.png",
-	        "/images/Goblin_axeman_1_Idle.png",
-	        "/images/Goblin_axeman_1_Attack.png"
-	    };
+        // Create skill buttons for Paladin
+        Button skillbutton1Paladin = new Button("Paladin Skill 1");
+        Button skillbutton2Paladin = new Button("Paladin Skill 2");
+        Button skillbutton3Paladin = new Button("Paladin Skill 3");
+        Button skillbutton4Paladin = new Button("Paladin Skill 4");
+        HBox skillButtonsPaladin = new HBox(10, skillbutton1Paladin, skillbutton2Paladin, skillbutton3Paladin, skillbutton4Paladin);
 
-	    // Set the "floor" position
-	    double floorY = 400;
+        // Create skill buttons for Assassin
+        Button skillbutton1Assassin = new Button("Assassin Skill 1");
+        Button skillbutton2Assassin = new Button("Assassin Skill 2");
+        Button skillbutton3Assassin = new Button("Assassin Skill 3");
+        Button skillbutton4Assassin = new Button("Assassin Skill 4");
+        HBox skillButtonsAssassin = new HBox(10, skillbutton1Assassin, skillbutton2Assassin, skillbutton3Assassin, skillbutton4Assassin);
 
-	    // Determine the tallest image
-	    double maxHeight = 0;
+        // Create skill buttons for Wizard
+        Button skillbutton1Wizard = new Button("Wizard Skill 1");
+        Button skillbutton2Wizard = new Button("Wizard Skill 2");
+        Button skillbutton3Wizard = new Button("Wizard Skill 3");
+        Button skillbutton4Wizard = new Button("Wizard Skill 4");
+        HBox skillButtonsWizard = new HBox(10, skillbutton1Wizard, skillbutton2Wizard, skillbutton3Wizard, skillbutton4Wizard);
 
-	    for (String path : imagePaths) {
-	        try {
-	            URL resource = getClass().getResource(path);
-	            if (resource == null) {
-	                System.err.println("Image not found: " + path);
-	                continue; // Skip if not found
-	            }
+        // Create skill buttons for Alchemist
+        Button skillbutton1Alchemist = new Button("Alchemist Skill 1");
+        Button skillbutton2Alchemist = new Button("Alchemist Skill 2");
+        Button skillbutton3Alchemist = new Button("Alchemist Skill 3");
+        Button skillbutton4Alchemist = new Button("Alchemist Skill 4");
+        HBox skillButtonsAlchemist = new HBox(10, skillbutton1Alchemist, skillbutton2Alchemist, skillbutton3Alchemist, skillbutton4Alchemist);
 
-	            Image image = new Image(resource.toString());
-	            ImageView imageView = new ImageView(image);
-	            maxHeight = Math.max(maxHeight, image.getHeight());
-	            imageViews.add(imageView);
-	        } catch (Exception e) {
-	            System.err.println("Error loading image: " + path);
-	            e.printStackTrace();
-	        }
-	    }
+        // Queue to manage HBoxes
+        Queue<HBox> hboxQueue = new LinkedList<>();
+        hboxQueue.add(skillButtonsAssassin);
+        hboxQueue.add(skillButtonsWizard);
+        hboxQueue.add(skillButtonsAlchemist);
+        hboxQueue.add(skillButtonsPaladin);
 
-	    // Adjust images to align their feet
-	    double xPosition = 50; // Starting x position
-	    for (ImageView imageView : imageViews) {
-	        double offset = maxHeight - imageView.getImage().getHeight();
-	        imageView.setLayoutX(xPosition); // Arrange horizontally
-	        imageView.setLayoutY(floorY - imageView.getImage().getHeight() + offset);
-	        xPosition += imageView.getImage().getWidth() + 20; // Add spacing
-	        root.getChildren().add(imageView);
-	    }
 
-	    // Create the scene and display it
-	    Scene scene = new Scene(root, 800, 600);
-	    primaryStage.setTitle("Align Images by Feet");
-	    primaryStage.setScene(scene);
-	    primaryStage.show();
-	}
+        // Add the first HBox to the StackPane
+        stackPane.getChildren().add(hboxQueue.peek());
+
+        // Define click behavior for buttons
+        for (HBox hbox : hboxQueue) {
+            for (javafx.scene.Node node : hbox.getChildren()) {
+                if (node instanceof Button) {
+                    Button button = (Button) node;
+                    button.setOnAction(e -> handleButtonClick(stackPane, hboxQueue));
+                }
+            }
+        }
+
+        // Set up the scene
+        Scene scene = new Scene(stackPane, 400, 200);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Skill Manager");
+        primaryStage.show();
+    }
+
+    private void handleButtonClick(StackPane stackPane, Queue<HBox> hboxQueue) {
+        // Remove the current HBox
+        HBox currentHBox = hboxQueue.poll();
+        if (currentHBox != null) {
+            stackPane.getChildren().remove(currentHBox);
+        }
+
+        // Add the next HBox in the queue
+        if (!hboxQueue.isEmpty()) {
+            stackPane.getChildren().add(hboxQueue.peek());
+        } else {
+            // Restart the cycle
+            System.out.println("All skill sets used, restarting cycle!");
+            restartCycle(stackPane, hboxQueue);
+        }
+    }
+
+    private void restartCycle(StackPane stackPane, Queue<HBox> hboxQueue) {
+        // Recreate the HBox queue
+        HBox skillButtonsPaladin = new HBox(10, new Button("Paladin Skill 1"), new Button("Paladin Skill 2"), new Button("Paladin Skill 3"), new Button("Paladin Skill 4"));
+        HBox skillButtonsAssassin = new HBox(10, new Button("Assassin Skill 1"), new Button("Assassin Skill 2"), new Button("Assassin Skill 3"), new Button("Assassin Skill 4"));
+        HBox skillButtonsWizard = new HBox(10, new Button("Wizard Skill 1"), new Button("Wizard Skill 2"), new Button("Wizard Skill 3"), new Button("Wizard Skill 4"));
+        HBox skillButtonsAlchemist = new HBox(10, new Button("Alchemist Skill 1"), new Button("Alchemist Skill 2"), new Button("Alchemist Skill 3"), new Button("Alchemist Skill 4"));
+
+        hboxQueue.add(skillButtonsAssassin);
+        hboxQueue.add(skillButtonsWizard);
+        hboxQueue.add(skillButtonsAlchemist);
+        hboxQueue.add(skillButtonsPaladin);
+
+        // Reset button actions
+        for (HBox hbox : hboxQueue) {
+            for (javafx.scene.Node node : hbox.getChildren()) {
+                if (node instanceof Button) {
+                    Button button = (Button) node;
+                    button.setOnAction(e -> handleButtonClick(stackPane, hboxQueue));
+                }
+            }
+        }
+        // Display the first HBox
+        stackPane.getChildren().add(hboxQueue.peek());
+    }
+ 
 
 
 //	private void textTutorial(Stage primaryStage) {

@@ -13,7 +13,7 @@ public class Paladin extends Characters {
     private int auraTurnsRemaining = 0;
     
     Paladin() {
-        name = "Dismas"; // Paladin name
+        name = "Paladin"; // Paladin name
         idleSprite = "applicationImagesPlayerSprites/Paladin_Idle.png";
         attackSprite = "applicationImagesPlayerSprites/Paladin_Attack.png";
         kneelingSprite = "applicationImagesHeroSprites/Paladin/Paladin_Kneeling.png";
