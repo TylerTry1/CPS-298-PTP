@@ -38,6 +38,17 @@ public class Items {
 		this.itemPrice = itemPrice;
 		
 	}
+	
+	public void statIncrease(Characters hero) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void fullHeal(Characters hero1, Characters hero2, Characters hero3, Characters hero4) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 	public class Clinic extends Items {
 		Clinic() {
@@ -45,7 +56,7 @@ public class Items {
 	    }
 		
 		//fully restores heros to max health
-		public void fullHeal(Characters hero1, Characters hero2, Characters hero3, Characters hero4) {
+		@Override public void fullHeal(Characters hero1, Characters hero2, Characters hero3, Characters hero4) {
 			hero1.setHealth(hero1.getMaxHealth());
 			hero2.setHealth(hero2.getMaxHealth());
 			hero3.setHealth(hero3.getMaxHealth());
@@ -59,7 +70,7 @@ public class Items {
 	    }
 		
 		//increases one characters damage by 1.1x
-		public void increaseDamage(Characters hero) {
+		@Override public void statIncrease(Characters hero) {
 			hero.setDamage((double) (hero.getDamage()*1.1));
 		}
 	}
@@ -70,7 +81,7 @@ public class Items {
 	    }
 		
 		//increases one characters speed by 1
-		public void increaseSpeed(Characters hero) {
+		@Override public void statIncrease(Characters hero) {
 			hero.adjustSpeed(1);
 		}
 	}
@@ -81,7 +92,7 @@ public class Items {
 	    }
 		
 		//increases one characters health by 1.1x
-		public void increaseMaxHealth(Characters hero) {
+		@Override public void statIncrease(Characters hero) {
 			double temp = hero.getMaxHealth();
 			double healthIncrease = (double) (temp * 1.1); //gets the total amount of health that character gains
 			hero.setMaxHealth(hero.getMaxHealth()+healthIncrease); //sets the max health to current max health added to the increase
@@ -91,11 +102,11 @@ public class Items {
 	
 	public class FortifyingSupplements extends Items {
 		FortifyingSupplements() {
-	        super("Fortifying Supplements", "shopAssets/fortifyingSupplements.png", "increases character’s total BLD/PSN/BRN etc res’ by +10%", "null", 400);
+	        super("Fortifying Supplements", "shopAssets/fortifyingSupplements.png", "increases character’s total resistances by +10%", "null", 400);
 	    }
 		
 		//increases one characters resistances by 10%
-		public void increaseResistances(Characters hero) {
+		@Override public void statIncrease(Characters hero) {
 			hero.setBlightResist(hero.getBlightResist()+10);
 			hero.setBleedResist(hero.getBleedResist()+10);
 			hero.setBurnResist(hero.getBurnResist()+10);
@@ -108,7 +119,7 @@ public class Items {
 	    }
 		
 		//increases one characters crit chance by 5%
-		public void increaseCritChance(Characters hero) {
+		@Override public void statIncrease(Characters hero) {
 			hero.setCritChance(hero.getCritChance()+5);
 		}
 	}

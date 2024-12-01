@@ -7,6 +7,12 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import application.Items.Clinic;
+import application.Items.FortifyingSupplements;
+import application.Items.RabbitsFoot;
+import application.Items.SmellingSalts;
+import application.Items.StrengtheningTonic;
+import application.Items.Whetstone;
 import application.combatFlow.combatControl;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
@@ -25,6 +31,7 @@ import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Labeled;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.effect.BoxBlur;
@@ -3041,7 +3048,21 @@ public class Main extends Application {
 		Rectangle transitionCoverExit = new Rectangle(400, 20, Color.BLACK); // Black rectangle
 		
 		Shop shop = new Shop(); //creates shop object
+		Items items = new Items("1", "2", "3", "4", 1);
+		//Money money = new Money();
+		Items.Clinic clinic = items.new Clinic();
+		/*
+		 * Items.FortifyingSupplements fortifyingSupplements = items.new
+		 * FortifyingSupplements(); Items.RabbitsFoot rabbitsFoot = items.new
+		 * RabbitsFoot(); Items.SmellingSalts smellingSalts = items.new SmellingSalts();
+		 * Items.StrengtheningTonic strengtheningTonic = items.new StrengtheningTonic();
+		 * Items.Whetstone whetstone = items.new Whetstone();
+		 */
 		ArrayList<Items> randItems = shop.getRandomItems(3); //uses shop object to run a function to get 3 random items than assign that to randItems
+		System.out.print(randItems.get(0).getName());
+		System.out.print(randItems.get(1).getName());
+		System.out.print(randItems.get(2).getName());
+		
 		
        TranslateTransition transitionEnter = new TranslateTransition(Duration.seconds(1.5), transitionCoverEnter);
        transitionEnter.setToY(2500); 
@@ -3070,7 +3091,7 @@ public class Main extends Application {
 
 		// Create buttons for everything
 		Button back = new Button("Back");
-		Text itemDescriptions = new Text("Item Descriptions will go here");
+		Text itemDescriptions = new Text("");
 		Text item1Price = new Text(Integer.toString(randItems.get(0).getItemPrice()));
 		Text item2Price = new Text(Integer.toString(randItems.get(1).getItemPrice()));
 		Text item3Price = new Text(Integer.toString(randItems.get(2).getItemPrice()));
@@ -3078,19 +3099,104 @@ public class Main extends Application {
 		Text purchaseConfirmationText = new Text("Buy (item) for (char) (-X Gold)");
 		Text exitShopText = new Text("exit shop");
 
+		
+		
+		
 		ToggleGroup itemSelection = new ToggleGroup();
-		RadioButton item1Button = new RadioButton("item1");
+		RadioButton item1Button = new RadioButton("0");
 		item1Button.setToggleGroup(itemSelection);
-		RadioButton item2Button = new RadioButton("item2");
+		RadioButton item2Button = new RadioButton("1");
 		item2Button.setToggleGroup(itemSelection);
-		RadioButton item3Button = new RadioButton("item3");
+		RadioButton item3Button = new RadioButton("2");
 		item3Button.setToggleGroup(itemSelection);
 		Button purchaseConfirmationButton = new Button("purchaseConfirmationButton");
 
-		Button charChoiceAlchemistButton= new Button("charChoiceAlchemist");
-		Button charChoiceWizardButton= new Button("charChoiceWizard");
-		Button charChoiceAssassinButton= new Button("charChoiceAssassin");
-		Button charChoicePaladinButton= new Button("charChoicePaladin");
+		ToggleGroup characterSelection = new ToggleGroup();
+		RadioButton charChoiceAlchemistButton= new RadioButton("Alchemist");
+		charChoiceAlchemistButton.setToggleGroup(characterSelection);
+		RadioButton charChoiceWizardButton= new RadioButton("Wizard");
+		charChoiceWizardButton.setToggleGroup(characterSelection);
+		RadioButton charChoiceAssassinButton= new RadioButton("Assassin");
+		charChoiceAssassinButton.setToggleGroup(characterSelection);
+		RadioButton charChoicePaladinButton= new RadioButton("Paladin");
+		charChoicePaladinButton.setToggleGroup(characterSelection);
+		
+		
+		purchaseConfirmationButton.setOnMouseClicked(event ->{
+			String itemNum = ((Labeled) itemSelection.getSelectedToggle()).getText();
+			String characterString = ((Labeled) characterSelection.getSelectedToggle()).getText();
+			int intItemNum;
+			int intCharacter;
+			System.out.print(itemNum);
+			switch(itemNum) {
+			case "0":
+				intItemNum = 0;
+				break;
+			case "1":
+				intItemNum = 1;
+				break;
+			case "2":
+				intItemNum = 2;
+				break;
+			default:
+				intItemNum = -1;
+			}
+			
+			switch(characterString) {
+			case "Paladin":
+				intCharacter = 0;
+				break;
+			case "Assassin":
+				intCharacter = 1;
+				break;
+			case "Wizard":
+				intCharacter = 2;
+				break;
+			case "Alchemist":
+				intCharacter = 3;
+				break;
+			default:
+				intCharacter = -1;
+			}
+			System.out.print(playerGoldAmount);
+			if(playerGoldAmount >= randItems.get(intItemNum).getItemPrice()) {
+				playerGoldAmount -= randItems.get(intItemNum).getItemPrice();
+				playerGold.setText("Current Gold: " + Integer.toString(playerGoldAmount));
+				if(intCharacter != -1 && intItemNum != -1) {
+					if(randItems.get(intItemNum).getClass() == clinic.getClass()) {
+						System.out.print(shopTeam[intCharacter].getHealth());
+						randItems.get(intItemNum).fullHeal(shopTeam[0], shopTeam[1], shopTeam[2], shopTeam[3]);
+						System.out.print(shopTeam[intCharacter].getHealth());
+					}
+					else {
+						System.out.print(shopTeam[intCharacter].getDamage());
+						randItems.get(intItemNum).statIncrease(shopTeam[intCharacter]);
+						System.out.print(shopTeam[intCharacter].getDamage());
+					}
+				}
+			}
+			else {
+				itemDescriptions.setText("Not enough gold");
+			}
+			
+			
+		});
+
+		
+		item1Button.setOnMouseClicked(event -> {
+			System.out.print(randItems.get(0).getItemDescription());
+            itemDescriptions.setText(randItems.get(0).getItemToolTip());
+        });
+		
+		item2Button.setOnMouseClicked(event -> {
+			System.out.print(randItems.get(1).getItemDescription());
+            itemDescriptions.setText(randItems.get(1).getItemToolTip());
+        });
+		
+		item3Button.setOnMouseClicked(event -> {
+			System.out.print(randItems.get(2).getItemDescription());
+            itemDescriptions.setText(randItems.get(2).getItemToolTip());
+        });
 
 
 		itemDescriptions.setFont(DwarvenAxe);
