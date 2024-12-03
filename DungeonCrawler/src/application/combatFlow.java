@@ -793,16 +793,16 @@ public class combatFlow {
 		skillDescriptions.put("Holy Rampart", "Creates a defensive barrier that protects allies.");
 		skillDescriptions.put("Shadow Strike", "A high-damage attack from the shadows.");
 		skillDescriptions.put("Poisoned Blade", "Applies poison to the enemy, causing damage over time.");
-		skillDescriptions.put("Backstab", "Creates smoke to disorient enemies, reducing their accuracy.");
-		skillDescriptions.put("Dagger Barrage", "Increases movement speed and grants the ability to avoid enemy detection.");
+		skillDescriptions.put("Backstab", "Sneak through the shadows to attack the enemy from behind.");
+		skillDescriptions.put("Dagger Barrage", "Throws knives at the entire enemy team.");
 		skillDescriptions.put("Fireball", "A powerful fire spell that causes explosive damage.");
-		skillDescriptions.put("Magic Missile", "A defensive shield made of ice that reduces incoming damage.");
-		skillDescriptions.put("Frost Bolt", "Teleports to a target location, avoiding damage.");
-		skillDescriptions.put("Staff Strike", "A burst of magical energy that damages all enemies in range.");
-		skillDescriptions.put("Acid Puddle", "Restores health to the target.");
-		skillDescriptions.put("Healing Elixir", "Throws a bomb that deals explosive damage to enemies.");
-		skillDescriptions.put("Invigoration", "Sprays acid that damages and lowers enemy defense.");
-		skillDescriptions.put("Explosive Flask", "Makes the user invisible for a short period.");
+		skillDescriptions.put("Magic Missile", "Fires multiple magic attacks at the enemy.");
+		skillDescriptions.put("Frost Bolt", "Hurls a spike of ice at the enemey.");
+		skillDescriptions.put("Staff Strike", "Bash the enemy with your staff.");
+		skillDescriptions.put("Acid Puddle", "Throws a poison vial at the enemies.");
+		skillDescriptions.put("Healing Elixir", "Hand a teammate a healing elixir");
+		skillDescriptions.put("Invigoration", "Provide a boost of speed to the team.");
+		skillDescriptions.put("Explosive Flask", "Throws an explosive vial that damages enemies.");
 			
 			teamDead = playerTeam.checkGameOver();
 			teamDead = enemyTeam.checkGameOver(); // Check initially for player and enemy health errors.
@@ -978,10 +978,10 @@ public class combatFlow {
 							    moveDescriptionText2.setText("Skill: Poisoned Blade\n" + skillDescriptions.get("Poisoned Blade"));
 							});
 							skillButtonA13.setOnMouseClicked(event -> {
-							    moveDescriptionText2.setText("Skill: Smoke Bomb\n" + skillDescriptions.get("Backstab"));
+							    moveDescriptionText2.setText("Skill: Backstab\n" + skillDescriptions.get("Backstab"));
 							});
 							skillButtonA14.setOnMouseClicked(event -> {
-							    moveDescriptionText2.setText("Skill: Silent Step\n" + skillDescriptions.get("Dagger Barrage"));
+							    moveDescriptionText2.setText("Skill: Dagger Barrage\n" + skillDescriptions.get("Dagger Barrage"));
 							});
 							
 						}
@@ -1046,13 +1046,13 @@ public class combatFlow {
 							    moveDescriptionText2.setText("Skill: Fireball\n" + skillDescriptions.get("Fireball"));
 							});
 							skillButtonW2.setOnMouseClicked(event -> {
-							    moveDescriptionText2.setText("Skill: Ice Shield\n" + skillDescriptions.get("Magic Missile"));
+							    moveDescriptionText2.setText("Skill: Magic Missile\n" + skillDescriptions.get("Magic Missile"));
 							});
 							skillButtonW3.setOnMouseClicked(event -> {
-							    moveDescriptionText2.setText("Skill: Teleport\n" + skillDescriptions.get("Frost Bolt"));
+							    moveDescriptionText2.setText("Skill: Frost Bolt\n" + skillDescriptions.get("Frost Bolt"));
 							});
 							skillButtonW4.setOnMouseClicked(event -> {
-							    moveDescriptionText2.setText("Skill: Arcane Blast\n" + skillDescriptions.get("Staff Strike"));
+							    moveDescriptionText2.setText("Skill: Staff Strike\n" + skillDescriptions.get("Staff Strike"));
 							});
 						}
 						skillButtonImageW1.setOpacity(0); //image is visible
@@ -1113,16 +1113,16 @@ public class combatFlow {
 							passTurnButton.setOnMouseClicked(handler);
 							
 							skillButtonA21.setOnMouseClicked(event -> {
-							    moveDescriptionText2.setText("Skill: Healing Potion\n" + skillDescriptions.get("Acid Puddle"));
+							    moveDescriptionText2.setText("Skill: Acid Puddle\n" + skillDescriptions.get("Acid Puddle"));
 							});
 							skillButtonA22.setOnMouseClicked(event -> {
-							    moveDescriptionText2.setText("Skill: Bomb Toss\n" + skillDescriptions.get("Healing Elixir"));
+							    moveDescriptionText2.setText("Skill: Healing Elixir\n" + skillDescriptions.get("Healing Elixir"));
 							});
 							skillButtonA23.setOnMouseClicked(event -> {
-							    moveDescriptionText2.setText("Skill: Acid Spray\n" + skillDescriptions.get("Invigoration"));
+							    moveDescriptionText2.setText("Skill: Invigoration\n" + skillDescriptions.get("Invigoration"));
 							});
 							skillButtonA24.setOnMouseClicked(event -> {
-							    moveDescriptionText2.setText("Skill: Cloak of Invisibility\n" + skillDescriptions.get("Explosive Flask"));
+							    moveDescriptionText2.setText("Skill: Explosive Flask\n" + skillDescriptions.get("Explosive Flask"));
 							});
 						}
 						skillButtonImageA21.setOpacity(0);
