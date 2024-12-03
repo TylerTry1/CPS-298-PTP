@@ -113,7 +113,7 @@ public class combatFlow {
 	Enemies currentEnemy = new Enemies();
 	Arrays_Enemy_Teams enemyTeamsArray = new Arrays_Enemy_Teams(4, 4, 15);
 	entities[] temp3 = new entities[8]; // Extra Array for sorting. Should be big enough, increase size if necessary.
-	entities[] turnOrder = new entities[8];
+	public entities[] turnOrder = new entities[8];
 	int count;
 	
 	Characters getCurrent() {

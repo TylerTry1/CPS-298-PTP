@@ -2,7 +2,9 @@ package application;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Queue;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -2082,7 +2084,7 @@ public class Main extends Application {
 		// -------------------------------------------------------------
 
 		// Create a Pane for free positioning
-		StackPane skills = new StackPane();
+		//StackPane skills = new StackPane();
 		Pane root = new Pane();
 		Pane combatMenu = new Pane();
 //		 	skill1.setOnAction(e -> handleButtonClick(stackPane, skill1, skill2, skill3, skill4));
@@ -2090,7 +2092,7 @@ public class Main extends Application {
 //	        skill3.setOnAction(e -> handleButtonClick(stackPane, skill3, skill1, skill2, skill4));
 //	        skill4.setOnAction(e -> handleButtonClick(stackPane, skill4, skill1, skill2, skill3));
 		// -------------------------------------------------------------
-		skills.getChildren().addAll(skillButtonsWizard, skillButtonsAlchemist, skillButtonsPaladin, skillButtonsAssassin); // last in order is on top
+		//skills.getChildren().addAll(skillButtonsWizard, skillButtonsAlchemist, skillButtonsPaladin, skillButtonsAssassin); // last in order is on top
 		
 		// -------------------------------------------------------------
 		
@@ -2126,10 +2128,10 @@ public class Main extends Application {
 		root.getChildren().addAll(enemy2BleedResistanceNumber,enemy2BlightResistanceNumber,enemy2BurnResistanceNumber,enemy2StunResistanceNumber,enemy2MoveResistanceNumber,enemy2DebuffResistanceNumber, enemy2DeathResistanceNumber);
 		root.getChildren().addAll(enemy3BleedResistanceNumber,enemy3BlightResistanceNumber,enemy3BurnResistanceNumber,enemy3StunResistanceNumber,enemy3MoveResistanceNumber,enemy3DebuffResistanceNumber, enemy3DeathResistanceNumber);
 		root.getChildren().addAll(enemy4BleedResistanceNumber,enemy4BlightResistanceNumber,enemy4BurnResistanceNumber,enemy4StunResistanceNumber,enemy4MoveResistanceNumber,enemy4DebuffResistanceNumber, enemy4DeathResistanceNumber);
-//		root.getChildren().addAll(skillButtonsPaladin);
-//		root.getChildren().add(skillButtonsAssassin);
-//		root.getChildren().add(skillButtonsWizard);
-//		root.getChildren().add(skillButtonsAlchemist);
+		root.getChildren().addAll(skillButtonsPaladin);
+		root.getChildren().addAll(skillButtonsAssassin);
+		root.getChildren().addAll(skillButtonsWizard);
+		root.getChildren().addAll(skillButtonsAlchemist);
 		root.getChildren().add(passTurnButton);
 		root.getChildren().addAll(skillButtonsImagesPaladin);
 		root.getChildren().addAll(skillButtonsImagesAssassin);																			
@@ -3051,7 +3053,7 @@ public class Main extends Application {
 		});});
 		primaryStage.setMaximized(true);
 		
-		Scene scene = new Scene(new StackPane(root, skills, combatMenu), 1920, 1080);
+		Scene scene = new Scene(new StackPane(root, combatMenu), 1920, 1080);
 		scene.setOnKeyPressed(event -> {
 			if (event.getCode() == KeyCode.ESCAPE) {
 				 if (combatMenu.isVisible()) {
@@ -3146,6 +3148,15 @@ public class Main extends Application {
 					
 				else {
 						
+					skillButtonsPaladin.setMouseTransparent(true);
+					skillButtonsAssassin.setMouseTransparent(true);
+					skillButtonsWizard.setMouseTransparent(true);
+					skillButtonsAlchemist.setMouseTransparent(true);
+					skillButtonsPaladin.setVisible(false);
+					skillButtonsAssassin.setVisible(false);
+					skillButtonsWizard.setVisible(false);
+					skillButtonsAlchemist.setVisible(false);
+					
 					// Reset turn counter if order has been run through
 					// Reset Turn Tickers
 					if (count > 7) {
@@ -3161,10 +3172,45 @@ public class Main extends Application {
 						round++;
 					}
 					
+					if (flow.turnOrder[count] instanceof Characters) {
+					
+						Characters currentCharacter = new Characters();
+						currentCharacter = (Characters) flow.turnOrder[count];
+						
+						if (currentCharacter instanceof Paladin) {
+							skillButtonsPaladin.setMouseTransparent(false);
+							skillButtonsPaladin.setVisible(true);
+						}
+						else if (currentCharacter instanceof Assassin) {
+
+							skillButtonsAssassin.setMouseTransparent(false);
+							skillButtonsAssassin.setVisible(true);
+						}
+							
+						else if (currentCharacter instanceof Wizard) {
+
+							skillButtonsWizard.setMouseTransparent(false);
+							skillButtonsWizard.setVisible(true);
+						}
+						else if (currentCharacter instanceof Alchemist) {
+							skillButtonsAlchemist.setMouseTransparent(false);
+							skillButtonsAlchemist.setVisible(true);
+							}
+
+					}
+					
 					heroNameText.setText("");
 					moveDescriptionText.setText("");
 					count = flow.runCombat(count);
 					
+					skillButtonsPaladin.setMouseTransparent(true);
+					skillButtonsAssassin.setMouseTransparent(true);
+					skillButtonsWizard.setMouseTransparent(true);
+					skillButtonsAlchemist.setMouseTransparent(true);
+					skillButtonsPaladin.setVisible(false);
+					skillButtonsAssassin.setVisible(false);
+					skillButtonsWizard.setVisible(false);
+					skillButtonsAlchemist.setVisible(false);
 					
 					
 					// Update All Sprites in case anyone was downed:
