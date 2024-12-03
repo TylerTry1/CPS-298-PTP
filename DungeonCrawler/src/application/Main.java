@@ -91,10 +91,10 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 //		setupLoadingStage(primaryStage);
-//		initialization(primaryStage); // use this!!!
+		initialization(primaryStage); // use this!!!
 //		shop(primaryStage);
 //		gameOver(primaryStage);
-		test(primaryStage);
+//		test(primaryStage);
 	}
 
 	private void initialization(Stage primaryStage) { // this scene is used specifically so that we can make our application full screen.
@@ -868,8 +868,96 @@ public class Main extends Application {
 		Text healNumberEnemy2 = new Text ("0"); 
 		Text healNumberEnemy1 = new Text ("0"); 
 		
+		Text damageTakenNumberHeroCritical4 = new Text ("Crit 0!");
+		Text damageTakenNumberHeroCritical3 = new Text ("Crit 0!");
+		Text damageTakenNumberHeroCritical2 = new Text ("Crit 0!");
+		Text damageTakenNumberHeroCritical1 = new Text ("Crit 0!");
+		Text healNumberHeroCritical4 = new Text ("Crit 0!"); 
+		Text healNumberHeroCritical3 = new Text ("Crit 0!"); 
+		Text healNumberHeroCritical2 = new Text ("Crit 0!"); 
+		Text healNumberHeroCritical1 = new Text ("Crit 0!"); 
+		
+		Text damageTakenNumberEnemyCritical4 = new Text ("Crit 0!"); 
+		Text damageTakenNumberEnemyCritical3 = new Text ("Crit 0!"); 
+		Text damageTakenNumberEnemyCritical2 = new Text ("Crit 0!"); 
+		Text damageTakenNumberEnemyCritical1 = new Text ("Crit 0!"); 
+		Text healNumberEnemyCritical4 = new Text ("Crit 0!"); 
+		Text healNumberEnemyCritical3 = new Text ("Crit 0!"); 
+		Text healNumberEnemyCritical2 = new Text ("Crit 0!"); 
+		Text healNumberEnemyCritical1 = new Text ("Crit 0!"); 
+		
 		Text menuQuitGameText = new Text ("Quit Game");
 		//---------------------------------------------------------------------------
+		
+		damageTakenNumberHeroCritical4.setFont(DwarvenAxe);
+		damageTakenNumberHeroCritical4.setFill(Color.web("#ff9626"));
+		damageTakenNumberHeroCritical4.setStroke(Color.web("#720000"));
+		damageTakenNumberHeroCritical4.setStrokeWidth(1.5);
+		damageTakenNumberHeroCritical3.setFont(DwarvenAxe);
+		damageTakenNumberHeroCritical3.setFill(Color.web("#ff9626"));
+		damageTakenNumberHeroCritical3.setStroke(Color.web("#720000"));
+		damageTakenNumberHeroCritical3.setStrokeWidth(1.5);
+		damageTakenNumberHeroCritical2.setFont(DwarvenAxe);
+		damageTakenNumberHeroCritical2.setFill(Color.web("#ff9626"));
+		damageTakenNumberHeroCritical2.setStroke(Color.web("#720000"));
+		damageTakenNumberHeroCritical2.setStrokeWidth(1.5);
+		damageTakenNumberHeroCritical1.setFont(DwarvenAxe);
+		damageTakenNumberHeroCritical1.setFill(Color.web("#ff9626"));
+		damageTakenNumberHeroCritical1.setStroke(Color.web("#720000"));
+		damageTakenNumberHeroCritical1.setStrokeWidth(1.5);
+		
+		damageTakenNumberEnemyCritical1.setFont(DwarvenAxe);
+		damageTakenNumberEnemyCritical1.setFill(Color.web("#ff9626"));
+		damageTakenNumberEnemyCritical1.setStroke(Color.web("#720000"));
+		damageTakenNumberEnemyCritical1.setStrokeWidth(1.5);
+		damageTakenNumberEnemyCritical2.setFont(DwarvenAxe);
+		damageTakenNumberEnemyCritical2.setFill(Color.web("#ff9626"));
+		damageTakenNumberEnemyCritical2.setStroke(Color.web("#720000"));
+		damageTakenNumberEnemyCritical2.setStrokeWidth(1.5);
+		damageTakenNumberEnemyCritical3.setFont(DwarvenAxe);
+		damageTakenNumberEnemyCritical3.setFill(Color.web("#ff9626"));
+		damageTakenNumberEnemyCritical3.setStroke(Color.web("#720000"));
+		damageTakenNumberEnemyCritical3.setStrokeWidth(1.5);
+		damageTakenNumberEnemyCritical4.setFont(DwarvenAxe);
+		damageTakenNumberEnemyCritical4.setFill(Color.web("#ff9626"));
+		damageTakenNumberEnemyCritical4.setStroke(Color.web("#720000"));
+		damageTakenNumberEnemyCritical4.setStrokeWidth(1.5);
+		
+		healNumberHeroCritical4.setFont(DwarvenAxe);
+		healNumberHeroCritical4.setFill(Color.web("#58f769"));
+		healNumberHeroCritical4.setStroke(Color.web("#006624"));  // Outline color
+		healNumberHeroCritical4.setStrokeWidth(1.5);
+		healNumberHeroCritical3.setFont(DwarvenAxe);
+		healNumberHeroCritical3.setFill(Color.web("#58f769"));
+		healNumberHeroCritical3.setStroke(Color.web("#006624"));  // Outline color
+		healNumberHeroCritical3.setStrokeWidth(1.5);
+		healNumberHeroCritical2.setFont(DwarvenAxe);
+		healNumberHeroCritical2.setFill(Color.web("#58f769"));
+		healNumberHeroCritical2.setStroke(Color.web("#006624"));  // Outline color
+		healNumberHeroCritical2.setStrokeWidth(1.5);
+		healNumberHeroCritical1.setFont(DwarvenAxe);
+		healNumberHeroCritical1.setFill(Color.web("#58f769"));
+		healNumberHeroCritical1.setStroke(Color.web("#006624"));  // Outline color
+		healNumberHeroCritical1.setStrokeWidth(1.5);
+		
+		healNumberEnemyCritical4.setFont(DwarvenAxe);
+		healNumberEnemyCritical4.setFill(Color.web("#58f769"));
+		healNumberEnemyCritical4.setStroke(Color.web("#006624"));  // Outline color
+		healNumberEnemyCritical4.setStrokeWidth(1.5);		
+		healNumberEnemyCritical3.setFont(DwarvenAxe);
+		healNumberEnemyCritical3.setFill(Color.web("#58f769"));
+		healNumberEnemyCritical3.setStroke(Color.web("#006624"));  // Outline color
+		healNumberEnemyCritical3.setStrokeWidth(1.5);		
+		healNumberEnemyCritical2.setFont(DwarvenAxe);
+		healNumberEnemyCritical2.setFill(Color.web("#58f769"));
+		healNumberEnemyCritical2.setStroke(Color.web("#006624"));  // Outline color
+		healNumberEnemyCritical2.setStrokeWidth(1.5);
+		healNumberEnemyCritical1.setFont(DwarvenAxe);
+		healNumberEnemyCritical1.setFill(Color.web("#58f769"));
+		healNumberEnemyCritical1.setStroke(Color.web("#006624"));  // Outline color
+		healNumberEnemyCritical1.setStrokeWidth(1.5);
+		
+		//------------------------------------------------------------------------
 		damageTakenNumberHero4.setFont(DwarvenAxe);
 		damageTakenNumberHero4.setFill(Color.web("#bc1313"));
 		damageTakenNumberHero4.setStroke(Color.BLACK);  // Outline color
@@ -937,7 +1025,7 @@ public class Main extends Application {
 		healNumberEnemy1.setFill(Color.web("#58f769"));
 		healNumberEnemy1.setStroke(Color.web("#006624"));  // Outline color
 		healNumberEnemy1.setStrokeWidth(1.5);
-		
+		//------------------------------------------------------------------------
 		heroNameText.setFont(KingArthurLegend);
 		heroNameText.setFill(Color.web("#FFEB80"));
 		enemyNameText.setFont(KingArthurLegend);
@@ -2070,6 +2158,11 @@ public class Main extends Application {
 				damageTakenNumberEnemy4,damageTakenNumberEnemy3,damageTakenNumberEnemy2,damageTakenNumberEnemy1,
 				healNumberEnemy4,healNumberEnemy3,healNumberEnemy2,healNumberEnemy1);
 		
+		root.getChildren().addAll(damageTakenNumberHeroCritical4,damageTakenNumberHeroCritical3,damageTakenNumberHeroCritical2,
+				damageTakenNumberHeroCritical1,healNumberHeroCritical4,healNumberHeroCritical3,healNumberHeroCritical2,healNumberHeroCritical1,
+				damageTakenNumberEnemyCritical4,damageTakenNumberEnemyCritical3,damageTakenNumberEnemyCritical2,damageTakenNumberEnemyCritical1,
+				healNumberEnemyCritical4,healNumberEnemyCritical3,healNumberEnemyCritical2,healNumberEnemyCritical1);
+		
 		root.getChildren().addAll(heroHPPos4,heroHPPos3,heroHPPos2,heroHPPos1);
 		root.getChildren().addAll(enemyHPPos4,enemyHPPos3,enemyHPPos2,enemyHPPos1);
 		root.getChildren().addAll(moveDescriptionText,moveDescriptionText2);
@@ -2372,9 +2465,93 @@ public class Main extends Application {
 		healNumberEnemy1.setOpacity(0);
 		
 		
-		FadeUtils.popNumber(damageTakenNumberEnemy1);
-
+//		FadeUtils.popNumber(damageTakenNumberEnemy1);
+		// -------------------------------------------------------------
 		
+		damageTakenNumberHeroCritical4.setLayoutX(200);
+		damageTakenNumberHeroCritical4.setLayoutY(350);
+		damageTakenNumberHeroCritical4.setScaleX(2);
+		damageTakenNumberHeroCritical4.setScaleY(2);
+		damageTakenNumberHeroCritical3.setLayoutX(405);
+		damageTakenNumberHeroCritical3.setLayoutY(350);
+		damageTakenNumberHeroCritical3.setScaleX(2);
+		damageTakenNumberHeroCritical3.setScaleY(2);
+		damageTakenNumberHeroCritical2.setLayoutX(610);
+		damageTakenNumberHeroCritical2.setLayoutY(350);
+		damageTakenNumberHeroCritical2.setScaleX(2);
+		damageTakenNumberHeroCritical2.setScaleY(2);
+		damageTakenNumberHeroCritical1.setLayoutX(815);
+		damageTakenNumberHeroCritical1.setLayoutY(350);
+		damageTakenNumberHeroCritical1.setScaleX(2);
+		damageTakenNumberHeroCritical1.setScaleY(2);
+		healNumberHeroCritical4.setLayoutX(200);
+		healNumberHeroCritical4.setLayoutY(350);
+		healNumberHeroCritical4.setScaleX(2);
+		healNumberHeroCritical4.setScaleY(2);
+		healNumberHeroCritical3.setLayoutX(405);
+		healNumberHeroCritical3.setLayoutY(350);
+		healNumberHeroCritical3.setScaleX(2);
+		healNumberHeroCritical3.setScaleY(2);
+		healNumberHeroCritical2.setLayoutX(610);
+		healNumberHeroCritical2.setLayoutY(350);
+		healNumberHeroCritical2.setScaleX(2);
+		healNumberHeroCritical2.setScaleY(2);
+		healNumberHeroCritical1.setLayoutX(815);
+		healNumberHeroCritical1.setLayoutY(350);
+		healNumberHeroCritical1.setScaleX(2);
+		healNumberHeroCritical1.setScaleY(2);
+		
+		damageTakenNumberEnemyCritical4.setLayoutX(1715);
+		damageTakenNumberEnemyCritical4.setLayoutY(350);
+		damageTakenNumberEnemyCritical4.setScaleX(2);
+		damageTakenNumberEnemyCritical4.setScaleY(2);
+		damageTakenNumberEnemyCritical3.setLayoutX(1510);
+		damageTakenNumberEnemyCritical3.setLayoutY(350);
+		damageTakenNumberEnemyCritical3.setScaleX(2);
+		damageTakenNumberEnemyCritical3.setScaleY(2);
+		damageTakenNumberEnemyCritical2.setLayoutX(1305);
+		damageTakenNumberEnemyCritical2.setLayoutY(350);
+		damageTakenNumberEnemyCritical2.setScaleX(2);
+		damageTakenNumberEnemyCritical2.setScaleY(2);
+		damageTakenNumberEnemyCritical1.setLayoutX(1100);
+		damageTakenNumberEnemyCritical1.setLayoutY(350);
+		damageTakenNumberEnemyCritical1.setScaleX(2);
+		damageTakenNumberEnemyCritical1.setScaleY(2);
+		healNumberEnemyCritical4.setLayoutX(1100);
+		healNumberEnemyCritical4.setLayoutY(350);
+		healNumberEnemyCritical4.setScaleX(2);
+		healNumberEnemyCritical4.setScaleY(2);
+		healNumberEnemyCritical3.setLayoutX(1305);
+		healNumberEnemyCritical3.setLayoutY(350);
+		healNumberEnemyCritical3.setScaleX(2);
+		healNumberEnemyCritical3.setScaleY(2);
+		healNumberEnemyCritical2.setLayoutX(1510);
+		healNumberEnemyCritical2.setLayoutY(350);
+		healNumberEnemyCritical2.setScaleX(2);
+		healNumberEnemyCritical2.setScaleY(2);
+		healNumberEnemyCritical1.setLayoutX(1715);
+		healNumberEnemyCritical1.setLayoutY(350);
+		healNumberEnemyCritical1.setScaleX(2);
+		healNumberEnemyCritical1.setScaleY(2);
+		
+		damageTakenNumberHeroCritical4.setOpacity(0);
+		damageTakenNumberHeroCritical3.setOpacity(0);
+		damageTakenNumberHeroCritical2.setOpacity(0);
+		damageTakenNumberHeroCritical1.setOpacity(0);
+		healNumberHeroCritical4.setOpacity(0);
+		healNumberHeroCritical3.setOpacity(0);
+		healNumberHeroCritical2.setOpacity(0);
+		healNumberHeroCritical1.setOpacity(0);
+
+		damageTakenNumberEnemyCritical4.setOpacity(0);
+		damageTakenNumberEnemyCritical3.setOpacity(0);
+		damageTakenNumberEnemyCritical2.setOpacity(0);
+		damageTakenNumberEnemyCritical1.setOpacity(0);
+		healNumberEnemyCritical4.setOpacity(0);
+		healNumberEnemyCritical3.setOpacity(0);
+		healNumberEnemyCritical2.setOpacity(0);
+		healNumberEnemyCritical1.setOpacity(0);
+//		FadeUtils.popNumber(damageTakenNumberEnemyCritical1);
 		// -------------------------------------------------------------
 		
 		enemyBLDResistanceIcon.setLayoutX(1412); // these 3 assets are weird, so need eyeball'd placements.
