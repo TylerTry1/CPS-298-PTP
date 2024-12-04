@@ -265,21 +265,13 @@ public class combatFlow {
 				tempHealth = currentEnemy.getHealth();
 				tempHealth -= currentDamage;
 				if (tempHealth <= 0) {
-					defyPercent = rand.nextInt(101 - 1) + 1; // Random from 1 to 100
-					if (currentEnemy.getDefy() >= defyPercent) {
-						tempHealth = 1;
-						if (currentEnemy.getDefy() != 0) // If Death Defy is not 0, reduce by 10
-							currentEnemy.setDefy(currentEnemy.getDefy() - 10);
-					}
-					else {
-						tempHealth = 0;
-						downed = true;
-						deathblowEnemy1.setOpacity(1.0); // Ensure the node is visible
-						FadeUtils.deathblow(deathblowEnemy1); // Play the animation
-						AudioManager.playEnemyDeathSFX(); // Play the sound effect
-						tempEnemyTeam[0].setIdleSprite("/images/CorpsePile.png");
-						currentEnemy.setDowned(downed);
-					}
+					tempHealth = 0;
+					downed = true;
+					deathblowEnemy1.setOpacity(1.0); // Ensure the node is visible
+					FadeUtils.deathblow(deathblowEnemy1); // Play the animation
+					AudioManager.playEnemyDeathSFX(); // Play the sound effect
+					tempEnemyTeam[0].setIdleSprite("/images/CorpsePile.png");
+					currentEnemy.setDowned(downed);
 				}
 				currentEnemy.setHealth(tempHealth);
 				tempEnemyTeam[0] = currentEnemy;
@@ -298,21 +290,13 @@ public class combatFlow {
 				tempHealth = currentEnemy.getHealth();
 				tempHealth -= currentDamage;
 				if (tempHealth <= 0) {
-					defyPercent = rand.nextInt(101 - 1) + 1; // Random from 1 to 100
-					if (currentEnemy.getDefy() >= defyPercent) {
-						tempHealth = 1;
-						if (currentEnemy.getDefy() != 0) // If Death Defy is not 0, reduce by 10
-							currentEnemy.setDefy(currentEnemy.getDefy() - 10);
-					}
-					else {
-						tempHealth = 0;
-						downed = true;
-						deathblowEnemy2.setOpacity(1.0); // Ensure the node is visible
-						FadeUtils.deathblow(deathblowEnemy2); // Play the animation
-						AudioManager.playEnemyDeathSFX(); // Play the sound effect
-						tempEnemyTeam[1].setIdleSprite("/images/CorpsePile.png");
-						currentEnemy.setDowned(downed);
-					}
+					tempHealth = 0;
+					downed = true;
+					deathblowEnemy2.setOpacity(1.0); // Ensure the node is visible
+					FadeUtils.deathblow(deathblowEnemy2); // Play the animation
+					AudioManager.playEnemyDeathSFX(); // Play the sound effect
+					tempEnemyTeam[1].setIdleSprite("/images/CorpsePile.png");
+					currentEnemy.setDowned(downed);
 				}
 				currentEnemy.setHealth(tempHealth);
 				tempEnemyTeam[1] = currentEnemy;
@@ -331,21 +315,13 @@ public class combatFlow {
 				tempHealth = currentEnemy.getHealth();
 				tempHealth -= currentDamage;
 				if (tempHealth <= 0) {
-					defyPercent = rand.nextInt(101 - 1) + 1; // Random from 1 to 100
-					if (currentEnemy.getDefy() >= defyPercent) {
-						tempHealth = 1;
-						if (currentEnemy.getDefy() != 0) // If Death Defy is not 0, reduce by 10
-							currentEnemy.setDefy(currentEnemy.getDefy() - 10);
-					}
-					else {
-						tempHealth = 0;
-						downed = true;
-						deathblowEnemy3.setOpacity(1.0); // Ensure the node is visible
-						FadeUtils.deathblow(deathblowEnemy3); // Play the animation
-						AudioManager.playEnemyDeathSFX(); // Play the sound effect
-						tempEnemyTeam[2].setIdleSprite("/images/CorpsePile.png");
-						currentEnemy.setDowned(downed);
-					}
+					tempHealth = 0;
+					downed = true;
+					deathblowEnemy3.setOpacity(1.0); // Ensure the node is visible
+					FadeUtils.deathblow(deathblowEnemy3); // Play the animation
+					AudioManager.playEnemyDeathSFX(); // Play the sound effect
+					tempEnemyTeam[2].setIdleSprite("/images/CorpsePile.png");
+					currentEnemy.setDowned(downed);
 				}
 				currentEnemy.setHealth(tempHealth);
 				tempEnemyTeam[2] = currentEnemy;
@@ -364,21 +340,13 @@ public class combatFlow {
 				tempHealth = currentEnemy.getHealth();
 				tempHealth -= currentDamage;
 				if (tempHealth <= 0) {
-					defyPercent = rand.nextInt(101 - 1) + 1; // Random from 1 to 100
-					if (currentEnemy.getDefy() >= defyPercent) {
-						tempHealth = 1;
-						if (currentEnemy.getDefy() != 0) // If Death Defy is not 0, reduce by 10
-							currentEnemy.setDefy(currentEnemy.getDefy() - 10);
-					}
-					else {
-						tempHealth = 0;
-						downed = true;
-						deathblowEnemy4.setOpacity(1.0); // Ensure the node is visible
-						FadeUtils.deathblow(deathblowEnemy4); // Play the animation
-						AudioManager.playEnemyDeathSFX(); // Play the sound effect
-						tempEnemyTeam[3].setIdleSprite("/images/CorpsePile.png");
-						currentEnemy.setDowned(downed);
-					}
+					tempHealth = 0;
+					downed = true;
+					deathblowEnemy4.setOpacity(1.0); // Ensure the node is visible
+					FadeUtils.deathblow(deathblowEnemy4); // Play the animation
+					AudioManager.playEnemyDeathSFX(); // Play the sound effect
+					tempEnemyTeam[3].setIdleSprite("/images/CorpsePile.png");
+					currentEnemy.setDowned(downed);
 				}
 				currentEnemy.setHealth(tempHealth);
 				tempEnemyTeam[3] = currentEnemy;
@@ -627,6 +595,7 @@ public class combatFlow {
 		
 		currentDamage = 0;
 		int abilitySelect;
+		int defyPercent = 0;
 		double tempHealth;
 		double[] positionsToDamage;
 		boolean downed = false;
@@ -654,12 +623,20 @@ public class combatFlow {
 						 if (currentCharacter.getHealth() != 0) { // If the character is not already down, process damage. 
 							 tempHealth = currentCharacter.getHealth();
 							 tempHealth -= currentDamage; 
-							 if (tempHealth <= 0) {
-								 tempHealth = 0;
-								 downed = true;
-								 currentCharacter.setActiveSprite(currentCharacter.getKneelingSprite());
-								 currentCharacter.setDowned(downed); // Adjust character sprite when we can.
-							 }
+								if (tempHealth <= 0) {
+									defyPercent = rand.nextInt(101 - 1) + 1; // Random from 1 to 100
+									if (currentCharacter.getDefy() >= defyPercent) {
+										tempHealth = 1;
+										if (currentCharacter.getDefy() != 0) // If Death Defy is not 0, reduce by 10
+											currentCharacter.setDefy(currentCharacter.getDefy() - 10);
+									}
+									else {
+										tempHealth = 0;
+										downed = true;
+										currentCharacter.setActiveSprite(currentCharacter.getKneelingSprite());
+										currentCharacter.setDowned(downed); // Adjust character sprite when we can.
+									}
+								}
 							 currentCharacter.setHealth(tempHealth); // Reinitialize character health
 							 tempTeam[0] = currentCharacter; // Reinitialize character in team.
 							 playerTeam.setTeam(tempTeam); // Reinitialize team.
@@ -675,12 +652,20 @@ public class combatFlow {
 						 if (currentCharacter.getHealth() != 0) { // If the character is not already down, process damage. 
 							 tempHealth = currentCharacter.getHealth();
 							 tempHealth -= currentDamage; 
-							 if (tempHealth <= 0) {
-								 tempHealth = 0;
-								 downed = true;
-								 currentCharacter.setActiveSprite(currentCharacter.getKneelingSprite());
-								 currentCharacter.setDowned(downed); // Adjust character sprite when we can.
-							 }
+								if (tempHealth <= 0) {
+									defyPercent = rand.nextInt(101 - 1) + 1; // Random from 1 to 100
+									if (currentCharacter.getDefy() >= defyPercent) {
+										tempHealth = 1;
+										if (currentCharacter.getDefy() != 0) // If Death Defy is not 0, reduce by 10
+											currentEnemy.setDefy(currentEnemy.getDefy() - 10);
+									}
+									else {
+										tempHealth = 0;
+										downed = true;
+										currentCharacter.setActiveSprite(currentCharacter.getKneelingSprite());
+										currentCharacter.setDowned(downed); // Adjust character sprite when we can.
+									}
+								}
 							 currentCharacter.setHealth(tempHealth); // Reinitialize character health
 							 tempTeam[1] = currentCharacter; // Reinitialize character in team.
 							 playerTeam.setTeam(tempTeam); // Reinitialize team.
@@ -696,12 +681,20 @@ public class combatFlow {
 						 if (currentCharacter.getHealth() != 0) { // If the character is not already down, process damage. 
 							 tempHealth = currentCharacter.getHealth();
 							 tempHealth -= currentDamage; 
-							 if (tempHealth <= 0) {
-								 tempHealth = 0;
-								 downed = true;
-								 currentCharacter.setActiveSprite(currentCharacter.getKneelingSprite());
-								 currentCharacter.setDowned(downed); // Adjust character sprite when we can.
-							 }
+								if (tempHealth <= 0) {
+									defyPercent = rand.nextInt(101 - 1) + 1; // Random from 1 to 100
+									if (currentCharacter.getDefy() >= defyPercent) {
+										tempHealth = 1;
+										if (currentCharacter.getDefy() != 0) // If Death Defy is not 0, reduce by 10
+											currentEnemy.setDefy(currentEnemy.getDefy() - 10);
+									}
+									else {
+										tempHealth = 0;
+										downed = true;
+										currentCharacter.setActiveSprite(currentCharacter.getKneelingSprite());
+										currentCharacter.setDowned(downed); // Adjust character sprite when we can.
+									}
+								}
 							 currentCharacter.setHealth(tempHealth); // Reinitialize character health
 							 tempTeam[2] = currentCharacter; // Reinitialize character in team.
 							 playerTeam.setTeam(tempTeam); // Reinitialize team.
@@ -717,12 +710,20 @@ public class combatFlow {
 						 if (currentCharacter.getHealth() != 0) { // If the character is not already down, process damage. 
 							 tempHealth = currentCharacter.getHealth();
 							 tempHealth -= currentDamage; 
-							 if (tempHealth <= 0) {
-								 tempHealth = 0;
-								 downed = true;
-								 currentCharacter.setActiveSprite(currentCharacter.getKneelingSprite());
-								 currentCharacter.setDowned(downed); // Adjust character sprite when we can.
-							 }
+								if (tempHealth <= 0) {
+									defyPercent = rand.nextInt(101 - 1) + 1; // Random from 1 to 100
+									if (currentCharacter.getDefy() >= defyPercent) {
+										tempHealth = 1;
+										if (currentCharacter.getDefy() != 0) // If Death Defy is not 0, reduce by 10
+											currentEnemy.setDefy(currentEnemy.getDefy() - 10);
+									}
+									else {
+										tempHealth = 0;
+										downed = true;
+										currentCharacter.setActiveSprite(currentCharacter.getKneelingSprite());
+										currentCharacter.setDowned(downed); // Adjust character sprite when we can.
+									}
+								}
 							 currentCharacter.setHealth(tempHealth); // Reinitialize character health
 							 tempTeam[3] = currentCharacter; // Reinitialize character in team.
 							 playerTeam.setTeam(tempTeam); // Reinitialize team.
@@ -784,6 +785,11 @@ public class combatFlow {
     
     public int runCombat(int c) {
     	
+    	// Make Enemies Not Clickable Outside of player turns.
+    	enemyPosition1.setMouseTransparent(true);
+    	enemyPosition2.setMouseTransparent(true);
+    	enemyPosition3.setMouseTransparent(true);
+    	enemyPosition4.setMouseTransparent(true);
     	
 		// Play Loop
 		Map<String, String> skillDescriptions = new HashMap<>();
@@ -893,6 +899,10 @@ public class combatFlow {
 							skillButtonP4.setMouseTransparent(false);
 							passTurnButton.setMouseTransparent(false);
 							heroSelectionIndicator1.setVisible(true);
+					    	enemyPosition1.setMouseTransparent(false);
+					    	enemyPosition2.setMouseTransparent(false);
+					    	enemyPosition3.setMouseTransparent(false);
+					    	enemyPosition4.setMouseTransparent(false);
 							enemyPosition1.setOnMouseClicked(handler);
 							enemyPosition2.setOnMouseClicked(handler);
 							enemyPosition3.setOnMouseClicked(handler);
@@ -933,6 +943,11 @@ public class combatFlow {
 						heroSelectionIndicator1.setVisible(false);
 						heroNameText.setText("");
 						moveDescriptionText.setText("");
+				    	// Make Enemies Not Clickable Outside of player turns.
+				    	enemyPosition1.setMouseTransparent(true);
+				    	enemyPosition2.setMouseTransparent(true);
+				    	enemyPosition3.setMouseTransparent(true);
+				    	enemyPosition4.setMouseTransparent(true);
 					}
 					//playerTeam.setTeam(tempTeam);
 					return count;
@@ -965,6 +980,10 @@ public class combatFlow {
 							skillButtonA14.setMouseTransparent(false);
 							passTurnButton.setMouseTransparent(false);
 							heroSelectionIndicator2.setVisible(true);
+					    	enemyPosition1.setMouseTransparent(false);
+					    	enemyPosition2.setMouseTransparent(false);
+					    	enemyPosition3.setMouseTransparent(false);
+					    	enemyPosition4.setMouseTransparent(false);
 							enemyPosition1.setOnMouseClicked(handler);
 							enemyPosition2.setOnMouseClicked(handler);
 							enemyPosition3.setOnMouseClicked(handler);
@@ -1004,6 +1023,11 @@ public class combatFlow {
 						heroNameText.setText("");
 						moveDescriptionText.setText("");
 						moveDescriptionText2.setText("");
+				    	// Make Enemies Not Clickable Outside of player turns.
+				    	enemyPosition1.setMouseTransparent(true);
+				    	enemyPosition2.setMouseTransparent(true);
+				    	enemyPosition3.setMouseTransparent(true);
+				    	enemyPosition4.setMouseTransparent(true);
 					}
 					//playerTeam.setTeam(tempTeam);
 					return count;
@@ -1036,6 +1060,10 @@ public class combatFlow {
 							skillButtonW4.setMouseTransparent(false);
 							passTurnButton.setMouseTransparent(false);
 							heroSelectionIndicator3.setVisible(true);
+					    	enemyPosition1.setMouseTransparent(false);
+					    	enemyPosition2.setMouseTransparent(false);
+					    	enemyPosition3.setMouseTransparent(false);
+					    	enemyPosition4.setMouseTransparent(false);
 							enemyPosition1.setOnMouseClicked(handler);
 							enemyPosition2.setOnMouseClicked(handler);
 							enemyPosition3.setOnMouseClicked(handler);
@@ -1074,6 +1102,11 @@ public class combatFlow {
 						heroNameText.setText("");
 						moveDescriptionText.setText("");
 						moveDescriptionText2.setText("");
+				    	// Make Enemies Not Clickable Outside of player turns.
+				    	enemyPosition1.setMouseTransparent(true);
+				    	enemyPosition2.setMouseTransparent(true);
+				    	enemyPosition3.setMouseTransparent(true);
+				    	enemyPosition4.setMouseTransparent(true);
 
 					}
 					//playerTeam.setTeam(tempTeam);
@@ -1106,6 +1139,10 @@ public class combatFlow {
 							skillButtonA24.setMouseTransparent(false);
 							passTurnButton.setMouseTransparent(false);
 							heroSelectionIndicator4.setVisible(true);
+					    	enemyPosition1.setMouseTransparent(false);
+					    	enemyPosition2.setMouseTransparent(false);
+					    	enemyPosition3.setMouseTransparent(false);
+					    	enemyPosition4.setMouseTransparent(false);
 							enemyPosition1.setOnMouseClicked(handler);
 							enemyPosition2.setOnMouseClicked(handler);
 							enemyPosition3.setOnMouseClicked(handler);
@@ -1144,6 +1181,11 @@ public class combatFlow {
 						heroNameText.setText("");
 						moveDescriptionText.setText("");
 						moveDescriptionText2.setText("");
+				    	// Make Enemies Not Clickable Outside of player turns.
+				    	enemyPosition1.setMouseTransparent(true);
+				    	enemyPosition2.setMouseTransparent(true);
+				    	enemyPosition3.setMouseTransparent(true);
+				    	enemyPosition4.setMouseTransparent(true);
 
 					}
 					//playerTeam.setTeam(tempTeam);

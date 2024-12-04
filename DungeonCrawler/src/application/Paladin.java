@@ -13,7 +13,7 @@ public class Paladin extends Characters {
     private int auraTurnsRemaining = 0;
     
     Paladin() {
-        name = "Paladin"; // Paladin name
+        name = "Dismas"; // Paladin name
         idleSprite = "applicationImagesPlayerSprites/Paladin_Idle.png";
         attackSprite = "applicationImagesPlayerSprites/Paladin_Attack.png";
         kneelingSprite = "applicationImagesHeroSprites/Paladin/Paladin_Kneeling.png";
@@ -27,6 +27,7 @@ public class Paladin extends Characters {
         dodge_chance = 0;
         position = 1;
         speed = 3;
+        defyChance = 50;
     }
 
     // Shield of Faith: Buff that increases defense and redirects attacks from an ally to the paladin

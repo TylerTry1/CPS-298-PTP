@@ -12,7 +12,7 @@ public class Wizard extends Characters {
     private static final int STAFF_STRIKE_DAMAGE = 3; // Small damage for Staff Strike
 
     public Wizard() {
-        name = "Wizard"; // Wizard name
+        name = "Merlin"; // Wizard name
         idleSprite = "applicationImagesPlayerSprites/Wizard_Idle.png";
         attackSprite = "applicationImagesPlayerSprites/Wizard_Attack.png";
         kneelingSprite = "applicationImagesHeroSprites/Wizard/Wizzard_Kneeling.png";
@@ -26,6 +26,7 @@ public class Wizard extends Characters {
         dodge_chance = 10; // Chance to dodge attacks
         position = 3; // Back row position for a ranged attacker
         speed = 4; // Average speed for a wizard
+        defyChance = 50;
     }
 
     // Fireball: Attacks two targets with splash damage and applies fire damage over time

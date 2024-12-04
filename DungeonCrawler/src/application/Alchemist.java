@@ -13,7 +13,7 @@ public class Alchemist extends Characters {
     private static final int INVIGORATION_BOOST_MAX = 2; // Maximum attack boost
     private static final int EXPLOSIVE_FLASK_DAMAGE = 5; // Damage from explosive flask
 	Alchemist() {
-        name = "Alchemist";
+        name = "Reynauld";
         idleSprite = "applicationImagesPlayerSprites/Alchemist_Idle.png";
         attackSprite = "applicationImagesPlayerSprites/Alchemist_Attack.png";
         kneelingSprite = "applicationImagesHeroSprites/Alchemist/Alchemist_Kneeling.png";
@@ -27,6 +27,7 @@ public class Alchemist extends Characters {
         dodge_chance = 0;
         position = 4;
         speed = 5;
+        defyChance = 50;
     }
 	// Acid Puddle: Creates a puddle that poisons enemies
     public void useAcidPuddle(List<Characters> enemies, Text moveNameText, Text moveDescriptionText) {

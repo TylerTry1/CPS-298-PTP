@@ -3120,6 +3120,7 @@ public class Main extends Application {
 
 			@Override
 			public void run() {
+				roundNumberText.setText("Round " + String.valueOf(round));
 				if (tempPTeamArray.checkGameOver() || tempETeamArray.checkGameOver()) {
 					
 					if(tempPTeamArray.checkGameOver()) {
@@ -3171,6 +3172,7 @@ public class Main extends Application {
 						enemyTurnTicker3.setVisible(true);
 						enemyTurnTicker4.setVisible(true);
 						round++;
+						AudioManager.playnewRoundSFX();
 					}
 					
 					if (flow.turnOrder[count] instanceof Characters) {
@@ -3212,6 +3214,7 @@ public class Main extends Application {
 					skillButtonsAssassin.setVisible(false);
 					skillButtonsWizard.setVisible(false);
 					skillButtonsAlchemist.setVisible(false);
+					
 					
 					
 					// Update All Sprites in case anyone was downed:
@@ -3264,9 +3267,22 @@ public class Main extends Application {
 		enemySelectionIndicator3.setVisible(false);
 		enemySelectionIndicator4.setVisible(false);
 		
+		// Set hero health text to 0 unitl combat starts
+		heroHPPos1.setText("");
+		heroHPPos2.setText("");
+		heroHPPos3.setText("");
+		heroHPPos4.setText("");
+		
+    	// Make Enemies Not Clickable Outside of player turns.
+    	enemyPosition1.setMouseTransparent(true);
+    	enemyPosition2.setMouseTransparent(true);
+    	enemyPosition3.setMouseTransparent(true);
+    	enemyPosition4.setMouseTransparent(true);
+		
 		round = 1;
+		roundNumberText.setText(""); // No Round Number text display until combat starts.
 		System.out.println("Starting Combat:");
-		timer.schedule(task, 0, 3000);
+		timer.schedule(task, 3000, 2000);
 		
 
 	}

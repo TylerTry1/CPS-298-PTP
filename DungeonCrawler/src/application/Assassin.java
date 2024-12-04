@@ -15,7 +15,7 @@ public class Assassin extends Characters {
     private int poisonTurnsRemaining = 0;
     
 	Assassin() {
-		name = "Assassin";
+		name = "Damian";
 		idleSprite = "applicationImagesPlayerSprites/Assassin_Idle.png";
 		attackSprite = "applicationImagesPlayerSprites/Assassin_Attack.png";
 		kneelingSprite = "applicationImagesHeroSprites/Assassin/Assassin_Kneeling.png";
@@ -29,6 +29,7 @@ public class Assassin extends Characters {
 		dodge_chance = 0;
 		position = 2;
 		speed = 7;
+		defyChance = 50;
 	}
 
 //Poisoned Blade: Buff that applies poison to the enemy

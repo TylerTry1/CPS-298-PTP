@@ -19,6 +19,7 @@ public class Characters extends entities {
         int dodge_chance; // leave this stat at 0 for all characters, need a 0 value in case we want to change it later.
         int position;
         int speed;
+        int defyChance;
         int bleedResist;
         int burnResist;
         int blightResist;
@@ -163,6 +164,15 @@ public class Characters extends entities {
         String getActiveSprite() {
         	return activeSprite;
         }
+        
+        void setDefy(int set) {
+        	defyChance = set;
+        }
+		
+        int getDefy() {
+        	return defyChance;
+        }
+        
     //}
 
     /*public class characterDismas extends characterStats {
