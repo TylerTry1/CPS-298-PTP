@@ -3281,6 +3281,8 @@ public class Main extends Application {
 		
 		round = 1;
 		roundNumberText.setText(""); // No Round Number text display until combat starts.
+		heroNameText.setText(""); // No Hero Name
+		moveDescriptionText.setText(""); // No Move Info
 		System.out.println("Starting Combat:");
 		timer.schedule(task, 3000, 2000);
 		

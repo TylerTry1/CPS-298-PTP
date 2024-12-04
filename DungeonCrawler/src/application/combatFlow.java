@@ -785,6 +785,11 @@ public class combatFlow {
     
 public int runCombat(int c) {
     	
+		// Make Enemies Not Clickable Outside of player turns.
+		enemyPosition1.setMouseTransparent(true);
+		enemyPosition2.setMouseTransparent(true);
+		enemyPosition3.setMouseTransparent(true);
+		enemyPosition4.setMouseTransparent(true);
     	
 		// Play Loop
 		Map<String, String> skillDescriptions = new HashMap<>();
@@ -894,6 +899,10 @@ public int runCombat(int c) {
 							skillButtonP4.setMouseTransparent(false);
 							passTurnButton.setMouseTransparent(false);
 							heroSelectionIndicator1.setVisible(true);
+					    	enemyPosition1.setMouseTransparent(false);
+					    	enemyPosition2.setMouseTransparent(false);
+					    	enemyPosition3.setMouseTransparent(false);
+					    	enemyPosition4.setMouseTransparent(false);
 							enemyPosition1.setOnMouseClicked(handler);
 							enemyPosition2.setOnMouseClicked(handler);
 							enemyPosition3.setOnMouseClicked(handler);
@@ -934,6 +943,10 @@ public int runCombat(int c) {
 						heroSelectionIndicator1.setVisible(false);
 						heroNameText.setText("");
 						moveDescriptionText.setText("");
+				    	enemyPosition1.setMouseTransparent(true);
+				    	enemyPosition2.setMouseTransparent(true);
+				    	enemyPosition3.setMouseTransparent(true);
+				    	enemyPosition4.setMouseTransparent(true);
 					}
 					//playerTeam.setTeam(tempTeam);
 					return count;
@@ -966,6 +979,10 @@ public int runCombat(int c) {
 							skillButtonA14.setMouseTransparent(false);
 							passTurnButton.setMouseTransparent(false);
 							heroSelectionIndicator2.setVisible(true);
+					    	enemyPosition1.setMouseTransparent(false);
+					    	enemyPosition2.setMouseTransparent(false);
+					    	enemyPosition3.setMouseTransparent(false);
+					    	enemyPosition4.setMouseTransparent(false);
 							enemyPosition1.setOnMouseClicked(handler);
 							enemyPosition2.setOnMouseClicked(handler);
 							enemyPosition3.setOnMouseClicked(handler);
@@ -1005,6 +1022,10 @@ public int runCombat(int c) {
 						heroNameText.setText("");
 						moveDescriptionText.setText("");
 						moveDescriptionText2.setText("");
+				    	enemyPosition1.setMouseTransparent(true);
+				    	enemyPosition2.setMouseTransparent(true);
+				    	enemyPosition3.setMouseTransparent(true);
+				    	enemyPosition4.setMouseTransparent(true);
 					}
 					//playerTeam.setTeam(tempTeam);
 					return count;
@@ -1037,6 +1058,10 @@ public int runCombat(int c) {
 							skillButtonW4.setMouseTransparent(false);
 							passTurnButton.setMouseTransparent(false);
 							heroSelectionIndicator3.setVisible(true);
+					    	enemyPosition1.setMouseTransparent(false);
+					    	enemyPosition2.setMouseTransparent(false);
+					    	enemyPosition3.setMouseTransparent(false);
+					    	enemyPosition4.setMouseTransparent(false);
 							enemyPosition1.setOnMouseClicked(handler);
 							enemyPosition2.setOnMouseClicked(handler);
 							enemyPosition3.setOnMouseClicked(handler);
@@ -1075,7 +1100,10 @@ public int runCombat(int c) {
 						heroNameText.setText("");
 						moveDescriptionText.setText("");
 						moveDescriptionText2.setText("");
-
+				    	enemyPosition1.setMouseTransparent(true);
+				    	enemyPosition2.setMouseTransparent(true);
+				    	enemyPosition3.setMouseTransparent(true);
+				    	enemyPosition4.setMouseTransparent(true);
 					}
 					//playerTeam.setTeam(tempTeam);
 					return count;
@@ -1107,6 +1135,10 @@ public int runCombat(int c) {
 							skillButtonA24.setMouseTransparent(false);
 							passTurnButton.setMouseTransparent(false);
 							heroSelectionIndicator4.setVisible(true);
+					    	enemyPosition1.setMouseTransparent(false);
+					    	enemyPosition2.setMouseTransparent(false);
+					    	enemyPosition3.setMouseTransparent(false);
+					    	enemyPosition4.setMouseTransparent(false);
 							enemyPosition1.setOnMouseClicked(handler);
 							enemyPosition2.setOnMouseClicked(handler);
 							enemyPosition3.setOnMouseClicked(handler);
@@ -1145,6 +1177,10 @@ public int runCombat(int c) {
 						heroNameText.setText("");
 						moveDescriptionText.setText("");
 						moveDescriptionText2.setText("");
+				    	enemyPosition1.setMouseTransparent(true);
+				    	enemyPosition2.setMouseTransparent(true);
+				    	enemyPosition3.setMouseTransparent(true);
+				    	enemyPosition4.setMouseTransparent(true);
 
 					}
 					//playerTeam.setTeam(tempTeam);
