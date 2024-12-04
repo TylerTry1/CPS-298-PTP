@@ -455,8 +455,9 @@ public class Main extends Application {
 	    root.getChildren().add(quit);
 	    root.getChildren().add(quitFrame);
 	    root.getChildren().add(quitGameButtonText);
-	    root.getChildren().addAll(playbutton, buttonBox2, shopTesting, gameOver);
-
+//	    root.getChildren().addAll(playbutton, buttonBox2, shopTesting, gameOver);
+	    root.getChildren().add(playbutton);
+	    
 	    root.getChildren().add(transitionCoverExit);
 	    root.setBackground(new Background(backgroundImage));
 	    
@@ -3325,7 +3326,7 @@ public class Main extends Application {
 		Text item2Price = new Text(Integer.toString(randItems.get(1).getItemPrice()));
 		Text item3Price = new Text(Integer.toString(randItems.get(2).getItemPrice()));
 		Text playerGold = new Text("Current Gold: " + Integer.toString(playerGoldAmount));
-		Text purchaseConfirmationText = new Text("Buy (item) for (char) (-X Gold)");
+		Text purchaseConfirmationText = new Text("Purchase");
 		Text exitShopText = new Text("exit shop");
 
 		
@@ -3770,8 +3771,8 @@ public class Main extends Application {
 		itemDescriptions.setLayoutX(1180);
 		itemDescriptions.setLayoutY(600);
 		
-		purchaseConfirmationText.setLayoutX(1300);
-		purchaseConfirmationText.setLayoutY(1010);
+		purchaseConfirmationText.setLayoutX(1440);
+		purchaseConfirmationText.setLayoutY(1015);
 		purchaseConfirmationText.setScaleX(1.9);
 		purchaseConfirmationText.setScaleY(1.9);
 		// -------------------------------------------------------------
@@ -4083,7 +4084,7 @@ public class Main extends Application {
 		goldEarnedText.setScaleY(3);
 		
 		goldEarnedVarText.setLayoutX(900);
-		goldEarnedVarText.setLayoutY(575);
+		goldEarnedVarText.setLayoutY(595);
 		goldEarnedVarText.setScaleX(4);
 		goldEarnedVarText.setScaleY(4);
 		
