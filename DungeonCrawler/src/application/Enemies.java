@@ -227,14 +227,11 @@ public class Enemies extends entities {
 			public double[][] apply() {
 				// TODO Auto-generated method stub
 				
-				
-				
-				
 				// Placeholder results
 				targetPos = new double[1];
-				targetPos[0] = 1.0;
+				targetPos[0] = 4.0;
 				
-				result[0] = goblinScout.placeholderDamage;
+				result[0] = goblinScout.damage;
 				result[1] = targetPos;
 				
 				return result;
@@ -281,8 +278,8 @@ public class Enemies extends entities {
 			@Override
 			public double[][] apply() {
 				targetPos = new double[2];
-				targetPos[0] = 1;
-				targetPos[1] = 2;
+				targetPos[0] = 3;
+				targetPos[1] = 4;
 			
 				result[0] = goblinAxeman.damage;
 				result[1] = targetPos;
@@ -298,10 +295,11 @@ public class Enemies extends entities {
 				goblinAxeman.accuracy = 25;
 				
 				// Placeholder results
-				targetPos = new double[1];
+				targetPos = new double[2];
 				targetPos[0] = 1;
+				targetPos[1] = 2;
 				
-				result[0] = goblinAxeman.placeholderDamage;
+				result[0] = goblinAxeman.damage;
 				result[1] = targetPos;
 				
 				return result;
@@ -416,10 +414,11 @@ public class Enemies extends entities {
 			public double[][] apply() {
 				
 				// Placeholder results
-				targetPos = new double[1];
+				targetPos = new double[2];
 				targetPos[0] = 1;
+				targetPos[1] = 2;
 				
-				result[0] = goblinShaman.placeholderDamage;
+				result[0] = goblinShaman.damage;
 				result[1] = targetPos;
 				
 				return result;
@@ -500,7 +499,7 @@ public class Enemies extends entities {
 				targetPos = new double[1];
 				targetPos[0] = 1;
 				
-				result[0] = skeletonSwordsman.damage;
+				result[0] = VerticalSlash.damage;
 				result[1] = targetPos;
 			
 				skeletonSwordsman.damage[0] = 12; // Return Damage to normal.
@@ -627,8 +626,9 @@ public class Enemies extends entities {
 		record MaceSlam() implements AbilityFunctions {
 			@Override
 			public double[][] apply() {
-				targetPos = new double[1];
-				targetPos[0] = 1;
+				targetPos = new double[2];
+				targetPos[0] = 3;
+				targetPos[1] = 4;
 				
 				result[0] = skeletonDefender.damage;
 				result[1] = targetPos;
@@ -649,7 +649,7 @@ public class Enemies extends entities {
 				targetPos = new double[1];
 				targetPos[0] = 1;
 				
-				result[0] = skeletonDefender.placeholderDamage;
+				result[0] =  skeletonDefender.damage;
 				result[1] = targetPos;
 				
 				return result;
@@ -684,27 +684,24 @@ public class Enemies extends entities {
 	        moveResist = 5;
 	        debuffResist = 6;
 	        deathResist = 4;
-			abilities[0] = new SummonUndead();
+			abilities[0] = new DrainLife();
 			abilities[1] = new DarkMagicBlast();
 		}
 		
-		// Summon Undead
-		// This ability will need to iterate over an array of all team members
-		// so we will come back to it when Enemy_Teams.java is complete.
-		// Have to check for body pile
-		record SummonUndead() implements AbilityFunctions {
+		// Drain Life
+		record DrainLife() implements AbilityFunctions {
 			
 			@Override
 			public double[][] apply() {
-				// This ability will need to iterate over an array of all team members
-				// so we will come back to it when Enemy_Teams.java is complete.
-				// Have to check for body pile
 				
 				// Placeholder results
-				targetPos = new double[1];
+				targetPos = new double[4];
 				targetPos[0] = 1;
+				targetPos[1] = 2;
+				targetPos[2] = 3;
+				targetPos[3] = 4;
 				
-				result[0] = necromancer.placeholderDamage;
+				result[0] = necromancer.damage;
 				result[1] = targetPos;
 				
 				return result;
@@ -986,10 +983,11 @@ public class Enemies extends entities {
 				zombiePeasant.dodge_chance = 25;
 			
 				// Placeholder results
-				targetPos = new double[1];
-				targetPos[0] = 1;
+				targetPos = new double[2];
+				targetPos[0] = 2;
+				targetPos[1] = 3;
 				
-				result[0] = zombiePeasant.placeholderDamage;
+				result[0] = zombiePeasant.damage;
 				result[1] = targetPos;
 				
 				return result;
@@ -1034,7 +1032,7 @@ public class Enemies extends entities {
 			@Override
 			public double[][] apply() {
 				targetPos = new double[1];
-				targetPos[0] = 1;
+				targetPos[0] = 4;
 				
 				result[0] = zombieKnight.damage;
 				result[1] = targetPos;
