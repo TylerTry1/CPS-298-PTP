@@ -783,31 +783,26 @@ public class combatFlow {
 	
     
     
-    public int runCombat(int c) {
+public int runCombat(int c) {
     	
-    	// Make Enemies Not Clickable Outside of player turns.
-    	enemyPosition1.setMouseTransparent(true);
-    	enemyPosition2.setMouseTransparent(true);
-    	enemyPosition3.setMouseTransparent(true);
-    	enemyPosition4.setMouseTransparent(true);
     	
 		// Play Loop
 		Map<String, String> skillDescriptions = new HashMap<>();
-		skillDescriptions.put("Shield of Faith", "A shield that protects an ally from harm.");
+		skillDescriptions.put("Shield Bash", "Bash the enemy with your shield");
 		skillDescriptions.put("Divine Smite", "A powerful strike that channels divine energy.");
-		skillDescriptions.put("Aura of Courage", "An aura that grants immunity to fear.");
-		skillDescriptions.put("Holy Rampart", "Creates a defensive barrier that protects allies.");
+		skillDescriptions.put("Radiance", "Calls down radiant light to damage\nall enemies.");
+		skillDescriptions.put("Dismember", "Causes a flesh wound.");
 		skillDescriptions.put("Shadow Strike", "A high-damage attack from the shadows.");
-		skillDescriptions.put("Poisoned Blade", "Applies poison to the enemy, causing damage over time.");
-		skillDescriptions.put("Backstab", "Sneak through the shadows to attack the enemy from behind.");
+		skillDescriptions.put("Poisoned Blade", "Applies poison to the enemy, causing\ndamage over time.");
+		skillDescriptions.put("Backstab", "Sneak through the shadows to attack the\nenemy from behind.");
 		skillDescriptions.put("Dagger Barrage", "Throws knives at the entire enemy team.");
-		skillDescriptions.put("Fireball", "A powerful fire spell that causes explosive damage.");
+		skillDescriptions.put("Fireball", "A powerful fire spell that causes\nexplosive damage.");
 		skillDescriptions.put("Magic Missile", "Fires multiple magic attacks at the enemy.");
 		skillDescriptions.put("Frost Bolt", "Hurls a spike of ice at the enemey.");
 		skillDescriptions.put("Staff Strike", "Bash the enemy with your staff.");
 		skillDescriptions.put("Acid Puddle", "Throws a poison vial at the enemies.");
-		skillDescriptions.put("Healing Elixir", "Hand a teammate a healing elixir");
-		skillDescriptions.put("Invigoration", "Provide a boost of speed to the team.");
+		skillDescriptions.put("Slash", "Slash the enemy with a hidden dagger");
+		skillDescriptions.put("Acid Rain", "Throw an acid flask at the ceiling\nraining down on the enemy team.");
 		skillDescriptions.put("Explosive Flask", "Throws an explosive vial that damages enemies.");
 			
 			teamDead = playerTeam.checkGameOver();
@@ -899,10 +894,6 @@ public class combatFlow {
 							skillButtonP4.setMouseTransparent(false);
 							passTurnButton.setMouseTransparent(false);
 							heroSelectionIndicator1.setVisible(true);
-					    	enemyPosition1.setMouseTransparent(false);
-					    	enemyPosition2.setMouseTransparent(false);
-					    	enemyPosition3.setMouseTransparent(false);
-					    	enemyPosition4.setMouseTransparent(false);
 							enemyPosition1.setOnMouseClicked(handler);
 							enemyPosition2.setOnMouseClicked(handler);
 							enemyPosition3.setOnMouseClicked(handler);
@@ -911,16 +902,16 @@ public class combatFlow {
 							
 							skillButtonP1.setOnMouseClicked(event -> {
 								
-				                moveDescriptionText2.setText("Skill: Shield of Faith\n" + skillDescriptions.get("Shield of Faith"));
+				                moveDescriptionText2.setText("Skill: Shield Bash\n" + skillDescriptions.get("Sheild Bash"));
 				            });
 				            skillButtonP2.setOnMouseClicked(event -> {
 				                moveDescriptionText2.setText("Skill: Divine Smite\n" + skillDescriptions.get("Divine Smite"));
 				            });
 				            skillButtonP3.setOnMouseClicked(event -> {
-				                moveDescriptionText2.setText("Skill: Aura of Courage\n" + skillDescriptions.get("Aura of Courage"));
+				                moveDescriptionText2.setText("Skill: Radience\n" + skillDescriptions.get("Radience"));
 				            });
 				            skillButtonP4.setOnMouseClicked(event -> {
-				                moveDescriptionText2.setText("Skill: Holy Rampart\n" + skillDescriptions.get("Holy Rampart"));
+				                moveDescriptionText2.setText("Skill: Dismember\n" + skillDescriptions.get("Dismember"));
 				            });
 				            
 				        }
@@ -943,11 +934,6 @@ public class combatFlow {
 						heroSelectionIndicator1.setVisible(false);
 						heroNameText.setText("");
 						moveDescriptionText.setText("");
-				    	// Make Enemies Not Clickable Outside of player turns.
-				    	enemyPosition1.setMouseTransparent(true);
-				    	enemyPosition2.setMouseTransparent(true);
-				    	enemyPosition3.setMouseTransparent(true);
-				    	enemyPosition4.setMouseTransparent(true);
 					}
 					//playerTeam.setTeam(tempTeam);
 					return count;
@@ -980,10 +966,6 @@ public class combatFlow {
 							skillButtonA14.setMouseTransparent(false);
 							passTurnButton.setMouseTransparent(false);
 							heroSelectionIndicator2.setVisible(true);
-					    	enemyPosition1.setMouseTransparent(false);
-					    	enemyPosition2.setMouseTransparent(false);
-					    	enemyPosition3.setMouseTransparent(false);
-					    	enemyPosition4.setMouseTransparent(false);
 							enemyPosition1.setOnMouseClicked(handler);
 							enemyPosition2.setOnMouseClicked(handler);
 							enemyPosition3.setOnMouseClicked(handler);
@@ -1023,11 +1005,6 @@ public class combatFlow {
 						heroNameText.setText("");
 						moveDescriptionText.setText("");
 						moveDescriptionText2.setText("");
-				    	// Make Enemies Not Clickable Outside of player turns.
-				    	enemyPosition1.setMouseTransparent(true);
-				    	enemyPosition2.setMouseTransparent(true);
-				    	enemyPosition3.setMouseTransparent(true);
-				    	enemyPosition4.setMouseTransparent(true);
 					}
 					//playerTeam.setTeam(tempTeam);
 					return count;
@@ -1060,10 +1037,6 @@ public class combatFlow {
 							skillButtonW4.setMouseTransparent(false);
 							passTurnButton.setMouseTransparent(false);
 							heroSelectionIndicator3.setVisible(true);
-					    	enemyPosition1.setMouseTransparent(false);
-					    	enemyPosition2.setMouseTransparent(false);
-					    	enemyPosition3.setMouseTransparent(false);
-					    	enemyPosition4.setMouseTransparent(false);
 							enemyPosition1.setOnMouseClicked(handler);
 							enemyPosition2.setOnMouseClicked(handler);
 							enemyPosition3.setOnMouseClicked(handler);
@@ -1102,11 +1075,6 @@ public class combatFlow {
 						heroNameText.setText("");
 						moveDescriptionText.setText("");
 						moveDescriptionText2.setText("");
-				    	// Make Enemies Not Clickable Outside of player turns.
-				    	enemyPosition1.setMouseTransparent(true);
-				    	enemyPosition2.setMouseTransparent(true);
-				    	enemyPosition3.setMouseTransparent(true);
-				    	enemyPosition4.setMouseTransparent(true);
 
 					}
 					//playerTeam.setTeam(tempTeam);
@@ -1139,10 +1107,6 @@ public class combatFlow {
 							skillButtonA24.setMouseTransparent(false);
 							passTurnButton.setMouseTransparent(false);
 							heroSelectionIndicator4.setVisible(true);
-					    	enemyPosition1.setMouseTransparent(false);
-					    	enemyPosition2.setMouseTransparent(false);
-					    	enemyPosition3.setMouseTransparent(false);
-					    	enemyPosition4.setMouseTransparent(false);
 							enemyPosition1.setOnMouseClicked(handler);
 							enemyPosition2.setOnMouseClicked(handler);
 							enemyPosition3.setOnMouseClicked(handler);
@@ -1153,10 +1117,10 @@ public class combatFlow {
 							    moveDescriptionText2.setText("Skill: Acid Puddle\n" + skillDescriptions.get("Acid Puddle"));
 							});
 							skillButtonA22.setOnMouseClicked(event -> {
-							    moveDescriptionText2.setText("Skill: Healing Elixir\n" + skillDescriptions.get("Healing Elixir"));
+							    moveDescriptionText2.setText("Skill: Slash\n" + skillDescriptions.get("Slash"));
 							});
 							skillButtonA23.setOnMouseClicked(event -> {
-							    moveDescriptionText2.setText("Skill: Invigoration\n" + skillDescriptions.get("Invigoration"));
+							    moveDescriptionText2.setText("Skill: Acid Rain\n" + skillDescriptions.get("Acid Rain"));
 							});
 							skillButtonA24.setOnMouseClicked(event -> {
 							    moveDescriptionText2.setText("Skill: Explosive Flask\n" + skillDescriptions.get("Explosive Flask"));
@@ -1181,11 +1145,6 @@ public class combatFlow {
 						heroNameText.setText("");
 						moveDescriptionText.setText("");
 						moveDescriptionText2.setText("");
-				    	// Make Enemies Not Clickable Outside of player turns.
-				    	enemyPosition1.setMouseTransparent(true);
-				    	enemyPosition2.setMouseTransparent(true);
-				    	enemyPosition3.setMouseTransparent(true);
-				    	enemyPosition4.setMouseTransparent(true);
 
 					}
 					//playerTeam.setTeam(tempTeam);
