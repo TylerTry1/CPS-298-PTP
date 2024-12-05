@@ -19,7 +19,7 @@ import javafx.util.Duration;
 
 public class combatFlow {
 
-	Random rand = new Random(); 
+	Random rand = new Random();
 	Button enemyPosition1 = new Button("enemyPosition1");
 	Button enemyPosition2 = new Button("enemyPosition2");
 	Button enemyPosition3 = new Button("enemyPosition3");
@@ -94,7 +94,6 @@ public class combatFlow {
 	Text moveDescriptionText = new Text();
 	Text moveDescriptionText2 = new Text();
 
-	
 	Image corpseSprite = new Image("/images/CorpsePile.png");
 	int roundCounter = 0;
 	int max = 2;
@@ -115,66 +114,59 @@ public class combatFlow {
 	entities[] temp3 = new entities[8]; // Extra Array for sorting. Should be big enough, increase size if necessary.
 	public entities[] turnOrder = new entities[8];
 	int count;
-	
+
 	Characters getCurrent() {
 		return currentCharacter;
 	}
+
 	entities[] getTurnOrder() {
 		return turnOrder;
 	}
-	
-	playerTeamArray getPlayerTeamArray( ) {
+
+	playerTeamArray getPlayerTeamArray() {
 		return playerTeam;
 	}
-	
+
 	void setPlayerTeamArray(playerTeamArray set) {
 		playerTeam = set;
 	}
-	
+
 	void resetPlayerTeamArray() {
 		playerTeam = new playerTeamArray(4);
 	}
-	
+
 	Characters[] getTempTeam() {
 		return tempTeam;
 	}
-	
+
 	void setTempTeam(Characters[] set) {
 		tempTeam = set;
 	}
-	
+
 	void resetTempTeam() {
 		playerTeam = new playerTeamArray(4);
 		tempTeam = playerTeam.getTeam();
 	}
-	
+
 	enemyTeam getEnemyTeam() {
 		return enemyTeam;
 	}
 
-	
-	static public class combatControl extends combatFlow {	
-		public combatControl(Button e1, Button e2, Button e3, Button e4,
-							RadioButton p1, RadioButton p2, RadioButton p3, RadioButton p4,
-							RadioButton a11, RadioButton a12, RadioButton a13, RadioButton a14,
-							RadioButton w1, RadioButton w2, RadioButton w3, RadioButton w4,
-							RadioButton a21, RadioButton a22, RadioButton a23, RadioButton a24,
-							ImageView ip1, ImageView ip2, ImageView ip3, ImageView ip4,
-							ImageView ia11, ImageView ia12, ImageView ia13, ImageView ia14,
-							ImageView iw1, ImageView iw2, ImageView iw3, ImageView iw4,
-							ImageView ia21, ImageView ia22, ImageView ia23, ImageView ia24,
-							ImageView htt1, ImageView htt2, ImageView htt3, ImageView htt4,
-							ImageView ett1, ImageView ett2, ImageView ett3, ImageView ett4,
-							ImageView hsi4, ImageView hsi3, ImageView hsi2, ImageView hsi1,
-							ImageView esi1, ImageView esi2, ImageView esi3, ImageView esi4,
-							Text hNT, Text mDT, Text mDT2,
-							ImageView sbsf1, ImageView sbsf2, ImageView sbsf3, ImageView sbsf4,
-							ImageView dbe1, ImageView dbe2, ImageView dbe3, ImageView dbe4,
-							ImageView eip1, ImageView eip2, ImageView eip3, ImageView eip4,
-							ImageView hip1, ImageView hip2, ImageView hip3, ImageView hip4,
-							playerTeamArray pt, Button ptb, ImageView sbip){ 
-			
-			enemyPosition1 = e1;										  					 
+	static public class combatControl extends combatFlow {
+		public combatControl(Button e1, Button e2, Button e3, Button e4, RadioButton p1, RadioButton p2, RadioButton p3,
+				RadioButton p4, RadioButton a11, RadioButton a12, RadioButton a13, RadioButton a14, RadioButton w1,
+				RadioButton w2, RadioButton w3, RadioButton w4, RadioButton a21, RadioButton a22, RadioButton a23,
+				RadioButton a24, ImageView ip1, ImageView ip2, ImageView ip3, ImageView ip4, ImageView ia11,
+				ImageView ia12, ImageView ia13, ImageView ia14, ImageView iw1, ImageView iw2, ImageView iw3,
+				ImageView iw4, ImageView ia21, ImageView ia22, ImageView ia23, ImageView ia24, ImageView htt1,
+				ImageView htt2, ImageView htt3, ImageView htt4, ImageView ett1, ImageView ett2, ImageView ett3,
+				ImageView ett4, ImageView hsi4, ImageView hsi3, ImageView hsi2, ImageView hsi1, ImageView esi1,
+				ImageView esi2, ImageView esi3, ImageView esi4, Text hNT, Text mDT, Text mDT2, ImageView sbsf1,
+				ImageView sbsf2, ImageView sbsf3, ImageView sbsf4, ImageView dbe1, ImageView dbe2, ImageView dbe3,
+				ImageView dbe4, ImageView eip1, ImageView eip2, ImageView eip3, ImageView eip4, ImageView hip1,
+				ImageView hip2, ImageView hip3, ImageView hip4, playerTeamArray pt, Button ptb, ImageView sbip) {
+
+			enemyPosition1 = e1;
 			enemyPosition2 = e2;
 			enemyPosition3 = e3;
 			enemyPosition4 = e4;
@@ -249,286 +241,297 @@ public class combatFlow {
 			heroInPosition4 = hip4;
 			playerTeam = pt;
 		}
-	
-	// Temp function for testing player input: 
-	void tempPlayerChoice(Characters current, int choice, int tempCount) {
-		
-		currentDamage = current.getDamage();
-		tempEnemyTeam = enemyTeam.getTeam();
-		boolean downed = false;
-		int defyPercent = 0;
-		
-		switch(choice) {
-		case 1:
-			currentEnemy = tempEnemyTeam[0];
-			if (currentEnemy.getHealth() != 0) {
-				tempHealth = currentEnemy.getHealth();
-				tempHealth -= currentDamage;
-				if (tempHealth <= 0) {
-					tempHealth = 0;
-					downed = true;
-					deathblowEnemy1.setOpacity(1.0); // Ensure the node is visible
-					FadeUtils.deathblow(deathblowEnemy1); // Play the animation
-					AudioManager.playEnemyDeathSFX(); // Play the sound effect
-					tempEnemyTeam[0].setIdleSprite("/images/CorpsePile.png");
-					currentEnemy.setDowned(downed);
+
+		// Temp function for testing player input:
+		void tempPlayerChoice(Characters current, int choice, int tempCount) {
+
+			currentDamage = current.getDamage();
+			tempEnemyTeam = enemyTeam.getTeam();
+			boolean downed = false;
+			int defyPercent = 0;
+
+			switch (choice) {
+			case 1:
+				currentEnemy = tempEnemyTeam[0];
+				if (currentEnemy.getHealth() != 0) {
+					tempHealth = currentEnemy.getHealth();
+					tempHealth -= currentDamage;
+					if (tempHealth <= 0) {
+						tempHealth = 0;
+						downed = true;
+						deathblowEnemy1.setOpacity(1.0); // Ensure the node is visible
+						FadeUtils.deathblow(deathblowEnemy1); // Play the animation
+						AudioManager.playEnemyDeathSFX(); // Play the sound effect
+						tempEnemyTeam[0].setIdleSprite("/images/CorpsePile.png");
+						currentEnemy.setDowned(downed);
+					}
+					currentEnemy.setHealth(tempHealth);
+					tempEnemyTeam[0] = currentEnemy;
+					enemyTeam.setTeam(tempEnemyTeam);
+					System.out.println(currentEnemy.name + " damaged for " + currentDamage + ".");
+				} else {
+					System.out.println(currentEnemy.name + " is downed.");
 				}
-				currentEnemy.setHealth(tempHealth);
-				tempEnemyTeam[0] = currentEnemy;
-				enemyTeam.setTeam(tempEnemyTeam);
-				System.out.println(currentEnemy.name + " damaged for " + currentDamage + ".");
-			}
-			else {
-				System.out.println(currentEnemy.name + " is downed.");
-			}
-			tempCount++;
-			break;
-		
-		case 2:
-			currentEnemy = tempEnemyTeam[1];
-			if (currentEnemy.getHealth() != 0) {
-				tempHealth = currentEnemy.getHealth();
-				tempHealth -= currentDamage;
-				if (tempHealth <= 0) {
-					tempHealth = 0;
-					downed = true;
-					deathblowEnemy2.setOpacity(1.0); // Ensure the node is visible
-					FadeUtils.deathblow(deathblowEnemy2); // Play the animation
-					AudioManager.playEnemyDeathSFX(); // Play the sound effect
-					tempEnemyTeam[1].setIdleSprite("/images/CorpsePile.png");
-					currentEnemy.setDowned(downed);
+				tempCount++;
+				break;
+
+			case 2:
+				currentEnemy = tempEnemyTeam[1];
+				if (currentEnemy.getHealth() != 0) {
+					tempHealth = currentEnemy.getHealth();
+					tempHealth -= currentDamage;
+					if (tempHealth <= 0) {
+						tempHealth = 0;
+						downed = true;
+						deathblowEnemy2.setOpacity(1.0); // Ensure the node is visible
+						FadeUtils.deathblow(deathblowEnemy2); // Play the animation
+						AudioManager.playEnemyDeathSFX(); // Play the sound effect
+						tempEnemyTeam[1].setIdleSprite("/images/CorpsePile.png");
+						currentEnemy.setDowned(downed);
+					}
+					currentEnemy.setHealth(tempHealth);
+					tempEnemyTeam[1] = currentEnemy;
+					enemyTeam.setTeam(tempEnemyTeam);
+					System.out.println(currentEnemy.name + " damaged for " + currentDamage + ".");
+				} else {
+					System.out.println(currentEnemy.name + " is downed.");
 				}
-				currentEnemy.setHealth(tempHealth);
-				tempEnemyTeam[1] = currentEnemy;
-				enemyTeam.setTeam(tempEnemyTeam);
-				System.out.println(currentEnemy.name + " damaged for " + currentDamage + ".");
-			}
-			else {
-				System.out.println(currentEnemy.name + " is downed.");
-			}
-			tempCount++;
-			break;
-		
-		case 3:
-			currentEnemy = tempEnemyTeam[2];
-			if (currentEnemy.getHealth() != 0) {
-				tempHealth = currentEnemy.getHealth();
-				tempHealth -= currentDamage;
-				if (tempHealth <= 0) {
-					tempHealth = 0;
-					downed = true;
-					deathblowEnemy3.setOpacity(1.0); // Ensure the node is visible
-					FadeUtils.deathblow(deathblowEnemy3); // Play the animation
-					AudioManager.playEnemyDeathSFX(); // Play the sound effect
-					tempEnemyTeam[2].setIdleSprite("/images/CorpsePile.png");
-					currentEnemy.setDowned(downed);
+				tempCount++;
+				break;
+
+			case 3:
+				currentEnemy = tempEnemyTeam[2];
+				if (currentEnemy.getHealth() != 0) {
+					tempHealth = currentEnemy.getHealth();
+					tempHealth -= currentDamage;
+					if (tempHealth <= 0) {
+						tempHealth = 0;
+						downed = true;
+						deathblowEnemy3.setOpacity(1.0); // Ensure the node is visible
+						FadeUtils.deathblow(deathblowEnemy3); // Play the animation
+						AudioManager.playEnemyDeathSFX(); // Play the sound effect
+						tempEnemyTeam[2].setIdleSprite("/images/CorpsePile.png");
+						currentEnemy.setDowned(downed);
+					}
+					currentEnemy.setHealth(tempHealth);
+					tempEnemyTeam[2] = currentEnemy;
+					enemyTeam.setTeam(tempEnemyTeam);
+					System.out.println(currentEnemy.name + " damaged for " + currentDamage + ".");
+				} else {
+					System.out.println(currentEnemy.name + " is downed.");
 				}
-				currentEnemy.setHealth(tempHealth);
-				tempEnemyTeam[2] = currentEnemy;
-				enemyTeam.setTeam(tempEnemyTeam);
-				System.out.println(currentEnemy.name + " damaged for " + currentDamage + ".");
-			}
-			else {
-				System.out.println(currentEnemy.name + " is downed.");
-			}
-			tempCount++;
-			break;
-		
-		case 4:
-			currentEnemy = tempEnemyTeam[3];
-			if (currentEnemy.getHealth() != 0) {
-				tempHealth = currentEnemy.getHealth();
-				tempHealth -= currentDamage;
-				if (tempHealth <= 0) {
-					tempHealth = 0;
-					downed = true;
-					deathblowEnemy4.setOpacity(1.0); // Ensure the node is visible
-					FadeUtils.deathblow(deathblowEnemy4); // Play the animation
-					AudioManager.playEnemyDeathSFX(); // Play the sound effect
-					tempEnemyTeam[3].setIdleSprite("/images/CorpsePile.png");
-					currentEnemy.setDowned(downed);
+				tempCount++;
+				break;
+
+			case 4:
+				currentEnemy = tempEnemyTeam[3];
+				if (currentEnemy.getHealth() != 0) {
+					tempHealth = currentEnemy.getHealth();
+					tempHealth -= currentDamage;
+					if (tempHealth <= 0) {
+						tempHealth = 0;
+						downed = true;
+						deathblowEnemy4.setOpacity(1.0); // Ensure the node is visible
+						FadeUtils.deathblow(deathblowEnemy4); // Play the animation
+						AudioManager.playEnemyDeathSFX(); // Play the sound effect
+						tempEnemyTeam[3].setIdleSprite("/images/CorpsePile.png");
+						currentEnemy.setDowned(downed);
+					}
+					currentEnemy.setHealth(tempHealth);
+					tempEnemyTeam[3] = currentEnemy;
+					enemyTeam.setTeam(tempEnemyTeam);
+					System.out.println(currentEnemy.name + " damaged for " + currentDamage + ".");
+				} else {
+					System.out.println(currentEnemy.name + " is downed.");
 				}
-				currentEnemy.setHealth(tempHealth);
-				tempEnemyTeam[3] = currentEnemy;
-				enemyTeam.setTeam(tempEnemyTeam);
-				System.out.println(currentEnemy.name + " damaged for " + currentDamage + ".");
-			}
-			else {
-				System.out.println(currentEnemy.name + " is downed.");
-			}
-			tempCount++;
-			break;
-		
-		}
-	}
-	
-	
-	// Might need functions for these, not sure.
-	/*
-	public void resetEnemyTeam() {
-		
-	}
-	
-	public void resetPlayerTeam() {
-		
-	}
-	*/
-	
-	public void createEnemyTeam() throws IOException {
-		// Create current Enemy Team:
-		enemyTeamsArray = enemyTeamsArray.createSelection(); // Create array of teams to pull from
-		int teamSelect = rand.nextInt(15);
-		enemyTeam = (enemyTeam) enemyTeamsArray.getTeam(teamSelect); // Select enemy team from array randomly.
-		//
-	}
-	
-	public void adjustSpeeds() {
-		
-		// Create temporary arrays for sorting:
-		Characters[] temp1 =  playerTeam.getTeam(); // Temp Arrays for merging for turn order
-		Enemies[] temp2 = enemyTeam.getTeam();
-		
-		for (int i = 0; i < temp3.length - 1; i++) {
-			temp3[i] = new entities();
-		}
-		
-		System.arraycopy(temp1, 0, turnOrder, 0, temp1.length); // Merge the player team and the enemy team to determine turn order
-		System.arraycopy(temp2, 0, turnOrder, temp1.length, temp2.length);
-		//
-		
-		
-		
-		
-		// Adjust Speed of all characters for variability. 
-		int count = 0;
-		for (entities entity : turnOrder) {
-			speedAdjust = rand.nextInt(max - min) + max; // Random Speed adjust with range -2 to 2. Change it every time the loop runs for variation
-			if (entity instanceof Enemies) {
-				((Enemies) entity).adjustSpeed(speedAdjust);
-				temp3[count] = entity;
-				count++;
-				System.out.println(((Enemies) entity).getName() +" Speed Set.");
-			}
-			else if (entity instanceof Characters) {
-				((Characters) entity).adjustSpeed(speedAdjust);
-				temp3[count] = entity;
-				count++;
-				System.out.println(((Characters) entity).getName() + " Speed Set.");
+				tempCount++;
+				break;
+
 			}
 		}
-		turnOrder = temp3; // Reinitialize.
-		// Speed Adjusted
-		
-		
-	}
-	
-	public void determineTurnOrder() {
-		
-		// Reinitialize and set variables
-		temp3 = new entities[8]; // Reinitialize temp array for turn sorting.
-		for (int i = 0; i < temp3.length - 1; i++) {
-			temp3[i] = new entities();
+
+		// Might need functions for these, not sure.
+		/*
+		 * public void resetEnemyTeam() {
+		 * 
+		 * }
+		 * 
+		 * public void resetPlayerTeam() {
+		 * 
+		 * }
+		 */
+
+		public void createEnemyTeam() throws IOException {
+			// Create current Enemy Team:
+			enemyTeamsArray = enemyTeamsArray.createSelection(); // Create array of teams to pull from
+			int teamSelect = rand.nextInt(15);
+			enemyTeam = (enemyTeam) enemyTeamsArray.getTeam(teamSelect); // Select enemy team from array randomly.
+			//
 		}
-		count = 0;
-		int i = 0;
-		int tempCount = 0;
-		
-		for (entities now : turnOrder) {
-			System.out.println(now.getClass());;
-		}
-		//
-		
-		
-		
-		// Actual Turn Sorting:
-		for (entities entity : turnOrder) {
-			// Reset Variables
-			i = 0;
-			tempCount = 0;
-			
-			
-			// If next element in array is enemy:
-			if (entity instanceof Enemies) {
-				
-				if (count == 0) { // Place it in if empty
+
+		public void adjustSpeeds() {
+
+			// Create temporary arrays for sorting:
+			Characters[] temp1 = playerTeam.getTeam(); // Temp Arrays for merging for turn order
+			Enemies[] temp2 = enemyTeam.getTeam();
+
+			for (int i = 0; i < temp3.length - 1; i++) {
+				temp3[i] = new entities();
+			}
+
+			System.arraycopy(temp1, 0, turnOrder, 0, temp1.length); // Merge the player team and the enemy team to
+																	// determine turn order
+			System.arraycopy(temp2, 0, turnOrder, temp1.length, temp2.length);
+			//
+
+			// Adjust Speed of all characters for variability.
+			int count = 0;
+			for (entities entity : turnOrder) {
+				speedAdjust = rand.nextInt(max - min) + max; // Random Speed adjust with range -2 to 2. Change it every
+																// time the loop runs for variation
+				if (entity instanceof Enemies) {
+					((Enemies) entity).adjustSpeed(speedAdjust);
 					temp3[count] = entity;
 					count++;
-					System.out.println(((Enemies) entity).getName() + " Placed in Order.");
-				}
-				
-				else {
-					for (entities entity2 : temp3) { // Otherwise iterate over the current turn order for comparison
-						
-						if (entity2 instanceof Enemies) {
-							if (((Enemies) entity).getSpeed() < ((Enemies) entity2).getSpeed()) {
-								tempCount++;
-								//continue;
-							}
-							else {
-								i = temp3.length - 1;
-								while (i > tempCount) {
-									temp3[i] = temp3[i - 1];
-									i--;
-								}
-								temp3[tempCount] = entity;
-								count++;
-								break;
-							}
-							
-						}
-						
-						else if (entity2 instanceof Characters) {
-							if (((Enemies) entity).getSpeed() < ((Characters) entity2).getSpeed()) {
-								tempCount++;
-								//continue;
-							}
-							else {
-								i = temp3.length - 1;
-								while (i > tempCount) {
-									temp3[i] = temp3[i - 1];
-									i--;
-								}
-								temp3[tempCount] = entity;
-								count++;
-								break;
-							}
-						}
-						
-						else if (entity2 instanceof entities) {
-							i = temp3.length - 1;
-							while (i > tempCount) {
-								temp3[i] = temp3[i - 1];
-								i--;
-							}
-							temp3[tempCount] = entity;
-							count++;
-							break;
-						}
-						
-					}
-					System.out.println(((Enemies) entity).getName() + " Placed in Order.");
-				}
-			}
-			
-			
-			
-			
-			// If next element in array is character:
-			else if (entity instanceof Characters) {
-				if (count == 0) {  // Place it in if empty
+					System.out.println(((Enemies) entity).getName() + " Speed Set.");
+				} else if (entity instanceof Characters) {
+					((Characters) entity).adjustSpeed(speedAdjust);
 					temp3[count] = entity;
 					count++;
-					System.out.println(((Characters) entity).getName() + " Placed in Order.");
+					System.out.println(((Characters) entity).getName() + " Speed Set.");
 				}
-				else {
-					for (entities entity2 : temp3) { // Otherwise iterate over the current turn order for comparison
-						
-						if (entity2 instanceof Enemies) {
-							if (((Characters) entity).getSpeed() < ((Enemies) entity2).getSpeed()) {
-								tempCount++;
-								//continue;
+			}
+			turnOrder = temp3; // Reinitialize.
+			// Speed Adjusted
+
+		}
+
+		public void determineTurnOrder() {
+
+			// Reinitialize and set variables
+			temp3 = new entities[8]; // Reinitialize temp array for turn sorting.
+			for (int i = 0; i < temp3.length - 1; i++) {
+				temp3[i] = new entities();
+			}
+			count = 0;
+			int i = 0;
+			int tempCount = 0;
+
+			for (entities now : turnOrder) {
+				System.out.println(now.getClass());
+				;
+			}
+			//
+
+			// Actual Turn Sorting:
+			for (entities entity : turnOrder) {
+				// Reset Variables
+				i = 0;
+				tempCount = 0;
+
+				// If next element in array is enemy:
+				if (entity instanceof Enemies) {
+
+					if (count == 0) { // Place it in if empty
+						temp3[count] = entity;
+						count++;
+						System.out.println(((Enemies) entity).getName() + " Placed in Order.");
+					}
+
+					else {
+						for (entities entity2 : temp3) { // Otherwise iterate over the current turn order for comparison
+
+							if (entity2 instanceof Enemies) {
+								if (((Enemies) entity).getSpeed() < ((Enemies) entity2).getSpeed()) {
+									tempCount++;
+									// continue;
+								} else {
+									i = temp3.length - 1;
+									while (i > tempCount) {
+										temp3[i] = temp3[i - 1];
+										i--;
+									}
+									temp3[tempCount] = entity;
+									count++;
+									break;
+								}
+
 							}
-							else {
+
+							else if (entity2 instanceof Characters) {
+								if (((Enemies) entity).getSpeed() < ((Characters) entity2).getSpeed()) {
+									tempCount++;
+									// continue;
+								} else {
+									i = temp3.length - 1;
+									while (i > tempCount) {
+										temp3[i] = temp3[i - 1];
+										i--;
+									}
+									temp3[tempCount] = entity;
+									count++;
+									break;
+								}
+							}
+
+							else if (entity2 instanceof entities) {
+								i = temp3.length - 1;
+								while (i > tempCount) {
+									temp3[i] = temp3[i - 1];
+									i--;
+								}
+								temp3[tempCount] = entity;
+								count++;
+								break;
+							}
+
+						}
+						System.out.println(((Enemies) entity).getName() + " Placed in Order.");
+					}
+				}
+
+				// If next element in array is character:
+				else if (entity instanceof Characters) {
+					if (count == 0) { // Place it in if empty
+						temp3[count] = entity;
+						count++;
+						System.out.println(((Characters) entity).getName() + " Placed in Order.");
+					} else {
+						for (entities entity2 : temp3) { // Otherwise iterate over the current turn order for comparison
+
+							if (entity2 instanceof Enemies) {
+								if (((Characters) entity).getSpeed() < ((Enemies) entity2).getSpeed()) {
+									tempCount++;
+									// continue;
+								} else {
+									i = temp3.length - 1;
+									while (i > tempCount) {
+										temp3[i] = temp3[i - 1];
+										i--;
+									}
+									temp3[tempCount] = entity;
+									count++;
+									break;
+								}
+							}
+
+							else if (entity2 instanceof Characters) {
+								if (((Characters) entity).getSpeed() < ((Characters) entity2).getSpeed()) {
+									tempCount++;
+									// continue;
+								} else {
+									i = temp3.length - 1;
+									while (i > tempCount) {
+										temp3[i] = temp3[i - 1];
+										i--;
+									}
+									temp3[tempCount] = entity;
+									count++;
+									break;
+								}
+							}
+
+							else if (entity2 instanceof entities) {
 								i = temp3.length - 1;
 								while (i > tempCount) {
 									temp3[i] = temp3[i - 1];
@@ -539,398 +542,364 @@ public class combatFlow {
 								break;
 							}
 						}
-						
-						else if (entity2 instanceof Characters) {
-							if (((Characters) entity).getSpeed() < ((Characters) entity2).getSpeed()) {
-								tempCount++;
-								//continue;
-							}
-							else {
-								i = temp3.length - 1;
-								while (i > tempCount) {
-									temp3[i] = temp3[i - 1];
-									i--;
-								}
-								temp3[tempCount] = entity;
-								count++;
-								break;
-							}
-						}
-						
-						else if (entity2 instanceof entities) {
-							i = temp3.length - 1;
-							while (i > tempCount) {
-								temp3[i] = temp3[i - 1];
-								i--;
-							}
-							temp3[tempCount] = entity;
-							count++;
-							break;
-						}
+						System.out.println(((Characters) entity).getName() + " Placed in Order.");
 					}
-					System.out.println(((Characters) entity).getName() + " Placed in Order.");
 				}
+				//
+
 			}
-			// 
-			
-			
-		
-			
-			
-		}
-		turnOrder = temp3; // Finally Ordered Based on Speed.
-		System.out.println("Turn Order Set.");
-		
-		
-		// Testing print statement
-		for (entities now : turnOrder) {
-			System.out.println(now.getClass());;
-		}
-		
-	}
-	
-	
-	
-	public void processEnemyDamage(entities current) {
-		
-		currentDamage = 0;
-		int abilitySelect;
-		int defyPercent = 0;
-		double tempHealth;
-		double[] positionsToDamage;
-		boolean downed = false;
-		tempTeam = playerTeam.getTeam();
-		
-		int count = 1;
-		Enemies activeEnemy = (Enemies) current;
-		//System.out.println(activeEnemy.getName()+ "'s Turn.");
-		abilitySelect = rand.nextInt(2);
-		double[][] result = (double[][]) activeEnemy.abilities[abilitySelect].apply(); // Randomly select and activate ability.
-		
-		for (double[] damageOrPos : result) { // Iterate through the ability's result (damage and positions)
-			if (count == 1) { // Damage
-				currentDamage = damageOrPos[0];
-				count++;
+			turnOrder = temp3; // Finally Ordered Based on Speed.
+			System.out.println("Turn Order Set.");
+
+			// Testing print statement
+			for (entities now : turnOrder) {
+				System.out.println(now.getClass());
+				;
 			}
-			else if (count == 2) { // Positions
-				positionsToDamage =  damageOrPos;
-				tempTeam = playerTeam.getTeam();
-				for (double currentPos : positionsToDamage) { // Go through all the positions to damage
-					if (currentPos != 0) {
-					switch((int) currentPos) { // Damage based on position
-					case 1:
-						 currentCharacter = (Characters) tempTeam[0];
-						 if (currentCharacter.getHealth() != 0) { // If the character is not already down, process damage. 
-							 tempHealth = currentCharacter.getHealth();
-							 tempHealth -= currentDamage; 
-								if (tempHealth <= 0) {
-									defyPercent = rand.nextInt(101 - 1) + 1; // Random from 1 to 100
-									if (currentCharacter.getDefy() >= defyPercent) {
-										tempHealth = 1;
-										if (currentCharacter.getDefy() != 0) // If Death Defy is not 0, reduce by 10
-											currentCharacter.setDefy(currentCharacter.getDefy() - 10);
+
+		}
+
+		public void processEnemyDamage(entities current) {
+
+			currentDamage = 0;
+			int abilitySelect;
+			int defyPercent = 0;
+			double tempHealth;
+			double[] positionsToDamage;
+			boolean downed = false;
+			tempTeam = playerTeam.getTeam();
+
+			int count = 1;
+			Enemies activeEnemy = (Enemies) current;
+			// System.out.println(activeEnemy.getName()+ "'s Turn.");
+			abilitySelect = rand.nextInt(2);
+			double[][] result = (double[][]) activeEnemy.abilities[abilitySelect].apply(); // Randomly select and
+																							// activate ability.
+
+			for (double[] damageOrPos : result) { // Iterate through the ability's result (damage and positions)
+				if (count == 1) { // Damage
+					currentDamage = damageOrPos[0];
+					count++;
+				} else if (count == 2) { // Positions
+					positionsToDamage = damageOrPos;
+					tempTeam = playerTeam.getTeam();
+					for (double currentPos : positionsToDamage) { // Go through all the positions to damage
+						if (currentPos != 0) {
+							switch ((int) currentPos) { // Damage based on position
+							case 1:
+								currentCharacter = (Characters) tempTeam[0];
+								if (currentCharacter.getHealth() != 0) { // If the character is not already down,
+																			// process damage.
+									tempHealth = currentCharacter.getHealth();
+									tempHealth -= currentDamage;
+									if (tempHealth <= 0) {
+										defyPercent = rand.nextInt(101 - 1) + 1; // Random from 1 to 100
+										if (currentCharacter.getDefy() >= defyPercent) {
+											tempHealth = 1;
+											if (currentCharacter.getDefy() != 0) // If Death Defy is not 0, reduce by 10
+												currentCharacter.setDefy(currentCharacter.getDefy() - 10);
+										} else {
+											tempHealth = 0;
+											downed = true;
+											currentCharacter.setActiveSprite(currentCharacter.getKneelingSprite());
+											currentCharacter.setDowned(downed); // Adjust character sprite when we can.
+										}
 									}
-									else {
-										tempHealth = 0;
-										downed = true;
-										currentCharacter.setActiveSprite(currentCharacter.getKneelingSprite());
-										currentCharacter.setDowned(downed); // Adjust character sprite when we can.
-									}
+									currentCharacter.setHealth(tempHealth); // Reinitialize character health
+									tempTeam[0] = currentCharacter; // Reinitialize character in team.
+									playerTeam.setTeam(tempTeam); // Reinitialize team.
+									System.out.println(currentCharacter.name + " damaged for " + currentDamage + ".");
+									break;
+								} else {
+									System.out.println(currentCharacter.name + " is downed.");
+									break;
 								}
-							 currentCharacter.setHealth(tempHealth); // Reinitialize character health
-							 tempTeam[0] = currentCharacter; // Reinitialize character in team.
-							 playerTeam.setTeam(tempTeam); // Reinitialize team.
-							 System.out.println(currentCharacter.name + " damaged for " + currentDamage + ".");
-							 break;
-						 }
-						 else {
-							 System.out.println(currentCharacter.name + " is downed.");
-							 break;
-						 }
-					case 2:
-						currentCharacter = (Characters) tempTeam[1];
-						 if (currentCharacter.getHealth() != 0) { // If the character is not already down, process damage. 
-							 tempHealth = currentCharacter.getHealth();
-							 tempHealth -= currentDamage; 
-								if (tempHealth <= 0) {
-									defyPercent = rand.nextInt(101 - 1) + 1; // Random from 1 to 100
-									if (currentCharacter.getDefy() >= defyPercent) {
-										tempHealth = 1;
-										if (currentCharacter.getDefy() != 0) // If Death Defy is not 0, reduce by 10
-											currentEnemy.setDefy(currentEnemy.getDefy() - 10);
+							case 2:
+								currentCharacter = (Characters) tempTeam[1];
+								if (currentCharacter.getHealth() != 0) { // If the character is not already down,
+																			// process damage.
+									tempHealth = currentCharacter.getHealth();
+									tempHealth -= currentDamage;
+									if (tempHealth <= 0) {
+										defyPercent = rand.nextInt(101 - 1) + 1; // Random from 1 to 100
+										if (currentCharacter.getDefy() >= defyPercent) {
+											tempHealth = 1;
+											if (currentCharacter.getDefy() != 0) // If Death Defy is not 0, reduce by 10
+												currentEnemy.setDefy(currentEnemy.getDefy() - 10);
+										} else {
+											tempHealth = 0;
+											downed = true;
+											currentCharacter.setActiveSprite(currentCharacter.getKneelingSprite());
+											currentCharacter.setDowned(downed); // Adjust character sprite when we can.
+										}
 									}
-									else {
-										tempHealth = 0;
-										downed = true;
-										currentCharacter.setActiveSprite(currentCharacter.getKneelingSprite());
-										currentCharacter.setDowned(downed); // Adjust character sprite when we can.
-									}
+									currentCharacter.setHealth(tempHealth); // Reinitialize character health
+									tempTeam[1] = currentCharacter; // Reinitialize character in team.
+									playerTeam.setTeam(tempTeam); // Reinitialize team.
+									System.out.println(currentCharacter.name + " damaged for " + currentDamage + ".");
+									break;
+								} else {
+									System.out.println(currentCharacter.name + " is downed.");
+									break;
 								}
-							 currentCharacter.setHealth(tempHealth); // Reinitialize character health
-							 tempTeam[1] = currentCharacter; // Reinitialize character in team.
-							 playerTeam.setTeam(tempTeam); // Reinitialize team.
-							 System.out.println(currentCharacter.name + " damaged for " + currentDamage + ".");
-							 break;
-						 }
-						 else {
-							 System.out.println(currentCharacter.name + " is downed.");
-							 break;
-						 }
-					case 3:
-						currentCharacter = (Characters) tempTeam[2];
-						 if (currentCharacter.getHealth() != 0) { // If the character is not already down, process damage. 
-							 tempHealth = currentCharacter.getHealth();
-							 tempHealth -= currentDamage; 
-								if (tempHealth <= 0) {
-									defyPercent = rand.nextInt(101 - 1) + 1; // Random from 1 to 100
-									if (currentCharacter.getDefy() >= defyPercent) {
-										tempHealth = 1;
-										if (currentCharacter.getDefy() != 0) // If Death Defy is not 0, reduce by 10
-											currentEnemy.setDefy(currentEnemy.getDefy() - 10);
+							case 3:
+								currentCharacter = (Characters) tempTeam[2];
+								if (currentCharacter.getHealth() != 0) { // If the character is not already down,
+																			// process damage.
+									tempHealth = currentCharacter.getHealth();
+									tempHealth -= currentDamage;
+									if (tempHealth <= 0) {
+										defyPercent = rand.nextInt(101 - 1) + 1; // Random from 1 to 100
+										if (currentCharacter.getDefy() >= defyPercent) {
+											tempHealth = 1;
+											if (currentCharacter.getDefy() != 0) // If Death Defy is not 0, reduce by 10
+												currentEnemy.setDefy(currentEnemy.getDefy() - 10);
+										} else {
+											tempHealth = 0;
+											downed = true;
+											currentCharacter.setActiveSprite(currentCharacter.getKneelingSprite());
+											currentCharacter.setDowned(downed); // Adjust character sprite when we can.
+										}
 									}
-									else {
-										tempHealth = 0;
-										downed = true;
-										currentCharacter.setActiveSprite(currentCharacter.getKneelingSprite());
-										currentCharacter.setDowned(downed); // Adjust character sprite when we can.
-									}
+									currentCharacter.setHealth(tempHealth); // Reinitialize character health
+									tempTeam[2] = currentCharacter; // Reinitialize character in team.
+									playerTeam.setTeam(tempTeam); // Reinitialize team.
+									System.out.println(currentCharacter.name + " damaged for " + currentDamage + ".");
+									break;
+								} else {
+									System.out.println(currentCharacter.name + " is downed.");
+									break;
 								}
-							 currentCharacter.setHealth(tempHealth); // Reinitialize character health
-							 tempTeam[2] = currentCharacter; // Reinitialize character in team.
-							 playerTeam.setTeam(tempTeam); // Reinitialize team.
-							 System.out.println(currentCharacter.name + " damaged for " + currentDamage + ".");
-							 break;
-						 }
-						 else {
-							 System.out.println(currentCharacter.name + " is downed.");
-							 break;
-						 }
-					case 4:
-						currentCharacter = (Characters) tempTeam[3];
-						 if (currentCharacter.getHealth() != 0) { // If the character is not already down, process damage. 
-							 tempHealth = currentCharacter.getHealth();
-							 tempHealth -= currentDamage; 
-								if (tempHealth <= 0) {
-									defyPercent = rand.nextInt(101 - 1) + 1; // Random from 1 to 100
-									if (currentCharacter.getDefy() >= defyPercent) {
-										tempHealth = 1;
-										if (currentCharacter.getDefy() != 0) // If Death Defy is not 0, reduce by 10
-											currentEnemy.setDefy(currentEnemy.getDefy() - 10);
+							case 4:
+								currentCharacter = (Characters) tempTeam[3];
+								if (currentCharacter.getHealth() != 0) { // If the character is not already down,
+																			// process damage.
+									tempHealth = currentCharacter.getHealth();
+									tempHealth -= currentDamage;
+									if (tempHealth <= 0) {
+										defyPercent = rand.nextInt(101 - 1) + 1; // Random from 1 to 100
+										if (currentCharacter.getDefy() >= defyPercent) {
+											tempHealth = 1;
+											if (currentCharacter.getDefy() != 0) // If Death Defy is not 0, reduce by 10
+												currentEnemy.setDefy(currentEnemy.getDefy() - 10);
+										} else {
+											tempHealth = 0;
+											downed = true;
+											currentCharacter.setActiveSprite(currentCharacter.getKneelingSprite());
+											currentCharacter.setDowned(downed); // Adjust character sprite when we can.
+										}
 									}
-									else {
-										tempHealth = 0;
-										downed = true;
-										currentCharacter.setActiveSprite(currentCharacter.getKneelingSprite());
-										currentCharacter.setDowned(downed); // Adjust character sprite when we can.
-									}
+									currentCharacter.setHealth(tempHealth); // Reinitialize character health
+									tempTeam[3] = currentCharacter; // Reinitialize character in team.
+									playerTeam.setTeam(tempTeam); // Reinitialize team.
+									System.out.println(currentCharacter.name + " damaged for " + currentDamage + ".");
+									break;
+								} else {
+									System.out.println(currentCharacter.name + " is downed.");
+									break;
 								}
-							 currentCharacter.setHealth(tempHealth); // Reinitialize character health
-							 tempTeam[3] = currentCharacter; // Reinitialize character in team.
-							 playerTeam.setTeam(tempTeam); // Reinitialize team.
-							 System.out.println(currentCharacter.name + " damaged for " + currentDamage + ".");
-							 break;
-						 }
-						 else {
-							 System.out.println(currentCharacter.name + " is downed.");
-							 break;
-						 }
-					}
+							}
+						}
 					}
 				}
 			}
 		}
-	}
-	
-    //Creating EventHandler   
-    EventHandler<MouseEvent> handler = new EventHandler<MouseEvent>() {
-       
-       @Override  
-       public void handle(MouseEvent event) {  
-          // TODO Auto-generated method stub  
-          if(event.getSource()==enemyPosition1) {  
-        	  tempPlayerChoice(currentCharacter, 1, count);
-        	  count++;
-        	  buttonClicked = true;
-        	  return;
-          }  
-          if(event.getSource()==enemyPosition2) {  
-        	  tempPlayerChoice(currentCharacter, 2, count);
-        	  count++;
-        	  buttonClicked = true;
-        	  return;
-          }  
-          if(event.getSource()==enemyPosition3) {  
-        	  tempPlayerChoice(currentCharacter, 3, count);
-        	  count++;
-        	  buttonClicked = true;
-        	  return;
-          }  
-          if(event.getSource()==enemyPosition4) {  
-        	  tempPlayerChoice(currentCharacter, 4, count);
-        	  count++;
-        	  buttonClicked = true;
-        	  return;
-          }  
-          if(event.getSource()==passTurnButton) {
-        	  count++;
-        	  buttonClicked = true;
-        	  return;
-          }
-          event.consume();  
-       }  
-          
-    };
-	
-    
-    
-public int runCombat(int c) {
-    	
-		// Make Enemies Not Clickable Outside of player turns.
-		enemyPosition1.setMouseTransparent(true);
-		enemyPosition2.setMouseTransparent(true);
-		enemyPosition3.setMouseTransparent(true);
-		enemyPosition4.setMouseTransparent(true);
-    	
-		// Play Loop
-		Map<String, String> skillDescriptions = new HashMap<>();
-		skillDescriptions.put("Shield Bash", "Bash the enemy with your shield");
-		skillDescriptions.put("Divine Smite", "A powerful strike that channels divine energy.");
-		skillDescriptions.put("Radiance", "Calls down radiant light to damage\nall enemies.");
-		skillDescriptions.put("Dismember", "Causes a flesh wound.");
-		skillDescriptions.put("Shadow Strike", "A high-damage attack from the shadows.");
-		skillDescriptions.put("Poisoned Blade", "Applies poison to the enemy, causing\ndamage over time.");
-		skillDescriptions.put("Backstab", "Sneak through the shadows to attack the\nenemy from behind.");
-		skillDescriptions.put("Dagger Barrage", "Throws knives at the entire enemy team.");
-		skillDescriptions.put("Fireball", "A powerful fire spell that causes\nexplosive damage.");
-		skillDescriptions.put("Magic Missile", "Fires multiple magic attacks at the enemy.");
-		skillDescriptions.put("Frost Bolt", "Hurls a spike of ice at the enemey.");
-		skillDescriptions.put("Staff Strike", "Bash the enemy with your staff.");
-		skillDescriptions.put("Acid Puddle", "Throws a poison vial at the enemies.");
-		skillDescriptions.put("Slash", "Slash the enemy with a hidden dagger");
-		skillDescriptions.put("Acid Rain", "Throw an acid flask at the ceiling\nraining down on the enemy team.");
-		skillDescriptions.put("Explosive Flask", "Throws an explosive vial that damages enemies.");
-			
+
+		// Creating EventHandler
+		EventHandler<MouseEvent> handler = new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent event) {
+				// TODO Auto-generated method stub
+				if (event.getSource() == enemyPosition1) {
+					tempPlayerChoice(currentCharacter, 1, count);
+					count++;
+					buttonClicked = true;
+					return;
+				}
+				if (event.getSource() == enemyPosition2) {
+					tempPlayerChoice(currentCharacter, 2, count);
+					count++;
+					buttonClicked = true;
+					return;
+				}
+				if (event.getSource() == enemyPosition3) {
+					tempPlayerChoice(currentCharacter, 3, count);
+					count++;
+					buttonClicked = true;
+					return;
+				}
+				if (event.getSource() == enemyPosition4) {
+					tempPlayerChoice(currentCharacter, 4, count);
+					count++;
+					buttonClicked = true;
+					return;
+				}
+				if (event.getSource() == passTurnButton) {
+					count++;
+					buttonClicked = true;
+					return;
+				}
+				event.consume();
+			}
+
+		};
+
+		public int runCombat(int c) {
+
+			// Make Enemies Not Clickable Outside of player turns.
+			enemyPosition1.setMouseTransparent(true);
+			enemyPosition2.setMouseTransparent(true);
+			enemyPosition3.setMouseTransparent(true);
+			enemyPosition4.setMouseTransparent(true);
+
+			// Play Loop
+			Map<String, String> skillDescriptions = new HashMap<>();
+			// paladin skills
+			skillDescriptions.put("Shield Bash", "Bash the enemy with your shield");
+			skillDescriptions.put("Divine Smite", "A powerful strike that channels divine energy.");
+			skillDescriptions.put("Radiance", "Calls down radiant light to damage\nall enemies.");
+			skillDescriptions.put("Dismember", "Causes a flesh wound.");
+			// assassin skills
+			skillDescriptions.put("Shadow Strike", "A high-damage attack from the shadows.");
+			skillDescriptions.put("Poisoned Blade", "Applies poison to the enemy, causing\ndamage over time.");
+			skillDescriptions.put("Backstab", "Sneak through the shadows to attack the\nenemy from behind.");
+			skillDescriptions.put("Dagger Barrage", "Throws knives at the entire enemy team.");
+			// wizard skills
+			skillDescriptions.put("Fireball", "A powerful fire spell that causes\nexplosive damage.");
+			skillDescriptions.put("Magic Missile", "Fires multiple magic attacks at the enemy.");
+			skillDescriptions.put("Frost Bolt", "Hurls a spike of ice at the enemey.");
+			skillDescriptions.put("Staff Strike", "Bash the enemy with your staff.");
+			// alchemist skills
+			skillDescriptions.put("Acid Puddle", "Throws a poison vial at the enemies.");
+			skillDescriptions.put("Slash", "Slash the enemy with a hidden dagger");
+			skillDescriptions.put("Acid Rain", "Throw an acid flask at the ceiling\nraining down on the enemy team.");
+			skillDescriptions.put("Explosive Flask", "Throws an explosive vial that damages enemies.");
+
 			teamDead = playerTeam.checkGameOver();
 			teamDead = enemyTeam.checkGameOver(); // Check initially for player and enemy health errors.
-			
+
 			buttonClicked = false;
 			count = c;
 
 			entities current;
 			current = turnOrder[count];
-			//currentCharacter = (Characters) current;
-			
+			// currentCharacter = (Characters) current;
+
 			// Automated enemy turn processing
 			if (current instanceof Enemies) {
 				System.out.println(((Enemies) current).getName() + "'s Turn.");
-				
+
 				// Enemy Selection Indicator Visible During Turn
 				if (((Enemies) current) == enemyTeam.getTeam()[0]) {
 					enemySelectionIndicator1.setVisible(true);
-				}
-				else if (((Enemies) current) == enemyTeam.getTeam()[1]) {
+				} else if (((Enemies) current) == enemyTeam.getTeam()[1]) {
 					enemySelectionIndicator2.setVisible(true);
-				}
-				else if (((Enemies) current) == enemyTeam.getTeam()[2]) {
+				} else if (((Enemies) current) == enemyTeam.getTeam()[2]) {
 					enemySelectionIndicator3.setVisible(true);
-				}
-				else if (((Enemies) current) == enemyTeam.getTeam()[3]) {
+				} else if (((Enemies) current) == enemyTeam.getTeam()[3]) {
 					enemySelectionIndicator4.setVisible(true);
 				}
-				
+
 				if (((Enemies) current).getHealth() != 0.0)
 					processEnemyDamage(current);
 				else
 					System.out.println(((Enemies) current).getName() + " is downed.");
-				
+
 				// Turn Ticker's Invisible After Processing Damage
 				if (((Enemies) current) == enemyTeam.getTeam()[0]) {
 					enemySelectionIndicator1.setVisible(false);
 					enemyTurnTicker1.setVisible(false);
-				}
-				else if (((Enemies) current) == enemyTeam.getTeam()[1]) {
+				} else if (((Enemies) current) == enemyTeam.getTeam()[1]) {
 					enemySelectionIndicator2.setVisible(false);
 					enemyTurnTicker2.setVisible(false);
-				}
-				else if (((Enemies) current) == enemyTeam.getTeam()[2]) {
+				} else if (((Enemies) current) == enemyTeam.getTeam()[2]) {
 					enemySelectionIndicator3.setVisible(false);
 					enemyTurnTicker3.setVisible(false);
-				}
-				else if (((Enemies) current) == enemyTeam.getTeam()[3]) {
+				} else if (((Enemies) current) == enemyTeam.getTeam()[3]) {
 					enemySelectionIndicator4.setVisible(false);
 					enemyTurnTicker4.setVisible(false);
 				}
-				
+
 				count++;
-				//playerTeam.setTeam(tempTeam);
+				// playerTeam.setTeam(tempTeam);
 				return count;
 			}
-			
+
 			// Player turn, waits for button click
-			// Add skip turn/skill buttons, etc in here. 
+			// Add skip turn/skill buttons, etc in here.
 			else if (current instanceof Characters) {
-				
+
 				currentCharacter = (Characters) current;
-				
+
 				if (current instanceof Paladin) {
-					
-					
+
 					System.out.println(((Characters) current).getName() + "'s Turn.");
 					heroNameText.setText(((Characters) current).getName());
-					moveDescriptionText.setText("DMG: " + ((Characters) current).getDamage() + " Crit %: " + ((Characters) current).getCritChance());
+					moveDescriptionText.setText("DMG: " + ((Characters) current).getDamage() + " Crit %: "
+							+ ((Characters) current).getCritChance());
 					moveDescriptionText2.setText("");
-					
-					if(((Characters)current).getHealth() == 0) {
+
+					if (((Characters) current).getHealth() == 0) {
 						System.out.println(((Characters) current).getName() + " is downed.");
 						heroTurnTicker1.setVisible(false);
 						count++;
-					}
-					else {
+					} else {
 						while (!buttonClicked) {
-							//all other buttons and images cannot be clicked or seen.
-							skillButtonImageP1.setOpacity(100); //image is visible
+							// all other buttons and images cannot be clicked or seen.
+							skillButtonImageP1.setOpacity(100); // image is visible
 							skillButtonImageP2.setOpacity(100);
 							skillButtonImageP3.setOpacity(100);
 							skillButtonImageP4.setOpacity(100);
 							skillbuttonimagepass.setOpacity(100);
-							skillButtonP1.setMouseTransparent(false); //button is clickable
+							skillButtonP1.setMouseTransparent(false); // button is clickable
 							skillButtonP2.setMouseTransparent(false);
 							skillButtonP3.setMouseTransparent(false);
 							skillButtonP4.setMouseTransparent(false);
 							passTurnButton.setMouseTransparent(false);
 							heroSelectionIndicator1.setVisible(true);
-					    	enemyPosition1.setMouseTransparent(false);
-					    	enemyPosition2.setMouseTransparent(false);
-					    	enemyPosition3.setMouseTransparent(false);
-					    	enemyPosition4.setMouseTransparent(false);
+							enemyPosition1.setMouseTransparent(false);
+							enemyPosition2.setMouseTransparent(false);
+							enemyPosition3.setMouseTransparent(false);
+							enemyPosition4.setMouseTransparent(false);
 							enemyPosition1.setOnMouseClicked(handler);
 							enemyPosition2.setOnMouseClicked(handler);
 							enemyPosition3.setOnMouseClicked(handler);
 							enemyPosition4.setOnMouseClicked(handler);
 							passTurnButton.setOnMouseClicked(handler);
-							
+
 							skillButtonP1.setOnMouseClicked(event -> {
-								
-				                moveDescriptionText2.setText("Skill: Shield Bash\n" + skillDescriptions.get("Sheild Bash"));
-				            });
-				            skillButtonP2.setOnMouseClicked(event -> {
-				                moveDescriptionText2.setText("Skill: Divine Smite\n" + skillDescriptions.get("Divine Smite"));
-				            });
-				            skillButtonP3.setOnMouseClicked(event -> {
-				                moveDescriptionText2.setText("Skill: Radience\n" + skillDescriptions.get("Radience"));
-				            });
-				            skillButtonP4.setOnMouseClicked(event -> {
-				                moveDescriptionText2.setText("Skill: Dismember\n" + skillDescriptions.get("Dismember"));
-				            });
-				            
-				        }
-							
-						skillButtonImageP1.setOpacity(0); 
+
+								moveDescriptionText2
+										.setText("Skill: Shield Bash\n" + skillDescriptions.get("Shield Bash"));
+								Paladin paladin = (Paladin) current;
+								paladin.shieldBash(enemyTeam.getTeam()[0]);
+							});
+							skillButtonP2.setOnMouseClicked(event -> {
+								moveDescriptionText2
+										.setText("Skill: Divine Smite\n" + skillDescriptions.get("Divine Smite"));
+								Paladin paladin = (Paladin) current;
+								paladin.divineSmite(enemyTeam.getTeam()[0]);
+							});
+							skillButtonP3.setOnMouseClicked(event -> {
+								moveDescriptionText2.setText("Skill: Radiance\n" + skillDescriptions.get("Radiance"));
+								Paladin paladin = (Paladin) current;
+								paladin.radiance(enemyTeam.getTeam());
+							});
+							skillButtonP4.setOnMouseClicked(event -> {
+								moveDescriptionText2.setText("Skill: Dismember\n" + skillDescriptions.get("Dismember"));
+								Paladin paladin = (Paladin) current;
+								paladin.dismember(enemyTeam.getTeam()[0]);
+							});
+
+						}
+
+						skillButtonImageP1.setOpacity(0);
 						skillButtonImageP2.setOpacity(0);
 						skillButtonImageP3.setOpacity(0);
 						skillButtonImageP4.setOpacity(0);
 						skillbuttonimagepass.setOpacity(0);
-						skillButtonP1.setMouseTransparent(true); 
+						skillButtonP1.setMouseTransparent(true);
 						skillButtonP2.setMouseTransparent(true);
 						skillButtonP3.setMouseTransparent(true);
 						skillButtonP4.setMouseTransparent(true);
@@ -943,65 +912,74 @@ public int runCombat(int c) {
 						heroSelectionIndicator1.setVisible(false);
 						heroNameText.setText("");
 						moveDescriptionText.setText("");
-				    	enemyPosition1.setMouseTransparent(true);
-				    	enemyPosition2.setMouseTransparent(true);
-				    	enemyPosition3.setMouseTransparent(true);
-				    	enemyPosition4.setMouseTransparent(true);
+						enemyPosition1.setMouseTransparent(true);
+						enemyPosition2.setMouseTransparent(true);
+						enemyPosition3.setMouseTransparent(true);
+						enemyPosition4.setMouseTransparent(true);
 					}
-					//playerTeam.setTeam(tempTeam);
+					// playerTeam.setTeam(tempTeam);
 					return count;
-				}
-				else if (current instanceof Assassin) {
-					
+				} else if (current instanceof Assassin) {
+
 					System.out.println(((Characters) current).getName() + "'s Turn.");
 					heroNameText.setText(((Characters) current).getName());
-					moveDescriptionText.setText("DMG: " + ((Characters) current).getDamage() + " Crit %: " + ((Characters) current).getCritChance());
+					moveDescriptionText.setText("DMG: " + ((Characters) current).getDamage() + " Crit %: "
+							+ ((Characters) current).getCritChance());
 					moveDescriptionText2.setText("");
 
-					
-					if(((Characters)current).getHealth() == 0) {
+					if (((Characters) current).getHealth() == 0) {
 						System.out.println(((Characters) current).getName() + " is downed.");
 						heroTurnTicker2.setVisible(false);
 						count++;
-					}
-					else {
+					} else {
 						while (!buttonClicked) {
-							
-							//all other buttons and images cannot be clicked or seen.
-							skillButtonImageA11.setOpacity(100); //image is visible
+
+							// all other buttons and images cannot be clicked or seen.
+							skillButtonImageA11.setOpacity(100); // image is visible
 							skillButtonImageA12.setOpacity(100);
 							skillButtonImageA13.setOpacity(100);
 							skillButtonImageA14.setOpacity(100);
 							skillbuttonimagepass.setOpacity(100);
-							skillButtonA11.setMouseTransparent(false); //button is clickable
+							skillButtonA11.setMouseTransparent(false); // button is clickable
 							skillButtonA12.setMouseTransparent(false);
 							skillButtonA13.setMouseTransparent(false);
 							skillButtonA14.setMouseTransparent(false);
 							passTurnButton.setMouseTransparent(false);
 							heroSelectionIndicator2.setVisible(true);
-					    	enemyPosition1.setMouseTransparent(false);
-					    	enemyPosition2.setMouseTransparent(false);
-					    	enemyPosition3.setMouseTransparent(false);
-					    	enemyPosition4.setMouseTransparent(false);
+							enemyPosition1.setMouseTransparent(false);
+							enemyPosition2.setMouseTransparent(false);
+							enemyPosition3.setMouseTransparent(false);
+							enemyPosition4.setMouseTransparent(false);
 							enemyPosition1.setOnMouseClicked(handler);
 							enemyPosition2.setOnMouseClicked(handler);
 							enemyPosition3.setOnMouseClicked(handler);
 							enemyPosition4.setOnMouseClicked(handler);
 							passTurnButton.setOnMouseClicked(handler);
-							
+
 							skillButtonA11.setOnMouseClicked(event -> {
-							    moveDescriptionText2.setText("Skill: Shadow Strike\n" + skillDescriptions.get("Shadow Strike"));
+								Assassin assassin = (Assassin) current;
+								moveDescriptionText2
+										.setText("Skill: Shadow Strike\n" + skillDescriptions.get("Shadow Strike"));
+								assassin.shadowStrike(enemyTeam.getTeam()[0]);
 							});
 							skillButtonA12.setOnMouseClicked(event -> {
-							    moveDescriptionText2.setText("Skill: Poisoned Blade\n" + skillDescriptions.get("Poisoned Blade"));
+								Assassin assassin = (Assassin) current;
+								moveDescriptionText2
+										.setText("Skill: Poisoned Blade\n" + skillDescriptions.get("Poisoned Blade"));
+								assassin.poisonedBlade(enemyTeam.getTeam()[0]);
 							});
 							skillButtonA13.setOnMouseClicked(event -> {
-							    moveDescriptionText2.setText("Skill: Backstab\n" + skillDescriptions.get("Backstab"));
+								Assassin assassin = (Assassin) current;
+								moveDescriptionText2.setText("Skill: Backstab\n" + skillDescriptions.get("Backstab"));
+								assassin.backstab(enemyTeam.getTeam()[0]);
 							});
 							skillButtonA14.setOnMouseClicked(event -> {
-							    moveDescriptionText2.setText("Skill: Dagger Barrage\n" + skillDescriptions.get("Dagger Barrage"));
+								Assassin assassin = (Assassin) current;
+								moveDescriptionText2
+										.setText("Skill: Dagger Barrage\n" + skillDescriptions.get("Dagger Barrage"));
+								assassin.daggerBarrage(enemyTeam.getTeam());
 							});
-							
+
 						}
 						skillButtonImageA11.setOpacity(0);
 						skillButtonImageA12.setOpacity(0);
@@ -1022,71 +1000,81 @@ public int runCombat(int c) {
 						heroNameText.setText("");
 						moveDescriptionText.setText("");
 						moveDescriptionText2.setText("");
-				    	enemyPosition1.setMouseTransparent(true);
-				    	enemyPosition2.setMouseTransparent(true);
-				    	enemyPosition3.setMouseTransparent(true);
-				    	enemyPosition4.setMouseTransparent(true);
+						enemyPosition1.setMouseTransparent(true);
+						enemyPosition2.setMouseTransparent(true);
+						enemyPosition3.setMouseTransparent(true);
+						enemyPosition4.setMouseTransparent(true);
 					}
-					//playerTeam.setTeam(tempTeam);
+					// playerTeam.setTeam(tempTeam);
 					return count;
 				}
-					
+
 				else if (current instanceof Wizard) {
-					
+
 					System.out.println(((Characters) current).getName() + "'s Turn.");
 					heroNameText.setText(((Characters) current).getName());
-					moveDescriptionText.setText("DMG: " + ((Characters) current).getDamage() + " Crit %: " + ((Characters) current).getCritChance());
+					moveDescriptionText.setText("DMG: " + ((Characters) current).getDamage() + " Crit %: "
+							+ ((Characters) current).getCritChance());
 					moveDescriptionText2.setText("");
 
-					
-					if(((Characters)current).getHealth() == 0) {
+					if (((Characters) current).getHealth() == 0) {
 						System.out.println(((Characters) current).getName() + " is downed.");
 						heroTurnTicker3.setVisible(false);
 						count++;
-					}
-					else {
+					} else {
 						while (!buttonClicked) {
-							//all other buttons and images cannot be clicked or seen.
-							skillButtonImageW1.setOpacity(100); //image is visible
+							// all other buttons and images cannot be clicked or seen.
+							skillButtonImageW1.setOpacity(100); // image is visible
 							skillButtonImageW2.setOpacity(100);
 							skillButtonImageW3.setOpacity(100);
 							skillButtonImageW4.setOpacity(100);
 							skillbuttonimagepass.setOpacity(100);
-							skillButtonW1.setMouseTransparent(false); //button is clickable
+							skillButtonW1.setMouseTransparent(false); // button is clickable
 							skillButtonW2.setMouseTransparent(false);
 							skillButtonW3.setMouseTransparent(false);
 							skillButtonW4.setMouseTransparent(false);
 							passTurnButton.setMouseTransparent(false);
 							heroSelectionIndicator3.setVisible(true);
-					    	enemyPosition1.setMouseTransparent(false);
-					    	enemyPosition2.setMouseTransparent(false);
-					    	enemyPosition3.setMouseTransparent(false);
-					    	enemyPosition4.setMouseTransparent(false);
+							enemyPosition1.setMouseTransparent(false);
+							enemyPosition2.setMouseTransparent(false);
+							enemyPosition3.setMouseTransparent(false);
+							enemyPosition4.setMouseTransparent(false);
 							enemyPosition1.setOnMouseClicked(handler);
 							enemyPosition2.setOnMouseClicked(handler);
 							enemyPosition3.setOnMouseClicked(handler);
 							enemyPosition4.setOnMouseClicked(handler);
 							passTurnButton.setOnMouseClicked(handler);
-							
+
 							skillButtonW1.setOnMouseClicked(event -> {
-							    moveDescriptionText2.setText("Skill: Fireball\n" + skillDescriptions.get("Fireball"));
+								moveDescriptionText2.setText("Skill: Fireball\n" + skillDescriptions.get("Fireball"));
+								Wizard wizard = (Wizard) current;
+								wizard.fireball(enemyTeam.getTeam()[0]);
 							});
 							skillButtonW2.setOnMouseClicked(event -> {
-							    moveDescriptionText2.setText("Skill: Magic Missile\n" + skillDescriptions.get("Magic Missile"));
+								moveDescriptionText2
+										.setText("Skill: Magic Missile\n" + skillDescriptions.get("Magic Missile"));
+								Wizard wizard = (Wizard) current;
+								wizard.magicMissile(enemyTeam.getTeam()[0]);
 							});
 							skillButtonW3.setOnMouseClicked(event -> {
-							    moveDescriptionText2.setText("Skill: Frost Bolt\n" + skillDescriptions.get("Frost Bolt"));
+								moveDescriptionText2
+										.setText("Skill: Frost Bolt\n" + skillDescriptions.get("Frost Bolt"));
+								Wizard wizard = (Wizard) current;
+								wizard.fireball(enemyTeam.getTeam()[0]);
 							});
 							skillButtonW4.setOnMouseClicked(event -> {
-							    moveDescriptionText2.setText("Skill: Staff Strike\n" + skillDescriptions.get("Staff Strike"));
+								moveDescriptionText2
+										.setText("Skill: Staff Strike\n" + skillDescriptions.get("Staff Strike"));
+								Wizard wizard = (Wizard) current;
+								wizard.fireball(enemyTeam.getTeam()[0]);
 							});
 						}
-						skillButtonImageW1.setOpacity(0); //image is visible
+						skillButtonImageW1.setOpacity(0); // image is visible
 						skillButtonImageW2.setOpacity(0);
 						skillButtonImageW3.setOpacity(0);
 						skillButtonImageW4.setOpacity(0);
 						skillbuttonimagepass.setOpacity(0);
-						skillButtonW1.setMouseTransparent(true); //button is clickable
+						skillButtonW1.setMouseTransparent(true); // button is clickable
 						skillButtonW2.setMouseTransparent(true);
 						skillButtonW3.setMouseTransparent(true);
 						skillButtonW4.setMouseTransparent(true);
@@ -1100,62 +1088,70 @@ public int runCombat(int c) {
 						heroNameText.setText("");
 						moveDescriptionText.setText("");
 						moveDescriptionText2.setText("");
-				    	enemyPosition1.setMouseTransparent(true);
-				    	enemyPosition2.setMouseTransparent(true);
-				    	enemyPosition3.setMouseTransparent(true);
-				    	enemyPosition4.setMouseTransparent(true);
+						enemyPosition1.setMouseTransparent(true);
+						enemyPosition2.setMouseTransparent(true);
+						enemyPosition3.setMouseTransparent(true);
+						enemyPosition4.setMouseTransparent(true);
 					}
-					//playerTeam.setTeam(tempTeam);
+					// playerTeam.setTeam(tempTeam);
 					return count;
-				}
-				else if (current instanceof Alchemist) {
-					
+				} else if (current instanceof Alchemist) {
+
 					System.out.println(((Characters) current).getName() + "'s Turn.");
 					heroNameText.setText(((Characters) current).getName());
-					moveDescriptionText.setText("DMG: " + ((Characters) current).getDamage() + " Crit %: " + ((Characters) current).getCritChance());
+					moveDescriptionText.setText("DMG: " + ((Characters) current).getDamage() + " Crit %: "
+							+ ((Characters) current).getCritChance());
 					moveDescriptionText2.setText("");
 
-					
-					if(((Characters)current).getHealth() == 0) {
+					if (((Characters) current).getHealth() == 0) {
 						System.out.println(((Characters) current).getName() + " is downed.");
 						heroTurnTicker4.setVisible(false);
 						count++;
-					}
-					else {
+					} else {
 						while (!buttonClicked) {
-							//all other buttons and images cannot be clicked or seen.
-							skillButtonImageA21.setOpacity(100); //image is visible
+							// all other buttons and images cannot be clicked or seen.
+							skillButtonImageA21.setOpacity(100); // image is visible
 							skillButtonImageA22.setOpacity(100);
 							skillButtonImageA23.setOpacity(100);
 							skillButtonImageA24.setOpacity(100);
 							skillbuttonimagepass.setOpacity(100);
-							skillButtonA21.setMouseTransparent(false); //button is clickable
+							skillButtonA21.setMouseTransparent(false); // button is clickable
 							skillButtonA22.setMouseTransparent(false);
 							skillButtonA23.setMouseTransparent(false);
 							skillButtonA24.setMouseTransparent(false);
 							passTurnButton.setMouseTransparent(false);
 							heroSelectionIndicator4.setVisible(true);
-					    	enemyPosition1.setMouseTransparent(false);
-					    	enemyPosition2.setMouseTransparent(false);
-					    	enemyPosition3.setMouseTransparent(false);
-					    	enemyPosition4.setMouseTransparent(false);
+							enemyPosition1.setMouseTransparent(false);
+							enemyPosition2.setMouseTransparent(false);
+							enemyPosition3.setMouseTransparent(false);
+							enemyPosition4.setMouseTransparent(false);
 							enemyPosition1.setOnMouseClicked(handler);
 							enemyPosition2.setOnMouseClicked(handler);
 							enemyPosition3.setOnMouseClicked(handler);
 							enemyPosition4.setOnMouseClicked(handler);
 							passTurnButton.setOnMouseClicked(handler);
-							
+
 							skillButtonA21.setOnMouseClicked(event -> {
-							    moveDescriptionText2.setText("Skill: Acid Puddle\n" + skillDescriptions.get("Acid Puddle"));
+								moveDescriptionText2
+										.setText("Skill: Acid Puddle\n" + skillDescriptions.get("Acid Puddle"));
+								Alchemist alchemist = (Alchemist) current;
+								alchemist.acidPuddle(enemyTeam.getTeam()[0]);
 							});
 							skillButtonA22.setOnMouseClicked(event -> {
-							    moveDescriptionText2.setText("Skill: Slash\n" + skillDescriptions.get("Slash"));
+								moveDescriptionText2.setText("Skill: Slash\n" + skillDescriptions.get("Slash"));
+								Alchemist alchemist = (Alchemist) current;
+								alchemist.slash(enemyTeam.getTeam()[0]);
 							});
 							skillButtonA23.setOnMouseClicked(event -> {
-							    moveDescriptionText2.setText("Skill: Acid Rain\n" + skillDescriptions.get("Acid Rain"));
+								moveDescriptionText2.setText("Skill: Acid Rain\n" + skillDescriptions.get("Acid Rain"));
+								Alchemist alchemist = (Alchemist) current;
+								alchemist.acidRain(enemyTeam.getTeam());
 							});
 							skillButtonA24.setOnMouseClicked(event -> {
-							    moveDescriptionText2.setText("Skill: Explosive Flask\n" + skillDescriptions.get("Explosive Flask"));
+								moveDescriptionText2
+										.setText("Skill: Explosive Flask\n" + skillDescriptions.get("Explosive Flask"));
+								Alchemist alchemist = (Alchemist) current;
+								alchemist.explosiveFlask(enemyTeam.getTeam());
 							});
 						}
 						skillButtonImageA21.setOpacity(0);
@@ -1177,28 +1173,28 @@ public int runCombat(int c) {
 						heroNameText.setText("");
 						moveDescriptionText.setText("");
 						moveDescriptionText2.setText("");
-				    	enemyPosition1.setMouseTransparent(true);
-				    	enemyPosition2.setMouseTransparent(true);
-				    	enemyPosition3.setMouseTransparent(true);
-				    	enemyPosition4.setMouseTransparent(true);
+						enemyPosition1.setMouseTransparent(true);
+						enemyPosition2.setMouseTransparent(true);
+						enemyPosition3.setMouseTransparent(true);
+						enemyPosition4.setMouseTransparent(true);
 
 					}
-					//playerTeam.setTeam(tempTeam);
+					// playerTeam.setTeam(tempTeam);
 					return count;
 				}
 			}
-			//System.out.println("Round Over.");
-			
+			// System.out.println("Round Over.");
+
 			else {
 				System.out.println("Round Over.");
-				//playerTeam.setTeam(tempTeam);
+				// playerTeam.setTeam(tempTeam);
 				return count;
 			}
-			
+
 			// Throwaway return statement to avoid compile errors
-			//playerTeam.setTeam(tempTeam);
+			// playerTeam.setTeam(tempTeam);
 			return count;
-			
-	}
+
+		}
 	}
 }

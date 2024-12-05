@@ -1215,4 +1215,9 @@ public class Enemies extends entities {
 			}
 		}
 	}
+
+	public void takeDamage(double damage2) {
+		// TODO Auto-generated method stub
+		
+	}
 }
