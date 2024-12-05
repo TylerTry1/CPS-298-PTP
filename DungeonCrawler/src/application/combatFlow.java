@@ -878,7 +878,7 @@ public int runCombat(int c) {
 					System.out.println(((Characters) current).getName() + "'s Turn.");
 					heroNameText.setText(((Characters) current).getName());
 					moveDescriptionText.setText("DMG: " + ((Characters) current).getDamage() + " Crit %: " + ((Characters) current).getCritChance());
-					moveDescriptionText2.setText("Test");
+					moveDescriptionText2.setText("");
 					
 					if(((Characters)current).getHealth() == 0) {
 						System.out.println(((Characters) current).getName() + " is downed.");

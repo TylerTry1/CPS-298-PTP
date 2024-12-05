@@ -214,6 +214,7 @@ public class Enemies extends entities {
 				result[0] = goblinScout.damage;
 				result[1] = targetPos;
 			
+				AudioManager.playGoblinScoutSlice();
 				return result;
 			}
 		}
@@ -234,6 +235,7 @@ public class Enemies extends entities {
 				result[0] = goblinScout.damage;
 				result[1] = targetPos;
 				
+				AudioManager.playGoblinScoutRecon();
 				return result;
 			}
 				// This ability will need to iterate over an array of all team members
@@ -284,6 +286,7 @@ public class Enemies extends entities {
 				result[0] = goblinAxeman.damage;
 				result[1] = targetPos;
 			
+				AudioManager.playGoblinAxemanAxeSlash();
 				return result;
 			}
 		}
@@ -302,6 +305,7 @@ public class Enemies extends entities {
 				result[0] = goblinAxeman.damage;
 				result[1] = targetPos;
 				
+				AudioManager.playGoblinAxemanShieldStance();
 				return result;
 			}
 		}
@@ -350,6 +354,7 @@ public class Enemies extends entities {
 				result[0] = goblinArcher.damage;
 				result[1] = targetPos;
 			
+				AudioManager.playGoblinArcherVolleyShot();
 				return result;
 			}
 		}
@@ -368,6 +373,8 @@ public class Enemies extends entities {
 				result[0] = Snipe.damage;
 				result[1] = targetPos;
 				//damage = 10; // Return Damage to normal.
+				
+				AudioManager.playGoblinArcherSnipe();
 				return result;
 			}
 		}
@@ -421,6 +428,7 @@ public class Enemies extends entities {
 				result[0] = goblinShaman.damage;
 				result[1] = targetPos;
 				
+				AudioManager.playGoblinShamanRally();
 				return result;
 			}
 		}
@@ -436,6 +444,7 @@ public class Enemies extends entities {
 				result[0] = goblinShaman.damage;
 				result[1] = targetPos;
 			
+				AudioManager.playGoblinShamanStaffSlam();
 				return result;
 			}
 		}
@@ -484,6 +493,7 @@ public class Enemies extends entities {
 				result[0] = skeletonSwordsman.damage;
 				result[1] = targetPos;
 			
+				AudioManager.playSkeletonSwordsmanRushSlash();
 				return result;
 			}
 		}
@@ -503,6 +513,7 @@ public class Enemies extends entities {
 				result[1] = targetPos;
 			
 				skeletonSwordsman.damage[0] = 12; // Return Damage to normal.
+				AudioManager.playSkeletonSwordsmanVerticalSlash();
 				return result;
 			}
 		}
@@ -567,6 +578,7 @@ public class Enemies extends entities {
 				result[1] = targetPos;
 			
 				skeletonCrossbowman.damage[0] = 10; // Return Damage to Normal
+				AudioManager.playSkeletonCrossbowmanBurstShot();
 				return result;
 			}
 			
@@ -586,6 +598,7 @@ public class Enemies extends entities {
 				result[0] = skeletonCrossbowman.placeholderDamage;
 				result[1] = targetPos;
 				
+				AudioManager.playSkeletonCrossbowmanTakeAim();
 				return result;
 			}
 		}
@@ -633,6 +646,7 @@ public class Enemies extends entities {
 				result[0] = skeletonDefender.damage;
 				result[1] = targetPos;
 			
+				AudioManager.playSkeletonDefenderMaceSlam();
 				return result;
 			}
 			
@@ -652,6 +666,7 @@ public class Enemies extends entities {
 				result[0] =  skeletonDefender.damage;
 				result[1] = targetPos;
 				
+				AudioManager.playSkeletonDefenderBuckleDown();
 				return result;
 			}
 		}
@@ -704,6 +719,7 @@ public class Enemies extends entities {
 				result[0] = necromancer.damage;
 				result[1] = targetPos;
 				
+				AudioManager.playNecromancerSummonUndead();
 				return result;
 			}
 		}
@@ -719,6 +735,7 @@ public class Enemies extends entities {
 				result[0] = necromancer.damage;
 				result[1] = targetPos;
 			
+				AudioManager.playNecromancerDarkMagicBlast();
 				return result;
 			}
 		}
@@ -839,6 +856,7 @@ public class Enemies extends entities {
 				result[1] = targetPos;
 			
 				giantPummeler.damage[0] = 25; // Return Damage to normal
+				AudioManager.playGiantPummelerShockwave();
 				return result;
 			}
 		}
@@ -855,6 +873,7 @@ public class Enemies extends entities {
 				result[0] = giantPummeler.damage;
 				result[1] = targetPos;
 			
+				AudioManager.playGiantPummelerGroundSlam();
 				return result;
 			}
 		}
@@ -908,6 +927,7 @@ public class Enemies extends entities {
 				result[1] = targetPos;
 			
 				giantSlammer.damage[0] = 30; // Return Damage to normal
+				AudioManager.playGiantSlammerSweep();
 				return result;
 			}
 		}
@@ -924,6 +944,7 @@ public class Enemies extends entities {
 				result[0] = giantSlammer.damage;
 				result[1] = targetPos;
 			
+				AudioManager.playGiantSlammerMaceCrush();
 				return result;
 			}
 		}
@@ -971,6 +992,7 @@ public class Enemies extends entities {
 				result[0] = zombiePeasant.damage;
 				result[1] = targetPos;
 			
+				AudioManager.playZombiePeasantBite();
 				return result;
 			}
 		}
@@ -990,6 +1012,7 @@ public class Enemies extends entities {
 				result[0] = zombiePeasant.damage;
 				result[1] = targetPos;
 				
+				AudioManager.playZombiePeasantSway();
 				return result;
 			}
 		}
@@ -1037,6 +1060,7 @@ public class Enemies extends entities {
 				result[0] = zombieKnight.damage;
 				result[1] = targetPos;
 			
+				AudioManager.playZombieKnightShoulderSlam();
 				return result;
 			}
 		}
@@ -1055,6 +1079,7 @@ public class Enemies extends entities {
 				result[0] = zombieKnight.damage;
 				result[1] = targetPos;
 			
+				AudioManager.playZombieKnightSwordSweep();
 				return result;
 			}
 		}
@@ -1104,6 +1129,7 @@ public class Enemies extends entities {
 				result[0] = minotaur.damage;
 				result[1] = targetPos;
 			
+				AudioManager.playMinotaurRush();
 				return result;
 			}
 		}
@@ -1120,6 +1146,7 @@ public class Enemies extends entities {
 				result[0] = minotaur.damage;
 				result[1] = targetPos;
 			
+				AudioManager.playMinotaurAxeSlash();
 				return result;
 			}
 		}
@@ -1166,6 +1193,7 @@ public class Enemies extends entities {
 				result[0] = boar.damage;
 				result[1] = targetPos;
 			
+				AudioManager.playBoarTuskSwipe();
 				return result;
 			}
 		}
@@ -1182,6 +1210,7 @@ public class Enemies extends entities {
 				result[0] = boar.damage;
 				result[1] = targetPos;
 			
+				AudioManager.playBoarFrenzy();
 				return result;
 			}
 		}

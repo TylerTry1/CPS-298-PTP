@@ -803,6 +803,14 @@ public class Main extends Application {
 		String heroImage4 = tempPTeam[3].getIdleSprite();
 		heroInPosition4 = new ImageView(new Image(heroImage4));
 		
+		// Reset Sprites if downed
+		Characters[] spriteCheck = flow.getTempTeam();
+		for (int i = 0; i < spriteCheck.length; i++) {
+			if (spriteCheck[i].getHealth() <= 0) {
+				spriteCheck[i].setActiveSprite(spriteCheck[i].getKneelingSprite());
+			}
+		}
+		flow.setTempTeam(spriteCheck);
 		
 		Button menuBackButton = new Button ("Back"); 	
 		Button menuQuitButton = new Button ("Quit Game");
@@ -1227,6 +1235,12 @@ public class Main extends Application {
 	    bottomRightHPBarBlackRectangle.setFill(whiteToBlackGradient);
 	    bottomRightHPBarBlackRectangle.setArcWidth(5);
 	    bottomRightHPBarBlackRectangle.setArcHeight(5);
+	    
+    	// Refresh hero health bars on new combat
+		heroHealthBarRedRectangle4.setWidth(tempPTeam[3].setHealthBarAmount());
+		heroHealthBarRedRectangle3.setWidth(tempPTeam[2].setHealthBarAmount());
+		heroHealthBarRedRectangle2.setWidth(tempPTeam[1].setHealthBarAmount());
+		heroHealthBarRedRectangle1.setWidth(tempPTeam[0].setHealthBarAmount());
 	    
 		// -------------------------------------------------------------
 
@@ -3278,6 +3292,7 @@ public class Main extends Application {
     	enemyPosition2.setMouseTransparent(true);
     	enemyPosition3.setMouseTransparent(true);
     	enemyPosition4.setMouseTransparent(true);
+		
 		
 		round = 1;
 		roundNumberText.setText(""); // No Round Number text display until combat starts.
