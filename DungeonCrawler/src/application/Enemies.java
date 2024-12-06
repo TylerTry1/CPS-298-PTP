@@ -1215,9 +1215,10 @@ public class Enemies extends entities {
 			}
 		}
 	}
+	public void applyDamage(double damage) {
+        this.health -= damage;
+        if (this.health < 0) this.health = 0;  // Ensure health doesn't go negative
+    }
 
-	public void takeDamage(double damage2) {
-		// TODO Auto-generated method stub
-		
-	}
+
 }

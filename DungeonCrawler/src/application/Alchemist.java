@@ -73,28 +73,28 @@ public class Alchemist extends Characters {
 	}
 
 
-	public void acidPuddle(Enemies enemy) {
-		double damage = this.acidPuddleDamage;
-		enemy.takeDamage(damage);
+	public void acidPuddle(Enemies targetEnemy) {
+        double damage = this.getDamage() * 1.2;
+		targetEnemy.applyDamage(damage);
 
 	}
 
-	public void slash(Enemies enemy) {
-		double damage = this.slashDamage;
-		enemy.takeDamage(damage);
+	public void slash(Enemies targetEnemy) {
+        double damage = this.getDamage() * 1.5;
+		targetEnemy.applyDamage(damage);
 	}
 
-	public void acidRain(Enemies[] enemies) {
-		for (Enemies enemy : enemies) {
-			double damage = this.acidRainDamage;
-			enemy.takeDamage(damage);
+	public void acidRain(Enemies[] enemyTeam) {
+		for (Enemies enemy : enemyTeam) {
+	        double damage = this.getDamage() * 0.5;
+			enemy.applyDamage(damage);
 		}
 	}
 
-	public void explosiveFlask(Enemies[] enemies) {
-		for (Enemies enemy : enemies) {
-			double damage = this.explosiveFlaskDamage;
-			enemy.takeDamage(damage);
+	public void explosiveFlask(Enemies[] enemyTeam) {
+		for (Enemies enemy : enemyTeam) {
+	        double damage = this.getDamage() * 0.5;
+			enemy.applyDamage(damage);
 		}
 	}
 }

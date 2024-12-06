@@ -69,25 +69,28 @@ public class Paladin extends Characters {
 		this.dismemberDamage = dismemberDamage;
 	}
 
-	public void shieldBash(Enemies enemy) {
-		double damage = this.getDamage() * 1.5;
-		enemy.takeDamage(damage);
+	public void shieldBash(Enemies targetEnemy) {
+	    double damage = this.getDamage() * 1.5;
+	    targetEnemy.applyDamage(damage); // Apply damage to the selected enemy
 	}
 
-	public void divineSmite(Enemies enemy) {
-		double damage = this.getDamage() * 2.0;
-		enemy.takeDamage(damage);
+	// Single-target skill
+	public void divineSmite(Enemies targetEnemy) {
+	    double damage = this.getDamage() * 2.0;
+	    targetEnemy.applyDamage(damage); // Apply damage to the selected enemy
 	}
 
-	public void radiance(Enemies[] enemies) {
-		for (Enemies enemy : enemies) {
-			double damage = this.getDamage() * 0.5;
-			enemy.takeDamage(damage);
-		}
+	// Multi-target skill (affects all enemies)
+	public void radiance(Enemies[] enemyTeam) {
+	    for (Enemies enemy : enemyTeam) {
+	        double damage = this.getDamage() * 0.5;
+	        enemy.applyDamage(damage); // Apply damage to all enemies
+	    }
 	}
 
-	public void dismember(Enemies enemy) {
-		double damage = this.getDamage();
-		enemy.takeDamage(damage);
+	// Single-target skill
+	public void dismember(Enemies targetEnemy) {
+	    double damage = this.getDamage();
+	    targetEnemy.applyDamage(damage); // Apply damage to the selected enemy
 	}
 }

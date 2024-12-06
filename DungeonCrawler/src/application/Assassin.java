@@ -73,25 +73,25 @@ public class Assassin extends Characters {
 
 // Assassin's Skills
 
-	public void shadowStrike(Enemies enemy) {
+	public void shadowStrike(Enemies targetEnemy) {
 		double damage = this.getDamage() * 1.5;
-		enemy.takeDamage(damage);
+		targetEnemy.applyDamage(damage);
 	}
 
-	public void poisonedBlade(Enemies enemy) {
-		double damage = this.poisonedBladeDamage * 1.2;
-		enemy.takeDamage(damage);
+	public void poisonedBlade(Enemies targetEnemy) {
+		double damage = this.getDamage() * 1.2;
+		targetEnemy.applyDamage(damage);
 	}
 
-	public void backstab(Enemies enemy) {
+	public void backstab(Enemies targetEnemy) {
 		double damage = this.getDamage() * 1.5;
-		enemy.takeDamage(damage);
+		targetEnemy.applyDamage(damage);
 	}
 
-	public void daggerBarrage(Enemies[] enemies) {
-		for (Enemies enemy : enemies) {
-			double damage = this.daggerBarrageDamage * 0.5;
-			enemy.takeDamage(damage);
+	public void daggerBarrage(Enemies[] enemyTeam) {
+		for (Enemies enemy : enemyTeam) {
+	        double damage = this.getDamage() * 0.5;
+	        enemy.applyDamage(damage);
 		}
 	}
 }

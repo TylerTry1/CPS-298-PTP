@@ -4,8 +4,8 @@ import java.util.List;
 import javafx.scene.text.Text;
 
 public class Wizard extends Characters {
-	private int fireballDamage = 10;
-	private int magicMissileDamage = 4;
+	private int fireballDamage = 6;
+	private int magicMissileDamage = 7;
 	private int frostBoltDamage = 7;
 	private int staffStrikeDamage = 3;
 
@@ -69,24 +69,26 @@ public class Wizard extends Characters {
     }
 
 
-    public void fireball(Enemies enemy) {
-        double damage = this.getDamage() + this.fireballDamage;
-        enemy.takeDamage(damage);
+    public void fireball(Enemies[] enemyTeam) {
+    	 for (Enemies enemy : enemyTeam) {
+ 	        double damage = this.getDamage() * 0.5;
+ 	        enemy.applyDamage(damage);
+    	 }
     }
 
-    public void magicMissile(Enemies enemy) {
-        double damage = this.getDamage()+this.getDamage();
-        enemy.takeDamage(damage);
+    public void magicMissile(Enemies targetEnemy) {
+        double damage = this.getDamage() * 1.0;
+        targetEnemy.applyDamage(damage);
     }
 
-    public void frostBolt(Enemies enemy) {
-        double damage = this.frostBoltDamage;
-        enemy.takeDamage(damage);
+    public void frostBolt(Enemies targetEnemy) {
+        double damage = this.getDamage() * 1.2;
+        targetEnemy.applyDamage(damage);
         
     }
 
-    public void staffStrike(Enemies enemy) {
-        double damage = this.staffStrikeDamage;
-        enemy.takeDamage(damage);
+    public void staffStrike(Enemies targetEnemy) {
+        double damage = this.getDamage() * 0.5;
+        targetEnemy.applyDamage(damage);
     }
 }

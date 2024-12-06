@@ -869,27 +869,35 @@ public class combatFlow {
 							passTurnButton.setOnMouseClicked(handler);
 
 							skillButtonP1.setOnMouseClicked(event -> {
+							    moveDescriptionText2
+							        .setText("Skill: Shield Bash\n" + skillDescriptions.get("Shield Bash"));
+							    Paladin paladin = (Paladin) current;
+							    // Pass the selected enemy (e.g., first enemy in the team)
+							    paladin.shieldBash(enemyTeam.getTeam()[0]);
+							});
 
-								moveDescriptionText2
-										.setText("Skill: Shield Bash\n" + skillDescriptions.get("Shield Bash"));
-								Paladin paladin = (Paladin) current;
-								paladin.shieldBash(enemyTeam.getTeam()[0]);
-							});
 							skillButtonP2.setOnMouseClicked(event -> {
-								moveDescriptionText2
-										.setText("Skill: Divine Smite\n" + skillDescriptions.get("Divine Smite"));
-								Paladin paladin = (Paladin) current;
-								paladin.divineSmite(enemyTeam.getTeam()[0]);
+							    moveDescriptionText2
+							        .setText("Skill: Divine Smite\n" + skillDescriptions.get("Divine Smite"));
+							    Paladin paladin = (Paladin) current;
+							    // Pass the selected enemy (e.g., second enemy in the team)
+							    paladin.divineSmite(enemyTeam.getTeam()[1]);
 							});
+
 							skillButtonP3.setOnMouseClicked(event -> {
-								moveDescriptionText2.setText("Skill: Radiance\n" + skillDescriptions.get("Radiance"));
-								Paladin paladin = (Paladin) current;
-								paladin.radiance(enemyTeam.getTeam());
+							    moveDescriptionText2
+							        .setText("Skill: Radiance\n" + skillDescriptions.get("Radiance"));
+							    Paladin paladin = (Paladin) current;
+							    // Pass the entire team for the AoE skill
+							    paladin.radiance(enemyTeam.getTeam());
 							});
+
 							skillButtonP4.setOnMouseClicked(event -> {
-								moveDescriptionText2.setText("Skill: Dismember\n" + skillDescriptions.get("Dismember"));
-								Paladin paladin = (Paladin) current;
-								paladin.dismember(enemyTeam.getTeam()[0]);
+							    moveDescriptionText2
+							        .setText("Skill: Dismember\n" + skillDescriptions.get("Dismember"));
+							    Paladin paladin = (Paladin) current;
+							    // Pass the selected enemy (e.g., third enemy in the team)
+							    paladin.dismember(enemyTeam.getTeam()[2]);
 							});
 
 						}
@@ -1048,7 +1056,7 @@ public class combatFlow {
 							skillButtonW1.setOnMouseClicked(event -> {
 								moveDescriptionText2.setText("Skill: Fireball\n" + skillDescriptions.get("Fireball"));
 								Wizard wizard = (Wizard) current;
-								wizard.fireball(enemyTeam.getTeam()[0]);
+								wizard.fireball(enemyTeam.getTeam());
 							});
 							skillButtonW2.setOnMouseClicked(event -> {
 								moveDescriptionText2
@@ -1060,13 +1068,13 @@ public class combatFlow {
 								moveDescriptionText2
 										.setText("Skill: Frost Bolt\n" + skillDescriptions.get("Frost Bolt"));
 								Wizard wizard = (Wizard) current;
-								wizard.fireball(enemyTeam.getTeam()[0]);
+								wizard.frostBolt(enemyTeam.getTeam()[1]);
 							});
 							skillButtonW4.setOnMouseClicked(event -> {
 								moveDescriptionText2
 										.setText("Skill: Staff Strike\n" + skillDescriptions.get("Staff Strike"));
 								Wizard wizard = (Wizard) current;
-								wizard.fireball(enemyTeam.getTeam()[0]);
+								wizard.staffStrike(enemyTeam.getTeam()[0]);
 							});
 						}
 						skillButtonImageW1.setOpacity(0); // image is visible
